@@ -32,7 +32,6 @@ namespace DataSmith
 		}
 		void MainFormLoad(object sender, EventArgs e)
 		{
-			AutofacConfig.Register();
 
 		    var dal = Host.GetService<DataSourceDal>();
 		    var models = dal.GetModels();

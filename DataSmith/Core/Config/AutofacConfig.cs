@@ -17,7 +17,7 @@ namespace DataSmith.Core.Config
 	/// </summary>
 	public class AutofacConfig
 	{
-		public static void Register()
+		public static IContainer Register()
 		{
 			//实例化一个autofac的创建容器
 			var builder = new ContainerBuilder();
@@ -39,7 +39,7 @@ namespace DataSmith.Core.Config
 		    //builder.RegisterTypes(types).PropertiesAutowired().AsImplementedInterfaces().SingleInstance();
             
             //创建一个Autofac的容器
-            Host.iContainer = builder.Build();
+            return builder.Build();
         }
 	}
 }
