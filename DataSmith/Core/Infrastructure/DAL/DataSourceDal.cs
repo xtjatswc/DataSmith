@@ -15,10 +15,10 @@ namespace DataSmith.Core.Infrastructure.DAL
 	/// </summary>
 	public class DataSourceDal : BaseDAL<DataSource>
 	{
-		public DataSourceDal(Host host)
-			: base(host)
+		public DataSourceDal()
+			: base()
 		{
-			Db = host.db1;
+			Db = Host.db1;
 		}
 
 	}

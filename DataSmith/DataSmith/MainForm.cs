@@ -34,13 +34,10 @@ namespace DataSmith
 		{
 			AutofacConfig.Register();
 
-		    string abc = LessConfig.db2;
+		    var dal = Host.GetService<DataSourceDal>();
+		    var models = dal.GetModels();
 
-            using (var scope = Host.iContainer.BeginLifetimeScope())
-            {
-            	var dal = scope.Resolve<DataSourceDal>();
-                var models = dal.GetModels();
-            }
-		}
-	}
+		    var dal2 = Host.GetServices<DataSourceDal>();
+        }
+    }
 }

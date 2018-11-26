@@ -34,11 +34,12 @@ namespace DataSmith.Core.Config
 			    typeof(IBaseDAL).IsAssignableFrom(o.BaseType)
             )
 			).ToArray();
-			builder.RegisterTypes(types).PropertiesAutowired().AsImplementedInterfaces().SingleInstance();	
 			builder.RegisterTypes(types).PropertiesAutowired().SingleInstance();
 
-			//创建一个Autofac的容器
+		    //builder.RegisterTypes(types).PropertiesAutowired().AsImplementedInterfaces().SingleInstance();
+            
+            //创建一个Autofac的容器
             Host.iContainer = builder.Build();
-		}
+        }
 	}
 }

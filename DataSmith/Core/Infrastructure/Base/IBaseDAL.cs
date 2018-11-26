@@ -8,6 +8,5 @@ namespace DataSmith.Core.Infrastructure.Base
 {
     public interface IBaseDAL
     {
-        Host host { get; set; }
     }
 }

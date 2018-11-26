@@ -14,8 +14,6 @@ namespace DataSmith.Core.Infrastructure.Base
 {
     public class BaseDAL<Model> : IBaseDAL
     {
-        public Host host { get; set; }
-
         private string _primaryKey;
         protected string PrimaryKey
         {
@@ -61,11 +59,6 @@ namespace DataSmith.Core.Infrastructure.Base
             }
         }
         public IDbContext Db { get; set; }
-
-        public BaseDAL(Host host)
-        {
-            this.host = host;
-        }
 
         public int Delete(object id)
         {
