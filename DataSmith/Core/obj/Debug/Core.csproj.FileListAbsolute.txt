@@ -1,0 +1,5 @@
+F:\work\GitHub\DataSmith\DataSmith\Core\obj\Debug\Core.csprojResolveAssemblyReference.cache
+F:\work\GitHub\DataSmith\DataSmith\bin\DataSmith.Core.dll
+F:\work\GitHub\DataSmith\DataSmith\bin\DataSmith.Core.pdb
+F:\work\GitHub\DataSmith\DataSmith\Core\obj\Debug\DataSmith.Core.dll
+F:\work\GitHub\DataSmith\DataSmith\Core\obj\Debug\DataSmith.Core.pdb
