@@ -7,6 +7,10 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using DataSmith.Core.Config;
+using DataSmith.Core.Context;
+using DataSmith.Core.Infrastructure.DAL;
+using Autofac;
 
 namespace DataSmith
 {
@@ -25,6 +29,18 @@ namespace DataSmith
 			//
 			// TODO: Add constructor code after the InitializeComponent() call.
 			//
+		}
+		void MainFormLoad(object sender, EventArgs e)
+		{
+			AutofacConfig.Register();
+
+		    string abc = LessConfig.db2;
+
+            using (var scope = Host.iContainer.BeginLifetimeScope())
+            {
+            	var dal = scope.Resolve<DataSourceDal>();
+                var models = dal.GetModels();
+            }
 		}
 	}
 }

@@ -70,7 +70,7 @@ namespace DataSmith.Core.JsonConfig
             {
                 var entryAssembly = Assembly.GetEntryAssembly();
                 var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-                foreach (var assembly in assemblies.Where(assembly => !assembly.Equals(entryAssembly) && assembly.GetName().Name.StartsWith("FlexibleMVC")))
+                foreach (var assembly in assemblies.Where(assembly => !assembly.Equals(entryAssembly) && assembly.GetName().Name.StartsWith("DataSmith")))
                 {
                     Default = Merger.Merge(GetDefaultConfig(assembly), Default);
                 }

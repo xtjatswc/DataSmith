@@ -10,7 +10,7 @@ using System.Text;
 using DataSmith.Core.Infrastructure.Attribute;
 using DataSmith.Core.Util;
 
-namespace DataSmith.Core.Infrastructure
+namespace DataSmith.Core.Infrastructure.Base
 {
     public class BaseDAL<Model> : IBaseDAL
     {

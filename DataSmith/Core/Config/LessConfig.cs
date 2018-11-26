@@ -8,17 +8,15 @@ namespace DataSmith.Core.Config
 {
     public class LessConfig
     {
-        public static readonly string AttachmentPath;
         public static readonly string ConfigPath;
         public static readonly string DbPath;
 
         static LessConfig()
         {
             //从文件目录加载用户配置
-            var execution_path = AppDomain.CurrentDomain.BaseDirectory;
-            AttachmentPath = new DirectoryInfo(execution_path).Parent.FullName + @"\FlexibleMVC_Attachment\";
-            ConfigPath = AttachmentPath + @"config\";
-            DbPath = AttachmentPath + @"db\";
+            var executionPath = AppDomain.CurrentDomain.BaseDirectory;
+            ConfigPath = executionPath + @"config\";
+            DbPath = executionPath + @"db\";
             JsonConfig.Config.User = JsonConfig.Config.ApplyFromDirectory(ConfigPath, JsonConfig.Config.User, true);
 
         }

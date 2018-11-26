@@ -54,6 +54,10 @@
     <Reference Include="Microsoft.CSharp">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\DLL\Newtonsoft.Json.11.0.2\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -62,21 +66,27 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\DLL\System.Data.SQLite.1.0.109\net40\System.Data.SQLite.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\AutofacConfig.cs" />
     <Compile Include="Config\LessConfig.cs" />
     <Compile Include="Context\Host.cs" />
     <Compile Include="IDataSource.cs" />
     <Compile Include="Infrastructure\Attribute\PrimaryKeyAttribute.cs" />
     <Compile Include="Infrastructure\Attribute\TableNameAttribute.cs" />
-    <Compile Include="Infrastructure\BaseBLL.cs" />
-    <Compile Include="Infrastructure\BaseDAL.cs" />
-    <Compile Include="Infrastructure\BaseModel.cs" />
-    <Compile Include="Infrastructure\IBaseDAL.cs" />
+    <Compile Include="Infrastructure\Base\BaseBLL.cs" />
+    <Compile Include="Infrastructure\Base\BaseDAL.cs" />
+    <Compile Include="Infrastructure\Base\BaseModel.cs" />
+    <Compile Include="Infrastructure\Base\IBaseDAL.cs" />
+    <Compile Include="Infrastructure\DAL\DataSourceDal.cs" />
+    <Compile Include="Infrastructure\Model\DataSource.cs" />
     <Compile Include="JsonConfig\Config.cs" />
     <Compile Include="JsonConfig\ConfigObjects.cs" />
     <Compile Include="JsonConfig\JsonUtil.cs" />
@@ -86,12 +96,7 @@
     <Compile Include="Util\ReflectionHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Infrastructure" />
-    <Folder Include="Infrastructure\Attribute" />
-    <Folder Include="Context" />
-    <Folder Include="JsonConfig" />
-    <Folder Include="Config" />
-    <Folder Include="Util" />
+    <Folder Include="Infrastructure\BLL\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

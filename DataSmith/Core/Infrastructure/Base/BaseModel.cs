@@ -6,7 +6,7 @@ using DataSmith.Core.JsonConfig;
 using DataSmith.Core.Infrastructure.Attribute;
 using Newtonsoft.Json;
 
-namespace DataSmith.Core.Infrastructure
+namespace DataSmith.Core.Infrastructure.Base
 {
     public class BaseModel
     {

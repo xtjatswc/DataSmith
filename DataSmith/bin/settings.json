@@ -1,0 +1,24 @@
+﻿{
+  "LessBase": {
+	"SystemInfo": {
+	  "Copyright": "<a href='#'>FlexibleMVC</a>",
+	  "Version": "1.0.0"
+	},
+    "JsonSettings": {
+	  #是否格式化Json
+      "IsJsonFormat": true,
+	  #是否忽略空值，注：只对get\set属性有效，动态类型转换时该设置无效
+      "IgnoreNullValue": false,
+	  #日期格式化
+	  "DateFormatString": "yyyy-MM-dd HH:mm:ss",
+  	  #是否驼峰小写
+	  "CamelLowercase": false
+    },
+	"TempDataProvider":{
+  	  #TempData的提供程序：0、SessionStateTempDataProvider，1、CacheTempDataProvider，2、TokenCacheTempDataProvider，3、MemcachedTempDataProvider
+	  "ProviderType": 2,
+  	  #MemcachedTempDataProvider中的缓存过期时间，单位：分钟
+	  "MemcachedExpiryTime": 5
+	}
+  }
+}

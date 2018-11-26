@@ -1,9 +1,0 @@
-F:\work\GitHub\DataSmith\DataSmith\DataSmith\bin\Debug\DataSmith.exe.config
-F:\work\GitHub\DataSmith\DataSmith\DataSmith\bin\Debug\DataSmith.exe
-F:\work\GitHub\DataSmith\DataSmith\DataSmith\bin\Debug\DataSmith.pdb
-F:\work\GitHub\DataSmith\DataSmith\DataSmith\obj\Debug\DataSmith.csprojResolveAssemblyReference.cache
-F:\work\GitHub\DataSmith\DataSmith\DataSmith\obj\Debug\DataSmith.exe
-F:\work\GitHub\DataSmith\DataSmith\DataSmith\obj\Debug\DataSmith.pdb
-F:\work\GitHub\DataSmith\DataSmith\bin\DataSmith.exe.config
-F:\work\GitHub\DataSmith\DataSmith\bin\DataSmith.exe
-F:\work\GitHub\DataSmith\DataSmith\bin\DataSmith.pdb

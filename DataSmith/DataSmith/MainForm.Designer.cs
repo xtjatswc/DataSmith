@@ -33,12 +33,18 @@ namespace DataSmith
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.SuspendLayout();
 			// 
 			// MainForm
 			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Text = "DataSmith";
+			this.ClientSize = new System.Drawing.Size(873, 388);
 			this.Name = "MainForm";
+			this.Text = "DataSmith";
+			this.Load += new System.EventHandler(this.MainFormLoad);
+			this.ResumeLayout(false);
+
 		}
 	}
 }
