@@ -1,24 +1,65 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-# SharpDevelop 5.1
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSmith", "DataSmith\DataSmith.csproj", "{B3F36DFC-A472-4102-912D-725E61353A62}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{0A8D1F91-6727-4875-B99C-1D57A87934C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentData", "FluentData\FluentData.csproj", "{B5AE821B-7728-49B3-9119-3BBC4C8E58E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Test|Any CPU = Test|Any CPU
+		Test|x64 = Test|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{B3F36DFC-A472-4102-912D-725E61353A62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B3F36DFC-A472-4102-912D-725E61353A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3F36DFC-A472-4102-912D-725E61353A62}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B3F36DFC-A472-4102-912D-725E61353A62}.Debug|x64.Build.0 = Debug|Any CPU
 		{B3F36DFC-A472-4102-912D-725E61353A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3F36DFC-A472-4102-912D-725E61353A62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3F36DFC-A472-4102-912D-725E61353A62}.Release|x64.ActiveCfg = Release|Any CPU
+		{B3F36DFC-A472-4102-912D-725E61353A62}.Release|x64.Build.0 = Release|Any CPU
+		{B3F36DFC-A472-4102-912D-725E61353A62}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{B3F36DFC-A472-4102-912D-725E61353A62}.Test|Any CPU.Build.0 = Release|Any CPU
+		{B3F36DFC-A472-4102-912D-725E61353A62}.Test|x64.ActiveCfg = Release|Any CPU
+		{B3F36DFC-A472-4102-912D-725E61353A62}.Test|x64.Build.0 = Release|Any CPU
 		{0A8D1F91-6727-4875-B99C-1D57A87934C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0A8D1F91-6727-4875-B99C-1D57A87934C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A8D1F91-6727-4875-B99C-1D57A87934C0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0A8D1F91-6727-4875-B99C-1D57A87934C0}.Debug|x64.Build.0 = Debug|Any CPU
 		{0A8D1F91-6727-4875-B99C-1D57A87934C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A8D1F91-6727-4875-B99C-1D57A87934C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A8D1F91-6727-4875-B99C-1D57A87934C0}.Release|x64.ActiveCfg = Release|Any CPU
+		{0A8D1F91-6727-4875-B99C-1D57A87934C0}.Release|x64.Build.0 = Release|Any CPU
+		{0A8D1F91-6727-4875-B99C-1D57A87934C0}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{0A8D1F91-6727-4875-B99C-1D57A87934C0}.Test|Any CPU.Build.0 = Release|Any CPU
+		{0A8D1F91-6727-4875-B99C-1D57A87934C0}.Test|x64.ActiveCfg = Release|Any CPU
+		{0A8D1F91-6727-4875-B99C-1D57A87934C0}.Test|x64.Build.0 = Release|Any CPU
+		{B5AE821B-7728-49B3-9119-3BBC4C8E58E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5AE821B-7728-49B3-9119-3BBC4C8E58E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5AE821B-7728-49B3-9119-3BBC4C8E58E9}.Debug|x64.ActiveCfg = Debug|x64
+		{B5AE821B-7728-49B3-9119-3BBC4C8E58E9}.Debug|x64.Build.0 = Debug|x64
+		{B5AE821B-7728-49B3-9119-3BBC4C8E58E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5AE821B-7728-49B3-9119-3BBC4C8E58E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5AE821B-7728-49B3-9119-3BBC4C8E58E9}.Release|x64.ActiveCfg = Release|x64
+		{B5AE821B-7728-49B3-9119-3BBC4C8E58E9}.Release|x64.Build.0 = Release|x64
+		{B5AE821B-7728-49B3-9119-3BBC4C8E58E9}.Test|Any CPU.ActiveCfg = Test|Any CPU
+		{B5AE821B-7728-49B3-9119-3BBC4C8E58E9}.Test|Any CPU.Build.0 = Test|Any CPU
+		{B5AE821B-7728-49B3-9119-3BBC4C8E58E9}.Test|x64.ActiveCfg = Test|x64
+		{B5AE821B-7728-49B3-9119-3BBC4C8E58E9}.Test|x64.Build.0 = Test|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FD309CA8-EAC8-4711-B35A-0B28CF05A439}
 	EndGlobalSection
 EndGlobal

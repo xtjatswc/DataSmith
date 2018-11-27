@@ -5,6 +5,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -15,6 +16,7 @@ using Autofac;
 using DataSmith.Core.DataProvider;
 using DataSmith.Core.Extension;
 using DataSmith.Core.Infrastructure.Base;
+using DataSmith.Core.Infrastructure.Model;
 
 namespace DataSmith
 {
@@ -36,24 +38,30 @@ namespace DataSmith
 		}
 		void MainFormLoad(object sender, EventArgs e)
 		{
-
+            //
+            var ifDal = Host.GetService<InterfacesDal>();
 		    var dal = Host.GetService<DataSourceDal>();
-		    var models = dal.GetModels();
+		    var vfsDal = Host.GetService<ViewFieldSetDal>();
 
-		    IDataProvider iDataProvider = models[0].GetDataProvider();
-            string sql = "select * from bednumber";
-		    var table = iDataProvider.GetDataTable(sql);
+            var ifs = ifDal.GetModels();
+		    foreach (var theIf in ifs)
+		    {
+		        var datasource = dal.GetModel(theIf.DataSourceID);
+		        IDataProvider iDataProvider = datasource.GetDataProvider();
+		        string sql = theIf.ViewSql;
+		        var table = iDataProvider.GetDataTable(sql);
 
-		    iDataProvider = models[1].GetDataProvider();
-		    sql = "select * from DataSource";
-		    table = iDataProvider.GetDataTable(sql);
+		        foreach (DataColumn column in table.Columns)
+		        {
+		            ViewFieldSet vfs = new ViewFieldSet();
+		            vfs.InterfaceID = theIf.ID;
+		            vfs.FieldName = column.ColumnName;
+		            vfs.FieldAlias = column.ColumnName;
+		            vfsDal.Insert(vfs, x => x.ID);
+		        }
 
-		    iDataProvider = models[2].GetDataProvider();
-		    sql = "select * from bednumber";
-		    table = iDataProvider.GetDataTable(sql);
-
-		    var pro = Host.GetServices<IDataProvider>().ToList()[0];
-		    bool r = iDataProvider == pro;
-		}
+            }
+		    
+        }
     }
 }
