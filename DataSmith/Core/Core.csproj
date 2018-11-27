@@ -78,7 +78,10 @@
     <Compile Include="Config\AutofacConfig.cs" />
     <Compile Include="Config\LessConfig.cs" />
     <Compile Include="Context\Host.cs" />
-    <Compile Include="IDataSource.cs" />
+    <Compile Include="DataProvider\IDataProvider.cs" />
+    <Compile Include="DataProvider\MySQLProvider.cs" />
+    <Compile Include="DataProvider\SqliteProvider.cs" />
+    <Compile Include="Extension\DataSourceExtension.cs" />
     <Compile Include="Infrastructure\Attribute\PrimaryKeyAttribute.cs" />
     <Compile Include="Infrastructure\Attribute\TableNameAttribute.cs" />
     <Compile Include="Infrastructure\Base\BaseBLL.cs" />

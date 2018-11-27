@@ -11,6 +11,9 @@ using DataSmith.Core.Config;
 using DataSmith.Core.Context;
 using DataSmith.Core.Infrastructure.DAL;
 using Autofac;
+using DataSmith.Core.DataProvider;
+using DataSmith.Core.Extension;
+using DataSmith.Core.Infrastructure.Base;
 
 namespace DataSmith
 {
@@ -36,7 +39,10 @@ namespace DataSmith
 		    var dal = Host.GetService<DataSourceDal>();
 		    var models = dal.GetModels();
 
-		    var dal2 = Host.GetServices<DataSourceDal>();
-        }
+		    IDataProvider iDataProvider = models[0].GetDataProvider();
+
+            string sql = "select * from bednumber";
+		    var table = iDataProvider.GetDataTable(sql);
+		}
     }
 }

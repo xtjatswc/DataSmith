@@ -5,16 +5,21 @@ using DataSmith.Core.Config;
 using Autofac;
 using Autofac.Core;
 using Autofac.Core.Activators.Reflection;
+using DataSmith.Core.DataProvider;
+using SqliteProvider = FluentData.SqliteProvider;
 
 namespace DataSmith.Core.Context
 {
     public class Host
     {
         public static IContainer iContainer;
+        public static Dictionary<DBType, IDataProvider> DataProviderPool;
 
         static Host()
         {
             iContainer = AutofacConfig.Register();
+
+            DataProviderPool = GetServices<IDataProvider>().ToDictionary(k => k.DbType, v => v);
         }
 
         public static IDbContext db = new DbContext().ConnectionString(LessConfig.db1, new MySqlProvider());
@@ -27,12 +32,7 @@ namespace DataSmith.Core.Context
 
         public static IEnumerable<TService> GetServices<TService>()
         {
-            var types = iContainer.ComponentRegistry
-                .RegistrationsFor(new TypedService(typeof(TService)))
-                .Select(x => x.Activator)
-                .OfType<ReflectionActivator>()
-                .Select(x => x.LimitType);
-
+            var types = iContainer.ComponentRegistry.Registrations.Where(r => typeof(TService).IsAssignableFrom(r.Activator.LimitType)).Select(r => r.Activator.LimitType);
             return types.Select(t => (TService)iContainer.Resolve(t));
         }
     }

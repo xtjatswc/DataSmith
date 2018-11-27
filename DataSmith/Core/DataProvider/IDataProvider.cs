@@ -7,21 +7,22 @@ using System;
 using System.Data;
 using System.Collections.Generic;
 
-namespace DataSmith.Core
+namespace DataSmith.Core.DataProvider
 {
 	/// <summary>
 	/// Description of MyClass.
 	/// </summary>
-	public interface IDataSource
-	{
-		DataTable GetDataTable();
+	public interface IDataProvider
+    {
+	    DBType DbType { get; }
+	    DataTable GetDataTable(string sql);
 	}
 	
 	public enum DBType
 	{
 		SqlServer=0,
 		Oracle=1,
-		MySql=2,
+		MySQL=2,
 		Sqlite=3
 	}
 }
