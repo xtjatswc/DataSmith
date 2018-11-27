@@ -24,6 +24,7 @@ namespace DataSmith.Core.Infrastructure.Model
         public String Password { get; set; }
         public String DBPath { get; set; }
         public String DBConnStr { get; set; }
+        public Int64 IsDeleted { get; set; }
 
     }
 }

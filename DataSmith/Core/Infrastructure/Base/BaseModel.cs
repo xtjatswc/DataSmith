@@ -11,8 +11,7 @@ namespace DataSmith.Core.Infrastructure.Base
     public class BaseModel
     {
         [PrimaryKey()]
-        public string ID { get; set; }
-        public Int64 IsDeleted { get; set; }
+        public Int64 ID { get; set; }
 
         public string ToJson()
         {

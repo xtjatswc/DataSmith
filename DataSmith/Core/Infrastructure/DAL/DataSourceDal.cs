@@ -10,16 +10,16 @@ using DataSmith.Core.Context;
 
 namespace DataSmith.Core.Infrastructure.DAL
 {
-	/// <summary>
-	/// Description of DataSourceDal.
-	/// </summary>
-	public class DataSourceDal : BaseDAL<DataSource>
-	{
-		public DataSourceDal()
-			: base()
-		{
-			Db = Host.db1;
-		}
+    /// <summary>
+    /// Description of DataSourceDal.
+    /// </summary>
+    public class DataSourceDal : BaseDAL<DataSource>
+    {
+        public DataSourceDal()
+            : base()
+        {
+            Db = Host.db1;
+        }
 
-	}
+    }
 }
