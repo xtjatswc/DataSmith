@@ -8,7 +8,7 @@ using FluentData;
 
 namespace DataSmith.Core.DataProvider
 {
-    public class MySQLProvider : IDataProvider
+    public class MySQLProvider : BaseDataProvider
     {
         public static IDbContext db;
 
@@ -17,9 +17,9 @@ namespace DataSmith.Core.DataProvider
 
         }
 
-        public DBType DbType => DBType.MySQL;
+        public override DBType DbType => DBType.MySQL;
 
-        public string ConnStr
+        public override string ConnStr
         {
             set
             {
@@ -27,7 +27,7 @@ namespace DataSmith.Core.DataProvider
             }
         }
 
-        public DataTable GetDataTable(string sql)
+        public override DataTable GetDataTable(string sql)
         {
             return db.Sql(sql).QuerySingle<DataTable>();
         }

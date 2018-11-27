@@ -6,6 +6,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using DataSmith.Core.Config;
 using DataSmith.Core.Context;
@@ -47,6 +48,12 @@ namespace DataSmith
 		    sql = "select * from DataSource";
 		    table = iDataProvider.GetDataTable(sql);
 
-        }
+		    iDataProvider = models[2].GetDataProvider();
+		    sql = "select * from bednumber";
+		    table = iDataProvider.GetDataTable(sql);
+
+		    var pro = Host.GetServices<IDataProvider>().ToList()[0];
+		    bool r = iDataProvider == pro;
+		}
     }
 }

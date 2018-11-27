@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DataSmith.Core.Context;
+﻿using DataSmith.Core.Context;
 using DataSmith.Core.DataProvider;
 using DataSmith.Core.Infrastructure.Model;
 
@@ -12,7 +8,7 @@ namespace DataSmith.Core.Extension
     {
         public static IDataProvider GetDataProvider(this DataSource dataSource)
         {
-            var provider = Host.DataProviderPool[(DBType)dataSource.DBType];
+            var provider = Host.DataProviderPool[(DBType)dataSource.DBType].Clone();
             provider.ConnStr = dataSource.DBConnStr;
             return provider;
         }

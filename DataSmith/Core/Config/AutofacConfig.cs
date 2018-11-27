@@ -38,14 +38,12 @@ namespace DataSmith.Core.Config
                 {
                     builder.RegisterType(type).PropertiesAutowired().SingleInstance();
                 }
-                else if(typeof(IDataProvider).IsAssignableFrom(type) && !type.IsInterface)
+                else if(typeof(IDataProvider).IsAssignableFrom(type.BaseType))
                 {
-                    builder.RegisterType(type).PropertiesAutowired().SingleInstance();
+                    builder.RegisterType(type);
                 }
             }
-
-
-
+            
             //创建一个Autofac的容器
             return builder.Build();
         }

@@ -16,6 +16,7 @@ namespace DataSmith.Core.DataProvider
     {
 	    DBType DbType { get; }
         string ConnStr { set; }
+        IDataProvider Clone();
         DataTable GetDataTable(string sql);
 	}
 	

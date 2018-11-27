@@ -7,12 +7,12 @@ using FluentData;
 
 namespace DataSmith.Core.DataProvider
 {
-    public class SqliteProvider : IDataProvider
+    public class SqliteProvider : BaseDataProvider
     {
         public static IDbContext db;
 
-        public DBType DbType => DBType.Sqlite;
-        public string ConnStr
+        public override DBType DbType => DBType.Sqlite;
+        public override string ConnStr
         {
             set
             {
@@ -20,7 +20,7 @@ namespace DataSmith.Core.DataProvider
             }
         }
 
-        public DataTable GetDataTable(string sql)
+        public override DataTable GetDataTable(string sql)
         {
             return db.Sql(sql).QuerySingle<DataTable>();
         }

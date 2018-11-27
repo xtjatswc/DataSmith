@@ -78,6 +78,7 @@
     <Compile Include="Config\AutofacConfig.cs" />
     <Compile Include="Config\LessConfig.cs" />
     <Compile Include="Context\Host.cs" />
+    <Compile Include="DataProvider\BaseDataProvider.cs" />
     <Compile Include="DataProvider\IDataProvider.cs" />
     <Compile Include="DataProvider\MySQLProvider.cs" />
     <Compile Include="DataProvider\SqliteProvider.cs" />
