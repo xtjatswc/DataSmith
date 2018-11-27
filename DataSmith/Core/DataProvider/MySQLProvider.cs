@@ -10,8 +10,6 @@ namespace DataSmith.Core.DataProvider
 {
     public class MySQLProvider : BaseDataProvider
     {
-        public static IDbContext db;
-
         public MySQLProvider()
         {
 
@@ -23,13 +21,8 @@ namespace DataSmith.Core.DataProvider
         {
             set
             {
-                db = new DbContext().ConnectionString(value, new MySqlProvider());
+                Db = new DbContext().ConnectionString(value, new MySqlProvider());
             }
-        }
-
-        public override DataTable GetDataTable(string sql)
-        {
-            return db.Sql(sql).QuerySingle<DataTable>();
         }
     }
 }

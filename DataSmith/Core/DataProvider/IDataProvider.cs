@@ -17,10 +17,12 @@ namespace DataSmith.Core.DataProvider
 	    DBType DbType { get; }
         string ConnStr { set; }
         IDataProvider Clone();
+
+        bool TestConn();
         DataTable GetDataTable(string sql);
 	}
-	
-	public enum DBType
+
+    public enum DBType
 	{
 		SqlServer=0,
 		Oracle=1,

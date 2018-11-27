@@ -9,18 +9,17 @@ namespace DataSmith.Core.DataProvider
 {
     public class OracleProvider : BaseDataProvider
     {
-        public static IDbContext db;
-
         public override DBType DbType => DBType.Oracle;
 
         public override string ConnStr
         {
-            set => db = new DbContext().ConnectionString(value, new FluentData.OracleProvider());
+            set => Db = new DbContext().ConnectionString(value, new FluentData.OracleProvider());
         }
 
-        public override DataTable GetDataTable(string sql)
+        public override bool TestConn()
         {
-            return db.Sql(sql).QuerySingle<DataTable>();
+            return Db.Sql("select 1 from dual").QuerySingle<Boolean>();
         }
+
     }
 }

@@ -9,20 +9,13 @@ namespace DataSmith.Core.DataProvider
 {
     public class SqliteProvider : BaseDataProvider
     {
-        public static IDbContext db;
-
         public override DBType DbType => DBType.Sqlite;
         public override string ConnStr
         {
             set
             {
-                db = new DbContext().ConnectionString(value, new FluentData.SqliteProvider());
+                Db = new DbContext().ConnectionString(value, new FluentData.SqliteProvider());
             }
-        }
-
-        public override DataTable GetDataTable(string sql)
-        {
-            return db.Sql(sql).QuerySingle<DataTable>();
         }
     }
 }

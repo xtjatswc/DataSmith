@@ -45,6 +45,10 @@
     <Reference Include="Autofac">
       <HintPath>..\DLL\Autofac.3.5.2\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="FluentData, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DLL\FluentData.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\DLL\log4net.2.0.8\net40-full\log4net.dll</HintPath>
     </Reference>
@@ -90,10 +94,12 @@
     <Compile Include="Infrastructure\Base\BaseDAL.cs" />
     <Compile Include="Infrastructure\Base\BaseModel.cs" />
     <Compile Include="Infrastructure\Base\IBaseDAL.cs" />
+    <Compile Include="Infrastructure\DAL\DataBaseTypeDal.cs" />
     <Compile Include="Infrastructure\DAL\DataSourceDal.cs" />
     <Compile Include="Infrastructure\DAL\InterfacesDal.cs" />
     <Compile Include="Infrastructure\DAL\FieldSetDal.cs" />
     <Compile Include="Infrastructure\DAL\ViewFieldSetDal.cs" />
+    <Compile Include="Infrastructure\Model\DataBaseType.cs" />
     <Compile Include="Infrastructure\Model\DataSource.cs" />
     <Compile Include="Infrastructure\Model\FieldSet.cs" />
     <Compile Include="Infrastructure\Model\Interfaces.cs" />
@@ -108,12 +114,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infrastructure\BLL\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FluentData\FluentData.csproj">
-      <Project>{b5ae821b-7728-49b3-9119-3bbc4c8e58e9}</Project>
-      <Name>FluentData</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
