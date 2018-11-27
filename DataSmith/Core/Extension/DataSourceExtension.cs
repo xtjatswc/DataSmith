@@ -12,7 +12,9 @@ namespace DataSmith.Core.Extension
     {
         public static IDataProvider GetDataProvider(this DataSource dataSource)
         {
-            return Host.DataProviderPool[(DBType)dataSource.DBType];
+            var provider = Host.DataProviderPool[(DBType)dataSource.DBType];
+            provider.ConnStr = dataSource.DBConnStr;
+            return provider;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace DataSmith.Core.DataProvider
 {
     public class MySQLProvider : IDataProvider
     {
-        public static IDbContext db = new DbContext().ConnectionString(LessConfig.db1, new MySqlProvider());
+        public static IDbContext db;
 
         public MySQLProvider()
         {
@@ -18,6 +18,14 @@ namespace DataSmith.Core.DataProvider
         }
 
         public DBType DbType => DBType.MySQL;
+
+        public string ConnStr
+        {
+            set
+            {
+                db = new DbContext().ConnectionString(value, new MySqlProvider());
+            }
+        }
 
         public DataTable GetDataTable(string sql)
         {

@@ -15,7 +15,8 @@ namespace DataSmith.Core.DataProvider
 	public interface IDataProvider
     {
 	    DBType DbType { get; }
-	    DataTable GetDataTable(string sql);
+        string ConnStr { set; }
+        DataTable GetDataTable(string sql);
 	}
 	
 	public enum DBType

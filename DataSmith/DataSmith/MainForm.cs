@@ -40,9 +40,13 @@ namespace DataSmith
 		    var models = dal.GetModels();
 
 		    IDataProvider iDataProvider = models[0].GetDataProvider();
-
             string sql = "select * from bednumber";
 		    var table = iDataProvider.GetDataTable(sql);
-		}
+
+		    iDataProvider = models[1].GetDataProvider();
+		    sql = "select * from DataSource";
+		    table = iDataProvider.GetDataTable(sql);
+
+        }
     }
 }
