@@ -7,10 +7,11 @@ using DataSmith.Core.Infrastructure.Base;
 
 namespace DataSmith.Core.Infrastructure.Model
 {
-    public class ViewFieldSet : BaseModel
+    public class ViewFieldSet
     {
         public Int64 InterfaceID { get; set; }
         public String FieldName { get; set; }
         public String FieldAlias { get; set; }
+        public Int64 IsDeleted { get; set; }
     }
 }

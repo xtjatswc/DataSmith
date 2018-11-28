@@ -95,7 +95,7 @@ namespace DataSmith.Core.Infrastructure.Base
             {
                 var ignorePropertyExpression = ignorePropertyExpressions[i];
                 var item = new PropertyExpressionParser<Model>(condition, ignorePropertyExpression);
-                sWhere += " and " + item.Name + " = @{i} ";
+                sWhere += " and " + item.Name + $" = @{i} ";
                 parameters.Add(item.Value);
             }
 

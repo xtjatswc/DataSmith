@@ -88,6 +88,7 @@
     <Compile Include="DataProvider\OracleProvider.cs" />
     <Compile Include="DataProvider\SqliteProvider.cs" />
     <Compile Include="Extension\DataSourceExtension.cs" />
+    <Compile Include="Extension\InterfacesExtension.cs" />
     <Compile Include="Infrastructure\Attribute\PrimaryKeyAttribute.cs" />
     <Compile Include="Infrastructure\Attribute\TableNameAttribute.cs" />
     <Compile Include="Infrastructure\Base\BaseBLL.cs" />

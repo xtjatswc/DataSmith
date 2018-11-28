@@ -158,6 +158,7 @@
             // 
             // inputButton1
             // 
+            this.inputButton1.Break = C1.Win.C1InputPanel.BreakType.None;
             this.inputButton1.Image = ((System.Drawing.Image)(resources.GetObject("inputButton1.Image")));
             this.inputButton1.Name = "inputButton1";
             this.inputButton1.Text = "测试连接";
@@ -168,6 +169,7 @@
             this.inputButton2.Image = ((System.Drawing.Image)(resources.GetObject("inputButton2.Image")));
             this.inputButton2.Name = "inputButton2";
             this.inputButton2.Text = "保存";
+            this.inputButton2.Click += new System.EventHandler(this.inputButton2_Click);
             // 
             // inputTextBox7
             // 
