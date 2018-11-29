@@ -42,12 +42,12 @@
             this.inputTextBox3 = new C1.Win.C1InputPanel.InputTextBox();
             this.inputLabel7 = new C1.Win.C1InputPanel.InputLabel();
             this.inputTextBox6 = new C1.Win.C1InputPanel.InputTextBox();
-            this.inputLabel2 = new C1.Win.C1InputPanel.InputLabel();
+            this.inputLabel8 = new C1.Win.C1InputPanel.InputLabel();
             this.inputTextBox2 = new C1.Win.C1InputPanel.InputTextBox();
+            this.inputLabel2 = new C1.Win.C1InputPanel.InputLabel();
+            this.inputTextBox7 = new C1.Win.C1InputPanel.InputTextBox();
             this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
             this.inputButton2 = new C1.Win.C1InputPanel.InputButton();
-            this.inputTextBox7 = new C1.Win.C1InputPanel.InputTextBox();
-            this.inputLabel8 = new C1.Win.C1InputPanel.InputLabel();
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,6 +77,7 @@
             this.c1InputPanel1.Name = "c1InputPanel1";
             this.c1InputPanel1.Size = new System.Drawing.Size(937, 606);
             this.c1InputPanel1.TabIndex = 0;
+            this.c1InputPanel1.VisualStyle = C1.Win.C1InputPanel.VisualStyle.Office2007Blue;
             // 
             // inputLabel3
             // 
@@ -145,16 +146,30 @@
             this.inputTextBox6.Name = "inputTextBox6";
             this.inputTextBox6.Width = 150;
             // 
+            // inputLabel8
+            // 
+            this.inputLabel8.Name = "inputLabel8";
+            this.inputLabel8.Text = "密码";
+            this.inputLabel8.Width = 100;
+            // 
+            // inputTextBox2
+            // 
+            this.inputTextBox2.Name = "inputTextBox2";
+            this.inputTextBox2.Width = 150;
+            // 
             // inputLabel2
             // 
             this.inputLabel2.Name = "inputLabel2";
             this.inputLabel2.Text = "连接字符串";
             this.inputLabel2.Width = 100;
             // 
-            // inputTextBox2
+            // inputTextBox7
             // 
-            this.inputTextBox2.Name = "inputTextBox2";
-            this.inputTextBox2.Width = 150;
+            this.inputTextBox7.Height = 132;
+            this.inputTextBox7.Multiline = true;
+            this.inputTextBox7.Name = "inputTextBox7";
+            this.inputTextBox7.VerticalAlign = C1.Win.C1InputPanel.InputContentAlignment.Spread;
+            this.inputTextBox7.Width = 381;
             // 
             // inputButton1
             // 
@@ -170,20 +185,6 @@
             this.inputButton2.Name = "inputButton2";
             this.inputButton2.Text = "保存";
             this.inputButton2.Click += new System.EventHandler(this.inputButton2_Click);
-            // 
-            // inputTextBox7
-            // 
-            this.inputTextBox7.Height = 132;
-            this.inputTextBox7.Multiline = true;
-            this.inputTextBox7.Name = "inputTextBox7";
-            this.inputTextBox7.VerticalAlign = C1.Win.C1InputPanel.InputContentAlignment.Spread;
-            this.inputTextBox7.Width = 381;
-            // 
-            // inputLabel8
-            // 
-            this.inputLabel8.Name = "inputLabel8";
-            this.inputLabel8.Text = "密码";
-            this.inputLabel8.Width = 100;
             // 
             // Form1
             // 
