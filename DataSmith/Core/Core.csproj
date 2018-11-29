@@ -97,12 +97,14 @@
     <Compile Include="Infrastructure\Base\IBaseDAL.cs" />
     <Compile Include="Infrastructure\DAL\DataBaseTypeDal.cs" />
     <Compile Include="Infrastructure\DAL\DataSourceDal.cs" />
+    <Compile Include="Infrastructure\DAL\InterfaceClassifyDal.cs" />
     <Compile Include="Infrastructure\DAL\InterfacesDal.cs" />
     <Compile Include="Infrastructure\DAL\FieldSetDal.cs" />
     <Compile Include="Infrastructure\DAL\ViewFieldSetDal.cs" />
     <Compile Include="Infrastructure\Model\DataBaseType.cs" />
     <Compile Include="Infrastructure\Model\DataSource.cs" />
     <Compile Include="Infrastructure\Model\FieldSet.cs" />
+    <Compile Include="Infrastructure\Model\InterfaceClassify.cs" />
     <Compile Include="Infrastructure\Model\Interfaces.cs" />
     <Compile Include="Infrastructure\Model\ViewFieldSet.cs" />
     <Compile Include="JsonConfig\Config.cs" />
