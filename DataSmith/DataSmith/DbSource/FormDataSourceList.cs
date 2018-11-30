@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using C1.Win.C1InputPanel;
 using DataSmith.Core.Context;
 using DataSmith.Core.Extension;
+using DataSmith.Core.Infrastructure.Base;
 using DataSmith.Core.Infrastructure.DAL;
 using DataSmith.Core.Infrastructure.Model;
 
-namespace DataSmith
+namespace DataSmith.DbSource
 {
     public partial class FormDataSourceList : Form
     {
@@ -42,13 +37,22 @@ namespace DataSmith
 
         private void InputButton_Click(object sender, EventArgs e)
         {
-            FormDataSourceEdit frm = Host.GetService<FormDataSourceEdit>();
-            frm.ChangeDataSource(((sender as InputButton).Tag as DataSource).ID);
-            frm.FormBorderStyle = FormBorderStyle.None;
-            frm.TopLevel = false;
-            frm.Dock = DockStyle.Fill;
-            frm.Show();
-            panel1.Controls.Add(frm);
+            var frm = Host.GetService<FormDataSourceEdit>();
+            panel1.ShowForm(frm);
+
+            frm.OperateType = OperateType.Modify;
+            frm.DataSourceId = ((sender as InputButton).Tag as DataSource).ID;
+            frm.ChangeDataSource();
+        }
+
+        //添加数据源
+        private void inputButton2_Click(object sender, EventArgs e)
+        {
+            var frm = Host.GetService<FormDataSourceEdit>();
+            panel1.ShowForm(frm);
+
+            frm.OperateType = OperateType.New;
+            frm.ChangeDataSource();
         }
     }
 }

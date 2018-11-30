@@ -81,10 +81,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormDataSourceList.cs">
+    <Compile Include="DbSource\FormDataSourceList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormDataSourceList.Designer.cs">
+    <Compile Include="DbSource\FormDataSourceList.Designer.cs">
       <DependentUpon>FormDataSourceList.cs</DependentUpon>
     </Compile>
     <Compile Include="FormSqlPreview.cs">
@@ -111,10 +111,10 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormDataSourceEdit.cs">
+    <Compile Include="DbSource\FormDataSourceEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormDataSourceEdit.Designer.cs">
+    <Compile Include="DbSource\FormDataSourceEdit.Designer.cs">
       <DependentUpon>FormDataSourceEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -135,7 +135,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FormDataSourceList.resx">
+    <EmbeddedResource Include="DbSource\FormDataSourceList.resx">
       <DependentUpon>FormDataSourceList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSqlPreview.resx">
@@ -150,7 +150,7 @@
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormDataSourceEdit.resx">
+    <EmbeddedResource Include="DbSource\FormDataSourceEdit.resx">
       <DependentUpon>FormDataSourceEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />

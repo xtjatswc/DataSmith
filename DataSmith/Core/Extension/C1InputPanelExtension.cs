@@ -9,6 +9,7 @@ namespace DataSmith.Core.Extension
 {
     public static class C1InputPanelExtension
     {
+        #region 单选按钮组
         public static void SetSwitchToggle(this C1InputPanel c1InputPanel)
         {
             foreach (InputComponent inputComponent in c1InputPanel.Items)
@@ -36,12 +37,24 @@ namespace DataSmith.Core.Extension
             else
             {
                 obj = inputButton.InputPanel.Tag;
-                if (obj.PressedButton != null)
+                if (obj.PressedButton != null && obj.PressedButton != inputButton)
                 {
                     obj.PressedButton.Pressed = false;
                 }
             }
             obj.PressedButton = inputButton;
+        }
+        #endregion
+
+        public static void FormReset(this C1InputPanel c1InputPanel)
+        {
+            foreach (InputComponent inputComponent in c1InputPanel.Items)
+            {
+                if (inputComponent is InputTextBox)
+                {
+                    inputComponent.Text = "";
+                }
+            }
         }
     }
 }

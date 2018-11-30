@@ -95,12 +95,14 @@
     <Compile Include="Extension\C1InputPanelExtension.cs" />
     <Compile Include="Extension\DataSourceExtension.cs" />
     <Compile Include="Extension\InterfacesExtension.cs" />
+    <Compile Include="Extension\PanelExtension.cs" />
     <Compile Include="Infrastructure\Attribute\PrimaryKeyAttribute.cs" />
     <Compile Include="Infrastructure\Attribute\TableNameAttribute.cs" />
     <Compile Include="Infrastructure\Base\BaseBLL.cs" />
     <Compile Include="Infrastructure\Base\BaseDAL.cs" />
     <Compile Include="Infrastructure\Base\BaseModel.cs" />
     <Compile Include="Infrastructure\Base\IBaseDAL.cs" />
+    <Compile Include="Infrastructure\Base\OperateType.cs" />
     <Compile Include="Infrastructure\DAL\DataBaseTypeDal.cs" />
     <Compile Include="Infrastructure\DAL\DataSourceDal.cs" />
     <Compile Include="Infrastructure\DAL\InterfaceClassifyDal.cs" />

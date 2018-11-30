@@ -1,4 +1,4 @@
-﻿namespace DataSmith
+﻿namespace DataSmith.DbSource
 {
     partial class FormDataSourceEdit
     {
@@ -37,7 +37,6 @@
             this.inputLabel6 = new C1.Win.C1InputPanel.InputLabel();
             this.inputTextBox5 = new C1.Win.C1InputPanel.InputTextBox();
             this.inputLabel5 = new C1.Win.C1InputPanel.InputLabel();
-            this.inputTextBox4 = new C1.Win.C1InputPanel.InputTextBox();
             this.inputLabel4 = new C1.Win.C1InputPanel.InputLabel();
             this.inputTextBox3 = new C1.Win.C1InputPanel.InputTextBox();
             this.inputLabel7 = new C1.Win.C1InputPanel.InputLabel();
@@ -48,6 +47,7 @@
             this.inputTextBox7 = new C1.Win.C1InputPanel.InputTextBox();
             this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
             this.inputButton2 = new C1.Win.C1InputPanel.InputButton();
+            this.inputNumericBox1 = new C1.Win.C1InputPanel.InputNumericBox();
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,7 +62,7 @@
             this.c1InputPanel1.Items.Add(this.inputLabel6);
             this.c1InputPanel1.Items.Add(this.inputTextBox5);
             this.c1InputPanel1.Items.Add(this.inputLabel5);
-            this.c1InputPanel1.Items.Add(this.inputTextBox4);
+            this.c1InputPanel1.Items.Add(this.inputNumericBox1);
             this.c1InputPanel1.Items.Add(this.inputLabel4);
             this.c1InputPanel1.Items.Add(this.inputTextBox3);
             this.c1InputPanel1.Items.Add(this.inputLabel7);
@@ -118,11 +118,6 @@
             this.inputLabel5.Name = "inputLabel5";
             this.inputLabel5.Text = "端口";
             this.inputLabel5.Width = 100;
-            // 
-            // inputTextBox4
-            // 
-            this.inputTextBox4.Name = "inputTextBox4";
-            this.inputTextBox4.Width = 150;
             // 
             // inputLabel4
             // 
@@ -186,13 +181,27 @@
             this.inputButton2.Text = "保存";
             this.inputButton2.Click += new System.EventHandler(this.inputButton2_Click);
             // 
-            // Form1
+            // inputNumericBox1
+            // 
+            this.inputNumericBox1.DecimalPlaces = 0;
+            this.inputNumericBox1.Format = "d";
+            this.inputNumericBox1.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.inputNumericBox1.Name = "inputNumericBox1";
+            this.inputNumericBox1.OutOfRangeErrorText = "{0}超出允许范围:[{1}，{2}]";
+            this.inputNumericBox1.ShowSpinButtons = false;
+            this.inputNumericBox1.Width = 150;
+            // 
+            // FormDataSourceEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(937, 606);
             this.Controls.Add(this.c1InputPanel1);
-            this.Name = "Form1";
+            this.Name = "FormDataSourceEdit";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).EndInit();
@@ -212,7 +221,6 @@
         private C1.Win.C1InputPanel.InputLabel inputLabel6;
         private C1.Win.C1InputPanel.InputTextBox inputTextBox5;
         private C1.Win.C1InputPanel.InputLabel inputLabel5;
-        private C1.Win.C1InputPanel.InputTextBox inputTextBox4;
         private C1.Win.C1InputPanel.InputLabel inputLabel4;
         private C1.Win.C1InputPanel.InputTextBox inputTextBox3;
         private C1.Win.C1InputPanel.InputButton inputButton1;
@@ -221,6 +229,7 @@
         private C1.Win.C1InputPanel.InputTextBox inputTextBox6;
         private C1.Win.C1InputPanel.InputTextBox inputTextBox7;
         private C1.Win.C1InputPanel.InputLabel inputLabel8;
+        private C1.Win.C1InputPanel.InputNumericBox inputNumericBox1;
     }
 }
 

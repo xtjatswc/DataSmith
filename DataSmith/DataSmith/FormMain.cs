@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using C1.Win.C1InputPanel;
 using DataSmith.Core.Context;
 using DataSmith.Core.Extension;
+using DataSmith.DbSource;
 
 namespace DataSmith
 {
