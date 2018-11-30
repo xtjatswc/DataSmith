@@ -11,6 +11,7 @@ using System.Linq;
 using DataSmith.Core.Infrastructure.Base;
 using DataSmith.Core.Context;
 using DataSmith.Core.DataProvider;
+using System.Windows.Forms;
 
 namespace DataSmith.Core.Config
 {
@@ -29,21 +30,30 @@ namespace DataSmith.Core.Config
             {
                 //BaseBLL、IBaseDAL
                 if (
-                        type.BaseType != null &&
-                        (
-                            typeof(BaseBLL).IsAssignableFrom(type.BaseType) ||
-                            typeof(IBaseDAL).IsAssignableFrom(type.BaseType)
-                        )
-                   )
+                    type.BaseType != null &&
+                    (
+                        typeof(BaseBLL).IsAssignableFrom(type.BaseType) ||
+                        typeof(IBaseDAL).IsAssignableFrom(type.BaseType)
+                    )
+                )
                 {
                     builder.RegisterType(type).PropertiesAutowired().SingleInstance();
                 }
-                else if(typeof(IDataProvider).IsAssignableFrom(type.BaseType))
+                else if (typeof(IDataProvider).IsAssignableFrom(type.BaseType))
                 {
                     builder.RegisterType(type);
                 }
             }
-            
+
+            Assembly exeAss = Assembly.Load("DataSmith");
+            foreach (var type in exeAss.GetTypes())
+            {
+                if (typeof(Form).IsAssignableFrom(type))
+                {
+                    builder.RegisterType(type).SingleInstance();
+                }
+            }
+
             //创建一个Autofac的容器
             return builder.Build();
         }

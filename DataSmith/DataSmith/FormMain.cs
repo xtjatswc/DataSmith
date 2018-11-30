@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 using C1.Win.C1InputPanel;
+using DataSmith.Core.Context;
+using DataSmith.Core.Extension;
 
 namespace DataSmith
 {
@@ -34,8 +36,6 @@ namespace DataSmith
             c1InputPanel1.Items.Clear();
             var inputButton = new InputButton();
             inputButton.Text = "数据源";
-            inputButton.TabStop = false;
-            inputButton.CheckOnClick = true;
             inputButton.Break = BreakType.None;
             inputButton.Width = width;
             inputButton.Height = c1InputPanel1.Height - bottomPadding;
@@ -44,8 +44,6 @@ namespace DataSmith
 
             inputButton = new InputButton();
             inputButton.Text = "接口定义";
-            inputButton.TabStop = false;
-            inputButton.CheckOnClick = true;
             inputButton.Break = BreakType.None;
             inputButton.Width = width;
             inputButton.Height = c1InputPanel1.Height - bottomPadding;
@@ -53,17 +51,18 @@ namespace DataSmith
 
             inputButton = new InputButton();
             inputButton.Text = "退出";
-            inputButton.TabStop = false;
             inputButton.Break = BreakType.None;
             inputButton.Width = width;
             inputButton.Height = c1InputPanel1.Height - bottomPadding;
             inputButton.Click += InputButton_Click;
             c1InputPanel1.Items.Add(inputButton);
+
+            c1InputPanel1.SetSwitchToggle();
         }
 
         private void InputButton_Click1(object sender, EventArgs e)
         {
-            FormDataSourceList frm = new FormDataSourceList();
+            FormDataSourceList frm = Host.GetService<FormDataSourceList>();
             frm.FormBorderStyle = FormBorderStyle.None;
             frm.TopLevel = false;
             frm.Dock = DockStyle.Fill;

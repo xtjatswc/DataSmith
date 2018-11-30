@@ -13,6 +13,7 @@ namespace DataSmith
         private IDataProvider DataProvider;
         private readonly DataBaseTypeDal dbtDal = Host.GetService<DataBaseTypeDal>();
         private readonly DataSourceDal dsDal = Host.GetService<DataSourceDal>();
+        private Int64 DataSourceId { get; set; }
 
         public FormDataSourceEdit()
         {
@@ -26,7 +27,13 @@ namespace DataSmith
             inputComboBox1.DisplayMember = "DBTypeName";
             inputComboBox1.ValueMember = "ID";
 
-            var dataSource = dsDal.GetModel(4);
+        }
+
+        public void ChangeDataSource(Int64 dataSourceId)
+        {
+            this.DataSourceId = dataSourceId;
+
+            var dataSource = dsDal.GetModel(DataSourceId);
             DataProvider = dataSource.GetDataProvider();
             inputTextBox1.Text = dataSource.SourceName;
             inputTextBox5.Text = dataSource.IP;
@@ -36,6 +43,7 @@ namespace DataSmith
             inputTextBox2.Text = dataSource.Password;
             inputTextBox7.Text = dataSource.DBConnStr;
             inputComboBox1.SelectedValue = dataSource.DBType;
+
         }
 
         private void inputButton1_Click(object sender, EventArgs e)
