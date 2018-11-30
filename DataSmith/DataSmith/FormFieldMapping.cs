@@ -1,25 +1,25 @@
-﻿using C1.Win.C1InputPanel;
+﻿using System;
+using System.Windows.Forms;
+using C1.Win.C1InputPanel;
 using DataSmith.Core.Context;
 using DataSmith.Core.Infrastructure.DAL;
-using System;
-using System.Windows.Forms;
 using DataSmith.Core.Infrastructure.Model;
 
 namespace DataSmith
 {
-    public partial class Form3 : Form
+    public partial class FormFieldMapping : Form
     {
         private readonly FieldSetDal _fieldSetDal = Host.GetService<FieldSetDal>();
         private readonly ViewFieldSetDal _viewFieldSetDal = Host.GetService<ViewFieldSetDal>();
 
-        public Form3()
+        public FormFieldMapping()
         {
             InitializeComponent();
         }
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            var fieldSets = _fieldSetDal.GetModels(where: "InterfaceID=1", orderBy: "SortNo");
+            var fieldSets = _fieldSetDal.GetModels("InterfaceID=1", "SortNo");
 
             c1InputPanel2.Items.Clear();
 
@@ -32,27 +32,27 @@ namespace DataSmith
                 //c1InputPanel2.Items.Add(inputLabelFieldName1);
 
                 //接口字段
-                InputLabel inputLabelFieldName2 = new InputLabel();
+                var inputLabelFieldName2 = new InputLabel();
                 inputLabelFieldName2.Text = fieldSet.FieldName;
                 inputLabelFieldName2.Width = 200;
                 c1InputPanel2.Items.Add(inputLabelFieldName2);
 
                 //接口字段描述
-                InputLabel inputLabelFieldDescribe = new InputLabel();
+                var inputLabelFieldDescribe = new InputLabel();
                 inputLabelFieldDescribe.Text = fieldSet.FieldDescribe;
                 inputLabelFieldDescribe.Width = 200;
                 c1InputPanel2.Items.Add(inputLabelFieldDescribe);
 
                 //接口字段备注
-                InputLabel inputLabelRemark = new InputLabel();
+                var inputLabelRemark = new InputLabel();
                 inputLabelRemark.Text = fieldSet.Remark;
                 inputLabelRemark.Width = 300;
                 c1InputPanel2.Items.Add(inputLabelRemark);
 
                 //视图字段别名
-                var viewFieldSets = _viewFieldSetDal.GetModels(where: "InterfaceID=1");
-                viewFieldSets.Insert(0, new ViewFieldSet{FieldName = ""});
-                InputComboBox inputComboBoxFieldAlias = new InputComboBox();
+                var viewFieldSets = _viewFieldSetDal.GetModels("InterfaceID=1");
+                viewFieldSets.Insert(0, new ViewFieldSet {FieldName = ""});
+                var inputComboBoxFieldAlias = new InputComboBox();
                 c1InputPanel2.Items.Add(inputComboBoxFieldAlias);
                 inputComboBoxFieldAlias.DataSource = viewFieldSets;
                 inputComboBoxFieldAlias.DisplayMember = "FieldName";
@@ -64,10 +64,9 @@ namespace DataSmith
                 inputComboBoxFieldAlias.MaxDropDownItems = 50;
 
                 //分隔线
-                InputSeparator inputSeparator = new InputSeparator();
+                var inputSeparator = new InputSeparator();
                 inputSeparator.Width = 1200;
                 c1InputPanel2.Items.Add(inputSeparator);
-
             }
         }
     }

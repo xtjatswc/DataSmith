@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using DataSmith.Core.Context;
 using DataSmith.Core.DataProvider;
@@ -14,20 +8,19 @@ using DataSmith.Core.Infrastructure.Model;
 
 namespace DataSmith
 {
-    public partial class Form1 : Form
+    public partial class FormDataSourceEdit : Form
     {
-        IDataProvider DataProvider;
-        DataBaseTypeDal dbtDal = Host.GetService<DataBaseTypeDal>();
-        DataSourceDal dsDal = Host.GetService<DataSourceDal>();
+        private IDataProvider DataProvider;
+        private readonly DataBaseTypeDal dbtDal = Host.GetService<DataBaseTypeDal>();
+        private readonly DataSourceDal dsDal = Host.GetService<DataSourceDal>();
 
-        public Form1()
+        public FormDataSourceEdit()
         {
             InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
             var model = dbtDal.GetModels();
             inputComboBox1.DataSource = model;
             inputComboBox1.DisplayMember = "DBTypeName";
@@ -47,13 +40,13 @@ namespace DataSmith
 
         private void inputButton1_Click(object sender, EventArgs e)
         {
-            bool success = DataProvider.TestConn();
+            var success = DataProvider.TestConn();
             MessageBox.Show(success.ToString());
         }
 
         private void inputButton2_Click(object sender, EventArgs e)
         {
-            DataSource dataSource = new DataSource();
+            var dataSource = new DataSource();
             dataSource.DBType = Convert.ToInt32(inputComboBox1.SelectedValue);
             dataSource.DBTypeName = inputComboBox1.Text;
             dataSource.SourceName = inputTextBox1.Text;

@@ -1,6 +1,6 @@
 ﻿namespace DataSmith
 {
-    partial class Form1
+    partial class FormDataSourceEdit
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDataSourceEdit));
             this.c1InputPanel1 = new C1.Win.C1InputPanel.C1InputPanel();
             this.inputLabel3 = new C1.Win.C1InputPanel.InputLabel();
             this.inputTextBox1 = new C1.Win.C1InputPanel.InputTextBox();

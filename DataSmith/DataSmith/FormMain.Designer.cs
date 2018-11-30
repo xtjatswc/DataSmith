@@ -1,6 +1,6 @@
 ﻿namespace DataSmith
 {
-    partial class Form5
+    partial class FormMain
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form5));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.c1InputPanel1 = new C1.Win.C1InputPanel.C1InputPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.inputButton1 = new C1.Win.C1InputPanel.InputButton();

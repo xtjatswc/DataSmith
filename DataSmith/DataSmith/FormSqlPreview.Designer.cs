@@ -1,6 +1,6 @@
 ﻿namespace DataSmith
 {
-    partial class Form2
+    partial class FormSqlPreview
     {
         /// <summary>
         /// Required designer variable.
@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSqlPreview));
             this.c1InputPanel1 = new C1.Win.C1InputPanel.C1InputPanel();
             this.inputLabel1 = new C1.Win.C1InputPanel.InputLabel();
+            this.inputLabel3 = new C1.Win.C1InputPanel.InputLabel();
+            this.inputLabel2 = new C1.Win.C1InputPanel.InputLabel();
             this.inputTextBox1 = new C1.Win.C1InputPanel.InputTextBox();
             this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
             this.inputButton2 = new C1.Win.C1InputPanel.InputButton();
-            this.inputLabel2 = new C1.Win.C1InputPanel.InputLabel();
             this.c1FlexGrid1 = new C1.Win.C1FlexGrid.C1FlexGrid();
-            this.inputLabel3 = new C1.Win.C1InputPanel.InputLabel();
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.c1FlexGrid1)).BeginInit();
             this.SuspendLayout();
@@ -55,12 +55,25 @@
             this.c1InputPanel1.Name = "c1InputPanel1";
             this.c1InputPanel1.Size = new System.Drawing.Size(1166, 260);
             this.c1InputPanel1.TabIndex = 0;
+            this.c1InputPanel1.VisualStyle = C1.Win.C1InputPanel.VisualStyle.Office2007Blue;
             // 
             // inputLabel1
             // 
             this.inputLabel1.Name = "inputLabel1";
             this.inputLabel1.Text = "接口名称";
             this.inputLabel1.Width = 150;
+            // 
+            // inputLabel3
+            // 
+            this.inputLabel3.Break = C1.Win.C1InputPanel.BreakType.Row;
+            this.inputLabel3.Name = "inputLabel3";
+            this.inputLabel3.Text = "Label";
+            // 
+            // inputLabel2
+            // 
+            this.inputLabel2.Name = "inputLabel2";
+            this.inputLabel2.Text = "视图SQL";
+            this.inputLabel2.Width = 150;
             // 
             // inputTextBox1
             // 
@@ -85,12 +98,6 @@
             this.inputButton2.Text = "保存";
             this.inputButton2.Click += new System.EventHandler(this.inputButton2_Click);
             // 
-            // inputLabel2
-            // 
-            this.inputLabel2.Name = "inputLabel2";
-            this.inputLabel2.Text = "视图SQL";
-            this.inputLabel2.Width = 150;
-            // 
             // c1FlexGrid1
             // 
             this.c1FlexGrid1.ColumnInfo = "10,1,0,0,0,120,Columns:";
@@ -100,12 +107,7 @@
             this.c1FlexGrid1.Rows.DefaultSize = 24;
             this.c1FlexGrid1.Size = new System.Drawing.Size(1166, 452);
             this.c1FlexGrid1.TabIndex = 1;
-            // 
-            // inputLabel3
-            // 
-            this.inputLabel3.Break = C1.Win.C1InputPanel.BreakType.Row;
-            this.inputLabel3.Name = "inputLabel3";
-            this.inputLabel3.Text = "Label";
+            this.c1FlexGrid1.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2007Blue;
             // 
             // Form2
             // 
