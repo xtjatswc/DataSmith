@@ -50,7 +50,7 @@ namespace DataSmith.Core.Extension
         {
             foreach (InputComponent inputComponent in c1InputPanel.Items)
             {
-                if (inputComponent is InputTextBox)
+                if (inputComponent is InputTextBox || inputComponent is InputNumericBox)
                 {
                     inputComponent.Text = "";
                 }

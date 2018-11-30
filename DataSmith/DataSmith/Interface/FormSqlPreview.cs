@@ -7,14 +7,17 @@ using DataSmith.Core.Extension;
 using DataSmith.Core.Infrastructure.DAL;
 using DataSmith.Core.Infrastructure.Model;
 
-namespace DataSmith
+namespace DataSmith.Interface
 {
     public partial class FormSqlPreview : Form
     {
+        private readonly DataSourceDal _dataSourceDal = Host.GetService<DataSourceDal>();
         private readonly InterfacesDal _interfacesDal = Host.GetService<InterfacesDal>();
         private readonly ViewFieldSetDal _viewFieldSetDal = Host.GetService<ViewFieldSetDal>();
         private IDataProvider _dataProvider;
-        private Interfaces _interfaces;
+
+        public Int64 InterfaceId { get; set; }
+        private Core.Infrastructure.Model.Interfaces _interfaces;
 
         public FormSqlPreview()
         {
@@ -23,11 +26,23 @@ namespace DataSmith
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            _interfaces = _interfacesDal.GetModel(1);
+            //绑定数据源下拉框
+            var models = _dataSourceDal.GetModels();
+            inputComboBox1.DisplayMember = "SourceName";
+            inputComboBox1.ValueMember = "ID";
+            inputComboBox1.DataSource = models;
+
+        }
+
+        public void ChangeInterface()
+        {
+            _interfaces = _interfacesDal.GetModel(InterfaceId);
             var dataSource = _interfaces.GetDataSource();
             _dataProvider = dataSource.GetDataProvider();
             inputLabel3.Text = _interfaces.InterfaceName;
-            inputTextBox1.Text = _interfaces.ViewSql;
+            inputTextBox2.Text = _interfaces.ViewName;
+            inputTextBox1.Text = $"select * from {_interfaces.ViewName}";
+            inputComboBox1.SelectedValue = _interfaces.DataSourceID;
         }
 
         private void inputButton1_Click(object sender, EventArgs e)

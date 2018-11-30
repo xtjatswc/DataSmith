@@ -12,7 +12,7 @@ namespace DataSmith.Core.Infrastructure.Model
         public String InterfaceName { get; set; }
         public Int64 ClassifyID { get; set; }
         public Int64 DataSourceID { get; set; }
-        public String ViewSql { get; set; }
+        public String ViewName { get; set; }
         public decimal SortNo { get; set; }
     }
 }

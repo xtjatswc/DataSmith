@@ -2,9 +2,11 @@
 using System.Windows.Forms;
 using C1.Win.C1InputPanel;
 using DataSmith.Core.Context;
+using DataSmith.Core.Extension;
 using DataSmith.Core.Infrastructure.DAL;
+using DataSmith.Core.Infrastructure.Model;
 
-namespace DataSmith
+namespace DataSmith.Interface
 {
     public partial class FormInterfaceList : Form
     {
@@ -32,11 +34,21 @@ namespace DataSmith
                     var inputButton = new InputButton();
                     inputButton.Text = model.InterfaceName;
                     inputButton.Width = c1InputPanel1.Width - 20;
-                    inputButton.TabStop = false;
-                    inputButton.CheckOnClick = true;
+                    inputButton.Click += InputButton_Click;
+                    inputButton.Tag = model;
                     c1InputPanel1.Items.Add(inputButton);
                 }
             }
+            c1InputPanel1.SetSwitchToggle();
+        }
+
+        private void InputButton_Click(object sender, EventArgs e)
+        {
+            var frm = Host.GetService<FormSqlPreview>();
+            panel1.ShowForm(frm);
+
+            frm.InterfaceId = ((sender as InputButton).Tag as Interfaces).ID;
+            frm.ChangeInterface();
         }
     }
 }

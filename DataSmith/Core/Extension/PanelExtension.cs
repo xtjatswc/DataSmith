@@ -19,6 +19,8 @@ namespace DataSmith.Core.Extension
                 frm.Show();
                 panel.Controls.Add(frm);
             }
+            frm.BringToFront();
+            
         }
     }
 }

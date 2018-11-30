@@ -4,6 +4,7 @@ using C1.Win.C1InputPanel;
 using DataSmith.Core.Context;
 using DataSmith.Core.Extension;
 using DataSmith.DbSource;
+using DataSmith.Interface;
 
 namespace DataSmith
 {
@@ -44,10 +45,19 @@ namespace DataSmith
             c1InputPanel1.Items.Add(inputButton);
 
             inputButton = new InputButton();
-            inputButton.Text = "接口定义";
+            inputButton.Text = "视图定义";
             inputButton.Break = BreakType.None;
             inputButton.Width = width;
             inputButton.Height = c1InputPanel1.Height - bottomPadding;
+            inputButton.Click += InputButton_Click2;
+            c1InputPanel1.Items.Add(inputButton);
+
+            inputButton = new InputButton();
+            inputButton.Text = "字段映射";
+            inputButton.Break = BreakType.None;
+            inputButton.Width = width;
+            inputButton.Height = c1InputPanel1.Height - bottomPadding;
+            inputButton.Click += InputButton_Click3;
             c1InputPanel1.Items.Add(inputButton);
 
             inputButton = new InputButton();
@@ -61,14 +71,22 @@ namespace DataSmith
             c1InputPanel1.SetSwitchToggle();
         }
 
+        private void InputButton_Click3(object sender, EventArgs e)
+        {
+            FormFieldMapping frm = Host.GetService<FormFieldMapping>();
+            panel1.ShowForm(frm);
+        }
+
+        private void InputButton_Click2(object sender, EventArgs e)
+        {
+            FormInterfaceList frm = Host.GetService<FormInterfaceList>();
+            panel1.ShowForm(frm);
+        }
+
         private void InputButton_Click1(object sender, EventArgs e)
         {
             FormDataSourceList frm = Host.GetService<FormDataSourceList>();
-            frm.FormBorderStyle = FormBorderStyle.None;
-            frm.TopLevel = false;
-            frm.Dock = DockStyle.Fill;
-            frm.Show();
-            panel1.Controls.Add(frm);
+            panel1.ShowForm(frm);
         }
 
         private void InputButton_Click(object sender, EventArgs e)

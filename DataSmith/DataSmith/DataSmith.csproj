@@ -87,10 +87,10 @@
     <Compile Include="DbSource\FormDataSourceList.Designer.cs">
       <DependentUpon>FormDataSourceList.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormSqlPreview.cs">
+    <Compile Include="Interface\FormSqlPreview.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormSqlPreview.Designer.cs">
+    <Compile Include="Interface\FormSqlPreview.Designer.cs">
       <DependentUpon>FormSqlPreview.cs</DependentUpon>
     </Compile>
     <Compile Include="FormFieldMapping.cs">
@@ -99,10 +99,10 @@
     <Compile Include="FormFieldMapping.Designer.cs">
       <DependentUpon>FormFieldMapping.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormInterfaceList.cs">
+    <Compile Include="Interface\FormInterfaceList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormInterfaceList.Designer.cs">
+    <Compile Include="Interface\FormInterfaceList.Designer.cs">
       <DependentUpon>FormInterfaceList.cs</DependentUpon>
     </Compile>
     <Compile Include="FormMain.cs">
@@ -138,13 +138,13 @@
     <EmbeddedResource Include="DbSource\FormDataSourceList.resx">
       <DependentUpon>FormDataSourceList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormSqlPreview.resx">
+    <EmbeddedResource Include="Interface\FormSqlPreview.resx">
       <DependentUpon>FormSqlPreview.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormFieldMapping.resx">
       <DependentUpon>FormFieldMapping.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormInterfaceList.resx">
+    <EmbeddedResource Include="Interface\FormInterfaceList.resx">
       <DependentUpon>FormInterfaceList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">

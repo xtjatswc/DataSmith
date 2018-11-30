@@ -1,4 +1,4 @@
-﻿namespace DataSmith
+﻿namespace DataSmith.Interface
 {
     partial class FormInterfaceList
     {
@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInterfaceList));
             this.c1InputPanel1 = new C1.Win.C1InputPanel.C1InputPanel();
             this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,21 +54,25 @@
             this.inputButton1.Text = "Button";
             this.inputButton1.Width = 182;
             // 
-            // Form4
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(240, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(766, 721);
+            this.panel1.TabIndex = 1;
+            // 
+            // FormInterfaceList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1006, 721);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.c1InputPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(960, 540);
-            this.Name = "Form4";
+            this.Name = "FormInterfaceList";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DataSmith";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form4_Load);
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).EndInit();
             this.ResumeLayout(false);
@@ -78,5 +83,6 @@
 
         private C1.Win.C1InputPanel.C1InputPanel c1InputPanel1;
         private C1.Win.C1InputPanel.InputButton inputButton1;
+        private System.Windows.Forms.Panel panel1;
     }
 }

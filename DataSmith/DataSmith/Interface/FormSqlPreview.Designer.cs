@@ -1,4 +1,4 @@
-﻿namespace DataSmith
+﻿namespace DataSmith.Interface
 {
     partial class FormSqlPreview
     {
@@ -37,6 +37,10 @@
             this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
             this.inputButton2 = new C1.Win.C1InputPanel.InputButton();
             this.c1FlexGrid1 = new C1.Win.C1FlexGrid.C1FlexGrid();
+            this.inputLabel4 = new C1.Win.C1InputPanel.InputLabel();
+            this.inputComboBox1 = new C1.Win.C1InputPanel.InputComboBox();
+            this.inputLabel5 = new C1.Win.C1InputPanel.InputLabel();
+            this.inputTextBox2 = new C1.Win.C1InputPanel.InputTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.c1FlexGrid1)).BeginInit();
             this.SuspendLayout();
@@ -47,6 +51,10 @@
             this.c1InputPanel1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.c1InputPanel1.Items.Add(this.inputLabel1);
             this.c1InputPanel1.Items.Add(this.inputLabel3);
+            this.c1InputPanel1.Items.Add(this.inputLabel4);
+            this.c1InputPanel1.Items.Add(this.inputComboBox1);
+            this.c1InputPanel1.Items.Add(this.inputLabel5);
+            this.c1InputPanel1.Items.Add(this.inputTextBox2);
             this.c1InputPanel1.Items.Add(this.inputLabel2);
             this.c1InputPanel1.Items.Add(this.inputTextBox1);
             this.c1InputPanel1.Items.Add(this.inputButton1);
@@ -109,14 +117,38 @@
             this.c1FlexGrid1.TabIndex = 1;
             this.c1FlexGrid1.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2007Blue;
             // 
-            // Form2
+            // inputLabel4
+            // 
+            this.inputLabel4.Name = "inputLabel4";
+            this.inputLabel4.Text = "数据源";
+            this.inputLabel4.Width = 150;
+            // 
+            // inputComboBox1
+            // 
+            this.inputComboBox1.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.inputComboBox1.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
+            this.inputComboBox1.Name = "inputComboBox1";
+            this.inputComboBox1.Width = 218;
+            // 
+            // inputLabel5
+            // 
+            this.inputLabel5.Name = "inputLabel5";
+            this.inputLabel5.Text = "视图名称";
+            this.inputLabel5.Width = 174;
+            // 
+            // inputTextBox2
+            // 
+            this.inputTextBox2.Name = "inputTextBox2";
+            this.inputTextBox2.Width = 201;
+            // 
+            // FormSqlPreview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1166, 712);
             this.Controls.Add(this.c1FlexGrid1);
             this.Controls.Add(this.c1InputPanel1);
-            this.Name = "Form2";
+            this.Name = "FormSqlPreview";
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).EndInit();
@@ -135,5 +167,9 @@
         private C1.Win.C1InputPanel.InputLabel inputLabel1;
         private C1.Win.C1InputPanel.InputLabel inputLabel2;
         private C1.Win.C1InputPanel.InputLabel inputLabel3;
+        private C1.Win.C1InputPanel.InputLabel inputLabel4;
+        private C1.Win.C1InputPanel.InputComboBox inputComboBox1;
+        private C1.Win.C1InputPanel.InputLabel inputLabel5;
+        private C1.Win.C1InputPanel.InputTextBox inputTextBox2;
     }
 }
