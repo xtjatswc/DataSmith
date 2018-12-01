@@ -6,6 +6,7 @@ using System.Text;
 using DataSmith.Core.Context;
 using DataSmith.Core.Extension;
 using DataSmith.Core.Infrastructure.DAL;
+using DataSmith.Core.Plugins;
 using Quartz;
 using Quartz.Impl;
 
@@ -75,14 +76,8 @@ namespace DataSmith
             var iDataProvider = dataSource.GetDataProvider();
             var datatable = iDataProvider.GetDataTable(sql);
 
-            //往目标数据库中插入数据
-            var targetDataSource = interfaces.GetTargetDataSource();
-            var targetDataProvider = targetDataSource.GetDataProvider();
-            foreach (DataRow row in datatable.Rows)
-            {
-                
-            }
-            
+            var iDataTransfer = Host.GetServices<IDataTransfer>().ToList();
+            iDataTransfer[0].DataTransfer(datatable);
             Console.WriteLine("作业执行，jobSays:" + sql);
         }
     }

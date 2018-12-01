@@ -8,3 +8,6 @@
 /DataSmith/bin/log
 /DataSmith/Core/obj
 /DataSmith/*.user
+/DataSmith/DataSmith.Plugin/Plugin/DataSmith.Plugin/obj
+/DataSmith/bin/plugins/DataSmith.CNIS.Plugin.dll
+/DataSmith/bin/plugins/DataSmith.CNIS.Plugin.pdb

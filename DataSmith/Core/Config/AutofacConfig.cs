@@ -5,6 +5,7 @@
  */
 using System;
 using System.CodeDom;
+using System.IO;
 using Autofac;
 using System.Reflection;
 using System.Linq;
@@ -52,6 +53,23 @@ namespace DataSmith.Core.Config
                 {
                     builder.RegisterType(type).SingleInstance();
                 }
+            }
+
+            //加载插件目录
+            var execution_path = AppDomain.CurrentDomain.BaseDirectory + "plugins\\";
+            var plugin_filename = "Plugin";
+
+            var d = new DirectoryInfo(execution_path);
+            var pluginDlls = (from FileInfo fi in d.GetFiles()
+                where (
+                    fi.FullName.EndsWith(plugin_filename + ".dll")
+                )
+                select fi).ToList();
+            foreach (var plugin in pluginDlls)
+            {
+                Assembly assPlugin = Assembly.LoadFile(plugin.FullName);
+                //.AsImplementedInterfaces()
+                builder.RegisterTypes(assPlugin.GetTypes()).PropertiesAutowired();
             }
 
             //创建一个Autofac的容器
