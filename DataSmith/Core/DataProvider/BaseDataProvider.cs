@@ -11,8 +11,7 @@ namespace DataSmith.Core.DataProvider
 {
     public abstract class BaseDataProvider : IDataProvider
     {
-        public IDbContext Db;
-
+        public IDbContext Db { get; set; }
         public abstract DBType DbType { get; }
         public abstract string ConnStr { set; }
 

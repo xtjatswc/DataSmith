@@ -58,12 +58,30 @@ namespace DataSmith.DbSource
 
         private void inputButton1_Click(object sender, EventArgs e)
         {
-            var success = DataProvider.TestConn();
-            MessageBox.Show(success.ToString());
+            if (TestConn())
+                MessageBox.Show("连接成功！");
+        }
+
+        private bool TestConn()
+        {
+            try
+            {
+                DataProvider.Db.Data.ConnectionString = inputTextBox7.Text;
+                return DataProvider.TestConn();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+
+            return false;
         }
 
         private void inputButton2_Click(object sender, EventArgs e)
         {
+            if (!TestConn())
+                return;
+
             _dataSource.DBType = Convert.ToInt32(inputComboBox1.SelectedValue);
             _dataSource.DBTypeName = inputComboBox1.Text;
             _dataSource.SourceName = inputTextBox1.Text;

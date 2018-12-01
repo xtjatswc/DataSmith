@@ -11,7 +11,6 @@ namespace DataSmith.Core.Infrastructure.Model
     {
         public Int64 InterfaceID { get; set; }
         public String FieldName { get; set; }
-        public String FieldAlias { get; set; }
-        public Int64 IsDeleted { get; set; }
+        public decimal SortNo { get; set; }
     }
 }

@@ -17,12 +17,20 @@ namespace DataSmith
         /// <summary>
         ///     Program entry point.
         /// </summary>
-        [STAThread]
-        private static void Main(string[] args)
+        //[STAThread]
+        //private static void Main(string[] args)
+        //{
+        //    Application.EnableVisualStyles();
+        //    Application.SetCompatibleTextRenderingDefault(false);
+        //    Application.Run(new FormMain());
+
+        //}
+
+        public static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMain());
+            Class1 c1 = new Class1();
+            c1.Test();
         }
+
     }
 }

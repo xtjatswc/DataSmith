@@ -57,26 +57,17 @@ namespace DataSmith.Interface
 
             using (var context = _viewFieldSetDal.Db.UseTransaction(true))
             {
-                _viewFieldSetDal.Db.Sql("update ViewFieldSet set IsDeleted = 1 where InterFaceID = @0", _interfaces.ID)
-                    .Execute();
-                foreach (DataColumn dataColumn in dt.Columns)
+                _viewFieldSetDal.Db.Sql("delete from ViewFieldSet where InterFaceID = @0 ",
+                    _interfaces.ID).Execute();
+                for (int i = 0; i < dt.Columns.Count; i++)
                 {
+                    var dataColumn = dt.Columns[i];
                     var viewFieldSet = new ViewFieldSet();
                     viewFieldSet.InterfaceID = _interfaces.ID;
                     viewFieldSet.FieldName = dataColumn.ColumnName;
-                    viewFieldSet.IsDeleted = 0;
-
-                    var model = _viewFieldSetDal.GetModel(viewFieldSet, x => x.InterfaceID, x => x.FieldName);
-                    if (model == null)
-                        _viewFieldSetDal.Insert(viewFieldSet);
-                    else
-                        _viewFieldSetDal.Db.Sql(
-                            "update ViewFieldSet set IsDeleted = 0 where InterFaceID = @0 and FieldName = @1",
-                            _interfaces.ID, viewFieldSet.FieldName).Execute();
+                    viewFieldSet.SortNo = i;
+                    _viewFieldSetDal.Insert(viewFieldSet);
                 }
-
-                _viewFieldSetDal.Db.Sql("delete from ViewFieldSet where IsDeleted = 1 and InterFaceID = @0 ",
-                    _interfaces.ID).Execute();
 
                 context.Commit();
             }

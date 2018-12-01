@@ -6,6 +6,7 @@
 using System;
 using System.Data;
 using System.Collections.Generic;
+using FluentData;
 
 namespace DataSmith.Core.DataProvider
 {
@@ -14,7 +15,8 @@ namespace DataSmith.Core.DataProvider
 	/// </summary>
 	public interface IDataProvider
     {
-	    DBType DbType { get; }
+        IDbContext Db { get; set; }
+        DBType DbType { get; }
         string ConnStr { set; }
         IDataProvider Clone();
 

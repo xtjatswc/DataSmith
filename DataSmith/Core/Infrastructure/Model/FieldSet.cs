@@ -14,6 +14,7 @@ namespace DataSmith.Core.Infrastructure.Model
         public String FieldDescribe { get; set; }
         public Int64 Required { get; set; }
         public String Remark { get; set; }
+        public String FieldAlias { get; set; }
         public Double SortNo { get; set; }
     }
 }

@@ -12,5 +12,12 @@ namespace DataSmith.Core.Extension
             var dataSource = dataSourceDal.GetModel(interfaces.DataSourceID);
             return dataSource;
         }
+
+        public static DataSource GetTargetDataSource(this Interfaces interfaces)
+        {
+            var dataSourceDal = Host.GetService<DataSourceDal>();
+            var dataSource = dataSourceDal.GetModel(interfaces.TargetDataSourceID);
+            return dataSource;
+        }
     }
 }

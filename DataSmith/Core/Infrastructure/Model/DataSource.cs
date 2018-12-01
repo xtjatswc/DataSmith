@@ -25,6 +25,8 @@ namespace DataSmith.Core.Infrastructure.Model
         public String DBPath { get; set; }
         public String DBConnStr { get; set; }
         public Int64 IsDeleted { get; set; }
+        //1、源数据库、2、目标数据库
+        public Int64 SourceType { get; set; }
 
     }
 }
