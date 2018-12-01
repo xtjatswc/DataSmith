@@ -32,7 +32,7 @@ namespace DataSmith
             ITrigger trigger = TriggerBuilder.Create()
                 .WithIdentity("myTrigger", "group1")
                 .StartNow()
-                .WithSimpleSchedule(x => x.WithIntervalInSeconds(400)
+                .WithSimpleSchedule(x => x.WithIntervalInSeconds(15)
                     .RepeatForever())
                 .Build();
             sched.ScheduleJob(job, trigger);
@@ -78,6 +78,7 @@ namespace DataSmith
 
             var iDataTransfer = Host.GetServices<IDataTransfer>().ToList();
             iDataTransfer[0].DataTransfer(datatable);
+            Host.log.Info("abcd");
             Console.WriteLine("作业执行，jobSays:" + sql);
         }
     }

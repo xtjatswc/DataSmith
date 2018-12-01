@@ -56,10 +56,9 @@ namespace DataSmith.Core.Config
             }
 
             //加载插件目录
-            var execution_path = AppDomain.CurrentDomain.BaseDirectory + "plugins\\";
             var plugin_filename = "Plugin";
 
-            var d = new DirectoryInfo(execution_path);
+            var d = new DirectoryInfo(LessConfig.PluginPath);
             var pluginDlls = (from FileInfo fi in d.GetFiles()
                 where (
                     fi.FullName.EndsWith(plugin_filename + ".dll")

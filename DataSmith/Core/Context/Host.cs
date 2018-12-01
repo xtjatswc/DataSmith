@@ -15,9 +15,15 @@ namespace DataSmith.Core.Context
         public static IContainer iContainer;
         public static Dictionary<DBType, IDataProvider> DataProviderPool;
 
+        public static log4net.ILog log;
+
         static Host()
         {
             iContainer = AutofacConfig.Register();
+
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(new System.IO.FileInfo($"{LessConfig.ExecutionPath}Log4net.config"));
+            log =
+                log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
             DataProviderPool = GetServices<IDataProvider>().ToDictionary(k => k.DbType, v => v);
         }

@@ -46,6 +46,10 @@
       <HintPath>..\..\..\bin\DataSmith.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\..\DLL\log4net.2.0.8\net40-full\log4net.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>

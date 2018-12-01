@@ -8,15 +8,18 @@ namespace DataSmith.Core.Config
 {
     public class LessConfig
     {
+        public static readonly string ExecutionPath;
         public static readonly string ConfigPath;
+        public static readonly string PluginPath;
         public static readonly string DbPath;
 
         static LessConfig()
         {
             //从文件目录加载用户配置
-            var executionPath = AppDomain.CurrentDomain.BaseDirectory;
-            ConfigPath = executionPath + @"config\";
-            DbPath = executionPath + @"db\";
+            ExecutionPath = AppDomain.CurrentDomain.BaseDirectory;
+            ConfigPath = ExecutionPath + @"config\";
+            PluginPath = ExecutionPath + @"plugins\";
+            DbPath = ExecutionPath + @"db\";
             JsonConfig.Config.User = JsonConfig.Config.ApplyFromDirectory(ConfigPath, JsonConfig.Config.User, true);
 
         }

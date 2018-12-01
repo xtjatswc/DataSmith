@@ -7,6 +7,7 @@ using System;
 using System.Data;
 using DataSmith.Core.Plugins;
 using System.Collections.Generic;
+using DataSmith.Core.Context;
 
 namespace DataSmith.Plugin
 {
@@ -17,6 +18,7 @@ namespace DataSmith.Plugin
 	{
         public void DataTransfer(DataTable dt)
         {
+        	Host.log.Info("我是插件！");
         	Console.Write("我是插件！");
         }
 	}
