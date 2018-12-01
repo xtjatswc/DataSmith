@@ -1,0 +1,7 @@
+E:\GitHub\DataSmith\DataSmith\bin\plugins\DataSmith.CNIS.Plugin.dll
+E:\GitHub\DataSmith\DataSmith\bin\plugins\DataSmith.CNIS.Plugin.pdb
+E:\GitHub\DataSmith\DataSmith\DataSmith.Plugin\Plugin\DataSmith.Plugin\obj\Debug\DataSmith.CNIS.Plugin.csprojResolveAssemblyReference.cache
+E:\GitHub\DataSmith\DataSmith\DataSmith.Plugin\Plugin\DataSmith.Plugin\obj\Debug\DataSmith.CNIS.Plugin.dll
+E:\GitHub\DataSmith\DataSmith\DataSmith.Plugin\Plugin\DataSmith.Plugin\obj\Debug\DataSmith.CNIS.Plugin.pdb
+E:\GitHub\DataSmith\DataSmith\DataSmith.Plugin\Plugin\DataSmith.CNIS.Plugin\obj\Debug\DataSmith.CNIS.Plugin.csprojResolveAssemblyReference.cache
+E:\GitHub\DataSmith\DataSmith\DataSmith.Plugin\Plugin\DataSmith.CNIS.Plugin\obj\Debug\DataSmith.CNIS.Plugin.dll

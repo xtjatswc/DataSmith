@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 # SharpDevelop 5.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSmith.CNIS.Plugin", "DataSmith.Plugin\DataSmith.CNIS.Plugin.csproj", "{0830CE1F-D0D7-4A83-AFB6-2727B9AF9A48}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSmith.CNIS.Plugin", "DataSmith.CNIS.Plugin\DataSmith.CNIS.Plugin.csproj", "{0830CE1F-D0D7-4A83-AFB6-2727B9AF9A48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
