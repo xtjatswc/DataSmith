@@ -96,6 +96,7 @@
     <Compile Include="Config\AutofacConfig.cs" />
     <Compile Include="Config\LessConfig.cs" />
     <Compile Include="Context\Host.cs" />
+    <Compile Include="Context\JoinContext.cs" />
     <Compile Include="DataProvider\BaseDataProvider.cs" />
     <Compile Include="DataProvider\IDataProvider.cs" />
     <Compile Include="DataProvider\MySQLProvider.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="JsonConfig\Merger.cs" />
     <Compile Include="Plugins\IDataTransfer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\PinYin.cs" />
     <Compile Include="Util\PropertyExpressionParser.cs" />
     <Compile Include="Util\ReflectionHelper.cs" />
   </ItemGroup>

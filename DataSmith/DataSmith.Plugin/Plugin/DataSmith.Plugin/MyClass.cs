@@ -6,20 +6,20 @@
 using System;
 using System.Data;
 using DataSmith.Core.Plugins;
-using System.Collections.Generic;
 using DataSmith.Core.Context;
+using DataSmith.CNIS.Plugin.AbsIF;
+using DataSmith.CNIS.Plugin.IFace;
 
-namespace DataSmith.Plugin
+namespace DataSmith.CNIS.Plugin
 {
 	/// <summary>
 	/// Description of MyClass.
 	/// </summary>
 	public class MyClass : IDataTransfer
 	{
-        public void DataTransfer(DataTable dt)
+        public void DataTransfer(JoinContext context)
         {
-        	Host.log.Info("我是插件！");
-        	Console.Write("我是插件！");
+        	IImp absImp = new ImpPatient(){context = context};
         }
 	}
 }

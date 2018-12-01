@@ -76,10 +76,18 @@ namespace DataSmith
             var iDataProvider = dataSource.GetDataProvider();
             var datatable = iDataProvider.GetDataTable(sql);
 
+            var targetDataSource = interfaces.GetTargetDataSource();
+            var iTargetDataProvider = targetDataSource.GetDataProvider();
+
+
+            JoinContext joinContext = new JoinContext();
+            joinContext.SourceDataProvider = iDataProvider;
+            joinContext.TargetDataProvider = iTargetDataProvider;
+            joinContext.Data = datatable;
+
+
             var iDataTransfer = Host.GetServices<IDataTransfer>().ToList();
-            iDataTransfer[0].DataTransfer(datatable);
-            Host.log.Info("abcd");
-            Console.WriteLine("作业执行，jobSays:" + sql);
+            iDataTransfer[0].DataTransfer(joinContext);
         }
     }
 }

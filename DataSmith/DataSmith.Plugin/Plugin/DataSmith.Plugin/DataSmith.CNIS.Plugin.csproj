@@ -6,7 +6,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <OutputType>Library</OutputType>
-    <RootNamespace>DataSmith.Plugin</RootNamespace>
+    <RootNamespace>DataSmith.CNIS.Plugin</RootNamespace>
     <AssemblyName>DataSmith.CNIS.Plugin</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -46,6 +46,10 @@
       <HintPath>..\..\..\bin\DataSmith.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="FluentData">
+      <HintPath>..\..\..\DLL\FluentData.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\..\DLL\log4net.2.0.8\net40-full\log4net.dll</HintPath>
       <Private>False</Private>
@@ -64,8 +68,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbsIF\AbsImpBase.cs" />
+    <Compile Include="AbsIF\AbsImpLisBase.cs" />
+    <Compile Include="AbsIF\AbsImpPatientBase.cs" />
+    <Compile Include="AbsIF\IImp.cs" />
+    <Compile Include="IFace\ImpConsultation.cs" />
+    <Compile Include="IFace\ImpEMR.cs" />
+    <Compile Include="IFace\ImpHisOrder.cs" />
+    <Compile Include="IFace\ImpLis.cs" />
+    <Compile Include="IFace\ImpLisNear.cs" />
+    <Compile Include="IFace\ImpOPatient.cs" />
+    <Compile Include="IFace\ImpOrderText.cs" />
+    <Compile Include="IFace\ImpPatient.cs" />
+    <Compile Include="IFace\ImpPatientSign.cs" />
     <Compile Include="MyClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\ExceptionUtil.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AbsIF" />
+    <Folder Include="IFace" />
+    <Folder Include="Util" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AbsIF\Plugin.sln" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
