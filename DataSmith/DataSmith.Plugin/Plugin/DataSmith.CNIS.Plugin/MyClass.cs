@@ -20,6 +20,7 @@ namespace DataSmith.CNIS.Plugin
         public void DataTransfer(JoinContext context)
         {
         	IImp absImp = new ImpPatient(){context = context};
+        	absImp.Import();
         }
 	}
 }

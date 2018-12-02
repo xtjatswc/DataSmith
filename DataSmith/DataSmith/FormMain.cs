@@ -60,6 +60,15 @@ namespace DataSmith
             inputButton.Click += InputButton_Click3;
             c1InputPanel1.Items.Add(inputButton);
 
+
+            inputButton = new InputButton();
+            inputButton.Text = "任务计划";
+            inputButton.Break = BreakType.None;
+            inputButton.Width = width;
+            inputButton.Height = c1InputPanel1.Height - bottomPadding;
+            inputButton.Click += InputButton_Click4;
+            c1InputPanel1.Items.Add(inputButton);
+
             inputButton = new InputButton();
             inputButton.Text = "退出";
             inputButton.Break = BreakType.None;
@@ -69,6 +78,12 @@ namespace DataSmith
             c1InputPanel1.Items.Add(inputButton);
 
             c1InputPanel1.SetSwitchToggle();
+        }
+
+        private void InputButton_Click4(object sender, EventArgs e)
+        {
+            Class1 c1 = new Class1();
+            c1.Test();
         }
 
         private void InputButton_Click3(object sender, EventArgs e)

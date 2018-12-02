@@ -32,7 +32,7 @@ namespace DataSmith
             ITrigger trigger = TriggerBuilder.Create()
                 .WithIdentity("myTrigger", "group1")
                 .StartNow()
-                .WithSimpleSchedule(x => x.WithIntervalInSeconds(15)
+                .WithSimpleSchedule(x => x.WithIntervalInSeconds(5000)
                     .RepeatForever())
                 .Build();
             sched.ScheduleJob(job, trigger);
