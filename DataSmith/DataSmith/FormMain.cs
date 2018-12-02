@@ -106,7 +106,7 @@ namespace DataSmith
 
         private void InputButton_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            Environment.Exit(Environment.ExitCode);
         }
     }
 }
