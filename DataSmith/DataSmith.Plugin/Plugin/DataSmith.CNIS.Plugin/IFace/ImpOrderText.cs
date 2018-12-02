@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Threading;
+using DataSmith.CNIS.Plugin.Util;
 
 namespace DataSmith.CNIS.Plugin.IFace
 {
@@ -19,9 +20,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 
 		public ImpOrderText()
 		{
-			DbHelperMySQL.connectionString = PubConstant.GetConnectionString("MysqlConnStr");
-			DbHelperSQL.connectionString = PubConstant.GetConnectionString("HisConnStr");
-
+			
 		}
 		
 		public override void Import()
@@ -32,7 +31,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 
 			string sql = @"select a.*, b.BRXM from V_CNIS_ClinicalDietaryAdvice  a inner join V_CNIS_ZYBRXX b on a.ZYH  = b.ZYH  where a.StopDateTime between '{0}' and '{1}' or a.EnterDateTime between '{0}' and '{1}'  or a.StopOrderDateTime between '{0}' and '{1}'";
 			sql = string.Format(sql, startDate, endDate);
-			DataTable dt = DbHelperSQL.Query(sql).Tables[0];
+			DataTable dt = context.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 			Console.WriteLine(" count >>>  " + dt.Rows.Count);
 			foreach (DataRow row in dt.Rows) {
 				try {
@@ -78,22 +77,21 @@ namespace DataSmith.CNIS.Plugin.IFace
 			RepeatIndicator = (StopDateTime == "" ? "2" : "1");
 			
 			string sql = "insert into clinicaldietaryadvice(patient_name,bahm,order_text,start_date_time,stop_date_time,doctor,stop_doctor,nurse,stop_nurse,enter_date_time,stop_order_date_time,order_status,repeat_indicator) values(@patient_name,@bahm,@order_text,@start_date_time,@stop_date_time,@doctor,@stop_doctor,@nurse,@stop_nurse,@enter_date_time,@stop_order_date_time,@order_status,@repeat_indicator) on duplicate key update doctor = values(doctor),stop_doctor = values(stop_doctor),nurse = values(nurse),stop_nurse = values(stop_nurse),enter_date_time = values(enter_date_time),stop_order_date_time = values(stop_order_date_time),order_status = values(order_status),repeat_indicator = values(repeat_indicator); ";
-			MySqlParameter[] paras = new MySqlParameter[] {
-				new MySqlParameter("patient_name", BRXM),
-				new MySqlParameter("bahm", ZYH),
-				new MySqlParameter("order_text", OrderText),
-				new MySqlParameter("start_date_time", StartDateTime),
-				new MySqlParameter("stop_date_time", StopDateTime),
-				new MySqlParameter("doctor", Doctor),
-				new MySqlParameter("stop_doctor", StopDoctor),
-				new MySqlParameter("nurse", Nurse),
-				new MySqlParameter("stop_nurse", StopDoctor),
-				new MySqlParameter("enter_date_time", EnterDateTime),
-				new MySqlParameter("stop_order_date_time", StopOrderDateTime),
-				new MySqlParameter("order_status", OrderStatus),
-				new MySqlParameter("repeat_indicator", RepeatIndicator),
-			};
-			int ret = DbHelperMySQL.ExecuteSql(sql, paras);
+			int ret = context.TargetDataProvider.Db.Sql(sql)
+				.Parameter("patient_name", BRXM)
+				.Parameter("bahm", ZYH)
+				.Parameter("order_text", OrderText)
+				.Parameter("start_date_time", StartDateTime)
+				.Parameter("stop_date_time", StopDateTime)
+				.Parameter("doctor", Doctor)
+				.Parameter("stop_doctor", StopDoctor)
+				.Parameter("nurse", Nurse)
+				.Parameter("stop_nurse", StopDoctor)
+				.Parameter("enter_date_time", EnterDateTime)
+				.Parameter("stop_order_date_time", StopOrderDateTime)
+				.Parameter("order_status", OrderStatus)
+				.Parameter("repeat_indicator", RepeatIndicator)
+				.Execute();
 			
 			
 

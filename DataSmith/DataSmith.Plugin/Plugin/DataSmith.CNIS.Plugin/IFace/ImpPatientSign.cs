@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataSmith.CNIS.Plugin.AbsIF;
 using System.Data;
+using DataSmith.Core.Util;
 
 namespace DataSmith.CNIS.Plugin.IFace
 {
@@ -26,16 +27,13 @@ namespace DataSmith.CNIS.Plugin.IFace
 		public ImpPatientSign(string zyh)
 		{
 			this.zyh = zyh;
-			DbHelperMySQL.connectionString = PubConstant.GetConnectionString("MysqlConnStr");
-			DbHelperSQL.connectionString = PubConstant.GetConnectionString("HisConnStr");
-
 		}
 
 
 		public override void Import()
 		{
 			string sql = "select * from V_CNIS_ZYBRXX where ZYH = '" + zyh + "'";
-			DataTable dt = DbHelperSQL.Query(sql).Tables[0];
+			DataTable dt = context.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 
 			Import(dt.Rows[0]);
 		}
@@ -113,28 +111,26 @@ namespace DataSmith.CNIS.Plugin.IFace
 				string PATIENT_DBKEY = "";
 				if (BAHM.Length > 0) {
 					sql = "	select PATIENT_DBKEY from PatientBasicInfo where patientno='" + BAHM + "';";
-					obj = DbHelperMySQL.GetSingle(sql);
+					obj = context.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
 					if (obj == null) {
 						PATIENT_DBKEY = GetSeed("PATIENT_DBKEY");
 
 						sql = "insert into PatientBasicInfo(PATIENT_DBKEY,patientno,patientname,patientnamefirstletter,gender,age,dateofbirth,maritalstatus,updatetime,telphone,homeaddress,UrgentContactName,UrgentContactTelPhone) 			values(@patientdbkey,@pno,@pname,@pin,@psex,@page,@pbirth,@pmarriage,@CURDATE,@telphone,@homeaddress,@UrgentContactName,@UrgentContactTelPhone);";
-						MySqlParameter[] paras = new MySqlParameter[] {
-							new MySqlParameter("patientdbkey", PATIENT_DBKEY),
-							new MySqlParameter("pno", BAHM),
-							new MySqlParameter("pname", BRXM),
-							new MySqlParameter("pin", patientnamefirstletter),
-							new MySqlParameter("psex", gender),
-							new MySqlParameter("page", age),
-							new MySqlParameter("pbirth", pbirth),
-							new MySqlParameter("pmarriage", HYZK),
-							new MySqlParameter("CURDATE", DateTime.Now),
-							new MySqlParameter("telphone", TELPHONE),
-							new MySqlParameter("homeaddress", HOMEADDRESS),
-							new MySqlParameter("UrgentContactName", UrgentContactName),
-							new MySqlParameter("UrgentContactTelPhone", UrgentContactTelPhone)
-
-						};
-						int ret = DbHelperMySQL.ExecuteSql(sql, paras);
+						int ret = context.TargetDataProvider.Db.Sql(sql)
+							.Parameter("patientdbkey", PATIENT_DBKEY)
+							.Parameter("pno", BAHM)
+							.Parameter("pname", BRXM)
+							.Parameter("pin", patientnamefirstletter)
+							.Parameter("psex", gender)
+							.Parameter("page", age)
+							.Parameter("pbirth", pbirth)
+							.Parameter("pmarriage", HYZK)
+							.Parameter("CURDATE", DateTime.Now)
+							.Parameter("telphone", TELPHONE)
+							.Parameter("homeaddress", HOMEADDRESS)
+							.Parameter("UrgentContactName", UrgentContactName)
+							.Parameter("UrgentContactTelPhone", UrgentContactTelPhone)
+							.Execute();
 					} else {
 						PATIENT_DBKEY = obj.ToString();
 					}
@@ -146,44 +142,45 @@ namespace DataSmith.CNIS.Plugin.IFace
 				string pdhosdbkey = "";
 				if (PATIENT_DBKEY.Length > 0 && ZYH.Length > 0) {
 					sql = "	select PatientHospitalize_DBKey from patienthospitalizebasicinfo where PATIENT_DBKEY='" + PATIENT_DBKEY + "' and HospitalizationNumber='" + ZYH + "';";
-					obj = DbHelperMySQL.GetSingle(sql);
+					obj = context.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
 					if (obj == null) {
 						pdhosdbkey = GetSeed("PatientHospitalize_DBKey");
 
 						sql = "insert into PatientHospitalizeBasicInfo(patienthospitalize_dbkey,patient_dbkey,Disease_DBKEY,department_dbkey,bednumber_dbkey,HospitalizationNumber,inhospitalData,Clinicist_DBKey,TherapyStatus,PhysicalActivityLevel,PregnantCondition,ClinicalDiagnosis,ClinicalTreatment,OutHospitalData,ChiefComplaint,MedicalHistory,PastMedicalHistory,Height,Weight) values(@pdhosdbkey,@patientdbkey,@diseasecode_DBKey,@departdbkey,@beddbkey,@hopno,@intime,@doctorydbkey,0,0,0,@ClinicalDiagnosis,@ClinicalTreatment,@OutHospitalData,@ChiefComplaint,@MedicalHistory,@PastMedicalHistory,@Height,@Weight);";
-						MySqlParameter[] paras = new MySqlParameter[] {
-							new MySqlParameter("pdhosdbkey", pdhosdbkey),
-							new MySqlParameter("patientdbkey", PATIENT_DBKEY),
-							new MySqlParameter("diseasecode_DBKey", Disease_DBKEY),
-							new MySqlParameter("departdbkey", Department_DBKey),
-							new MySqlParameter("beddbkey", beddbkey),
-							new MySqlParameter("hopno", ZYH),
-							new MySqlParameter("intime", RYRQ),
-							new MySqlParameter("doctorydbkey", doctorydbkey),
-							new MySqlParameter("ClinicalDiagnosis", ClinicalDiagnosis),
-							new MySqlParameter("ClinicalTreatment", ClinicalTreatment),
-							new MySqlParameter("OutHospitalData", OutHospitalData),
-							new MySqlParameter("ChiefComplaint", ChiefComplaint),
-							new MySqlParameter("MedicalHistory", MedicalHistory),
-							new MySqlParameter("PastMedicalHistory", PastMedicalHistory),
-							new MySqlParameter("Height", Height),
-							new MySqlParameter("Weight", Weight),							
-						};
-						int ret = DbHelperMySQL.ExecuteSql(sql, paras);
+						int ret = context.TargetDataProvider.Db.Sql(sql)
+							.Parameter("pdhosdbkey", pdhosdbkey)
+							.Parameter("patientdbkey", PATIENT_DBKEY)
+							.Parameter("diseasecode_DBKey", Disease_DBKEY)
+							.Parameter("departdbkey", Department_DBKey)
+							.Parameter("beddbkey", beddbkey)
+							.Parameter("hopno", ZYH)
+							.Parameter("intime", RYRQ)
+							.Parameter("doctorydbkey", doctorydbkey)
+							.Parameter("ClinicalDiagnosis", ClinicalDiagnosis)
+							.Parameter("ClinicalTreatment", ClinicalTreatment)
+							.Parameter("OutHospitalData", OutHospitalData)
+							.Parameter("ChiefComplaint", ChiefComplaint)
+							.Parameter("MedicalHistory", MedicalHistory)
+							.Parameter("PastMedicalHistory", PastMedicalHistory)
+							.Parameter("Height", Height)
+							.Parameter("Weight", Weight)
+							.Execute();
+						
+						
+						
 					} else {
 						pdhosdbkey = obj.ToString();
 						sql = "update PatientHospitalizeBasicInfo set department_dbkey=@departdbkey,bednumber_dbkey=@beddbkey,Clinicist_DBKey=@doctorydbkey, Height=@height,Weight=@Weight where patienthospitalize_dbkey=@pdhosdbkey;update patientbasicinfo set PatientName = @PatientName where PATIENT_DBKEY = @PATIENT_DBKEY;";
-						MySqlParameter[] paras = new MySqlParameter[] {
-							new MySqlParameter("departdbkey", Department_DBKey),
-							new MySqlParameter("beddbkey", beddbkey),
-							new MySqlParameter("doctorydbkey", doctorydbkey),
-							new MySqlParameter("pdhosdbkey", pdhosdbkey),
-							new MySqlParameter("Height", Height),
-							new MySqlParameter("Weight", Weight),
-							new MySqlParameter("PatientName", BRXM),
-							new MySqlParameter("PATIENT_DBKEY", PATIENT_DBKEY),
-						};
-						int ret = DbHelperMySQL.ExecuteSql(sql, paras);
+						int ret = context.TargetDataProvider.Db.Sql(sql)
+							.Parameter("departdbkey", Department_DBKey)
+							.Parameter("beddbkey", beddbkey)
+							.Parameter("doctorydbkey", doctorydbkey)
+							.Parameter("pdhosdbkey", pdhosdbkey)
+							.Parameter("Height", Height)
+							.Parameter("Weight", Weight)
+							.Parameter("PatientName", BRXM)
+							.Parameter("PATIENT_DBKEY", PATIENT_DBKEY)
+							.Execute();
 					}
 				}
 				#endregion
@@ -193,20 +190,19 @@ namespace DataSmith.CNIS.Plugin.IFace
 				string pdhosdbkey = "";
 				if (ZYH.Length > 0) {
 					sql = "	select PatientHospitalize_DBKey from patienthospitalizebasicinfo where HospitalizationNumber='" + ZYH + "';";
-					obj = DbHelperMySQL.GetSingle(sql);
+					obj = context.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
 					if (obj != null) {
 						pdhosdbkey = obj.ToString();
 						sql = "update PatientHospitalizeBasicInfo set TherapyStatus=9,department_dbkey=@departdbkey,bednumber_dbkey=@beddbkey,Clinicist_DBKey=@doctorydbkey,OutHospitalData=@OutHospitalData,Height=@height,Weight=@Weight  where patienthospitalize_dbkey=@pdhosdbkey;";
-						MySqlParameter[] paras = new MySqlParameter[] {
-							new MySqlParameter("departdbkey", Department_DBKey),
-							new MySqlParameter("beddbkey", beddbkey),
-							new MySqlParameter("doctorydbkey", doctorydbkey),
-							new MySqlParameter("pdhosdbkey", pdhosdbkey),
-							new MySqlParameter("OutHospitalData", OutHospitalData),
-							new MySqlParameter("Height", Height),
-							new MySqlParameter("Weight", Weight),							
-						};
-						int ret = DbHelperMySQL.ExecuteSql(sql, paras);
+						int ret = context.TargetDataProvider.Db.Sql(sql)
+							.Parameter("departdbkey", Department_DBKey)
+							.Parameter("beddbkey", beddbkey)
+							.Parameter("doctorydbkey", doctorydbkey)
+							.Parameter("pdhosdbkey", pdhosdbkey)
+							.Parameter("OutHospitalData", OutHospitalData)
+							.Parameter("Height", Height)
+							.Parameter("Weight", Weight)
+							.Execute();
 					}
 				}
 				#endregion

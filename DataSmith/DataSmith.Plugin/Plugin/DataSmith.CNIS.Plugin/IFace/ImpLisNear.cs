@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using DataSmith.CNIS.Plugin.Util;
 
 namespace DataSmith.CNIS.Plugin.IFace
 {
@@ -33,7 +34,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 			
 			//增量取最新的未导入检验的患者住院号
 			sql = "select  DISTINCT BAHM ZYH from  V_CNIS_TestResult_i where SamTime >= '" + nearTime + "'";
-			dt = DbHelperSQL.Query(sql).Tables[0];
+			dt = context.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 			Console.WriteLine(" count >>>  " + dt.Rows.Count);
 			ImpLis impLis = new ImpLis();
 			foreach (DataRow row in dt.Rows) {
@@ -49,7 +50,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 
 			//DeleteLis();
 			sql = @"delete from laboratoryindex where PatientHospitalize_DBKey not in (select PatientHospitalize_DBKey from patienthospitalizebasicinfo);";
-			int ret = DbHelperMySQL.ExecuteSql(sql);
+			int ret = context.TargetDataProvider.Db.Sql(sql).Execute();
 		}
 		        
 	}

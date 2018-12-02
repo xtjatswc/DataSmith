@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Threading;
+using DataSmith.CNIS.Plugin.Util;
 
 namespace DataSmith.CNIS.Plugin.IFace
 {
@@ -45,7 +46,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 
 			sql = string.Format(sql, startDate, endDate, condition);
 
-			DataTable dt = DbHelperSQL.Query(sql).Tables[0];
+			DataTable dt = context.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 
 			Console.WriteLine("共计" + dt.Rows.Count + "位患者");
 			ImpPatientSign sign = new ImpPatientSign();
