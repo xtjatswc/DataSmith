@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataSmith.CNIS.Plugin.AbsIF;
 using System.Data;
 using DataSmith.Core.Util;
+using DataSmith.Core.Extension;
 
 namespace DataSmith.CNIS.Plugin.IFace
 {
@@ -40,25 +41,20 @@ namespace DataSmith.CNIS.Plugin.IFace
 
 		public void Import(DataRow row)
 		{
-
-			string BRXM = row["BRXM"].ToString();//InPatients.BRXM;
-			string ZYH = row["ZYH"].ToString();//InPatients.BAHM;
-			string YGBH = row["YGBH"].ToString();//InPatients.YGBH;
-			string YGXM = row["YGXM"].ToString();// InPatients.YGXM;
-			string BRKS = row["BRKS"].ToString();//InPatients.BRKS;
-			string lcysxmsx = PinYin.GetFirstLetter(YGXM);
-			string KSMC = row["KSMC"].ToString();//InPatients.KSMC;
-			string BRCH = row["BRCH"].ToString();//InPatients.BRCH;
-			string ClinicalDiagnosis = "";//row["ClinicalDiagnosis"].ToString();//InPatients.ClinicalDiagnosis;
-			string ChiefComplaint = ""; //row["ChiefComplaint"].ToString();//InPatients.ChiefComplaint; //主诉
-			string MedicalHistory = "";//row["MedicalHistory"].ToString();//InPatients.MedicalHistory; //现病史
-			string PastMedicalHistory = "";// row["PastMedicalHistory"].ToString();//InPatients.PastMedicalHistory; //既往病史
-			string diseasecode = row["diseasecode"].ToString();
-			string DiseaseName = row["DISEASENAME"].ToString();
-			string CYPB = row["CYPB"].ToString();//InPatients.CYPB;
-			string BAHM = row["BAHM"].ToString();//InPatients.ZYH;
-			string patientnamefirstletter = PinYin.GetFirstLetter(BRXM);
-			string gender = (row["BRXB"].ToString().Trim() == "男" ? "M" : "F"); //M男、F女
+			string BRXM = row.GetString(context.GetFieldAlias("BRXM"));//患者姓名
+			string ZYH = row.GetString(context.GetFieldAlias("ZYH"));//住院号
+			string YGBH = row.GetString(context.GetFieldAlias("YGBH"));//临床医生工号
+			string YGXM = row.GetString(context.GetFieldAlias("YGXM"));//临床医生姓名
+			string lcysxmsx = PinYin.GetFirstLetter(YGXM);//临床医生姓名拼音缩写
+			string BRKS = row.GetString(context.GetFieldAlias("BRKS"));//科室编码
+			string KSMC = row.GetString(context.GetFieldAlias("KSMC"));//科室名称
+			string BRCH = row.GetString(context.GetFieldAlias("BRCH"));//床位编号
+			string DiseaseCode = row.GetString(context.GetFieldAlias("DiseaseCode"));//疾病编码
+			string DiseaseName = row.GetString(context.GetFieldAlias("DiseaseName"));//疾病名称
+			string CYPB = row.GetString(context.GetFieldAlias("CYPB"));//出院判别：0在院，8出院，1门诊
+			string BAHM = row.GetString(context.GetFieldAlias("BAHM"));//病案号（同一患者多次入院时，该号不变）
+			string patientnamefirstletter = PinYin.GetFirstLetter(BRXM);//患者姓名拼音首字母
+			string gender = (row.GetString(context.GetFieldAlias("BRXB")).Trim() == "男" ? "M" : "F"); //M男、F女
 			string pbirth = DateTime.ParseExact(row["CSNY"].ToString().Trim(), "yyyyMMdd", System.Globalization.CultureInfo.CurrentCulture).ToString("yyyy-MM-dd");//InPatients.CSNY;
 			int age = DateTime.Now.Year - DateTime.Parse(pbirth).Year;
 			string HYZK = (row["MaritalStatus"].ToString() == "已婚" ? "1" : "0");
@@ -102,7 +98,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 			#endregion
 
 			#region 疾病
-			string Disease_DBKEY = ImportDisease(diseasecode, DiseaseName);
+			string Disease_DBKEY = ImportDisease(DiseaseCode, DiseaseName);
 			#endregion
 
 
@@ -146,7 +142,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 					if (obj == null) {
 						pdhosdbkey = GetSeed("PatientHospitalize_DBKey");
 
-						sql = "insert into PatientHospitalizeBasicInfo(patienthospitalize_dbkey,patient_dbkey,Disease_DBKEY,department_dbkey,bednumber_dbkey,HospitalizationNumber,inhospitalData,Clinicist_DBKey,TherapyStatus,PhysicalActivityLevel,PregnantCondition,ClinicalDiagnosis,ClinicalTreatment,OutHospitalData,ChiefComplaint,MedicalHistory,PastMedicalHistory,Height,Weight) values(@pdhosdbkey,@patientdbkey,@diseasecode_DBKey,@departdbkey,@beddbkey,@hopno,@intime,@doctorydbkey,0,0,0,@ClinicalDiagnosis,@ClinicalTreatment,@OutHospitalData,@ChiefComplaint,@MedicalHistory,@PastMedicalHistory,@Height,@Weight);";
+						sql = "insert into PatientHospitalizeBasicInfo(patienthospitalize_dbkey,patient_dbkey,Disease_DBKEY,department_dbkey,bednumber_dbkey,HospitalizationNumber,inhospitalData,Clinicist_DBKey,TherapyStatus,PhysicalActivityLevel,PregnantCondition,ClinicalTreatment,OutHospitalData,Height,Weight) values(@pdhosdbkey,@patientdbkey,@diseasecode_DBKey,@departdbkey,@beddbkey,@hopno,@intime,@doctorydbkey,0,0,0,@ClinicalTreatment,@OutHospitalData,@Height,@Weight);";
 						int ret = context.TargetDataProvider.Db.Sql(sql)
 							.Parameter("pdhosdbkey", pdhosdbkey)
 							.Parameter("patientdbkey", PATIENT_DBKEY)
@@ -156,12 +152,8 @@ namespace DataSmith.CNIS.Plugin.IFace
 							.Parameter("hopno", ZYH)
 							.Parameter("intime", RYRQ)
 							.Parameter("doctorydbkey", doctorydbkey)
-							.Parameter("ClinicalDiagnosis", ClinicalDiagnosis)
 							.Parameter("ClinicalTreatment", ClinicalTreatment)
 							.Parameter("OutHospitalData", OutHospitalData)
-							.Parameter("ChiefComplaint", ChiefComplaint)
-							.Parameter("MedicalHistory", MedicalHistory)
-							.Parameter("PastMedicalHistory", PastMedicalHistory)
 							.Parameter("Height", Height)
 							.Parameter("Weight", Weight)
 							.Execute();

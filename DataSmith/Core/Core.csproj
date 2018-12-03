@@ -104,7 +104,9 @@
     <Compile Include="DataProvider\OracleProvider.cs" />
     <Compile Include="DataProvider\SqliteProvider.cs" />
     <Compile Include="Extension\C1InputPanelExtension.cs" />
+    <Compile Include="Extension\DataRowExtension.cs" />
     <Compile Include="Extension\DataSourceExtension.cs" />
+    <Compile Include="Extension\HashTableExtension.cs" />
     <Compile Include="Extension\InputComboBoxExtension.cs" />
     <Compile Include="Extension\InterfacesExtension.cs" />
     <Compile Include="Extension\PanelExtension.cs" />

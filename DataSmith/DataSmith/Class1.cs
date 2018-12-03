@@ -69,20 +69,10 @@ namespace DataSmith
             }
 
             string fieldStr = sbField.ToString().TrimEnd(',');
-            string sql = $"select {fieldStr} from {interfaces.ViewName}";
 
-            //在数据源中执行sql，获取DataTable
+            //获取数据提供程序
             var dataSource = interfaces.GetDataSource();
             var iDataProvider = dataSource.GetDataProvider();
-            DataTable datatable = null;
-            try
-            {
-                datatable = iDataProvider.GetDataTable(sql);
-            }
-            catch (Exception e)
-            {
-                Host.log.Error(e);
-            }
 
             var targetDataSource = interfaces.GetTargetDataSource();
             var iTargetDataProvider = targetDataSource.GetDataProvider();
@@ -92,11 +82,11 @@ namespace DataSmith
 
             JoinContext joinContext = new JoinContext();
             joinContext.Interfaces = interfaces;
+            joinContext.QueryFields = fieldStr;
             joinContext.FieldSets = fields.ToDictionary(k => k.FieldName, v => v);
             joinContext.QueryParameters = queryParameters.ToDictionary(k => k.ParaName, v => v);
             joinContext.SourceDataProvider = iDataProvider;
             joinContext.TargetDataProvider = iTargetDataProvider;
-            joinContext.Data = datatable;
 
             var iDataTransfer = Host.GetServices<IDataTransfer>().ToList();
             iDataTransfer[0].DataTransfer(joinContext);

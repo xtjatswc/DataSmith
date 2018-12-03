@@ -91,6 +91,7 @@
     <Folder Include="AbsIF" />
     <Folder Include="IFace" />
     <Folder Include="Util" />
+    <Folder Include="Extension" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AbsIF\Plugin.sln" />

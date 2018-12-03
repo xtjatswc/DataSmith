@@ -13,6 +13,9 @@ namespace DataSmith.Core.Context
         //接口模型
         public Interfaces Interfaces { get; set; }
 
+        //查询字段拼接，select ... from 中间的部分
+        public string QueryFields { get; set; }
+
         //字段模型
         public Dictionary<string, FieldSet> FieldSets { get; set; }
 
@@ -25,7 +28,13 @@ namespace DataSmith.Core.Context
         //目标数据源提供程序
         public IDataProvider TargetDataProvider { get; set; }
 
-        //需要传输的数据
-        public DataTable Data { get; set; }
+        //根据接口字段名得到视图别名
+        public string GetFieldAlias(string fieldName)
+        {
+            if(FieldSets.ContainsKey(fieldName))
+                return FieldSets[fieldName].FieldAlias;
+
+            return "";
+        }
     }
 }

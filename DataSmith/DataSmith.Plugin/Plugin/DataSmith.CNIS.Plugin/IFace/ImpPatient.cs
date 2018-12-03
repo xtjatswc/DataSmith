@@ -36,23 +36,23 @@ namespace DataSmith.CNIS.Plugin.IFace
 				condition = " and CYPB = 0 ";
 			} else {
 				/*
-				 *可能的格式：
+				 * 可能的格式：
 				 * "yyyyMMdd00:00:01" "yyyyMMddHH:mm:ss"
-				 * 
+				 * 				 
 				 */
 				startDate = DateTime.Now.AddDays(-nearDays).ToString(context.QueryParameters["BeginTime"].Formart);
 				endDate = DateTime.Now.Date.AddDays(1).AddSeconds(-1).ToString(context.QueryParameters["EndTime"].Formart);
 			}
 			Console.WriteLine("入院起止时间：从" + startDate + "到" + endDate);
 
-			string sql = "select * from " + context.Interfaces.ViewName + " where (" + context.FieldSets["RYRQ"].FieldAlias + " between '{0}' and '{1}' or " + context.FieldSets["OutHospitalDate"].FieldAlias + " between '{0}' and '{1}') {2} order by RYRQ asc";
+			string sql = "select " + context.QueryFields + " from " + context.Interfaces.ViewName + " where (" + context.FieldSets["RYRQ"].FieldAlias + " between '{0}' and '{1}' or " + context.FieldSets["OutHospitalDate"].FieldAlias + " between '{0}' and '{1}') {2} order by " + context.FieldSets["RYRQ"].FieldAlias + " asc";
 
 			sql = string.Format(sql, startDate, endDate, condition);
 
 			DataTable dt = context.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 
 			Console.WriteLine("共计" + dt.Rows.Count + "位患者");
-			ImpPatientSign sign = new ImpPatientSign();
+			ImpPatientSign sign = new ImpPatientSign{context = context};
 			foreach (DataRow patient in dt.Rows) {
 				try {
 					sign.Import(patient);
