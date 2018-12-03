@@ -35,14 +35,17 @@ namespace DataSmith.CNIS.Plugin.IFace
 				endDate = inEndDate.Value.ToString("yyyyMMdd23:59:59");
 				condition = " and CYPB = 0 ";
 			} else {
-				startDate = DateTime.Now.AddDays(-nearDays).ToString("yyyyMMdd00:00:01");
-				endDate = DateTime.Now.Date.AddDays(1).AddSeconds(-1).ToString("yyyyMMddHH:mm:ss");
+				/*
+				 *可能的格式：
+				 * "yyyyMMdd00:00:01" "yyyyMMddHH:mm:ss"
+				 * 
+				 */
+				startDate = DateTime.Now.AddDays(-nearDays).ToString(context.QueryParameters["BeginTime"].Formart);
+				endDate = DateTime.Now.Date.AddDays(1).AddSeconds(-1).ToString(context.QueryParameters["EndTime"].Formart);
 			}
 			Console.WriteLine("入院起止时间：从" + startDate + "到" + endDate);
 
-			string sql = "select * from V_CNIS_ZYBRXX where (RYRQ between '{0}' and '{1}' or OutHospitalDate between '{0}' and '{1}') {2} order by RYRQ asc";
-			//string sql = "select top 1000 * from V_CNIS_ZYBRXX  where CYPB<> 8";
-			//string sql = "select * from V_CNIS_ZYBRXX where RYRQ between '2018011400:00:01' and '2018031323:59:59' or OutHospitalDate between '2018011400:00:01' and '2018031323:59:59' order by RYRQ asc";
+			string sql = "select * from " + context.Interfaces.ViewName + " where (" + context.FieldSets["RYRQ"].FieldAlias + " between '{0}' and '{1}' or " + context.FieldSets["OutHospitalDate"].FieldAlias + " between '{0}' and '{1}') {2} order by RYRQ asc";
 
 			sql = string.Format(sql, startDate, endDate, condition);
 

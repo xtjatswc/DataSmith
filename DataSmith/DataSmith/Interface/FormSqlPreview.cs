@@ -47,12 +47,32 @@ namespace DataSmith.Interface
 
         private void inputButton1_Click(object sender, EventArgs e)
         {
-            var datatable = _dataProvider.GetDataTable(inputTextBox1.Text);
-            c1FlexGrid1.DataSource = datatable;
+            ExecQuery();
+        }
+
+        private bool ExecQuery()
+        {
+            try
+            {
+                var datatable = _dataProvider.GetDataTable(inputTextBox1.Text);
+                c1FlexGrid1.DataSource = datatable;
+
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+                return false;
+
+            }
+
+            return true;
         }
 
         private void inputButton2_Click(object sender, EventArgs e)
         {
+            if(!ExecQuery())
+                return;
+
             var dt = c1FlexGrid1.DataSource as DataTable;
 
             using (var context = _viewFieldSetDal.Db.UseTransaction(true))

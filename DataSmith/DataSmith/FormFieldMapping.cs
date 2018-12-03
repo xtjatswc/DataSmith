@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Dynamic;
 using System.Windows.Forms;
 using C1.Win.C1InputPanel;
@@ -75,11 +76,22 @@ namespace DataSmith
                 {
                     inputComboBoxFieldAlias.SetInitValue(fieldSet.FieldAlias, true);
                 }
+                inputComboBoxFieldAlias.Break = BreakType.None;
                 inputComboBoxFieldAlias.Width = 200;
-                inputComboBoxFieldAlias.Break = BreakType.Row;
                 inputComboBoxFieldAlias.MaxDropDownItems = 50;
                 inputComboBoxFieldAlias.SelectedValueChanged += InputComboBoxFieldAlias_SelectedValueChanged; ;
                 controls.inputComboBoxFieldAlias = inputComboBoxFieldAlias;
+
+                InputLabel inputLabel = new InputLabel();
+                inputLabel.ForeColor = Color.Red;
+                inputLabel.Width = 50;
+                if (fieldSet.Required == 1)
+                {
+                    inputLabel.Text = "(必填)";
+                }
+                inputLabel.Break = BreakType.Row;
+                c1InputPanel2.Items.Add(inputLabel);
+
 
                 //分隔线
                 var inputSeparator = new InputSeparator();
@@ -106,6 +118,18 @@ namespace DataSmith
                     MessageBox.Show(inputComboBoxFieldAlias.ErrorText);
                     inputComboBoxFieldAlias.Focus();
                     return;
+                }
+
+                if (fieldSet.Required == 1 && inputComboBoxFieldAlias.SelectedValue == "")
+                {
+                    inputComboBoxFieldAlias.ErrorText = $"栏目\"{fieldSet.FieldDescribe}\"为必填项！";
+                    MessageBox.Show(inputComboBoxFieldAlias.ErrorText);
+                    inputComboBoxFieldAlias.Focus();
+                    return;                    
+                }
+                else
+                {
+                    inputComboBoxFieldAlias.ErrorText = "";
                 }
 
                 fieldSet.FieldAlias = inputComboBoxFieldAlias.SelectedValue.ToString();

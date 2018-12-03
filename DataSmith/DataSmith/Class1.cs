@@ -74,17 +74,29 @@ namespace DataSmith
             //在数据源中执行sql，获取DataTable
             var dataSource = interfaces.GetDataSource();
             var iDataProvider = dataSource.GetDataProvider();
-            var datatable = iDataProvider.GetDataTable(sql);
+            DataTable datatable = null;
+            try
+            {
+                datatable = iDataProvider.GetDataTable(sql);
+            }
+            catch (Exception e)
+            {
+                Host.log.Error(e);
+            }
 
             var targetDataSource = interfaces.GetTargetDataSource();
             var iTargetDataProvider = targetDataSource.GetDataProvider();
 
+            var queryParameterDal = Host.GetService<QueryParameterDal>();
+            var queryParameters = queryParameterDal.GetModels(where: $"InterfaceID={InterfaceID}");
 
             JoinContext joinContext = new JoinContext();
+            joinContext.Interfaces = interfaces;
+            joinContext.FieldSets = fields.ToDictionary(k => k.FieldName, v => v);
+            joinContext.QueryParameters = queryParameters.ToDictionary(k => k.ParaName, v => v);
             joinContext.SourceDataProvider = iDataProvider;
             joinContext.TargetDataProvider = iTargetDataProvider;
             joinContext.Data = datatable;
-
 
             var iDataTransfer = Host.GetServices<IDataTransfer>().ToList();
             iDataTransfer[0].DataTransfer(joinContext);

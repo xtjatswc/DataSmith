@@ -120,12 +120,14 @@
     <Compile Include="Infrastructure\DAL\InterfaceClassifyDal.cs" />
     <Compile Include="Infrastructure\DAL\InterfacesDal.cs" />
     <Compile Include="Infrastructure\DAL\FieldSetDal.cs" />
+    <Compile Include="Infrastructure\DAL\QueryParameterDal.cs" />
     <Compile Include="Infrastructure\DAL\ViewFieldSetDal.cs" />
     <Compile Include="Infrastructure\Model\DataBaseType.cs" />
     <Compile Include="Infrastructure\Model\DataSource.cs" />
     <Compile Include="Infrastructure\Model\FieldSet.cs" />
     <Compile Include="Infrastructure\Model\InterfaceClassify.cs" />
     <Compile Include="Infrastructure\Model\Interfaces.cs" />
+    <Compile Include="Infrastructure\Model\QueryParameter.cs" />
     <Compile Include="Infrastructure\Model\ViewFieldSet.cs" />
     <Compile Include="JsonConfig\Config.cs" />
     <Compile Include="JsonConfig\ConfigObjects.cs" />
