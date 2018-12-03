@@ -106,6 +106,7 @@
     <Compile Include="Extension\C1InputPanelExtension.cs" />
     <Compile Include="Extension\DataRowExtension.cs" />
     <Compile Include="Extension\DataSourceExtension.cs" />
+    <Compile Include="Extension\FieldSetExtension.cs" />
     <Compile Include="Extension\HashTableExtension.cs" />
     <Compile Include="Extension\InputComboBoxExtension.cs" />
     <Compile Include="Extension\InterfacesExtension.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Infrastructure\Base\OperateType.cs" />
     <Compile Include="Infrastructure\DAL\DataBaseTypeDal.cs" />
     <Compile Include="Infrastructure\DAL\DataSourceDal.cs" />
+    <Compile Include="Infrastructure\DAL\FieldPropertiesDal.cs" />
     <Compile Include="Infrastructure\DAL\InterfaceClassifyDal.cs" />
     <Compile Include="Infrastructure\DAL\InterfacesDal.cs" />
     <Compile Include="Infrastructure\DAL\FieldSetDal.cs" />
@@ -126,6 +128,7 @@
     <Compile Include="Infrastructure\DAL\ViewFieldSetDal.cs" />
     <Compile Include="Infrastructure\Model\DataBaseType.cs" />
     <Compile Include="Infrastructure\Model\DataSource.cs" />
+    <Compile Include="Infrastructure\Model\FieldProperties.cs" />
     <Compile Include="Infrastructure\Model\FieldSet.cs" />
     <Compile Include="Infrastructure\Model\InterfaceClassify.cs" />
     <Compile Include="Infrastructure\Model\Interfaces.cs" />

@@ -7,6 +7,7 @@ using DataSmith.CNIS.Plugin.AbsIF;
 using System.Data;
 using DataSmith.Core.Util;
 using DataSmith.Core.Extension;
+using DataSmith.Core.Context;
 
 namespace DataSmith.CNIS.Plugin.IFace
 {
@@ -16,6 +17,22 @@ namespace DataSmith.CNIS.Plugin.IFace
 	class ImpPatientSign : AbsImpPatientBase
 	{
 		string zyh;
+		
+		private string _male;
+		
+		private JoinContext _context;
+		public new JoinContext context { 
+			get {
+				return _context; 
+			}
+			set {
+				_context = value;
+				
+				//获取代表男性的字符串
+				_male = context.GetTrue("BRXB");
+			}
+		}
+
 
 		/// <summary>
 		/// 批量循环导患者时调用
@@ -23,6 +40,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 		/// <param name="his"></param>
 		public ImpPatientSign()
 		{
+
 		}
 
 		public ImpPatientSign(string zyh)
@@ -54,7 +72,8 @@ namespace DataSmith.CNIS.Plugin.IFace
 			string CYPB = row.GetString(context.GetFieldAlias("CYPB"));//出院判别：0在院，8出院，1门诊
 			string BAHM = row.GetString(context.GetFieldAlias("BAHM"));//病案号（同一患者多次入院时，该号不变）
 			string patientnamefirstletter = PinYin.GetFirstLetter(BRXM);//患者姓名拼音首字母
-			string gender = (row.GetString(context.GetFieldAlias("BRXB")).Trim() == "男" ? "M" : "F"); //M男、F女
+			
+			string gender = (row.GetString(context.GetFieldAlias("BRXB")).Trim() == _male ? "M" : "F"); //M男、F女
 			string pbirth = DateTime.ParseExact(row["CSNY"].ToString().Trim(), "yyyyMMdd", System.Globalization.CultureInfo.CurrentCulture).ToString("yyyy-MM-dd");//InPatients.CSNY;
 			int age = DateTime.Now.Year - DateTime.Parse(pbirth).Year;
 			string HYZK = (row["MaritalStatus"].ToString() == "已婚" ? "1" : "0");

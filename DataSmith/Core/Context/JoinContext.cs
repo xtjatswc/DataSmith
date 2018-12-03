@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using DataSmith.Core.DataProvider;
+using DataSmith.Core.Extension;
 using DataSmith.Core.Infrastructure.Model;
 
 namespace DataSmith.Core.Context
@@ -35,6 +36,12 @@ namespace DataSmith.Core.Context
                 return FieldSets[fieldName].FieldAlias;
 
             return "";
+        }
+
+        //得到代表true的字符串标识，如参数传入性别字段，返回“男”或“M”
+        public string GetTrue(string fieldName)
+        {
+            return FieldSets[fieldName].GetFieldProperties().Property2;
         }
     }
 }

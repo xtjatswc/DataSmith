@@ -45,7 +45,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 			}
 			Console.WriteLine("入院起止时间：从" + startDate + "到" + endDate);
 
-			string sql = "select " + context.QueryFields + " from " + context.Interfaces.ViewName + " where (" + context.FieldSets["RYRQ"].FieldAlias + " between '{0}' and '{1}' or " + context.FieldSets["OutHospitalDate"].FieldAlias + " between '{0}' and '{1}') {2} order by " + context.FieldSets["RYRQ"].FieldAlias + " asc";
+			string sql = "select " + context.QueryFields + " from " + context.Interfaces.ViewName + " where (" + context.GetFieldAlias("RYRQ") + " between '{0}' and '{1}' or " + context.GetFieldAlias("OutHospitalDate") + " between '{0}' and '{1}') {2} order by " + context.GetFieldAlias("RYRQ") + " asc";
 
 			sql = string.Format(sql, startDate, endDate, condition);
 
