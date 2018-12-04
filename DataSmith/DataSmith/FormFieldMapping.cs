@@ -25,7 +25,7 @@ namespace DataSmith
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            interfaceNav1.NavClick += InterfaceNav1_NavClick;            
+            interfaceNav1.NavClick += InterfaceNav1_NavClick;
         }
 
         private void InterfaceNav1_NavClick(Interfaces e)
@@ -59,7 +59,7 @@ namespace DataSmith
                 c1InputPanel2.Items.Add(inputLabelRemark);
 
                 //视图字段别名
-                var viewFieldSets = _viewFieldSetDal.GetModels("InterfaceID=1");
+                var viewFieldSets = _viewFieldSetDal.GetModels("InterfaceID=" + e.ID);
                 viewFieldSets.Insert(0, new ViewFieldSet { FieldName = "" });
                 var inputComboBoxFieldAlias = new InputComboBox();
                 inputComboBoxFieldAlias.MismatchValueErrorText = "值“{0}”不匹配任何可用选项";
@@ -101,7 +101,7 @@ namespace DataSmith
         }
 
         private void InputComboBoxFieldAlias_SelectedValueChanged(object sender, EventArgs e)
-        {           
+        {
             InputComboBox inputComboBox = sender as InputComboBox;
             inputComboBox.ErrorText = "";
         }
@@ -125,7 +125,7 @@ namespace DataSmith
                     inputComboBoxFieldAlias.ErrorText = $"栏目\"{fieldSet.FieldDescribe}\"为必填项！";
                     MessageBox.Show(inputComboBoxFieldAlias.ErrorText);
                     inputComboBoxFieldAlias.Focus();
-                    return;                    
+                    return;
                 }
                 else
                 {
