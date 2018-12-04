@@ -20,9 +20,8 @@ namespace DataSmith.CNIS.Plugin.AbsIF
 		public void ImportUserLimit(string YGBH, string YGXM, string lcysxmsx, out string doctorydbkey)
 		{
 			string sql = "	select User_DBKey from `user` where userloginid='" + YGBH + "';";
-			object obj = context.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
-			doctorydbkey = "";
-			if (obj == null) {
+			doctorydbkey = context.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
+			if (doctorydbkey == null) {
 				//新建用户
 				doctorydbkey = GetSeed("User_DBKey");
 
@@ -85,8 +84,6 @@ namespace DataSmith.CNIS.Plugin.AbsIF
 					.Parameter("usraccessid", usraccessid)
 					.Parameter("doctorydbkey", doctorydbkey)
 					.Execute();
-			} else {
-				doctorydbkey = obj.ToString();
 			}
 		}
 
@@ -101,9 +98,9 @@ namespace DataSmith.CNIS.Plugin.AbsIF
 			string Department_DBKey = "";
 			if (BRKS.Length > 0) {
 				string sql = "	select Department_DBKey from department where DepartmentCode='" + BRKS + "';";
-				object obj = context.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
+				Department_DBKey = context.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
 				int ret = 0;
-				if (obj == null) {
+				if (Department_DBKey == null) {
 					Department_DBKey = GetSeed("Department_DBKey");
 
 					sql = "	insert into department(department_dbkey,DepartmentCode,DepartmentName,isactive,DepartmentNameFirstLetter)values(@departdbkey,@departno,@departname,1,@DepartmentNameFirstLetter);";
@@ -114,7 +111,6 @@ namespace DataSmith.CNIS.Plugin.AbsIF
 						.Parameter("DepartmentNameFirstLetter", PinYin.GetFirstLetter(KSMC))
 						.Execute();
 				} else {
-					Department_DBKey = obj.ToString();
 					sql = "	update department set DepartmentName=@DepartmentName where department_dbkey = @department_dbkey;";
 					ret = context.TargetDataProvider.Db.Sql(sql)
 						.Parameter("department_dbkey", Department_DBKey)
@@ -138,8 +134,8 @@ namespace DataSmith.CNIS.Plugin.AbsIF
 			string beddbkey = "";
 			if (BRCH.Length > 0 && Department_DBKey.Length > 0) {
 				string sql = "	select max(BedNumber_DBKey) from bednumber  where BedCode='" + BRCH + "' and Department_DBKey='" + Department_DBKey + "';";
-				object obj = context.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
-				if (obj == null) {
+				beddbkey = context.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
+				if (beddbkey == null) {
 					beddbkey = GetSeed("BedNumber_DBKey");
 
 					sql = "	insert into bednumber(BedNumber_DBKey,Department_dbkey,bedcode,bed,isactive) values(@beddbkey,@departdbkey,@bedno,@bedno,1);";
@@ -148,8 +144,6 @@ namespace DataSmith.CNIS.Plugin.AbsIF
 						.Parameter("departdbkey", Department_DBKey)
 						.Parameter("bedno", BRCH)
 						.Execute();
-				} else {
-					beddbkey = obj.ToString();
 				}
 			}
 
@@ -167,8 +161,8 @@ namespace DataSmith.CNIS.Plugin.AbsIF
 			string Disease_DBKEY = "";
 			if (diseasecode.Length > 0) {
 				string sql = "	select Disease_DBKEY from diseaseicd10 where DiseaseClassificationCode='" + diseasecode + "';";
-				object obj = context.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
-				if (obj == null) {
+				Disease_DBKEY = context.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
+				if (Disease_DBKEY == null) {
 					Disease_DBKEY = GetSeed("Disease_DBKEY");
 
 					sql = "insert into diseaseicd10(Disease_DBKEY,DiseaseClassificationCode,DiseaseName,IsPrimary)values(@diseasecode_DBKey,@diseasecode,@diseasename,0);";
@@ -177,8 +171,6 @@ namespace DataSmith.CNIS.Plugin.AbsIF
 						.Parameter("diseasecode", diseasecode)
 						.Parameter("diseasename", DiseaseName)
 						.Execute();
-				} else {
-					Disease_DBKEY = obj.ToString();
 				}
 			}
 

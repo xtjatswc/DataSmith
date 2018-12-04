@@ -43,10 +43,11 @@
             this.c1InputPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.c1InputPanel2.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.c1InputPanel2.Items.Add(this.inputComboBox1);
-            this.c1InputPanel2.Location = new System.Drawing.Point(197, 66);
-            this.c1InputPanel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.c1InputPanel2.Location = new System.Drawing.Point(263, 82);
+            this.c1InputPanel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.c1InputPanel2.MouseWheelEdit = false;
             this.c1InputPanel2.Name = "c1InputPanel2";
-            this.c1InputPanel2.Size = new System.Drawing.Size(534, 417);
+            this.c1InputPanel2.Size = new System.Drawing.Size(712, 522);
             this.c1InputPanel2.TabIndex = 1;
             this.c1InputPanel2.VisualStyle = C1.Win.C1InputPanel.VisualStyle.Office2007Blue;
             // 
@@ -59,8 +60,9 @@
             // 
             this.interfaceNav1.Dock = System.Windows.Forms.DockStyle.Left;
             this.interfaceNav1.Location = new System.Drawing.Point(0, 0);
+            this.interfaceNav1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.interfaceNav1.Name = "interfaceNav1";
-            this.interfaceNav1.Size = new System.Drawing.Size(197, 483);
+            this.interfaceNav1.Size = new System.Drawing.Size(263, 604);
             this.interfaceNav1.TabIndex = 2;
             // 
             // c1InputPanel1
@@ -68,9 +70,10 @@
             this.c1InputPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.c1InputPanel1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.c1InputPanel1.Items.Add(this.inputButton1);
-            this.c1InputPanel1.Location = new System.Drawing.Point(197, 0);
+            this.c1InputPanel1.Location = new System.Drawing.Point(263, 0);
+            this.c1InputPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.c1InputPanel1.Name = "c1InputPanel1";
-            this.c1InputPanel1.Size = new System.Drawing.Size(534, 66);
+            this.c1InputPanel1.Size = new System.Drawing.Size(712, 82);
             this.c1InputPanel1.TabIndex = 3;
             this.c1InputPanel1.VisualStyle = C1.Win.C1InputPanel.VisualStyle.Office2007Blue;
             // 
@@ -83,13 +86,13 @@
             // 
             // FormFieldMapping
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(731, 483);
+            this.ClientSize = new System.Drawing.Size(975, 604);
             this.Controls.Add(this.c1InputPanel2);
             this.Controls.Add(this.c1InputPanel1);
             this.Controls.Add(this.interfaceNav1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormFieldMapping";
             this.Text = "Form3";
             this.Load += new System.EventHandler(this.Form3_Load);

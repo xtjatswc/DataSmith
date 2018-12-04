@@ -123,7 +123,6 @@ namespace DataSmith.CNIS.Plugin.IFace
 			Console.WriteLine(BRXM + "	" + RYRQ);
 
 			string sql = "";
-			object obj = null;
 
 			#region 用户信息
 			string doctorydbkey = "";
@@ -148,8 +147,8 @@ namespace DataSmith.CNIS.Plugin.IFace
 				string PATIENT_DBKEY = "";
 				if (BAHM.Length > 0) {
 					sql = "	select PATIENT_DBKEY from PatientBasicInfo where patientno='" + BAHM + "';";
-					obj = context.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
-					if (obj == null) {
+					PATIENT_DBKEY = context.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
+					if (PATIENT_DBKEY == null) {
 						PATIENT_DBKEY = GetSeed("PATIENT_DBKEY");
 
 						sql = "insert into PatientBasicInfo(PATIENT_DBKEY,patientno,patientname,patientnamefirstletter,gender,age,dateofbirth,maritalstatus,updatetime,telphone,homeaddress,UrgentContactName,UrgentContactTelPhone,IDNumber) 			values(@patientdbkey,@pno,@pname,@pin,@psex,@page,@pbirth,@pmarriage,@CURDATE,@telphone,@homeaddress,@UrgentContactName,@UrgentContactTelPhone,@IDNumber);";
@@ -169,8 +168,6 @@ namespace DataSmith.CNIS.Plugin.IFace
 							.Parameter("UrgentContactTelPhone", UrgentContactTelPhone)
 							.Parameter("IDNumber", IDNumber)
 							.Execute();
-					} else {
-						PATIENT_DBKEY = obj.ToString();
 					}
 				}
 
@@ -180,8 +177,8 @@ namespace DataSmith.CNIS.Plugin.IFace
 				string pdhosdbkey = "";
 				if (PATIENT_DBKEY.Length > 0 && ZYH.Length > 0) {
 					sql = "	select PatientHospitalize_DBKey from patienthospitalizebasicinfo where PATIENT_DBKEY='" + PATIENT_DBKEY + "' and HospitalizationNumber='" + ZYH + "';";
-					obj = context.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
-					if (obj == null) {
+					pdhosdbkey = context.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
+					if (pdhosdbkey == null) {
 						pdhosdbkey = GetSeed("PatientHospitalize_DBKey");
 
 						sql = "insert into PatientHospitalizeBasicInfo(patienthospitalize_dbkey,patient_dbkey,Disease_DBKEY,department_dbkey,bednumber_dbkey,HospitalizationNumber,inhospitalData,Clinicist_DBKey,TherapyStatus,PhysicalActivityLevel,PregnantCondition,OutHospitalData,Height,Weight) values(@pdhosdbkey,@patientdbkey,@diseasecode_DBKey,@departdbkey,@beddbkey,@hopno,@intime,@doctorydbkey,0,0,0,@OutHospitalData,@Height,@Weight);";
@@ -202,7 +199,6 @@ namespace DataSmith.CNIS.Plugin.IFace
 						
 						
 					} else {
-						pdhosdbkey = obj.ToString();
 						sql = "update PatientHospitalizeBasicInfo set department_dbkey=@departdbkey,bednumber_dbkey=@beddbkey,Clinicist_DBKey=@doctorydbkey, Height=@height,Weight=@Weight where patienthospitalize_dbkey=@pdhosdbkey;update patientbasicinfo set PatientName = @PatientName where PATIENT_DBKEY = @PATIENT_DBKEY;";
 						int ret = context.TargetDataProvider.Db.Sql(sql)
 							.Parameter("departdbkey", Department_DBKey)
@@ -223,9 +219,8 @@ namespace DataSmith.CNIS.Plugin.IFace
 				string pdhosdbkey = "";
 				if (ZYH.Length > 0) {
 					sql = "	select PatientHospitalize_DBKey from patienthospitalizebasicinfo where HospitalizationNumber='" + ZYH + "';";
-					obj = context.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
-					if (obj != null) {
-						pdhosdbkey = obj.ToString();
+					pdhosdbkey = context.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
+					if (pdhosdbkey != null) {
 						sql = "update PatientHospitalizeBasicInfo set TherapyStatus=9,department_dbkey=@departdbkey,bednumber_dbkey=@beddbkey,Clinicist_DBKey=@doctorydbkey,OutHospitalData=@OutHospitalData,Height=@height,Weight=@Weight  where patienthospitalize_dbkey=@pdhosdbkey;";
 						int ret = context.TargetDataProvider.Db.Sql(sql)
 							.Parameter("departdbkey", Department_DBKey)
