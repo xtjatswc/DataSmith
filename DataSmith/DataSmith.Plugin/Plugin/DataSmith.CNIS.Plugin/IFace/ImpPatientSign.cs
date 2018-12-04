@@ -20,39 +20,28 @@ namespace DataSmith.CNIS.Plugin.IFace
 		string zyh;
 		
 		//男性
-		private string _male;
-		//已婚 
-		private string _married;
-		private FieldProperties _CSNY_Properties;
-		private FieldProperties _RYRQ_Properties;
-		private FieldProperties _OutHospitalDate_Properties;
-		
-		private JoinContext _context;
-		public override JoinContext context { 
-			get {
-				return _context; 
-			}
-			set {
-				_context = value;
-				
-				_male = context.GetTrue("BRXB");
-				_married = context.GetTrue("MaritalStatus");
-				_CSNY_Properties = context.FieldSets["CSNY"].GetFieldProperties();
-				_RYRQ_Properties = context.FieldSets["RYRQ"].GetFieldProperties();
-				_OutHospitalDate_Properties = context.FieldSets["OutHospitalDate"].GetFieldProperties();
-			}
-		}
-
+		private readonly string _male;
+		//已婚
+		private readonly string _married;
+		private readonly FieldProperties _CSNY_Properties;
+		private readonly FieldProperties _RYRQ_Properties;
+		private readonly FieldProperties _OutHospitalDate_Properties;
+	
 		/// <summary>
 		/// 批量循环导患者时调用
 		/// </summary>
 		/// <param name="his"></param>
 		public ImpPatientSign()
 		{
-
+			_male = context.GetTrue("BRXB");
+			_married = context.GetTrue("MaritalStatus");
+			_CSNY_Properties = context.FieldSets["CSNY"].GetFieldProperties();
+			_RYRQ_Properties = context.FieldSets["RYRQ"].GetFieldProperties();
+			_OutHospitalDate_Properties = context.FieldSets["OutHospitalDate"].GetFieldProperties();
 		}
 
 		public ImpPatientSign(string zyh)
+			: this()
 		{
 			this.zyh = zyh;
 		}
@@ -112,9 +101,9 @@ namespace DataSmith.CNIS.Plugin.IFace
 			string UrgentContactTelPhone = row.GetString(context.GetFieldAlias("UrgentContactTelPhone"));//紧急联系电话
 			//出院日期
 			DateTime? OutHospitalData = null;
-			if(_OutHospitalDate_Properties == null){
+			if (_OutHospitalDate_Properties == null) {
 				OutHospitalData = row.GetDateTime(context.GetFieldAlias("OutHospitalDate"));
-			}else{
+			} else {
 				OutHospitalData = DateTime.ParseExact(row.GetString(context.GetFieldAlias("OutHospitalDate")).Trim(), _OutHospitalDate_Properties.Property2, System.Globalization.CultureInfo.CurrentCulture);   
 			}
 			string Height = row.GetString(context.GetFieldAlias("Height"));

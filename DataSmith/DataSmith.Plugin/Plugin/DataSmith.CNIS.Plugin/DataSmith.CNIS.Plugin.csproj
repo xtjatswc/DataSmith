@@ -83,7 +83,7 @@
     <Compile Include="IFace\ImpOrderText.cs" />
     <Compile Include="IFace\ImpPatient.cs" />
     <Compile Include="IFace\ImpPatientSign.cs" />
-    <Compile Include="MyClass.cs" />
+    <Compile Include="Export.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\ExceptionUtil.cs" />
   </ItemGroup>

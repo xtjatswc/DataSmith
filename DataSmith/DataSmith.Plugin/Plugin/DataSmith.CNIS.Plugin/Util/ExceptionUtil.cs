@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataSmith.CNIS.Plugin.Util
 {
-    public class ExceptionUtil
+    public static class ExceptionUtil
     {
         public static string getInnerException(Exception ex)
         {

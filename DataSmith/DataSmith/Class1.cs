@@ -81,6 +81,7 @@ namespace DataSmith
             var queryParameters = queryParameterDal.GetModels(where: $"InterfaceID={InterfaceID}");
 
             JoinContext joinContext = new JoinContext();
+            joinContext.Args = new[] {"2"};
             joinContext.Interfaces = interfaces;
             joinContext.QueryFields = fieldStr;
             joinContext.FieldSets = fields.ToDictionary(k => k.FieldName, v => v);

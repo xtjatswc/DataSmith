@@ -11,6 +11,9 @@ namespace DataSmith.Core.Context
 {
     public class JoinContext
     {
+        //命令行参数
+        public string[] Args { get; set; }
+
         //接口模型
         public Interfaces Interfaces { get; set; }
 
