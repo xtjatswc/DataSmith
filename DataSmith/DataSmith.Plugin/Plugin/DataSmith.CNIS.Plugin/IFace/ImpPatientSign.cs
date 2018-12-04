@@ -8,6 +8,7 @@ using System.Data;
 using DataSmith.Core.Util;
 using DataSmith.Core.Extension;
 using DataSmith.Core.Context;
+using DataSmith.Core.Infrastructure.Model;
 
 namespace DataSmith.CNIS.Plugin.IFace
 {
@@ -18,21 +19,29 @@ namespace DataSmith.CNIS.Plugin.IFace
 	{
 		string zyh;
 		
+		//男性
 		private string _male;
+		//已婚 
+		private string _married;
+		private FieldProperties _CSNY_Properties;
+		private FieldProperties _RYRQ_Properties;
+		private FieldProperties _OutHospitalDate_Properties;
 		
 		private JoinContext _context;
-		public new JoinContext context { 
+		public override JoinContext context { 
 			get {
 				return _context; 
 			}
 			set {
 				_context = value;
 				
-				//获取代表男性的字符串
 				_male = context.GetTrue("BRXB");
+				_married = context.GetTrue("MaritalStatus");
+				_CSNY_Properties = context.FieldSets["CSNY"].GetFieldProperties();
+				_RYRQ_Properties = context.FieldSets["RYRQ"].GetFieldProperties();
+				_OutHospitalDate_Properties = context.FieldSets["OutHospitalDate"].GetFieldProperties();
 			}
 		}
-
 
 		/// <summary>
 		/// 批量循环导患者时调用
@@ -71,33 +80,46 @@ namespace DataSmith.CNIS.Plugin.IFace
 			string DiseaseName = row.GetString(context.GetFieldAlias("DiseaseName"));//疾病名称
 			string CYPB = row.GetString(context.GetFieldAlias("CYPB"));//出院判别：0在院，8出院，1门诊
 			string BAHM = row.GetString(context.GetFieldAlias("BAHM"));//病案号（同一患者多次入院时，该号不变）
-			string patientnamefirstletter = PinYin.GetFirstLetter(BRXM);//患者姓名拼音首字母
-			
+			string patientnamefirstletter = PinYin.GetFirstLetter(BRXM);//患者姓名拼音首字母			
 			string gender = (row.GetString(context.GetFieldAlias("BRXB")).Trim() == _male ? "M" : "F"); //M男、F女
-			string pbirth = DateTime.ParseExact(row["CSNY"].ToString().Trim(), "yyyyMMdd", System.Globalization.CultureInfo.CurrentCulture).ToString("yyyy-MM-dd");//InPatients.CSNY;
-			int age = DateTime.Now.Year - DateTime.Parse(pbirth).Year;
-			string HYZK = (row["MaritalStatus"].ToString() == "已婚" ? "1" : "0");
-			string RYRQ = "";
-			try {
-				RYRQ = DateTime.ParseExact(row["RYRQ"].ToString().Trim(), "yyyyMMddHH:mm:ss", System.Globalization.CultureInfo.CurrentCulture).ToString("yyyy-MM-dd HH:mm:ss");//InPatients.CSNY;         
-			} catch (Exception ex) {
-            	
-				//throw;
-			}
-			string ClinicalTreatment = "";// row["ClinicalTreatment"].ToString(); // InPatients.ClinicalTreatment;
-			string TELPHONE = row["TELPHONE"].ToString();
-			;// row["TELPHONE"].ToString();
-			string HOMEADDRESS = row["HOMEADDRESS"].ToString();
-			string UrgentContactName = row["UrgentContactName"].ToString();//紧急联系人							
-			string UrgentContactTelPhone = row["UrgentContactTelPhone"].ToString();
-			string OutHospitalData = "";
-			if (row["OutHospitalDate"].ToString().Trim() != "") {
-				OutHospitalData = DateTime.ParseExact(row["OutHospitalDate"].ToString().Trim(), "yyyyMMddHH:mm:ss", System.Globalization.CultureInfo.CurrentCulture).ToString("yyyy-MM-dd HH:mm:ss");//InPatients.CSNY;
-			}
-			string Height = row["Height"].ToString();
-			string Weight = row["Weight"].ToString();
+			string IDNumber = row.GetString(context.GetFieldAlias("IDNumber"));//身份证号
 
-			//CYPB = "0";			
+			//出生日期
+			DateTime? pbirth = null;
+			if (_CSNY_Properties == null) {
+				pbirth = row.GetDateTime(context.GetFieldAlias("CSNY"));
+			} else {
+				pbirth = DateTime.ParseExact(row.GetString(context.GetFieldAlias("CSNY")).Trim(), _CSNY_Properties.Property2, System.Globalization.CultureInfo.CurrentCulture);
+			}
+						
+			int? age = null;
+			if (pbirth != null) {
+				age = DateTime.Now.Year - pbirth.Value.Year;
+			}
+			
+			string HYZK = (row.GetString(context.GetFieldAlias("MaritalStatus")).Trim() == _married ? "1" : "0");
+			
+			DateTime? RYRQ = null;
+			if (_RYRQ_Properties == null) {
+				RYRQ = row.GetDateTime(context.GetFieldAlias("RYRQ"));
+			} else {
+				RYRQ = DateTime.ParseExact(row.GetString(context.GetFieldAlias("RYRQ")).Trim(), _RYRQ_Properties.Property2, System.Globalization.CultureInfo.CurrentCulture);   
+			}
+
+			string TELPHONE = row.GetString(context.GetFieldAlias("TELPHONE"));//联系电话
+			string HOMEADDRESS = row.GetString(context.GetFieldAlias("HOMEADDRESS"));//家庭住址
+			string UrgentContactName = row.GetString(context.GetFieldAlias("UrgentContactName"));//紧急联系人					
+			string UrgentContactTelPhone = row.GetString(context.GetFieldAlias("UrgentContactTelPhone"));//紧急联系电话
+			//出院日期
+			DateTime? OutHospitalData = null;
+			if(_OutHospitalDate_Properties == null){
+				OutHospitalData = row.GetDateTime(context.GetFieldAlias("OutHospitalDate"));
+			}else{
+				OutHospitalData = DateTime.ParseExact(row.GetString(context.GetFieldAlias("OutHospitalDate")).Trim(), _OutHospitalDate_Properties.Property2, System.Globalization.CultureInfo.CurrentCulture);   
+			}
+			string Height = row.GetString(context.GetFieldAlias("Height"));
+			string Weight = row.GetString(context.GetFieldAlias("Weight"));
+
 			Console.WriteLine(BRXM + "	" + RYRQ);
 
 			string sql = "";
@@ -130,7 +152,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 					if (obj == null) {
 						PATIENT_DBKEY = GetSeed("PATIENT_DBKEY");
 
-						sql = "insert into PatientBasicInfo(PATIENT_DBKEY,patientno,patientname,patientnamefirstletter,gender,age,dateofbirth,maritalstatus,updatetime,telphone,homeaddress,UrgentContactName,UrgentContactTelPhone) 			values(@patientdbkey,@pno,@pname,@pin,@psex,@page,@pbirth,@pmarriage,@CURDATE,@telphone,@homeaddress,@UrgentContactName,@UrgentContactTelPhone);";
+						sql = "insert into PatientBasicInfo(PATIENT_DBKEY,patientno,patientname,patientnamefirstletter,gender,age,dateofbirth,maritalstatus,updatetime,telphone,homeaddress,UrgentContactName,UrgentContactTelPhone,IDNumber) 			values(@patientdbkey,@pno,@pname,@pin,@psex,@page,@pbirth,@pmarriage,@CURDATE,@telphone,@homeaddress,@UrgentContactName,@UrgentContactTelPhone,@IDNumber);";
 						int ret = context.TargetDataProvider.Db.Sql(sql)
 							.Parameter("patientdbkey", PATIENT_DBKEY)
 							.Parameter("pno", BAHM)
@@ -145,6 +167,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 							.Parameter("homeaddress", HOMEADDRESS)
 							.Parameter("UrgentContactName", UrgentContactName)
 							.Parameter("UrgentContactTelPhone", UrgentContactTelPhone)
+							.Parameter("IDNumber", IDNumber)
 							.Execute();
 					} else {
 						PATIENT_DBKEY = obj.ToString();
@@ -161,7 +184,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 					if (obj == null) {
 						pdhosdbkey = GetSeed("PatientHospitalize_DBKey");
 
-						sql = "insert into PatientHospitalizeBasicInfo(patienthospitalize_dbkey,patient_dbkey,Disease_DBKEY,department_dbkey,bednumber_dbkey,HospitalizationNumber,inhospitalData,Clinicist_DBKey,TherapyStatus,PhysicalActivityLevel,PregnantCondition,ClinicalTreatment,OutHospitalData,Height,Weight) values(@pdhosdbkey,@patientdbkey,@diseasecode_DBKey,@departdbkey,@beddbkey,@hopno,@intime,@doctorydbkey,0,0,0,@ClinicalTreatment,@OutHospitalData,@Height,@Weight);";
+						sql = "insert into PatientHospitalizeBasicInfo(patienthospitalize_dbkey,patient_dbkey,Disease_DBKEY,department_dbkey,bednumber_dbkey,HospitalizationNumber,inhospitalData,Clinicist_DBKey,TherapyStatus,PhysicalActivityLevel,PregnantCondition,OutHospitalData,Height,Weight) values(@pdhosdbkey,@patientdbkey,@diseasecode_DBKey,@departdbkey,@beddbkey,@hopno,@intime,@doctorydbkey,0,0,0,@OutHospitalData,@Height,@Weight);";
 						int ret = context.TargetDataProvider.Db.Sql(sql)
 							.Parameter("pdhosdbkey", pdhosdbkey)
 							.Parameter("patientdbkey", PATIENT_DBKEY)
@@ -171,7 +194,6 @@ namespace DataSmith.CNIS.Plugin.IFace
 							.Parameter("hopno", ZYH)
 							.Parameter("intime", RYRQ)
 							.Parameter("doctorydbkey", doctorydbkey)
-							.Parameter("ClinicalTreatment", ClinicalTreatment)
 							.Parameter("OutHospitalData", OutHospitalData)
 							.Parameter("Height", Height)
 							.Parameter("Weight", Weight)

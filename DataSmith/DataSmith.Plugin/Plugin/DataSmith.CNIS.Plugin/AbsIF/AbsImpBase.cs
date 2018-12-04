@@ -9,7 +9,7 @@ namespace DataSmith.CNIS.Plugin.AbsIF
 {
     public abstract class AbsImpBase: IImp
     {
-    	public JoinContext context{get;set;}			
+    	public virtual JoinContext context{get;set;}			
 
         public string GetSeed(string seedName)
         {

@@ -26,7 +26,7 @@ namespace DataSmith.CNIS.Plugin.AbsIF
 				//新建用户
 				doctorydbkey = GetSeed("User_DBKey");
 
-				sql = "INSERT INTO `user` VALUES (@doctorydbkey,2,@doctorno,@doctorname,  @lcysxmsx , 'c6f057b86584942e415435ffb1fa93d4', '0', '临床医师', null, null, '临床医师', null, '','', '', '', '', '', '0', '1', '', '', '', '', '', '', '', '','1');";
+				sql = "INSERT INTO `user` (`User_DBKey`, `Organization_DBKey`, `UserLoginID`, `UserName`, `UserNameFirstLetter`, `LoginPassword`, `IsLocked`, `UserJob`, `UserGender`, `UserJobNumber`, `UserTitle`, `UserDateOfBirth`, `UserEducation`, `TelPhone`, `MobilePhone`, `Email`, `Description`, `UserPhoto`, `IsSupperUser`, `IsActive`, `CreateBy`, `CreateTime`, `CreateProgram`, `CreateIP`, `UpdateBy`, `UpdateTime`, `UpdateProgram`, `UpdateIP`, `LoginFlg`) VALUES (@doctorydbkey,2,@doctorno,@doctorname,  @lcysxmsx , 'c6f057b86584942e415435ffb1fa93d4', '0', '临床医师', null, null, '临床医师', null, '','', '', '', '', '', '0', '1', '', '', '', '', '', '', '', '','1');";
 
 				int ret = context.TargetDataProvider.Db.Sql(sql)
 					.Parameter("doctorydbkey", doctorydbkey)
@@ -69,8 +69,7 @@ namespace DataSmith.CNIS.Plugin.AbsIF
 
 
 				//新建角色
-				sql = "update seed set CurrentMaxValue = CurrentMaxValue + 1  where seedname  = 'UserRoleRelation_DBKey'; select CurrentMaxValue from seed where seedname  = 'UserRoleRelation_DBKey'";
-				string usrroleid = context.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
+				string usrroleid = GetSeed("UserRoleRelation_DBKey");
 
 				sql = "	INSERT INTO `userrolerelation` VALUES (@usrroleid,@doctorydbkey, '2', null, null, null, null, null, null, null, null);";
 				ret = context.TargetDataProvider.Db.Sql(sql)
@@ -79,8 +78,7 @@ namespace DataSmith.CNIS.Plugin.AbsIF
 					.Execute();
 
 				//登陆系统权限
-				sql = "update seed set CurrentMaxValue = CurrentMaxValue + 1  where seedname  = 'UserDataAccess_DBKEY'; select CurrentMaxValue from seed where seedname  = 'UserDataAccess_DBKEY'";
-				string usraccessid = context.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
+				string usraccessid = GetSeed("UserDataAccess_DBKEY");
 
 				sql = "	INSERT INTO `userdataaccess` VALUES (@usraccessid,@doctorydbkey, '2', '1', null, null, null, null, null, null, null, null);";
 				ret = context.TargetDataProvider.Db.Sql(sql)

@@ -15,12 +15,28 @@ namespace DataSmith.Core.Extension
     /// </summary>
     public static class DataRowExtension
 	{
-		public static string GetString(this DataRow row, string fieldAlias)
-		{
-			if(fieldAlias == "")
-				return "";
-			
-			return Convert.ToString(row[fieldAlias]);
-		}
+	    public static string GetString(this DataRow row, string fieldAlias)
+	    {
+	        if (fieldAlias == "")
+	            return "";
+
+	        return Convert.ToString(row[fieldAlias]);
+	    }
+
+	    public static DateTime? GetDateTime(this DataRow row, string fieldAlias)
+	    {
+	        if (fieldAlias == "")
+	            return null;
+
+	        try
+	        {
+	            return Convert.ToDateTime(row[fieldAlias]);
+	        }
+            catch (InvalidCastException e)
+            {
+                return default(DateTime?);
+
+            }
+        }
 	}
 }
