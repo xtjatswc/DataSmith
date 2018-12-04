@@ -6,6 +6,7 @@
 
 using System;
 using System.Windows.Forms;
+using DataSmith.Core.Context;
 
 namespace DataSmith
 {
@@ -20,9 +21,17 @@ namespace DataSmith
         [STAThread]
         private static void Main(string[] args)
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMain());
+            if (args.Length > 0)
+            {
+                Host.Args = args;
+                DoJob.Execute();
+            }
+            else
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new FormMain());
+            }
 
         }
 

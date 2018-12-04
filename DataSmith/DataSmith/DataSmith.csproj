@@ -89,7 +89,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="DoJob.cs" />
     <Compile Include="DbSource\FormDataSourceList.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -7,47 +7,17 @@ using DataSmith.Core.Context;
 using DataSmith.Core.Extension;
 using DataSmith.Core.Infrastructure.DAL;
 using DataSmith.Core.Plugins;
+using DataSmith.Core.Util;
 using Quartz;
 using Quartz.Impl;
 
 namespace DataSmith
 {
-    public class Class1
+    public class DoJob
     {
-        public void Test()
+        public static void Execute()
         {
-
-
-            // construct a scheduler factory 
-            ISchedulerFactory schedFact = new StdSchedulerFactory();
-            // get a scheduler 
-            IScheduler sched = schedFact.GetScheduler();
-            sched.Start();
-            // define the job and tie it to our HelloJob class 
-            IJobDetail job = JobBuilder.Create<InterfaceJob>()
-                .WithIdentity("myJob", "group1")
-                .UsingJobData("InterfaceID", "1")
-                .Build();
-            // Trigger the job to run now, and then every 40 seconds 
-            ITrigger trigger = TriggerBuilder.Create()
-                .WithIdentity("myTrigger", "group1")
-                .StartNow()
-                .WithSimpleSchedule(x => x.WithIntervalInSeconds(5000)
-                    .RepeatForever())
-                .Build();
-            sched.ScheduleJob(job, trigger);
-        }
-    }
-
-    /// <summary>
-    /// 作业
-    /// </summary>
-    public class InterfaceJob : IJob
-    {
-        public void Execute(IJobExecutionContext context)
-        {
-            JobDataMap dataMap = context.JobDetail.JobDataMap;
-            int InterfaceID = dataMap.GetIntValue("InterfaceID");
+            int InterfaceID = 1;
 
             //获取视图名称
             var ifDal = Host.GetService<InterfacesDal>();
@@ -81,7 +51,7 @@ namespace DataSmith
             var queryParameters = queryParameterDal.GetModels(where: $"InterfaceID={InterfaceID}");
 
             JoinContext joinContext = new JoinContext();
-            joinContext.Args = new[] {"2"};
+            joinContext.Args = new[] { "2" };
             joinContext.Interfaces = interfaces;
             joinContext.QueryFields = fieldStr;
             joinContext.FieldSets = fields.ToDictionary(k => k.FieldName, v => v);
@@ -91,6 +61,9 @@ namespace DataSmith
 
             var iDataTransfer = Host.GetServices<IDataTransfer>().ToList();
             iDataTransfer[0].DataTransfer(joinContext);
+
+            Environment.Exit(Environment.ExitCode);
+
         }
     }
 }

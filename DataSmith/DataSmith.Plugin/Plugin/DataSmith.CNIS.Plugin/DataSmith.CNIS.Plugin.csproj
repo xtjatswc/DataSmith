@@ -34,6 +34,7 @@
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
     <StartAction>Program</StartAction>
     <StartProgram>..\..\..\bin\DataSmith.exe</StartProgram>
+    <StartArguments>2</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <OutputPath>bin\Release\</OutputPath>

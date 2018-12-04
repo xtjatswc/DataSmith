@@ -12,6 +12,7 @@ namespace DataSmith.Core.Context
 {
     public class Host
     {
+        public static string[] Args;
         public static IContainer iContainer;
         public static Dictionary<DBType, IDataProvider> DataProviderPool;
 

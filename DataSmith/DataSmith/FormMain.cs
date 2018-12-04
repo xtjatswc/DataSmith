@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using C1.Win.C1InputPanel;
 using DataSmith.Core.Context;
 using DataSmith.Core.Extension;
+using DataSmith.Core.Util;
 using DataSmith.DbSource;
 using DataSmith.Interface;
 
@@ -82,8 +84,9 @@ namespace DataSmith
 
         private void InputButton_Click4(object sender, EventArgs e)
         {
-            Class1 c1 = new Class1();
-            c1.Test();
+            string cmd = Application.StartupPath +  @"\DataSmith.exe 2";
+            string cc = "";
+            Cmd.RunCmd(cmd, out cc);
         }
 
         private void InputButton_Click3(object sender, EventArgs e)
