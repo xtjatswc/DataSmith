@@ -4,7 +4,7 @@ using DataSmith.Core.Infrastructure.Model;
 
 namespace DataSmith.Core.Extension
 {
-    public static class InterfacesExtension
+    public static class InterfacesExtensions
     {
         public static DataSource GetDataSource(this Interfaces interfaces)
         {

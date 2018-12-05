@@ -8,7 +8,7 @@ using DataSmith.Core.Infrastructure.Model;
 
 namespace DataSmith.Core.Extension
 {
-    public static class FieldSetExtension
+    public static class FieldSetExtensions
     {
         public static FieldProperties GetFieldProperties(this FieldSet fieldSet)
         {

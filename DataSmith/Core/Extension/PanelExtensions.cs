@@ -7,7 +7,7 @@ using DataSmith.Core.Context;
 
 namespace DataSmith.Core.Extension
 {
-    public static class PanelExtension
+    public static class PanelExtensions
     {
         public static void ShowForm(this Panel panel, Form frm)
         {

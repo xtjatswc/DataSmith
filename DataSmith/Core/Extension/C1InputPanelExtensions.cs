@@ -7,7 +7,7 @@ using C1.Win.C1InputPanel;
 
 namespace DataSmith.Core.Extension
 {
-    public static class C1InputPanelExtension
+    public static class C1InputPanelExtensions
     {
         #region 单选按钮组
         public static void SetSwitchToggle(this C1InputPanel c1InputPanel)

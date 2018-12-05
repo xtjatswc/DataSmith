@@ -6,7 +6,7 @@ using C1.Win.C1InputPanel;
 
 namespace DataSmith.Core.Extension
 {
-    public static class InputComboBoxExtension
+    public static class InputComboBoxExtensions
     {
         //初始化赋值，不区分大小写，如果值赋不上，则把值赋给Text属性
         public static void SetInitValue(this InputComboBox inputComboBox, string value, bool setTextWhenValueNull = false)

@@ -7,7 +7,7 @@ using DataSmith.Core.JsonConfig;
 
 namespace DataSmith.Core.Extension
 {
-    public static class HashTableExtension
+    public static class HashTableExtensions
     {
         #region 获取请求参数
         public static String GetString(this Hashtable ht, String name)

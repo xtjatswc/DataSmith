@@ -13,7 +13,7 @@ namespace DataSmith.Core.Extension
     /// <summary>
     /// Description of DataRowExtension.
     /// </summary>
-    public static class DataRowExtension
+    public static class DataRowExtensions
 	{
 	    public static string GetString(this DataRow row, string fieldAlias)
 	    {
