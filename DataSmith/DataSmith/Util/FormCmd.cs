@@ -16,6 +16,7 @@ namespace DataSmith.Util
 
         public String Commond { get; set; }
         public String Parameter { get; set; }
+        public bool AutoExec { get; set; } = false;
 
         public FormCmd()
         {
@@ -28,6 +29,8 @@ namespace DataSmith.Util
             txtParameter.Text = Parameter;
             _cmd = new Cmd();
             _cmd.OutputDataReceived += ProcessOutDataReceived;
+            if(AutoExec)
+                ExecCmd();
         }
 
         protected override void WndProc(ref Message m)
@@ -43,6 +46,11 @@ namespace DataSmith.Util
         private void btnExec_Click(object sender, EventArgs e)
         {
             ExecCmd();
+        }
+
+        private void btnAbort_Click(object sender, EventArgs e)
+        {
+            _cmd.Abort();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -86,11 +94,6 @@ namespace DataSmith.Util
                 MessageBox.Show("请输入命令");
             }
             _cmd.Exec(txtCommand.Text, txtParameter.Text);
-        }
-
-        private void btnAbort_Click(object sender, EventArgs e)
-        {
-            _cmd.Abort();
         }
     }
 }
