@@ -11,10 +11,10 @@ namespace DataSmith.Util
         private const int WM_NCLBUTTONDOWN = 0x00A1;
         private const int HTCAPTION = 2;
 
-        private BatStatus curBatSataus = BatStatus.NONE;
         private Process curProcess = new Process();
 
         public String Cmd { get; set; }
+        public String Parameter { get; set; }
 
         public FormCmd()
         {
@@ -24,8 +24,9 @@ namespace DataSmith.Util
         private void FormCmd_Load(object sender, EventArgs e)
         {
             txtCommand.Text = Cmd;
+            txtParameter.Text = Parameter;
 
-            InitInfo();
+            InitProcess();
         }
 
         protected override void WndProc(ref Message m)
@@ -38,45 +39,23 @@ namespace DataSmith.Util
             base.WndProc(ref m);
         }
 
-        private void btnStop_Click(object sender, EventArgs e)
+        private void btnExec_Click(object sender, EventArgs e)
         {
-            KillProcess();
+            if (string.IsNullOrEmpty(txtCommand.Text.Trim()))
+            {
+                MessageBox.Show("请输入命令");
+            }
+            curProcess.StandardInput.WriteLine(txtCommand.Text + " " + txtParameter.Text);
         }
 
-        private void inputButton4_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void KillProcess()
+        private void btnClear_Click(object sender, EventArgs e)
         {
-            if (curBatSataus == BatStatus.ON)
-            {
-                curProcess.CancelOutputRead();//取消异步操作
-                curProcess.Kill();
-                curBatSataus = BatStatus.OFF;
-                //如果需要手动关闭，则关闭后再进行初始化
-                InitInfo();
-            }
-        }
-
-        private void btnExec_Click(object sender, EventArgs e)
-        {
-            KillProcess();
-
-            if (string.IsNullOrEmpty(this.txtCommand.Text.Trim()))
-            {
-                MessageBox.Show("请输入命令");
-            }
-            if (curBatSataus != BatStatus.ON)
-            {
-                curProcess.StandardInput.WriteLine(this.txtCommand.Text.Trim());
-                curBatSataus = BatStatus.ON;
-            }
-            else
-            {
-                MessageBox.Show("当前进程正在运行，请先关闭");
-            }
+            txtOutPutInfo.Clear();
         }
 
         /// <summary>
@@ -86,23 +65,24 @@ namespace DataSmith.Util
         /// <param name="e"></param>
         public void ProcessOutDataReceived(object sender, DataReceivedEventArgs e)
         {
-            if (this.txtOutPutInfo.InvokeRequired)
+            if (txtOutPutInfo.InvokeRequired)
             {
-                this.txtOutPutInfo.Invoke(new Action(() =>
+                txtOutPutInfo.Invoke(new Action(() =>
                 {
                     txtOutPutInfo.AppendText(e.Data + "\r\n");
-                    txtOutPutInfo.SelectionStart = txtOutPutInfo.Text.Length;
-                    txtOutPutInfo.SelectionLength = 0;
-                    txtOutPutInfo.Focus();
+                    //txtOutPutInfo.SelectionStart = txtOutPutInfo.Text.Length;
+                    //txtOutPutInfo.SelectionLength = 0;
+                    //txtOutPutInfo.Focus();
+                    txtOutPutInfo.ScrollToCaret();
                 }));
             }
             else
             {
-                this.txtOutPutInfo.AppendText(e.Data + "\r\n");
+                txtOutPutInfo.AppendText(e.Data + "\r\n");
             }
         }
 
-        private void InitInfo()
+        private void InitProcess()
         {
             curProcess.OutputDataReceived -= new DataReceivedEventHandler(ProcessOutDataReceived);
             ProcessStartInfo p = new ProcessStartInfo();
@@ -121,20 +101,15 @@ namespace DataSmith.Util
             curProcess.OutputDataReceived += new DataReceivedEventHandler(ProcessOutDataReceived);
         }
 
-        private void inputButton3_Click(object sender, EventArgs e)
+        private void KillProcess()
         {
-            txtOutPutInfo.Clear();
+            curProcess.CancelOutputRead();//取消异步操作
+            curProcess.Kill();
         }
 
-    }
-
-    /// <summary>
-    /// 命令状态
-    /// </summary>
-    public enum BatStatus
-    {
-        NONE = 0,
-        ON = 1,
-        OFF = 2
+        private void FormCmd_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            KillProcess();
+        }
     }
 }

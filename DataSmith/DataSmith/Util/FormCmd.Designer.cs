@@ -31,13 +31,12 @@
             this.c1InputPanel1 = new C1.Win.C1InputPanel.C1InputPanel();
             this.inputLabel1 = new C1.Win.C1InputPanel.InputLabel();
             this.txtCommand = new C1.Win.C1InputPanel.InputTextBox();
-            this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
-            this.inputButton2 = new C1.Win.C1InputPanel.InputButton();
-            this.txtOutPutInfo = new System.Windows.Forms.RichTextBox();
             this.inputLabel2 = new C1.Win.C1InputPanel.InputLabel();
-            this.inputTextBox1 = new C1.Win.C1InputPanel.InputTextBox();
+            this.txtParameter = new C1.Win.C1InputPanel.InputTextBox();
+            this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
             this.inputButton3 = new C1.Win.C1InputPanel.InputButton();
             this.inputButton4 = new C1.Win.C1InputPanel.InputButton();
+            this.txtOutPutInfo = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,9 +47,8 @@
             this.c1InputPanel1.Items.Add(this.inputLabel1);
             this.c1InputPanel1.Items.Add(this.txtCommand);
             this.c1InputPanel1.Items.Add(this.inputLabel2);
-            this.c1InputPanel1.Items.Add(this.inputTextBox1);
+            this.c1InputPanel1.Items.Add(this.txtParameter);
             this.c1InputPanel1.Items.Add(this.inputButton1);
-            this.c1InputPanel1.Items.Add(this.inputButton2);
             this.c1InputPanel1.Items.Add(this.inputButton3);
             this.c1InputPanel1.Items.Add(this.inputButton4);
             this.c1InputPanel1.Location = new System.Drawing.Point(10, 10);
@@ -73,6 +71,20 @@
             this.txtCommand.TabStop = false;
             this.txtCommand.Width = 680;
             // 
+            // inputLabel2
+            // 
+            this.inputLabel2.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputLabel2.Name = "inputLabel2";
+            this.inputLabel2.Text = "参数：";
+            this.inputLabel2.Width = 85;
+            // 
+            // txtParameter
+            // 
+            this.txtParameter.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.txtParameter.Name = "txtParameter";
+            this.txtParameter.TabStop = false;
+            this.txtParameter.Width = 680;
+            // 
             // inputButton1
             // 
             this.inputButton1.Break = C1.Win.C1InputPanel.BreakType.None;
@@ -82,14 +94,22 @@
             this.inputButton1.Text = "开始执行";
             this.inputButton1.Click += new System.EventHandler(this.btnExec_Click);
             // 
-            // inputButton2
+            // inputButton3
             // 
-            this.inputButton2.Break = C1.Win.C1InputPanel.BreakType.None;
-            this.inputButton2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.inputButton2.Name = "inputButton2";
-            this.inputButton2.TabStop = false;
-            this.inputButton2.Text = "结束进程";
-            this.inputButton2.Click += new System.EventHandler(this.btnStop_Click);
+            this.inputButton3.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.inputButton3.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputButton3.Name = "inputButton3";
+            this.inputButton3.TabStop = false;
+            this.inputButton3.Text = "清空输出";
+            this.inputButton3.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // inputButton4
+            // 
+            this.inputButton4.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputButton4.Name = "inputButton4";
+            this.inputButton4.TabStop = false;
+            this.inputButton4.Text = "关闭窗口";
+            this.inputButton4.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // txtOutPutInfo
             // 
@@ -104,37 +124,6 @@
             this.txtOutPutInfo.TabIndex = 1;
             this.txtOutPutInfo.Text = "";
             // 
-            // inputLabel2
-            // 
-            this.inputLabel2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.inputLabel2.Name = "inputLabel2";
-            this.inputLabel2.Text = "参数：";
-            this.inputLabel2.Width = 85;
-            // 
-            // inputTextBox1
-            // 
-            this.inputTextBox1.Break = C1.Win.C1InputPanel.BreakType.None;
-            this.inputTextBox1.Name = "inputTextBox1";
-            this.inputTextBox1.TabStop = false;
-            this.inputTextBox1.Width = 680;
-            // 
-            // inputButton3
-            // 
-            this.inputButton3.Break = C1.Win.C1InputPanel.BreakType.None;
-            this.inputButton3.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.inputButton3.Name = "inputButton3";
-            this.inputButton3.TabStop = false;
-            this.inputButton3.Text = "清空输出";
-            this.inputButton3.Click += new System.EventHandler(this.inputButton3_Click);
-            // 
-            // inputButton4
-            // 
-            this.inputButton4.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.inputButton4.Name = "inputButton4";
-            this.inputButton4.TabStop = false;
-            this.inputButton4.Text = "关闭窗口";
-            this.inputButton4.Click += new System.EventHandler(this.inputButton4_Click);
-            // 
             // FormCmd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -147,6 +136,7 @@
             this.ShowInTaskbar = false;
             this.Text = "命令窗口";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormCmd_FormClosing);
             this.Load += new System.EventHandler(this.FormCmd_Load);
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).EndInit();
             this.ResumeLayout(false);
@@ -158,11 +148,10 @@
         private C1.Win.C1InputPanel.C1InputPanel c1InputPanel1;
         private C1.Win.C1InputPanel.InputTextBox txtCommand;
         private C1.Win.C1InputPanel.InputButton inputButton1;
-        private C1.Win.C1InputPanel.InputButton inputButton2;
         private System.Windows.Forms.RichTextBox txtOutPutInfo;
         private C1.Win.C1InputPanel.InputLabel inputLabel1;
         private C1.Win.C1InputPanel.InputLabel inputLabel2;
-        private C1.Win.C1InputPanel.InputTextBox inputTextBox1;
+        private C1.Win.C1InputPanel.InputTextBox txtParameter;
         private C1.Win.C1InputPanel.InputButton inputButton3;
         private C1.Win.C1InputPanel.InputButton inputButton4;
     }
