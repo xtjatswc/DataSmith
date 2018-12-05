@@ -62,7 +62,7 @@ namespace DataSmith
             var iDataTransfer = Host.GetServices<IDataTransfer>().ToList();
             iDataTransfer[0].DataTransfer(joinContext);
 
-            Environment.Exit(Environment.ExitCode);
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
 
         }
     }
