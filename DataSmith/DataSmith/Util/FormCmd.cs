@@ -26,7 +26,8 @@ namespace DataSmith.Util
         {
             txtCommand.Text = Commond;
             txtParameter.Text = Parameter;
-            _cmd = new Cmd { DataReceivedHandler = ProcessOutDataReceived };
+            _cmd = new Cmd();
+            _cmd.OutputDataReceived += ProcessOutDataReceived;
         }
 
         protected override void WndProc(ref Message m)
@@ -87,9 +88,9 @@ namespace DataSmith.Util
             _cmd.Exec(txtCommand.Text, txtParameter.Text);
         }
 
-        private void FormCmd_FormClosing(object sender, FormClosingEventArgs e)
+        private void btnAbort_Click(object sender, EventArgs e)
         {
-            _cmd.Exit();
+            _cmd.Abort();
         }
     }
 }
