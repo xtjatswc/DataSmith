@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using DataSmith.Core.Util;
 
 namespace DataSmith.Util
 {
@@ -11,9 +12,9 @@ namespace DataSmith.Util
         private const int WM_NCLBUTTONDOWN = 0x00A1;
         private const int HTCAPTION = 2;
 
-        private Process curProcess = new Process();
+        private Cmd _cmd;
 
-        public String Cmd { get; set; }
+        public String Commond { get; set; }
         public String Parameter { get; set; }
 
         public FormCmd()
@@ -23,10 +24,9 @@ namespace DataSmith.Util
 
         private void FormCmd_Load(object sender, EventArgs e)
         {
-            txtCommand.Text = Cmd;
+            txtCommand.Text = Commond;
             txtParameter.Text = Parameter;
-
-            InitProcess();
+            _cmd = new Cmd { DataReceivedHandler = ProcessOutDataReceived };
         }
 
         protected override void WndProc(ref Message m)
@@ -41,11 +41,7 @@ namespace DataSmith.Util
 
         private void btnExec_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtCommand.Text.Trim()))
-            {
-                MessageBox.Show("请输入命令");
-            }
-            curProcess.StandardInput.WriteLine(txtCommand.Text + " " + txtParameter.Text);
+            ExecCmd();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -82,34 +78,18 @@ namespace DataSmith.Util
             }
         }
 
-        private void InitProcess()
+        private void ExecCmd()
         {
-            curProcess.OutputDataReceived -= new DataReceivedEventHandler(ProcessOutDataReceived);
-            ProcessStartInfo p = new ProcessStartInfo();
-            p.FileName = "cmd.exe";
-            //p.Arguments = " -t 192.168.1.103";
-            p.UseShellExecute = false;
-            p.WindowStyle = ProcessWindowStyle.Hidden;
-            p.CreateNoWindow = true;
-            p.RedirectStandardError = true;
-            p.RedirectStandardInput = true;
-            p.RedirectStandardOutput = true;
-            curProcess.StartInfo = p;
-            curProcess.Start();
-
-            curProcess.BeginOutputReadLine();
-            curProcess.OutputDataReceived += new DataReceivedEventHandler(ProcessOutDataReceived);
-        }
-
-        private void KillProcess()
-        {
-            curProcess.CancelOutputRead();//取消异步操作
-            curProcess.Kill();
+            if (string.IsNullOrEmpty(txtCommand.Text.Trim()))
+            {
+                MessageBox.Show("请输入命令");
+            }
+            _cmd.Exec(txtCommand.Text, txtParameter.Text);
         }
 
         private void FormCmd_FormClosing(object sender, FormClosingEventArgs e)
         {
-            KillProcess();
+            _cmd.Exit();
         }
     }
 }
