@@ -96,6 +96,18 @@
     <Compile Include="DbSource\FormDataSourceList.Designer.cs">
       <DependentUpon>FormDataSourceList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Util\BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Util\BaseForm.Designer.cs">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Util\FormCmd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Util\FormCmd.Designer.cs">
+      <DependentUpon>FormCmd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Interface\FormSqlPreview.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,6 +190,12 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Util\BaseForm.resx">
+      <DependentUpon>BaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Util\FormCmd.resx">
+      <DependentUpon>FormCmd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

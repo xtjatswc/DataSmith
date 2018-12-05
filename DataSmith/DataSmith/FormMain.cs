@@ -7,6 +7,7 @@ using DataSmith.Core.Extension;
 using DataSmith.Core.Util;
 using DataSmith.DbSource;
 using DataSmith.Interface;
+using DataSmith.Util;
 
 namespace DataSmith
 {
@@ -84,9 +85,9 @@ namespace DataSmith
 
         private void InputButton_Click4(object sender, EventArgs e)
         {
-            string cmd = Application.StartupPath +  @"\DataSmith.exe 2";
-            string cc = "";
-            Cmd.RunCmd(cmd, out cc);
+            string cmd = Application.StartupPath + @"\DataSmith.exe 2";
+            FormCmd frm = new FormCmd() { Cmd = cmd };
+            frm.ShowDialog();
         }
 
         private void InputButton_Click3(object sender, EventArgs e)
