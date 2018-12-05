@@ -99,6 +99,7 @@
             this.txtOutPutInfo.ForeColor = System.Drawing.Color.Black;
             this.txtOutPutInfo.Location = new System.Drawing.Point(10, 126);
             this.txtOutPutInfo.Name = "txtOutPutInfo";
+            this.txtOutPutInfo.ReadOnly = true;
             this.txtOutPutInfo.Size = new System.Drawing.Size(1182, 531);
             this.txtOutPutInfo.TabIndex = 1;
             this.txtOutPutInfo.Text = "";
@@ -143,6 +144,7 @@
             this.Controls.Add(this.c1InputPanel1);
             this.Name = "FormCmd";
             this.Padding = new System.Windows.Forms.Padding(10);
+            this.ShowInTaskbar = false;
             this.Text = "命令窗口";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FormCmd_Load);

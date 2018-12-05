@@ -110,7 +110,8 @@ namespace DataSmith
 
         private void InputButton_Click(object sender, EventArgs e)
         {
-            Environment.Exit(Environment.ExitCode);
+            //Environment.Exit(Environment.ExitCode);
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
         }
     }
 }
