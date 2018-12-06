@@ -92,7 +92,7 @@ namespace DataSmith.CNIS.Plugin.Setting
 			// 
 			this.inputLabel2.Font = new System.Drawing.Font("微软雅黑", 10F);
 			this.inputLabel2.Name = "inputLabel2";
-			this.inputLabel2.Text = "备注：入院日期或出院日期在上面设置的天数范围内的患者信息才会被导入。";
+			this.inputLabel2.Text = "备注：导入最近几天入院或出院的患者。";
 			// 
 			// Form2
 			// 

@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using DataSmith.Core.Plugins;
 using DataSmith.Core.Util;
+using DataSmith.Core.Context;
 
 namespace DataSmith.CNIS.Plugin.Setting
 {
@@ -39,9 +40,8 @@ namespace DataSmith.CNIS.Plugin.Setting
 				return;
 			}
 			
-			string cmd = Application.StartupPath + @"\DataSmith.exe";
 			FormCmd frm = new FormCmd() {
-				Commond = cmd,
+				Commond = Host.ExePath,
 				Parameter = string.Format("{0} {1}", TaskSchedulerID, inputNumericBox1.Text),
 				AutoExec = true
 			};

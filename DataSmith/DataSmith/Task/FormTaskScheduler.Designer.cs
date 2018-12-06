@@ -39,16 +39,16 @@
             this.c1InputPanel1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.c1InputPanel1.Location = new System.Drawing.Point(0, 0);
             this.c1InputPanel1.Name = "c1InputPanel1";
-            this.c1InputPanel1.Size = new System.Drawing.Size(318, 593);
+            this.c1InputPanel1.Size = new System.Drawing.Size(409, 593);
             this.c1InputPanel1.TabIndex = 0;
             this.c1InputPanel1.VisualStyle = C1.Win.C1InputPanel.VisualStyle.Office2007Blue;
             // 
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(318, 0);
+            this.panel1.Location = new System.Drawing.Point(409, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(464, 593);
+            this.panel1.Size = new System.Drawing.Size(373, 593);
             this.panel1.TabIndex = 1;
             // 
             // FormTaskScheduler

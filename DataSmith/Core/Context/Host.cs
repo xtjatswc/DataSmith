@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using FluentData;
 using DataSmith.Core.Config;
 using Autofac;
@@ -13,6 +14,7 @@ namespace DataSmith.Core.Context
     public class Host
     {
         public static string[] Args;
+        public static string ExePath;
         public static IContainer iContainer;
         public static Dictionary<DBType, IDataProvider> DataProviderPool;
 
@@ -20,6 +22,7 @@ namespace DataSmith.Core.Context
 
         static Host()
         {
+            ExePath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
             iContainer = AutofacConfig.Register();
 
             log4net.Config.XmlConfigurator.ConfigureAndWatch(new System.IO.FileInfo($"{LessConfig.ExecutionPath}Log4net.config"));
