@@ -27,23 +27,23 @@ namespace DataSmith.CNIS.Plugin
         	var args = context.Args;
         	
         	try {
-				string flag = args[0];
+				string taskSchedulerID = args[0];
 				IImp absImp = null;
 				string zyh = "";
 
-				switch (flag) {
+				switch (taskSchedulerID) {
 					case "1":                        
-						Console.WriteLine("1.按住院号导入单个住院患者信息>>>");
+						Console.WriteLine("1.在院患者 -> 按住院号导入>>>");
 						zyh = args[1];
 						absImp = new ImpPatientSign(zyh);
 						break;
 					case "2":      
 						var nearDays = int.Parse(args[1]);
-						Console.WriteLine("2.批量导最近" + nearDays + "天内入院或出院的患者信息>>>");
+						Console.WriteLine("2.在院患者 -> 导入最近" + nearDays + "天入院或出院的患者>>>");
 						absImp = new ImpPatient(){nearDays=nearDays};
 						break;
 					case "3":                        
-						Console.WriteLine("3.批量按入院时间段导住院患者信息>>>");
+						Console.WriteLine("3.在院患者 -> 导入时间范围内入院或出院的患者>>>");
 						absImp = new ImpPatient(){
 							inBeginDate = DateTime.Parse(args[1]),
 							inEndDate = DateTime.Parse(args[2]),

@@ -36,51 +36,6 @@ namespace DataSmith
 
         private void Form5_Load(object sender, EventArgs e)
         {
-            var width = 150;
-            var bottomPadding = 5;
-
-            c1InputPanel1.Items.Clear();
-            var inputButton = new InputButton();
-            inputButton.Text = "数据源";
-            inputButton.Break = BreakType.None;
-            inputButton.Width = width;
-            inputButton.Height = c1InputPanel1.Height - bottomPadding;
-            inputButton.Click += InputButton_Click1;
-            c1InputPanel1.Items.Add(inputButton);
-
-            inputButton = new InputButton();
-            inputButton.Text = "视图定义";
-            inputButton.Break = BreakType.None;
-            inputButton.Width = width;
-            inputButton.Height = c1InputPanel1.Height - bottomPadding;
-            inputButton.Click += InputButton_Click2;
-            c1InputPanel1.Items.Add(inputButton);
-
-            inputButton = new InputButton();
-            inputButton.Text = "字段映射";
-            inputButton.Break = BreakType.None;
-            inputButton.Width = width;
-            inputButton.Height = c1InputPanel1.Height - bottomPadding;
-            inputButton.Click += InputButton_Click3;
-            c1InputPanel1.Items.Add(inputButton);
-
-
-            inputButton = new InputButton();
-            inputButton.Text = "任务计划";
-            inputButton.Break = BreakType.None;
-            inputButton.Width = width;
-            inputButton.Height = c1InputPanel1.Height - bottomPadding;
-            inputButton.Click += InputButton_Click4;
-            c1InputPanel1.Items.Add(inputButton);
-
-            inputButton = new InputButton();
-            inputButton.Text = "退出";
-            inputButton.Break = BreakType.None;
-            inputButton.Width = width;
-            inputButton.Height = c1InputPanel1.Height - bottomPadding;
-            inputButton.Click += InputButton_Click;
-            c1InputPanel1.Items.Add(inputButton);
-
             c1InputPanel1.SetSwitchToggle();
         }
 

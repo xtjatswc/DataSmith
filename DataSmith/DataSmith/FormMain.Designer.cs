@@ -30,10 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.c1InputPanel1 = new C1.Win.C1InputPanel.C1InputPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
             this.inputButton2 = new C1.Win.C1InputPanel.InputButton();
             this.inputButton3 = new C1.Win.C1InputPanel.InputButton();
+            this.inputButton4 = new C1.Win.C1InputPanel.InputButton();
+            this.inputButton5 = new C1.Win.C1InputPanel.InputButton();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,53 +46,87 @@
             this.c1InputPanel1.Items.Add(this.inputButton1);
             this.c1InputPanel1.Items.Add(this.inputButton2);
             this.c1InputPanel1.Items.Add(this.inputButton3);
+            this.c1InputPanel1.Items.Add(this.inputButton4);
+            this.c1InputPanel1.Items.Add(this.inputButton5);
             this.c1InputPanel1.Location = new System.Drawing.Point(0, 0);
             this.c1InputPanel1.Name = "c1InputPanel1";
-            this.c1InputPanel1.Size = new System.Drawing.Size(908, 99);
+            this.c1InputPanel1.Size = new System.Drawing.Size(1248, 82);
             this.c1InputPanel1.TabIndex = 0;
             this.c1InputPanel1.VisualStyle = C1.Win.C1InputPanel.VisualStyle.Office2007Blue;
-            // 
-            // panel1
-            // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 99);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(908, 537);
-            this.panel1.TabIndex = 1;
             // 
             // inputButton1
             // 
             this.inputButton1.Break = C1.Win.C1InputPanel.BreakType.None;
-            this.inputButton1.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.inputButton1.Height = 73;
+            this.inputButton1.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputButton1.Height = 60;
             this.inputButton1.Name = "inputButton1";
             this.inputButton1.TabStop = false;
             this.inputButton1.Text = "数据源";
-            this.inputButton1.Width = 174;
+            this.inputButton1.Width = 180;
+            this.inputButton1.Click += new System.EventHandler(this.InputButton_Click1);
             // 
             // inputButton2
             // 
             this.inputButton2.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.inputButton2.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputButton2.Height = 60;
             this.inputButton2.Image = ((System.Drawing.Image)(resources.GetObject("inputButton2.Image")));
             this.inputButton2.Name = "inputButton2";
-            this.inputButton2.Text = "Button";
+            this.inputButton2.TabStop = false;
+            this.inputButton2.Text = "视图定义";
+            this.inputButton2.Width = 180;
+            this.inputButton2.Click += new System.EventHandler(this.InputButton_Click2);
             // 
             // inputButton3
             // 
             this.inputButton3.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.inputButton3.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputButton3.Height = 60;
             this.inputButton3.Image = ((System.Drawing.Image)(resources.GetObject("inputButton3.Image")));
             this.inputButton3.Name = "inputButton3";
-            this.inputButton3.Text = "Button";
+            this.inputButton3.TabStop = false;
+            this.inputButton3.Text = "字段映射";
+            this.inputButton3.Width = 180;
+            this.inputButton3.Click += new System.EventHandler(this.InputButton_Click3);
             // 
-            // Form5
+            // inputButton4
+            // 
+            this.inputButton4.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.inputButton4.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputButton4.Height = 60;
+            this.inputButton4.Name = "inputButton4";
+            this.inputButton4.TabStop = false;
+            this.inputButton4.Text = "任务计划";
+            this.inputButton4.Width = 180;
+            this.inputButton4.Click += new System.EventHandler(this.InputButton_Click4);
+            // 
+            // inputButton5
+            // 
+            this.inputButton5.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputButton5.Height = 60;
+            this.inputButton5.Name = "inputButton5";
+            this.inputButton5.TabStop = false;
+            this.inputButton5.Text = "退出系统";
+            this.inputButton5.Width = 180;
+            this.inputButton5.Click += new System.EventHandler(this.InputButton_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 82);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1248, 607);
+            this.panel1.TabIndex = 1;
+            // 
+            // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(908, 636);
+            this.ClientSize = new System.Drawing.Size(1248, 689);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.c1InputPanel1);
-            this.Name = "Form5";
+            this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DataSmith";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -107,5 +143,7 @@
         private C1.Win.C1InputPanel.InputButton inputButton1;
         private C1.Win.C1InputPanel.InputButton inputButton2;
         private C1.Win.C1InputPanel.InputButton inputButton3;
+        private C1.Win.C1InputPanel.InputButton inputButton4;
+        private C1.Win.C1InputPanel.InputButton inputButton5;
     }
 }
