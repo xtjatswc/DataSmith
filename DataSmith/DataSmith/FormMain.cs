@@ -86,10 +86,6 @@ namespace DataSmith
 
         private void InputButton_Click4(object sender, EventArgs e)
         {
-            //string cmd = Application.StartupPath + @"\DataSmith.exe";
-            //FormCmd frm = new FormCmd() { Commond = cmd, Parameter = "2", AutoExec = true};
-            //frm.ShowDialog();
-
             FormTaskScheduler frm = Host.GetService<FormTaskScheduler>();
             panel1.ShowForm(frm);
         }

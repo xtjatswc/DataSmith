@@ -3,9 +3,9 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using DataSmith.Core.Util;
 
-namespace DataSmith.Util
+namespace DataSmith.Core.Util
 {
-    public partial class FormCmd : BaseForm
+    public partial class FormCmd : Form
     {
         //禁止通过拖动，双击标题栏改变窗体大小。
         public const int WM_NCLBUTTONDBLCLK = 0xA3;
@@ -29,7 +29,7 @@ namespace DataSmith.Util
             txtParameter.Text = Parameter;
             _cmd = new Cmd();
             _cmd.OutputDataReceived += ProcessOutDataReceived;
-            if(AutoExec)
+            if (AutoExec)
                 ExecCmd();
         }
 

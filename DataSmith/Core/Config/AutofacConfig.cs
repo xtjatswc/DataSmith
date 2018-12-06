@@ -67,8 +67,8 @@ namespace DataSmith.Core.Config
             foreach (var plugin in pluginDlls)
             {
                 Assembly assPlugin = Assembly.LoadFile(plugin.FullName);
-                //.AsImplementedInterfaces()
-                builder.RegisterTypes(assPlugin.GetTypes()).PropertiesAutowired();
+                //.AsImplementedInterfaces().PropertiesAutowired()
+                builder.RegisterTypes(assPlugin.GetTypes());
             }
 
             //创建一个Autofac的容器

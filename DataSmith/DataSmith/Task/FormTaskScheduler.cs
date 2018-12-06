@@ -10,6 +10,7 @@ using C1.Win.C1InputPanel;
 using DataSmith.Core.Context;
 using DataSmith.Core.Extension;
 using DataSmith.Core.Infrastructure.DAL;
+using DataSmith.Core.Plugins;
 using DataSmith.Util;
 
 namespace DataSmith.Task
@@ -40,12 +41,19 @@ namespace DataSmith.Task
                     var inputButton = new InputButton();
                     inputButton.Text = model.TaskName;
                     inputButton.Width = c1InputPanel1.Width - 20;
-                    //inputButton.Click += InputButton_Click;
+                    inputButton.Click += InputButton_Click; ;
                     inputButton.Tag = model;
                     c1InputPanel1.Items.Add(inputButton);
                 }
             }
             c1InputPanel1.SetSwitchToggle();
+        }
+
+        private void InputButton_Click(object sender, EventArgs e)
+        {
+            var frm = Host.GetServices<ISetting>();
+            var form = (Form) frm.First();
+            panel1.ShowForm(form);
         }
     }
 }

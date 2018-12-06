@@ -1,4 +1,4 @@
-﻿namespace DataSmith.Util
+﻿namespace DataSmith.Core.Util
 {
     partial class FormCmd
     {
@@ -34,10 +34,10 @@
             this.inputLabel2 = new C1.Win.C1InputPanel.InputLabel();
             this.txtParameter = new C1.Win.C1InputPanel.InputTextBox();
             this.btnExec = new C1.Win.C1InputPanel.InputButton();
+            this.btnAbort = new C1.Win.C1InputPanel.InputButton();
             this.btnClear = new C1.Win.C1InputPanel.InputButton();
             this.btnClose = new C1.Win.C1InputPanel.InputButton();
             this.txtOutPutInfo = new System.Windows.Forms.RichTextBox();
-            this.btnAbort = new C1.Win.C1InputPanel.InputButton();
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,11 +53,11 @@
             this.c1InputPanel1.Items.Add(this.btnAbort);
             this.c1InputPanel1.Items.Add(this.btnClear);
             this.c1InputPanel1.Items.Add(this.btnClose);
-            this.c1InputPanel1.Location = new System.Drawing.Point(8, 8);
-            this.c1InputPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.c1InputPanel1.Location = new System.Drawing.Point(11, 10);
+            this.c1InputPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.c1InputPanel1.Name = "c1InputPanel1";
             this.c1InputPanel1.Padding = new System.Windows.Forms.Padding(2, 20, 2, 2);
-            this.c1InputPanel1.Size = new System.Drawing.Size(1207, 93);
+            this.c1InputPanel1.Size = new System.Drawing.Size(1609, 116);
             this.c1InputPanel1.TabIndex = 0;
             this.c1InputPanel1.VisualStyle = C1.Win.C1InputPanel.VisualStyle.Office2010Black;
             // 
@@ -97,6 +97,15 @@
             this.btnExec.Text = "开始执行";
             this.btnExec.Click += new System.EventHandler(this.btnExec_Click);
             // 
+            // btnAbort
+            // 
+            this.btnAbort.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.btnAbort.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.btnAbort.Name = "btnAbort";
+            this.btnAbort.TabStop = false;
+            this.btnAbort.Text = "结束进程";
+            this.btnAbort.Click += new System.EventHandler(this.btnAbort_Click);
+            // 
             // btnClear
             // 
             this.btnClear.Break = C1.Win.C1InputPanel.BreakType.None;
@@ -120,32 +129,25 @@
             this.txtOutPutInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtOutPutInfo.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtOutPutInfo.ForeColor = System.Drawing.Color.Black;
-            this.txtOutPutInfo.Location = new System.Drawing.Point(8, 101);
-            this.txtOutPutInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtOutPutInfo.Location = new System.Drawing.Point(11, 126);
+            this.txtOutPutInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtOutPutInfo.Name = "txtOutPutInfo";
             this.txtOutPutInfo.ReadOnly = true;
-            this.txtOutPutInfo.Size = new System.Drawing.Size(1207, 470);
+            this.txtOutPutInfo.Size = new System.Drawing.Size(1609, 588);
             this.txtOutPutInfo.TabIndex = 1;
             this.txtOutPutInfo.Text = "";
             // 
-            // btnAbort
-            // 
-            this.btnAbort.Break = C1.Win.C1InputPanel.BreakType.None;
-            this.btnAbort.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.btnAbort.Name = "btnAbort";
-            this.btnAbort.TabStop = false;
-            this.btnAbort.Text = "结束进程";
-            this.btnAbort.Click += new System.EventHandler(this.btnAbort_Click);
-            // 
             // FormCmd
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1223, 579);
+            this.ClientSize = new System.Drawing.Size(1631, 724);
+            this.ControlBox = false;
             this.Controls.Add(this.txtOutPutInfo);
             this.Controls.Add(this.c1InputPanel1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormCmd";
-            this.Padding = new System.Windows.Forms.Padding(8, 8, 8, 8);
+            this.Padding = new System.Windows.Forms.Padding(11, 10, 11, 10);
             this.ShowInTaskbar = false;
             this.Text = "命令窗口";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

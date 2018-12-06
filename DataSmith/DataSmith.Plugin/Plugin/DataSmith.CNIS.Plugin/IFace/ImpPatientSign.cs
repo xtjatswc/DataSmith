@@ -51,7 +51,10 @@ namespace DataSmith.CNIS.Plugin.IFace
 		{
 			string sql = "select * from V_CNIS_ZYBRXX where ZYH = '" + zyh + "'";
 			DataTable dt = context.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
-
+			if(dt.Rows.Count == 0){
+				Console.WriteLine("未能查询到住院号为 “" + zyh + "” 的患者！");
+				return;
+			}
 			Import(dt.Rows[0]);
 		}
 
