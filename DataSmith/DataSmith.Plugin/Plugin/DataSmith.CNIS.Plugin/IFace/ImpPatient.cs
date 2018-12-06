@@ -13,7 +13,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 	class ImpPatient : AbsImpPatientBase
 	{
 		//导最近几天的住院患者
-		const int nearDays = 3;
+		public int nearDays = 3;
 		public DateTime? inBeginDate = null;
 		public DateTime? inEndDate = null;
 
@@ -52,7 +52,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 			DataTable dt = context.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 
 			Console.WriteLine("共计" + dt.Rows.Count + "位患者");
-			ImpPatientSign sign = new ImpPatientSign{context = context};
+			ImpPatientSign sign = new ImpPatientSign{ context = context };
 			foreach (DataRow patient in dt.Rows) {
 				try {
 					sign.Import(patient);

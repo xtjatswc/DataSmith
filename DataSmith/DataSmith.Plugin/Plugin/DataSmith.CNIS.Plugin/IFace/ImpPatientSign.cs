@@ -17,7 +17,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 	/// </summary>
 	class ImpPatientSign : AbsImpPatientBase
 	{
-		string zyh;
+		string _zyh;
 		
 		//男性
 		private readonly string _male;
@@ -43,16 +43,16 @@ namespace DataSmith.CNIS.Plugin.IFace
 		public ImpPatientSign(string zyh)
 			: this()
 		{
-			this.zyh = zyh;
+			this._zyh = zyh;
 		}
 
 
 		public override void Import()
 		{
-			string sql = "select * from V_CNIS_ZYBRXX where ZYH = '" + zyh + "'";
+			string sql = "select * from V_CNIS_ZYBRXX where ZYH = '" + _zyh + "'";
 			DataTable dt = context.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 			if(dt.Rows.Count == 0){
-				Console.WriteLine("未能查询到住院号为 “" + zyh + "” 的患者！");
+				Console.WriteLine("未能查询到住院号为 “" + _zyh + "” 的患者！");
 				return;
 			}
 			Import(dt.Rows[0]);
@@ -112,7 +112,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 			string Height = row.GetString(context.GetFieldAlias("Height"));
 			string Weight = row.GetString(context.GetFieldAlias("Weight"));
 
-			Console.WriteLine(BRXM + "	" + RYRQ);
+			Console.WriteLine(string.Format("{0,-25}住院号：{1,-25}入院日期：{2,-25}  出院日期：{3,-25}", BRXM, ZYH, RYRQ, OutHospitalData));
 
 			string sql = "";
 

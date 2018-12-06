@@ -37,9 +37,10 @@ namespace DataSmith.CNIS.Plugin
 						zyh = args[1];
 						absImp = new ImpPatientSign(zyh);
 						break;
-					case "2":                        
-						Console.WriteLine("2.批量导最近几天住院患者信息>>>");
-						absImp = new ImpPatient();
+					case "2":      
+						var nearDays = int.Parse(args[1]);
+						Console.WriteLine("2.批量导最近" + nearDays + "天内入院或出院的患者信息>>>");
+						absImp = new ImpPatient(){nearDays=nearDays};
 						break;
 					case "3":                        
 						Console.WriteLine("3.批量按入院时间段导住院患者信息>>>");

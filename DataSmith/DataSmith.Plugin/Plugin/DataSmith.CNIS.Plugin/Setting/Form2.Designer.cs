@@ -40,8 +40,8 @@ namespace DataSmith.CNIS.Plugin.Setting
 		{
 			this.c1InputPanel1 = new C1.Win.C1InputPanel.C1InputPanel();
 			this.inputLabel1 = new C1.Win.C1InputPanel.InputLabel();
-			this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
 			this.inputNumericBox1 = new C1.Win.C1InputPanel.InputNumericBox();
+			this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
 			this.inputLabel2 = new C1.Win.C1InputPanel.InputLabel();
 			((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).BeginInit();
 			this.SuspendLayout();
@@ -66,6 +66,20 @@ namespace DataSmith.CNIS.Plugin.Setting
 			this.inputLabel1.Name = "inputLabel1";
 			this.inputLabel1.Text = "最近几天？";
 			// 
+			// inputNumericBox1
+			// 
+			this.inputNumericBox1.Break = C1.Win.C1InputPanel.BreakType.None;
+			this.inputNumericBox1.DecimalPlaces = 0;
+			this.inputNumericBox1.Font = new System.Drawing.Font("微软雅黑", 10F);
+			this.inputNumericBox1.Format = "n";
+			this.inputNumericBox1.Name = "inputNumericBox1";
+			this.inputNumericBox1.OutOfRangeErrorText = "{0}超出允许范围:[{1}，{2}]";
+			this.inputNumericBox1.Value = new decimal(new int[] {
+			3,
+			0,
+			0,
+			0});
+			// 
 			// inputButton1
 			// 
 			this.inputButton1.Font = new System.Drawing.Font("微软雅黑", 10F);
@@ -73,23 +87,6 @@ namespace DataSmith.CNIS.Plugin.Setting
 			this.inputButton1.TabStop = false;
 			this.inputButton1.Text = "导入";
 			this.inputButton1.Click += new System.EventHandler(this.InputButton1Click);
-			// 
-			// inputNumericBox1
-			// 
-			this.inputNumericBox1.Break = C1.Win.C1InputPanel.BreakType.None;
-			this.inputNumericBox1.DecimalPlaces = 0;
-			this.inputNumericBox1.Font = new System.Drawing.Font("微软雅黑", 10F);
-			this.inputNumericBox1.Maximum = new decimal(new int[] {
-			60,
-			0,
-			0,
-			0});
-			this.inputNumericBox1.Name = "inputNumericBox1";
-			this.inputNumericBox1.Value = new decimal(new int[] {
-			3,
-			0,
-			0,
-			0});
 			// 
 			// inputLabel2
 			// 
