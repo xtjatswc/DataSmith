@@ -12,3 +12,7 @@
 /DataSmith/bin/plugins/DataSmith.CNIS.Plugin.dll
 /DataSmith/bin/plugins/DataSmith.CNIS.Plugin.pdb
 /DataSmith/DataSmith.Plugin/Plugin/DataSmith.CNIS.Plugin/obj
+/DataSmith/DataSmith.Core/obj
+/DataSmith/DataSmith.Res/obj
+/DataSmith/bin/DataSmith.Res.pdb
+/DataSmith/bin/DataSmith.Res.dll

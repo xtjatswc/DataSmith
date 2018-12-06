@@ -5,7 +5,11 @@ VisualStudioVersion = 15.0.27130.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSmith", "DataSmith\DataSmith.csproj", "{B3F36DFC-A472-4102-912D-725E61353A62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{0A8D1F91-6727-4875-B99C-1D57A87934C0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Base", "Base", "{04FC97BE-BCBF-42BA-A4C2-9945EC93B4B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSmith.Core", "DataSmith.Core\DataSmith.Core.csproj", "{0A8D1F91-6727-4875-B99C-1D57A87934C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSmith.Res", "DataSmith.Res\DataSmith.Res.csproj", "{7D36F86E-9E8D-43A9-AE0C-50C614E85E66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,9 +45,25 @@ Global
 		{0A8D1F91-6727-4875-B99C-1D57A87934C0}.Test|Any CPU.Build.0 = Release|Any CPU
 		{0A8D1F91-6727-4875-B99C-1D57A87934C0}.Test|x64.ActiveCfg = Release|Any CPU
 		{0A8D1F91-6727-4875-B99C-1D57A87934C0}.Test|x64.Build.0 = Release|Any CPU
+		{7D36F86E-9E8D-43A9-AE0C-50C614E85E66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D36F86E-9E8D-43A9-AE0C-50C614E85E66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D36F86E-9E8D-43A9-AE0C-50C614E85E66}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7D36F86E-9E8D-43A9-AE0C-50C614E85E66}.Debug|x64.Build.0 = Debug|Any CPU
+		{7D36F86E-9E8D-43A9-AE0C-50C614E85E66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D36F86E-9E8D-43A9-AE0C-50C614E85E66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D36F86E-9E8D-43A9-AE0C-50C614E85E66}.Release|x64.ActiveCfg = Release|Any CPU
+		{7D36F86E-9E8D-43A9-AE0C-50C614E85E66}.Release|x64.Build.0 = Release|Any CPU
+		{7D36F86E-9E8D-43A9-AE0C-50C614E85E66}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{7D36F86E-9E8D-43A9-AE0C-50C614E85E66}.Test|Any CPU.Build.0 = Release|Any CPU
+		{7D36F86E-9E8D-43A9-AE0C-50C614E85E66}.Test|x64.ActiveCfg = Release|Any CPU
+		{7D36F86E-9E8D-43A9-AE0C-50C614E85E66}.Test|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0A8D1F91-6727-4875-B99C-1D57A87934C0} = {04FC97BE-BCBF-42BA-A4C2-9945EC93B4B5}
+		{7D36F86E-9E8D-43A9-AE0C-50C614E85E66} = {04FC97BE-BCBF-42BA-A4C2-9945EC93B4B5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FD309CA8-EAC8-4711-B35A-0B28CF05A439}

@@ -159,12 +159,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{0a8d1f91-6727-4875-b99c-1d57a87934c0}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="DbSource\FormDataSourceList.resx">
       <DependentUpon>FormDataSourceList.cs</DependentUpon>
     </EmbeddedResource>
@@ -197,6 +191,16 @@
     <EmbeddedResource Include="Util\BaseForm.resx">
       <DependentUpon>BaseForm.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataSmith.Core\DataSmith.Core.csproj">
+      <Project>{0a8d1f91-6727-4875-b99c-1d57a87934c0}</Project>
+      <Name>DataSmith.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataSmith.Res\DataSmith.Res.csproj">
+      <Project>{7d36f86e-9e8d-43a9-ae0c-50c614e85e66}</Project>
+      <Name>DataSmith.Res</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
