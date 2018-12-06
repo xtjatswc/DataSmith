@@ -1,22 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using C1.Win.C1InputPanel;
+﻿using C1.Win.C1InputPanel;
 using DataSmith.Core.Context;
 using DataSmith.Core.Extension;
 using DataSmith.Core.Infrastructure.DAL;
+using DataSmith.Core.Infrastructure.Model;
 using DataSmith.Core.Plugins;
 using DataSmith.Util;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 
 namespace DataSmith.Task
 {
     public partial class FormTaskScheduler : BaseForm
     {
+        readonly IEnumerable<ISetting> _iSettings = Host.GetServices<ISetting>();
+
         public FormTaskScheduler()
         {
             InitializeComponent();
@@ -51,9 +50,9 @@ namespace DataSmith.Task
 
         private void InputButton_Click(object sender, EventArgs e)
         {
-            var frm = Host.GetServices<ISetting>();
-            var form = (Form) frm.First();
-            panel1.ShowForm(form);
+            TaskScheduler taskScheduler = (sender as InputButton).Tag as TaskScheduler;
+            var setting = _iSettings.Where(o => o.TaskSchedulerID == taskScheduler.ID).First();
+            panel1.ShowForm(setting.FormInstance);
         }
     }
 }

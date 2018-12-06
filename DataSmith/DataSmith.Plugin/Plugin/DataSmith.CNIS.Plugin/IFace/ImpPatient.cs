@@ -43,7 +43,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 				startDate = DateTime.Now.AddDays(-nearDays).ToString(context.QueryParameters["BeginTime"].Formart);
 				endDate = DateTime.Now.Date.AddDays(1).AddSeconds(-1).ToString(context.QueryParameters["EndTime"].Formart);
 			}
-			Console.WriteLine("入院起止时间：从" + startDate + "到" + endDate);
+			Console.WriteLine("入院或者出院时间：从" + startDate + "到" + endDate);
 
 			string sql = "select " + context.QueryFields + " from " + context.Interfaces.ViewName + " where (" + context.GetFieldAlias("RYRQ") + " between '{0}' and '{1}' or " + context.GetFieldAlias("OutHospitalDate") + " between '{0}' and '{1}') {2} order by " + context.GetFieldAlias("RYRQ") + " asc";
 

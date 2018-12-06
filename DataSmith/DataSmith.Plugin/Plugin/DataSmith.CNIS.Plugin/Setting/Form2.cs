@@ -12,14 +12,14 @@ using DataSmith.Core.Util;
 namespace DataSmith.CNIS.Plugin.Setting
 {
 	/// <summary>
-	/// Description of Form1.
+	/// Description of Form2.
 	/// </summary>
-	internal partial class Form1 : Form,ISetting
+	public partial class Form2 : Form,ISetting
 	{
-		public Int64 TaskSchedulerID { get { return 1; } }
+		public Int64 TaskSchedulerID { get { return 2; } }
 		public Form FormInstance{ get { return this; } }
-		
-		public Form1()
+
+		public Form2()
 		{
 			//
 			// The InitializeComponent() call is required for Windows Forms designer support.
@@ -33,16 +33,16 @@ namespace DataSmith.CNIS.Plugin.Setting
 		
 		void InputButton1Click(object sender, EventArgs e)
 		{
-			if (inputTextBox1.Text.Trim() == "") {
-				MessageBox.Show("请输入住院号！");
-				inputTextBox1.Focus();
+			if (inputNumericBox1.Text.Trim() == "") {
+				MessageBox.Show("请输入天数！");
+				inputNumericBox1.Focus();
 				return;
 			}
 			
 			string cmd = Application.StartupPath + @"\DataSmith.exe";
 			FormCmd frm = new FormCmd() {
 				Commond = cmd,
-				Parameter = string.Format("{0} {1}", TaskSchedulerID, inputTextBox1.Text),
+				Parameter = string.Format("{0} {1}", TaskSchedulerID, inputNumericBox1.Text),
 				AutoExec = true
 			};
 			frm.ShowDialog();

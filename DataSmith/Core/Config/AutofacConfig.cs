@@ -13,6 +13,7 @@ using DataSmith.Core.Infrastructure.Base;
 using DataSmith.Core.Context;
 using DataSmith.Core.DataProvider;
 using System.Windows.Forms;
+using DataSmith.Core.Plugins;
 
 namespace DataSmith.Core.Config
 {
@@ -60,15 +61,22 @@ namespace DataSmith.Core.Config
 
             var d = new DirectoryInfo(LessConfig.PluginPath);
             var pluginDlls = (from FileInfo fi in d.GetFiles()
-                where (
-                    fi.FullName.EndsWith(plugin_filename + ".dll")
-                )
-                select fi).ToList();
+                              where (
+                                  fi.FullName.EndsWith(plugin_filename + ".dll")
+                              )
+                              select fi).ToList();
             foreach (var plugin in pluginDlls)
             {
                 Assembly assPlugin = Assembly.LoadFile(plugin.FullName);
+                var types = assPlugin.GetTypes().Where(
+                    o => o.BaseType != null
+                         && (
+                             typeof(Form).IsAssignableFrom(o.BaseType) ||
+                             typeof(IDataTransfer).IsAssignableFrom(o)
+                         )
+                         ).ToArray();
                 //.AsImplementedInterfaces().PropertiesAutowired()
-                builder.RegisterTypes(assPlugin.GetTypes());
+                builder.RegisterTypes(types).SingleInstance();
             }
 
             //创建一个Autofac的容器

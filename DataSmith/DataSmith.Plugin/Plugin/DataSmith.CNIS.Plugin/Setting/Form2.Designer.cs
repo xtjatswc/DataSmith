@@ -5,7 +5,7 @@
  */
 namespace DataSmith.CNIS.Plugin.Setting
 {
-	partial class Form1
+	partial class Form2
 	{
 		/// <summary>
 		/// Designer variable used to keep track of non-visual components.
@@ -13,8 +13,9 @@ namespace DataSmith.CNIS.Plugin.Setting
 		private System.ComponentModel.IContainer components = null;
 		private C1.Win.C1InputPanel.C1InputPanel c1InputPanel1;
 		private C1.Win.C1InputPanel.InputLabel inputLabel1;
-		private C1.Win.C1InputPanel.InputTextBox inputTextBox1;
 		private C1.Win.C1InputPanel.InputButton inputButton1;
+		private C1.Win.C1InputPanel.InputNumericBox inputNumericBox1;
+		private C1.Win.C1InputPanel.InputLabel inputLabel2;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -39,8 +40,9 @@ namespace DataSmith.CNIS.Plugin.Setting
 		{
 			this.c1InputPanel1 = new C1.Win.C1InputPanel.C1InputPanel();
 			this.inputLabel1 = new C1.Win.C1InputPanel.InputLabel();
-			this.inputTextBox1 = new C1.Win.C1InputPanel.InputTextBox();
 			this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
+			this.inputNumericBox1 = new C1.Win.C1InputPanel.InputNumericBox();
+			this.inputLabel2 = new C1.Win.C1InputPanel.InputLabel();
 			((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -49,8 +51,9 @@ namespace DataSmith.CNIS.Plugin.Setting
 			this.c1InputPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.c1InputPanel1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
 			this.c1InputPanel1.Items.Add(this.inputLabel1);
-			this.c1InputPanel1.Items.Add(this.inputTextBox1);
+			this.c1InputPanel1.Items.Add(this.inputNumericBox1);
 			this.c1InputPanel1.Items.Add(this.inputButton1);
+			this.c1InputPanel1.Items.Add(this.inputLabel2);
 			this.c1InputPanel1.Location = new System.Drawing.Point(0, 0);
 			this.c1InputPanel1.Name = "c1InputPanel1";
 			this.c1InputPanel1.Size = new System.Drawing.Size(649, 618);
@@ -61,13 +64,7 @@ namespace DataSmith.CNIS.Plugin.Setting
 			// 
 			this.inputLabel1.Font = new System.Drawing.Font("微软雅黑", 10F);
 			this.inputLabel1.Name = "inputLabel1";
-			this.inputLabel1.Text = "住院号";
-			// 
-			// inputTextBox1
-			// 
-			this.inputTextBox1.Break = C1.Win.C1InputPanel.BreakType.None;
-			this.inputTextBox1.Name = "inputTextBox1";
-			this.inputTextBox1.Width = 185;
+			this.inputLabel1.Text = "最近几天？";
 			// 
 			// inputButton1
 			// 
@@ -76,6 +73,29 @@ namespace DataSmith.CNIS.Plugin.Setting
 			this.inputButton1.TabStop = false;
 			this.inputButton1.Text = "导入";
 			this.inputButton1.Click += new System.EventHandler(this.InputButton1Click);
+			// 
+			// inputNumericBox1
+			// 
+			this.inputNumericBox1.Break = C1.Win.C1InputPanel.BreakType.None;
+			this.inputNumericBox1.DecimalPlaces = 0;
+			this.inputNumericBox1.Font = new System.Drawing.Font("微软雅黑", 10F);
+			this.inputNumericBox1.Maximum = new decimal(new int[] {
+			60,
+			0,
+			0,
+			0});
+			this.inputNumericBox1.Name = "inputNumericBox1";
+			this.inputNumericBox1.Value = new decimal(new int[] {
+			3,
+			0,
+			0,
+			0});
+			// 
+			// inputLabel2
+			// 
+			this.inputLabel2.Font = new System.Drawing.Font("微软雅黑", 10F);
+			this.inputLabel2.Name = "inputLabel2";
+			this.inputLabel2.Text = "备注：入院日期或出院日期在上面设置的天数范围内的患者信息才会被导入。";
 			// 
 			// Form2
 			// 
