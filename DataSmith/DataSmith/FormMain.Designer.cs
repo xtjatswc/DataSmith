@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.c1InputPanel1 = new C1.Win.C1InputPanel.C1InputPanel();
             this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
             this.inputButton2 = new C1.Win.C1InputPanel.InputButton();
@@ -59,6 +58,7 @@
             this.inputButton1.Break = C1.Win.C1InputPanel.BreakType.None;
             this.inputButton1.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputButton1.Height = 60;
+            this.inputButton1.ImageSize = new System.Drawing.Size(32, 32);
             this.inputButton1.Name = "inputButton1";
             this.inputButton1.TabStop = false;
             this.inputButton1.Text = "数据源";
@@ -70,7 +70,7 @@
             this.inputButton2.Break = C1.Win.C1InputPanel.BreakType.None;
             this.inputButton2.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputButton2.Height = 60;
-            this.inputButton2.Image = ((System.Drawing.Image)(resources.GetObject("inputButton2.Image")));
+            this.inputButton2.ImageSize = new System.Drawing.Size(32, 32);
             this.inputButton2.Name = "inputButton2";
             this.inputButton2.TabStop = false;
             this.inputButton2.Text = "视图定义";
@@ -82,7 +82,7 @@
             this.inputButton3.Break = C1.Win.C1InputPanel.BreakType.None;
             this.inputButton3.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputButton3.Height = 60;
-            this.inputButton3.Image = ((System.Drawing.Image)(resources.GetObject("inputButton3.Image")));
+            this.inputButton3.ImageSize = new System.Drawing.Size(32, 32);
             this.inputButton3.Name = "inputButton3";
             this.inputButton3.TabStop = false;
             this.inputButton3.Text = "字段映射";
@@ -94,9 +94,10 @@
             this.inputButton4.Break = C1.Win.C1InputPanel.BreakType.None;
             this.inputButton4.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputButton4.Height = 60;
+            this.inputButton4.ImageSize = new System.Drawing.Size(32, 32);
             this.inputButton4.Name = "inputButton4";
             this.inputButton4.TabStop = false;
-            this.inputButton4.Text = "任务计划";
+            this.inputButton4.Text = "接口调试";
             this.inputButton4.Width = 180;
             this.inputButton4.Click += new System.EventHandler(this.InputButton_Click4);
             // 
@@ -104,6 +105,7 @@
             // 
             this.inputButton5.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputButton5.Height = 60;
+            this.inputButton5.ImageSize = new System.Drawing.Size(32, 32);
             this.inputButton5.Name = "inputButton5";
             this.inputButton5.TabStop = false;
             this.inputButton5.Text = "退出系统";

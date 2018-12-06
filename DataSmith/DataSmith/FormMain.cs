@@ -22,6 +22,11 @@ namespace DataSmith
         public FormMain()
         {
             InitializeComponent();
+            inputButton1.Image = DataSmith.Res.Resource48.cylinder_database_48px_13406_easyicon_net;
+            inputButton2.Image = DataSmith.Res.Resource48.SQL_File_Extension_48px_1140212_easyicon_net;
+            inputButton3.Image = DataSmith.Res.Resource48.table_relationship_48px_527120_easyicon_net;
+            inputButton4.Image = DataSmith.Res.Resource128.transfer;
+            inputButton5.Image = DataSmith.Res.Resource48.close_48px_1175541_easyicon_net;
         }
 
         protected override void WndProc(ref Message m)
