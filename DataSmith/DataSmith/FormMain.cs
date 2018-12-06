@@ -7,6 +7,7 @@ using DataSmith.Core.Extension;
 using DataSmith.Core.Util;
 using DataSmith.DbSource;
 using DataSmith.Interface;
+using DataSmith.Task;
 using DataSmith.Util;
 
 namespace DataSmith
@@ -85,9 +86,12 @@ namespace DataSmith
 
         private void InputButton_Click4(object sender, EventArgs e)
         {
-            string cmd = Application.StartupPath + @"\DataSmith.exe";
-            FormCmd frm = new FormCmd() { Commond = cmd, Parameter = "2", AutoExec = true};
-            frm.ShowDialog();
+            //string cmd = Application.StartupPath + @"\DataSmith.exe";
+            //FormCmd frm = new FormCmd() { Commond = cmd, Parameter = "2", AutoExec = true};
+            //frm.ShowDialog();
+
+            FormTaskScheduler frm = Host.GetService<FormTaskScheduler>();
+            panel1.ShowForm(frm);
         }
 
         private void InputButton_Click3(object sender, EventArgs e)
