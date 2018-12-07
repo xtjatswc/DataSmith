@@ -54,6 +54,7 @@ namespace DataSmith.DbSource
                 DataProvider = _dataSource.GetDataProvider();
                 inputTextBox1.Text = _dataSource.SourceName;
                 inputTextBoxIP.Text = _dataSource.IP;
+                inputTextBoxInstanceName.Text = _dataSource.InstanceName;
                 inputComboBox1.SelectedValue = _dataSource.DBType;
                 inputNumericBoxPort.Value = _dataSource.Port;
                 inputTextBoxDBName.Text = _dataSource.DBName;
@@ -112,6 +113,7 @@ namespace DataSmith.DbSource
 
             if (OperateType == OperateType.New)
             {
+                _dataSource.SourceType = 1;
                 dsDal.Insert(_dataSource, x => x.ID);
             }
             else
@@ -129,6 +131,7 @@ namespace DataSmith.DbSource
             _dataSource.DBTypeName = inputComboBox1.Text;
             _dataSource.SourceName = inputTextBox1.Text;
             _dataSource.IP = inputTextBoxIP.Text;
+            _dataSource.InstanceName = inputTextBoxInstanceName.Text;
             _dataSource.Port = Convert.ToInt32(inputNumericBoxPort.Value);
             _dataSource.DBName = inputTextBoxDBName.Text;
             _dataSource.UserID = inputTextBoxUserID.Text;
@@ -154,6 +157,11 @@ namespace DataSmith.DbSource
                 inputTextBoxInstanceName.Visibility = Visibility.Collapsed;
                 inputLabel11.Visibility = Visibility.Collapsed;
 
+                //IP
+                inputLabel6.Visibility = Visibility.Visible;
+                inputTextBoxIP.Visibility = Visibility.Visible;
+                btnPing.Visibility = Visibility.Visible;
+
                 //端口
                 inputLabel5.Visibility = Visibility.Visible;
                 inputNumericBoxPort.Visibility = Visibility.Visible;
@@ -171,6 +179,10 @@ namespace DataSmith.DbSource
                     inputNumericBoxPort.Value = dataBaseType.DefaultPort;
                 }
 
+                //用户名
+                inputLabel7.Visibility = Visibility.Visible;
+                inputTextBoxUserID.Visibility = Visibility.Visible;
+
                 switch ((DBType) dataBaseType.ID)
                 {
                     case DBType.SqlServer:
@@ -184,23 +196,22 @@ namespace DataSmith.DbSource
                         break;
                     case DBType.Oracle:
                     case DBType.MySQL:
-                        inputTextBoxConnStr.Text = string.Format(dataBaseType.DefaultConnStr,
-                            inputTextBoxIP.Text,
-                            inputNumericBoxPort.Text,
-                            inputTextBoxDBName.Text,
-                            inputTextBoxUserID.Text,
-                            inputTextBoxPassword.Text
-                        );
                         break;
                     case DBType.Sqlite:
+                        //IP
+                        inputLabel6.Visibility = Visibility.Collapsed;
+                        inputTextBoxIP.Visibility = Visibility.Collapsed;
+                        btnPing.Visibility = Visibility.Collapsed;
+
                         //端口
                         inputLabel5.Visibility = Visibility.Collapsed;
                         inputNumericBoxPort.Visibility = Visibility.Collapsed;
                         inputLabel10.Visibility = Visibility.Collapsed;
 
-                        inputTextBoxConnStr.Text = string.Format(dataBaseType.DefaultConnStr,
-                            inputTextBoxDBName.Text
-                        );
+                        //用户名
+                        inputLabel7.Visibility = Visibility.Collapsed;
+                        inputTextBoxUserID.Visibility = Visibility.Collapsed;
+
                         break;
                 }
             }
@@ -238,7 +249,8 @@ namespace DataSmith.DbSource
                         break;
                     case DBType.Sqlite:
                         inputTextBoxConnStr.Text = string.Format(dataBaseType.DefaultConnStr,
-                            inputTextBoxDBName.Text
+                            inputTextBoxDBName.Text,
+                            string.IsNullOrWhiteSpace(inputTextBoxPassword.Text) ? "" : $"Password={inputTextBoxPassword.Text};"
                         );
                         break;
 

@@ -17,12 +17,12 @@ namespace DataSmith.Core.Infrastructure.Model
         public Int64 DBType { get; set; }
         public String DBTypeName { get; set; }
         public String SourceName { get; set; }
+        public String InstanceName { get; set; }
         public String IP { get; set; }
         public Int64 Port { get; set; }
         public String DBName { get; set; }
         public String UserID { get; set; }
         public String Password { get; set; }
-        public String DBPath { get; set; }
         public String DBConnStr { get; set; }
         public Int64 IsDeleted { get; set; }
         //1、源数据库、2、目标数据库
