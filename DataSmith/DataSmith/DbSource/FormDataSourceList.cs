@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using C1.Win.C1InputPanel;
 using DataSmith.Core.Context;
@@ -25,6 +26,7 @@ namespace DataSmith.DbSource
             foreach (var model in models)
             {
                 InputButton inputButton = new InputButton();
+                inputButton.Font = new System.Drawing.Font("微软雅黑", 10F);
                 inputButton.Text = model.SourceName;
                 inputButton.Width = c1InputPanel1.Width - 20;
                 inputButton.Click += InputButton_Click;

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDataSourceEdit));
             this.c1InputPanel1 = new C1.Win.C1InputPanel.C1InputPanel();
             this.inputLabel3 = new C1.Win.C1InputPanel.InputLabel();
             this.inputTextBox1 = new C1.Win.C1InputPanel.InputTextBox();
@@ -37,6 +36,7 @@
             this.inputLabel6 = new C1.Win.C1InputPanel.InputLabel();
             this.inputTextBox5 = new C1.Win.C1InputPanel.InputTextBox();
             this.inputLabel5 = new C1.Win.C1InputPanel.InputLabel();
+            this.inputNumericBox1 = new C1.Win.C1InputPanel.InputNumericBox();
             this.inputLabel4 = new C1.Win.C1InputPanel.InputLabel();
             this.inputTextBox3 = new C1.Win.C1InputPanel.InputTextBox();
             this.inputLabel7 = new C1.Win.C1InputPanel.InputLabel();
@@ -47,7 +47,6 @@
             this.inputTextBox7 = new C1.Win.C1InputPanel.InputTextBox();
             this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
             this.inputButton2 = new C1.Win.C1InputPanel.InputButton();
-            this.inputNumericBox1 = new C1.Win.C1InputPanel.InputNumericBox();
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,24 +73,29 @@
             this.c1InputPanel1.Items.Add(this.inputButton1);
             this.c1InputPanel1.Items.Add(this.inputButton2);
             this.c1InputPanel1.Location = new System.Drawing.Point(0, 0);
+            this.c1InputPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.c1InputPanel1.MouseWheelEdit = false;
             this.c1InputPanel1.Name = "c1InputPanel1";
-            this.c1InputPanel1.Size = new System.Drawing.Size(937, 606);
+            this.c1InputPanel1.Size = new System.Drawing.Size(972, 505);
             this.c1InputPanel1.TabIndex = 0;
             this.c1InputPanel1.VisualStyle = C1.Win.C1InputPanel.VisualStyle.Office2007Blue;
             // 
             // inputLabel3
             // 
+            this.inputLabel3.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputLabel3.Name = "inputLabel3";
             this.inputLabel3.Text = "数据源名称";
             this.inputLabel3.Width = 100;
             // 
             // inputTextBox1
             // 
+            this.inputTextBox1.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputTextBox1.Name = "inputTextBox1";
-            this.inputTextBox1.Width = 150;
+            this.inputTextBox1.Width = 230;
             // 
             // inputLabel1
             // 
+            this.inputLabel1.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputLabel1.Name = "inputLabel1";
             this.inputLabel1.Text = "数据库类型";
             this.inputLabel1.Width = 100;
@@ -99,91 +103,34 @@
             // inputComboBox1
             // 
             this.inputComboBox1.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
+            this.inputComboBox1.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputComboBox1.Name = "inputComboBox1";
-            this.inputComboBox1.Width = 150;
+            this.inputComboBox1.Width = 230;
             // 
             // inputLabel6
             // 
+            this.inputLabel6.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputLabel6.Name = "inputLabel6";
             this.inputLabel6.Text = "IP";
             this.inputLabel6.Width = 100;
             // 
             // inputTextBox5
             // 
+            this.inputTextBox5.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputTextBox5.Name = "inputTextBox5";
-            this.inputTextBox5.Width = 150;
+            this.inputTextBox5.Width = 230;
             // 
             // inputLabel5
             // 
+            this.inputLabel5.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputLabel5.Name = "inputLabel5";
             this.inputLabel5.Text = "端口";
             this.inputLabel5.Width = 100;
             // 
-            // inputLabel4
-            // 
-            this.inputLabel4.Name = "inputLabel4";
-            this.inputLabel4.Text = "数据库名称";
-            this.inputLabel4.Width = 100;
-            // 
-            // inputTextBox3
-            // 
-            this.inputTextBox3.Name = "inputTextBox3";
-            this.inputTextBox3.Width = 150;
-            // 
-            // inputLabel7
-            // 
-            this.inputLabel7.Name = "inputLabel7";
-            this.inputLabel7.Text = "用户名";
-            this.inputLabel7.Width = 100;
-            // 
-            // inputTextBox6
-            // 
-            this.inputTextBox6.Name = "inputTextBox6";
-            this.inputTextBox6.Width = 150;
-            // 
-            // inputLabel8
-            // 
-            this.inputLabel8.Name = "inputLabel8";
-            this.inputLabel8.Text = "密码";
-            this.inputLabel8.Width = 100;
-            // 
-            // inputTextBox2
-            // 
-            this.inputTextBox2.Name = "inputTextBox2";
-            this.inputTextBox2.Width = 150;
-            // 
-            // inputLabel2
-            // 
-            this.inputLabel2.Name = "inputLabel2";
-            this.inputLabel2.Text = "连接字符串";
-            this.inputLabel2.Width = 100;
-            // 
-            // inputTextBox7
-            // 
-            this.inputTextBox7.Height = 132;
-            this.inputTextBox7.Multiline = true;
-            this.inputTextBox7.Name = "inputTextBox7";
-            this.inputTextBox7.VerticalAlign = C1.Win.C1InputPanel.InputContentAlignment.Spread;
-            this.inputTextBox7.Width = 381;
-            // 
-            // inputButton1
-            // 
-            this.inputButton1.Break = C1.Win.C1InputPanel.BreakType.None;
-            this.inputButton1.Image = ((System.Drawing.Image)(resources.GetObject("inputButton1.Image")));
-            this.inputButton1.Name = "inputButton1";
-            this.inputButton1.Text = "测试连接";
-            this.inputButton1.Click += new System.EventHandler(this.inputButton1_Click);
-            // 
-            // inputButton2
-            // 
-            this.inputButton2.Image = ((System.Drawing.Image)(resources.GetObject("inputButton2.Image")));
-            this.inputButton2.Name = "inputButton2";
-            this.inputButton2.Text = "保存";
-            this.inputButton2.Click += new System.EventHandler(this.inputButton2_Click);
-            // 
             // inputNumericBox1
             // 
             this.inputNumericBox1.DecimalPlaces = 0;
+            this.inputNumericBox1.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputNumericBox1.Format = "d";
             this.inputNumericBox1.Maximum = new decimal(new int[] {
             999999,
@@ -193,14 +140,87 @@
             this.inputNumericBox1.Name = "inputNumericBox1";
             this.inputNumericBox1.OutOfRangeErrorText = "{0}超出允许范围:[{1}，{2}]";
             this.inputNumericBox1.ShowSpinButtons = false;
-            this.inputNumericBox1.Width = 150;
+            this.inputNumericBox1.Width = 230;
+            // 
+            // inputLabel4
+            // 
+            this.inputLabel4.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputLabel4.Name = "inputLabel4";
+            this.inputLabel4.Text = "数据库名称";
+            this.inputLabel4.Width = 100;
+            // 
+            // inputTextBox3
+            // 
+            this.inputTextBox3.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputTextBox3.Name = "inputTextBox3";
+            this.inputTextBox3.Width = 230;
+            // 
+            // inputLabel7
+            // 
+            this.inputLabel7.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputLabel7.Name = "inputLabel7";
+            this.inputLabel7.Text = "用户名";
+            this.inputLabel7.Width = 100;
+            // 
+            // inputTextBox6
+            // 
+            this.inputTextBox6.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputTextBox6.Name = "inputTextBox6";
+            this.inputTextBox6.Width = 230;
+            // 
+            // inputLabel8
+            // 
+            this.inputLabel8.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputLabel8.Name = "inputLabel8";
+            this.inputLabel8.Text = "密码";
+            this.inputLabel8.Width = 100;
+            // 
+            // inputTextBox2
+            // 
+            this.inputTextBox2.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputTextBox2.Name = "inputTextBox2";
+            this.inputTextBox2.Width = 230;
+            // 
+            // inputLabel2
+            // 
+            this.inputLabel2.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputLabel2.Name = "inputLabel2";
+            this.inputLabel2.Text = "连接字符串";
+            this.inputLabel2.Width = 100;
+            // 
+            // inputTextBox7
+            // 
+            this.inputTextBox7.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputTextBox7.Height = 132;
+            this.inputTextBox7.Multiline = true;
+            this.inputTextBox7.Name = "inputTextBox7";
+            this.inputTextBox7.VerticalAlign = C1.Win.C1InputPanel.InputContentAlignment.Spread;
+            this.inputTextBox7.Width = 570;
+            // 
+            // inputButton1
+            // 
+            this.inputButton1.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.inputButton1.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputButton1.Name = "inputButton1";
+            this.inputButton1.TabStop = false;
+            this.inputButton1.Text = "测试连接";
+            this.inputButton1.Click += new System.EventHandler(this.inputButton1_Click);
+            // 
+            // inputButton2
+            // 
+            this.inputButton2.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputButton2.Name = "inputButton2";
+            this.inputButton2.TabStop = false;
+            this.inputButton2.Text = "保存";
+            this.inputButton2.Click += new System.EventHandler(this.inputButton2_Click);
             // 
             // FormDataSourceEdit
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(937, 606);
+            this.ClientSize = new System.Drawing.Size(972, 505);
             this.Controls.Add(this.c1InputPanel1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FormDataSourceEdit";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
