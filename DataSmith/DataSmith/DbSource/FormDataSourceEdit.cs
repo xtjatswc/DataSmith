@@ -47,6 +47,7 @@ namespace DataSmith.DbSource
                 DataSourceId = -1;
                 _dataSource = new DataSource();
                 c1InputPanel1.FormReset();
+                inputButtonDelete.Visibility = Visibility.Hidden;
             }
             else if (OperateType == OperateType.Modify)
             {
@@ -61,6 +62,7 @@ namespace DataSmith.DbSource
                 inputTextBoxUserID.Text = _dataSource.UserID;
                 inputTextBoxPassword.Text = _dataSource.Password;
                 inputTextBoxConnStr.Text = _dataSource.DBConnStr;
+                inputButtonDelete.Visibility = Visibility.Visible;
             }
 
             inputComboBox1_ChangeCommitted(inputComboBox1, null);
@@ -255,6 +257,19 @@ namespace DataSmith.DbSource
                         break;
 
                 }
+            }
+        }
+
+        private void inputButtonDelete_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("删除后不可恢复，请谨慎操作！是否删除？", "询问", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+            if (dr == DialogResult.Yes)
+            {
+                dsDal.DeleteExt(DataSourceId);
+                OperateType = OperateType.New;
+                ChangeDataSource();
+                AfterSaved?.Invoke(this, new EventArgs());
             }
         }
     }

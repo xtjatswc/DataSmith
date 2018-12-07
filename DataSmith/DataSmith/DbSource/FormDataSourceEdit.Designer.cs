@@ -52,6 +52,7 @@
             this.inputTextBoxConnStr = new C1.Win.C1InputPanel.InputTextBox();
             this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
             this.inputButton2 = new C1.Win.C1InputPanel.InputButton();
+            this.inputButtonDelete = new C1.Win.C1InputPanel.InputButton();
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,6 +81,7 @@
             this.c1InputPanel1.Items.Add(this.inputTextBoxPassword);
             this.c1InputPanel1.Items.Add(this.inputLabel2);
             this.c1InputPanel1.Items.Add(this.inputTextBoxConnStr);
+            this.c1InputPanel1.Items.Add(this.inputButtonDelete);
             this.c1InputPanel1.Items.Add(this.inputButton1);
             this.c1InputPanel1.Items.Add(this.inputButton2);
             this.c1InputPanel1.Location = new System.Drawing.Point(0, 0);
@@ -272,6 +274,16 @@
             this.inputButton2.Text = "保存";
             this.inputButton2.Click += new System.EventHandler(this.inputButton2_Click);
             // 
+            // inputButtonDelete
+            // 
+            this.inputButtonDelete.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.inputButtonDelete.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputButtonDelete.Name = "inputButtonDelete";
+            this.inputButtonDelete.Padding = new System.Windows.Forms.Padding(0, 0, 64, 0);
+            this.inputButtonDelete.TabStop = false;
+            this.inputButtonDelete.Text = "删除";
+            this.inputButtonDelete.Click += new System.EventHandler(this.inputButtonDelete_Click);
+            // 
             // FormDataSourceEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -313,6 +325,7 @@
         private C1.Win.C1InputPanel.InputTextBox inputTextBoxInstanceName;
         private C1.Win.C1InputPanel.InputLabel inputLabel10;
         private C1.Win.C1InputPanel.InputLabel inputLabel11;
+        private C1.Win.C1InputPanel.InputButton inputButtonDelete;
     }
 }
 

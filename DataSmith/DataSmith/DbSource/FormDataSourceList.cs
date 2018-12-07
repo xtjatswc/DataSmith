@@ -28,7 +28,7 @@ namespace DataSmith.DbSource
 
         private void RefreshList()
         {
-            var models = _dataSourceDal.GetModels();
+            var models = _dataSourceDal.GetModels(where:"IsDeleted=0");
             c1InputPanel1.Items.Clear();
 
             //源
