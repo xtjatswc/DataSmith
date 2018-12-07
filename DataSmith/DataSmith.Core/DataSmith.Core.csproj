@@ -97,6 +97,7 @@
     <Compile Include="DataProvider\BaseDataProvider.cs" />
     <Compile Include="DataProvider\IDataProvider.cs" />
     <Compile Include="DataProvider\MySQLProvider.cs" />
+    <Compile Include="DataProvider\SqlServerProvider.cs" />
     <Compile Include="DataProvider\OracleProvider.cs" />
     <Compile Include="DataProvider\SqliteProvider.cs" />
     <Compile Include="Extension\C1InputPanelExtensions.cs" />

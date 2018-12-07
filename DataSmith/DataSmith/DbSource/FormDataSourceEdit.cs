@@ -22,19 +22,22 @@ namespace DataSmith.DbSource
         private DataSource _dataSource;
 
         //保存成功事件
-        public event EventHandler AfterSaved; 
+        public event EventHandler AfterSaved;
 
         public FormDataSourceEdit()
         {
             InitializeComponent();
-        }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
             var model = dbtDal.GetModels();
             inputComboBox1.DataSource = model;
             inputComboBox1.DisplayMember = "DBTypeName";
             inputComboBox1.ValueMember = "ID";
+            this.inputComboBox1.ChangeCommitted += new System.EventHandler(this.inputComboBox1_ChangeCommitted);
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
         }
 
         public void ChangeDataSource()
@@ -44,21 +47,23 @@ namespace DataSmith.DbSource
                 DataSourceId = -1;
                 _dataSource = new DataSource();
                 c1InputPanel1.FormReset();
-                inputComboBox1_ChangeCommitted(inputComboBox1, null);
             }
             else if (OperateType == OperateType.Modify)
             {
                 _dataSource = dsDal.GetModel(DataSourceId);
                 DataProvider = _dataSource.GetDataProvider();
                 inputTextBox1.Text = _dataSource.SourceName;
-                inputTextBox5.Text = _dataSource.IP;
+                inputTextBoxIP.Text = _dataSource.IP;
                 inputComboBox1.SelectedValue = _dataSource.DBType;
-                inputNumericBox1.Text = _dataSource.Port.ToString();
-                inputTextBox3.Text = _dataSource.DBName;
-                inputTextBox6.Text = _dataSource.UserID;
-                inputTextBox2.Text = _dataSource.Password;
-                inputTextBox7.Text = _dataSource.DBConnStr;
+                inputNumericBoxPort.Value = _dataSource.Port;
+                inputTextBoxDBName.Text = _dataSource.DBName;
+                inputTextBoxUserID.Text = _dataSource.UserID;
+                inputTextBoxPassword.Text = _dataSource.Password;
+                inputTextBoxConnStr.Text = _dataSource.DBConnStr;
             }
+
+            inputComboBox1_ChangeCommitted(inputComboBox1, null);
+
         }
 
         private void inputButton1_Click(object sender, EventArgs e)
@@ -76,7 +81,7 @@ namespace DataSmith.DbSource
                     GetModel();
                 }
 
-                DataProvider.Db.Data.ConnectionString = inputTextBox7.Text;
+                DataProvider.Db.Data.ConnectionString = inputTextBoxConnStr.Text;
                 return DataProvider.TestConn();
             }
             catch (Exception exception)
@@ -123,28 +128,121 @@ namespace DataSmith.DbSource
             _dataSource.DBType = Convert.ToInt32(inputComboBox1.SelectedValue);
             _dataSource.DBTypeName = inputComboBox1.Text;
             _dataSource.SourceName = inputTextBox1.Text;
-            _dataSource.IP = inputTextBox5.Text;
-            _dataSource.Port = Convert.ToInt32(inputNumericBox1.Value);
-            _dataSource.DBName = inputTextBox3.Text;
-            _dataSource.UserID = inputTextBox6.Text;
-            _dataSource.Password = inputTextBox2.Text;
-            _dataSource.DBConnStr = inputTextBox7.Text;
+            _dataSource.IP = inputTextBoxIP.Text;
+            _dataSource.Port = Convert.ToInt32(inputNumericBoxPort.Value);
+            _dataSource.DBName = inputTextBoxDBName.Text;
+            _dataSource.UserID = inputTextBoxUserID.Text;
+            _dataSource.Password = inputTextBoxPassword.Text;
+            _dataSource.DBConnStr = inputTextBoxConnStr.Text;
             DataProvider = _dataSource.GetDataProvider();
         }
 
         private void btnPing_Click(object sender, EventArgs e)
         {
-            FormCmd cmd = new FormCmd { Commond = "ping", Parameter = inputTextBox5.Text, AutoExec = true };
+            FormCmd cmd = new FormCmd { Commond = "ping", Parameter = inputTextBoxIP.Text, AutoExec = true };
             cmd.ShowDialog();
         }
 
         private void inputComboBox1_ChangeCommitted(object sender, EventArgs e)
         {
-            InputComboBox inputComboBox = sender as  InputComboBox;
+            InputComboBox inputComboBox = sender as InputComboBox;
             DataBaseType dataBaseType = inputComboBox.SelectedItem as DataBaseType;
             if (dataBaseType != null)
             {
-                inputNumericBox1.Value = dataBaseType.DefaultPort;
+                //实例名 默认隐藏
+                inputLabel9.Visibility = Visibility.Collapsed;
+                inputTextBoxInstanceName.Visibility = Visibility.Collapsed;
+                inputLabel11.Visibility = Visibility.Collapsed;
+
+                //端口
+                inputLabel5.Visibility = Visibility.Visible;
+                inputNumericBoxPort.Visibility = Visibility.Visible;
+                inputLabel10.Visibility = Visibility.Visible;
+                inputLabel10.Text = string.Format("备注：{0}的默认端口是{1}",
+                    Enum.GetName(typeof(DBType), dataBaseType.ID),
+                    dataBaseType.DefaultPort
+                );
+                if (dataBaseType.DefaultPort == 0)
+                {
+                    inputNumericBoxPort.Text = "";
+                }
+                else
+                {
+                    inputNumericBoxPort.Value = dataBaseType.DefaultPort;
+                }
+
+                switch ((DBType) dataBaseType.ID)
+                {
+                    case DBType.SqlServer:
+                        //实例名
+                        inputLabel9.Visibility = Visibility.Visible;
+                        inputTextBoxInstanceName.Visibility = Visibility.Visible;
+                        inputLabel11.Visibility = Visibility.Visible;
+
+                        //端口
+                        inputLabel10.Text = "备注：SqlServer通常是动态端口，该项一般情况下不用配置。";
+                        break;
+                    case DBType.Oracle:
+                    case DBType.MySQL:
+                        inputTextBoxConnStr.Text = string.Format(dataBaseType.DefaultConnStr,
+                            inputTextBoxIP.Text,
+                            inputNumericBoxPort.Text,
+                            inputTextBoxDBName.Text,
+                            inputTextBoxUserID.Text,
+                            inputTextBoxPassword.Text
+                        );
+                        break;
+                    case DBType.Sqlite:
+                        //端口
+                        inputLabel5.Visibility = Visibility.Collapsed;
+                        inputNumericBoxPort.Visibility = Visibility.Collapsed;
+                        inputLabel10.Visibility = Visibility.Collapsed;
+
+                        inputTextBoxConnStr.Text = string.Format(dataBaseType.DefaultConnStr,
+                            inputTextBoxDBName.Text
+                        );
+                        break;
+                }
+            }
+
+            inputTextBox5_TextChanged(null, null);
+        }
+
+        private void inputTextBox5_TextChanged(object sender, EventArgs e)
+        {
+            DataBaseType dataBaseType = inputComboBox1.SelectedItem as DataBaseType;
+            if (dataBaseType != null)
+            {
+
+                switch ((DBType)dataBaseType.ID)
+                {
+                    case DBType.SqlServer:
+                        inputTextBoxConnStr.Text = string.Format(dataBaseType.DefaultConnStr,
+                            inputTextBoxIP.Text,
+                            inputNumericBoxPort.Value == 0 ? "" : $",{inputNumericBoxPort.Text}",
+                            string.IsNullOrWhiteSpace(inputTextBoxInstanceName.Text) ? "" : $"\\{inputTextBoxInstanceName.Text.Trim()}",
+                            inputTextBoxDBName.Text,
+                            inputTextBoxUserID.Text,
+                            inputTextBoxPassword.Text
+                        );
+                        break;
+                    case DBType.Oracle:
+                    case DBType.MySQL:
+                        inputTextBoxConnStr.Text = string.Format(dataBaseType.DefaultConnStr,
+                            inputTextBoxIP.Text,
+                            inputNumericBoxPort.Text,
+                            inputTextBoxDBName.Text,
+                            inputTextBoxUserID.Text,
+                            inputTextBoxPassword.Text
+                        );
+                        break;
+                    case DBType.Sqlite:
+                        inputTextBoxConnStr.Text = string.Format(dataBaseType.DefaultConnStr,
+                            inputTextBoxDBName.Text
+                        );
+                        break;
+
+                }
             }
         }
     }

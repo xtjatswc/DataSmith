@@ -68,11 +68,10 @@ namespace DataSmith.DbSource
         private void InputButton_Click(object sender, EventArgs e)
         {
             var frm = Host.GetService<FormDataSourceEdit>();
-            panel1.ShowForm(frm);
-
             frm.OperateType = OperateType.Modify;
             frm.DataSourceId = ((sender as InputButton).Tag as DataSource).ID;
             frm.ChangeDataSource();
+            panel1.ShowForm(frm);
             frm.AfterSaved += Frm_AfterSaved;
         }
 
@@ -88,6 +87,7 @@ namespace DataSmith.DbSource
             frm.OperateType = OperateType.New;
             frm.ChangeDataSource();
             panel1.ShowForm(frm);
+            frm.AfterSaved += Frm_AfterSaved;
 
             c1InputPanel1.ClearSwitchToggle();
         }

@@ -34,20 +34,24 @@
             this.inputLabel1 = new C1.Win.C1InputPanel.InputLabel();
             this.inputComboBox1 = new C1.Win.C1InputPanel.InputComboBox();
             this.inputLabel6 = new C1.Win.C1InputPanel.InputLabel();
-            this.inputTextBox5 = new C1.Win.C1InputPanel.InputTextBox();
+            this.inputTextBoxIP = new C1.Win.C1InputPanel.InputTextBox();
+            this.btnPing = new C1.Win.C1InputPanel.InputButton();
+            this.inputLabel9 = new C1.Win.C1InputPanel.InputLabel();
+            this.inputTextBoxInstanceName = new C1.Win.C1InputPanel.InputTextBox();
+            this.inputLabel11 = new C1.Win.C1InputPanel.InputLabel();
             this.inputLabel5 = new C1.Win.C1InputPanel.InputLabel();
-            this.inputNumericBox1 = new C1.Win.C1InputPanel.InputNumericBox();
+            this.inputNumericBoxPort = new C1.Win.C1InputPanel.InputNumericBox();
+            this.inputLabel10 = new C1.Win.C1InputPanel.InputLabel();
             this.inputLabel4 = new C1.Win.C1InputPanel.InputLabel();
-            this.inputTextBox3 = new C1.Win.C1InputPanel.InputTextBox();
+            this.inputTextBoxDBName = new C1.Win.C1InputPanel.InputTextBox();
             this.inputLabel7 = new C1.Win.C1InputPanel.InputLabel();
-            this.inputTextBox6 = new C1.Win.C1InputPanel.InputTextBox();
+            this.inputTextBoxUserID = new C1.Win.C1InputPanel.InputTextBox();
             this.inputLabel8 = new C1.Win.C1InputPanel.InputLabel();
-            this.inputTextBox2 = new C1.Win.C1InputPanel.InputTextBox();
+            this.inputTextBoxPassword = new C1.Win.C1InputPanel.InputTextBox();
             this.inputLabel2 = new C1.Win.C1InputPanel.InputLabel();
-            this.inputTextBox7 = new C1.Win.C1InputPanel.InputTextBox();
+            this.inputTextBoxConnStr = new C1.Win.C1InputPanel.InputTextBox();
             this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
             this.inputButton2 = new C1.Win.C1InputPanel.InputButton();
-            this.btnPing = new C1.Win.C1InputPanel.InputButton();
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,22 +64,26 @@
             this.c1InputPanel1.Items.Add(this.inputLabel1);
             this.c1InputPanel1.Items.Add(this.inputComboBox1);
             this.c1InputPanel1.Items.Add(this.inputLabel6);
-            this.c1InputPanel1.Items.Add(this.inputTextBox5);
+            this.c1InputPanel1.Items.Add(this.inputTextBoxIP);
             this.c1InputPanel1.Items.Add(this.btnPing);
+            this.c1InputPanel1.Items.Add(this.inputLabel9);
+            this.c1InputPanel1.Items.Add(this.inputTextBoxInstanceName);
+            this.c1InputPanel1.Items.Add(this.inputLabel11);
             this.c1InputPanel1.Items.Add(this.inputLabel5);
-            this.c1InputPanel1.Items.Add(this.inputNumericBox1);
+            this.c1InputPanel1.Items.Add(this.inputNumericBoxPort);
+            this.c1InputPanel1.Items.Add(this.inputLabel10);
             this.c1InputPanel1.Items.Add(this.inputLabel4);
-            this.c1InputPanel1.Items.Add(this.inputTextBox3);
+            this.c1InputPanel1.Items.Add(this.inputTextBoxDBName);
             this.c1InputPanel1.Items.Add(this.inputLabel7);
-            this.c1InputPanel1.Items.Add(this.inputTextBox6);
+            this.c1InputPanel1.Items.Add(this.inputTextBoxUserID);
             this.c1InputPanel1.Items.Add(this.inputLabel8);
-            this.c1InputPanel1.Items.Add(this.inputTextBox2);
+            this.c1InputPanel1.Items.Add(this.inputTextBoxPassword);
             this.c1InputPanel1.Items.Add(this.inputLabel2);
-            this.c1InputPanel1.Items.Add(this.inputTextBox7);
+            this.c1InputPanel1.Items.Add(this.inputTextBoxConnStr);
             this.c1InputPanel1.Items.Add(this.inputButton1);
             this.c1InputPanel1.Items.Add(this.inputButton2);
             this.c1InputPanel1.Location = new System.Drawing.Point(0, 0);
-            this.c1InputPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.c1InputPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.c1InputPanel1.MouseWheelEdit = false;
             this.c1InputPanel1.Name = "c1InputPanel1";
             this.c1InputPanel1.Padding = new System.Windows.Forms.Padding(8, 8, 2, 2);
@@ -110,7 +118,6 @@
             this.inputComboBox1.Name = "inputComboBox1";
             this.inputComboBox1.TabStop = false;
             this.inputComboBox1.Width = 230;
-            this.inputComboBox1.ChangeCommitted += new System.EventHandler(this.inputComboBox1_ChangeCommitted);
             // 
             // inputLabel6
             // 
@@ -119,12 +126,44 @@
             this.inputLabel6.Text = "IP";
             this.inputLabel6.Width = 100;
             // 
-            // inputTextBox5
+            // inputTextBoxIP
             // 
-            this.inputTextBox5.Break = C1.Win.C1InputPanel.BreakType.None;
-            this.inputTextBox5.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.inputTextBox5.Name = "inputTextBox5";
-            this.inputTextBox5.Width = 230;
+            this.inputTextBoxIP.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.inputTextBoxIP.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputTextBoxIP.Name = "inputTextBoxIP";
+            this.inputTextBoxIP.Width = 230;
+            this.inputTextBoxIP.TextChanged += new System.EventHandler(this.inputTextBox5_TextChanged);
+            // 
+            // btnPing
+            // 
+            this.btnPing.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.btnPing.Name = "btnPing";
+            this.btnPing.TabStop = false;
+            this.btnPing.Text = "Ping";
+            this.btnPing.Click += new System.EventHandler(this.btnPing_Click);
+            // 
+            // inputLabel9
+            // 
+            this.inputLabel9.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputLabel9.Name = "inputLabel9";
+            this.inputLabel9.Text = "实例名";
+            this.inputLabel9.Width = 100;
+            // 
+            // inputTextBoxInstanceName
+            // 
+            this.inputTextBoxInstanceName.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.inputTextBoxInstanceName.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputTextBoxInstanceName.Name = "inputTextBoxInstanceName";
+            this.inputTextBoxInstanceName.Width = 230;
+            this.inputTextBoxInstanceName.TextChanged += new System.EventHandler(this.inputTextBox5_TextChanged);
+            // 
+            // inputLabel11
+            // 
+            this.inputLabel11.Break = C1.Win.C1InputPanel.BreakType.Row;
+            this.inputLabel11.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputLabel11.ForeColor = System.Drawing.Color.Blue;
+            this.inputLabel11.Name = "inputLabel11";
+            this.inputLabel11.Text = "备注：如果没有则不用填写";
             // 
             // inputLabel5
             // 
@@ -133,20 +172,30 @@
             this.inputLabel5.Text = "端口";
             this.inputLabel5.Width = 100;
             // 
-            // inputNumericBox1
+            // inputNumericBoxPort
             // 
-            this.inputNumericBox1.DecimalPlaces = 0;
-            this.inputNumericBox1.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.inputNumericBox1.Format = "d";
-            this.inputNumericBox1.Maximum = new decimal(new int[] {
+            this.inputNumericBoxPort.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.inputNumericBoxPort.DecimalPlaces = 0;
+            this.inputNumericBoxPort.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputNumericBoxPort.Format = "d";
+            this.inputNumericBoxPort.Maximum = new decimal(new int[] {
             999999,
             0,
             0,
             0});
-            this.inputNumericBox1.Name = "inputNumericBox1";
-            this.inputNumericBox1.OutOfRangeErrorText = "{0}超出允许范围:[{1}，{2}]";
-            this.inputNumericBox1.ShowSpinButtons = false;
-            this.inputNumericBox1.Width = 230;
+            this.inputNumericBoxPort.Name = "inputNumericBoxPort";
+            this.inputNumericBoxPort.OutOfRangeErrorText = "{0}超出允许范围:[{1}，{2}]";
+            this.inputNumericBoxPort.ShowSpinButtons = false;
+            this.inputNumericBoxPort.Width = 230;
+            this.inputNumericBoxPort.TextChanged += new System.EventHandler(this.inputTextBox5_TextChanged);
+            // 
+            // inputLabel10
+            // 
+            this.inputLabel10.Break = C1.Win.C1InputPanel.BreakType.Row;
+            this.inputLabel10.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputLabel10.ForeColor = System.Drawing.Color.Blue;
+            this.inputLabel10.Name = "inputLabel10";
+            this.inputLabel10.Text = "备注：";
             // 
             // inputLabel4
             // 
@@ -155,11 +204,12 @@
             this.inputLabel4.Text = "数据库名称";
             this.inputLabel4.Width = 100;
             // 
-            // inputTextBox3
+            // inputTextBoxDBName
             // 
-            this.inputTextBox3.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.inputTextBox3.Name = "inputTextBox3";
-            this.inputTextBox3.Width = 230;
+            this.inputTextBoxDBName.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputTextBoxDBName.Name = "inputTextBoxDBName";
+            this.inputTextBoxDBName.Width = 230;
+            this.inputTextBoxDBName.TextChanged += new System.EventHandler(this.inputTextBox5_TextChanged);
             // 
             // inputLabel7
             // 
@@ -168,11 +218,12 @@
             this.inputLabel7.Text = "用户名";
             this.inputLabel7.Width = 100;
             // 
-            // inputTextBox6
+            // inputTextBoxUserID
             // 
-            this.inputTextBox6.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.inputTextBox6.Name = "inputTextBox6";
-            this.inputTextBox6.Width = 230;
+            this.inputTextBoxUserID.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputTextBoxUserID.Name = "inputTextBoxUserID";
+            this.inputTextBoxUserID.Width = 230;
+            this.inputTextBoxUserID.TextChanged += new System.EventHandler(this.inputTextBox5_TextChanged);
             // 
             // inputLabel8
             // 
@@ -181,11 +232,12 @@
             this.inputLabel8.Text = "密码";
             this.inputLabel8.Width = 100;
             // 
-            // inputTextBox2
+            // inputTextBoxPassword
             // 
-            this.inputTextBox2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.inputTextBox2.Name = "inputTextBox2";
-            this.inputTextBox2.Width = 230;
+            this.inputTextBoxPassword.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputTextBoxPassword.Name = "inputTextBoxPassword";
+            this.inputTextBoxPassword.Width = 230;
+            this.inputTextBoxPassword.TextChanged += new System.EventHandler(this.inputTextBox5_TextChanged);
             // 
             // inputLabel2
             // 
@@ -194,14 +246,14 @@
             this.inputLabel2.Text = "连接字符串";
             this.inputLabel2.Width = 100;
             // 
-            // inputTextBox7
+            // inputTextBoxConnStr
             // 
-            this.inputTextBox7.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.inputTextBox7.Height = 132;
-            this.inputTextBox7.Multiline = true;
-            this.inputTextBox7.Name = "inputTextBox7";
-            this.inputTextBox7.VerticalAlign = C1.Win.C1InputPanel.InputContentAlignment.Spread;
-            this.inputTextBox7.Width = 570;
+            this.inputTextBoxConnStr.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputTextBoxConnStr.Height = 132;
+            this.inputTextBoxConnStr.Multiline = true;
+            this.inputTextBoxConnStr.Name = "inputTextBoxConnStr";
+            this.inputTextBoxConnStr.VerticalAlign = C1.Win.C1InputPanel.InputContentAlignment.Spread;
+            this.inputTextBoxConnStr.Width = 570;
             // 
             // inputButton1
             // 
@@ -220,21 +272,13 @@
             this.inputButton2.Text = "保存";
             this.inputButton2.Click += new System.EventHandler(this.inputButton2_Click);
             // 
-            // btnPing
-            // 
-            this.btnPing.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.btnPing.Name = "btnPing";
-            this.btnPing.TabStop = false;
-            this.btnPing.Text = "Ping";
-            this.btnPing.Click += new System.EventHandler(this.btnPing_Click);
-            // 
             // FormDataSourceEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(972, 505);
             this.Controls.Add(this.c1InputPanel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FormDataSourceEdit";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -249,22 +293,26 @@
         private C1.Win.C1InputPanel.InputLabel inputLabel1;
         private C1.Win.C1InputPanel.InputTextBox inputTextBox1;
         private C1.Win.C1InputPanel.InputLabel inputLabel2;
-        private C1.Win.C1InputPanel.InputTextBox inputTextBox2;
+        private C1.Win.C1InputPanel.InputTextBox inputTextBoxPassword;
         private C1.Win.C1InputPanel.InputComboBox inputComboBox1;
         private C1.Win.C1InputPanel.InputLabel inputLabel3;
         private C1.Win.C1InputPanel.InputLabel inputLabel6;
-        private C1.Win.C1InputPanel.InputTextBox inputTextBox5;
+        private C1.Win.C1InputPanel.InputTextBox inputTextBoxIP;
         private C1.Win.C1InputPanel.InputLabel inputLabel5;
         private C1.Win.C1InputPanel.InputLabel inputLabel4;
-        private C1.Win.C1InputPanel.InputTextBox inputTextBox3;
+        private C1.Win.C1InputPanel.InputTextBox inputTextBoxDBName;
         private C1.Win.C1InputPanel.InputButton inputButton1;
         private C1.Win.C1InputPanel.InputButton inputButton2;
         private C1.Win.C1InputPanel.InputLabel inputLabel7;
-        private C1.Win.C1InputPanel.InputTextBox inputTextBox6;
-        private C1.Win.C1InputPanel.InputTextBox inputTextBox7;
+        private C1.Win.C1InputPanel.InputTextBox inputTextBoxUserID;
+        private C1.Win.C1InputPanel.InputTextBox inputTextBoxConnStr;
         private C1.Win.C1InputPanel.InputLabel inputLabel8;
-        private C1.Win.C1InputPanel.InputNumericBox inputNumericBox1;
+        private C1.Win.C1InputPanel.InputNumericBox inputNumericBoxPort;
         private C1.Win.C1InputPanel.InputButton btnPing;
+        private C1.Win.C1InputPanel.InputLabel inputLabel9;
+        private C1.Win.C1InputPanel.InputTextBox inputTextBoxInstanceName;
+        private C1.Win.C1InputPanel.InputLabel inputLabel10;
+        private C1.Win.C1InputPanel.InputLabel inputLabel11;
     }
 }
 
