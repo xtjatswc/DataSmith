@@ -24,6 +24,16 @@ namespace DataSmith.Core.Extension
             }
         }
 
+        //清空选中效果
+        public static void ClearSwitchToggle(this C1InputPanel c1InputPanel)
+        {
+            dynamic obj = c1InputPanel.Tag;
+            if (obj != null && obj.PressedButton != null)
+            {
+                obj.PressedButton.Pressed = false;
+            }
+        }
+
         private static void InputButton_Click(object sender, EventArgs e)
         {
             InputButton inputButton = sender as InputButton;

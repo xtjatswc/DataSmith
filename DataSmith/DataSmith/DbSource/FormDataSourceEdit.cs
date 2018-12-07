@@ -6,6 +6,7 @@ using DataSmith.Core.Extension;
 using DataSmith.Core.Infrastructure.Base;
 using DataSmith.Core.Infrastructure.DAL;
 using DataSmith.Core.Infrastructure.Model;
+using DataSmith.Core.Util;
 
 namespace DataSmith.DbSource
 {
@@ -102,6 +103,12 @@ namespace DataSmith.DbSource
             }
 
             MessageBox.Show("保存成功！");
+        }
+
+        private void btnPing_Click(object sender, EventArgs e)
+        {
+            FormCmd cmd = new FormCmd{Commond = "ping", Parameter = inputTextBox5.Text, AutoExec = true};
+            cmd.ShowDialog();
         }
     }
 }

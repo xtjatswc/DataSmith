@@ -94,6 +94,7 @@
             // 
             this.inputButton2.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputButton2.Name = "inputButton2";
+            this.inputButton2.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
             this.inputButton2.TabStop = false;
             this.inputButton2.Text = "添加数据源";
             this.inputButton2.Width = 172;

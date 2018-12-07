@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using C1.Win.C1InputPanel;
 using DataSmith.Core.Context;
@@ -23,6 +25,29 @@ namespace DataSmith.DbSource
         {
             var models = _dataSourceDal.GetModels();
             c1InputPanel1.Items.Clear();
+
+            //源
+            var source = models.Where(o => o.SourceType == 1).ToList();
+            InputGroupHeader groupHeader = new InputGroupHeader();
+            groupHeader.Font = new System.Drawing.Font("微软雅黑", 10F);
+            groupHeader.Text = "[源]";
+            c1InputPanel1.Items.Add(groupHeader);
+            LoadItems(source);
+
+            //目标
+            var target = models.Where(o => o.SourceType == 2).ToList();
+            groupHeader = new InputGroupHeader();
+            groupHeader.Font = new System.Drawing.Font("微软雅黑", 10F);
+            groupHeader.Padding = new Padding(2, 15, 2, 2);
+            groupHeader.Text = "[目标]";
+            c1InputPanel1.Items.Add(groupHeader);
+            LoadItems(target);
+
+            c1InputPanel1.SetSwitchToggle();
+        }
+
+        private void LoadItems(List<DataSource> models)
+        {
             foreach (var model in models)
             {
                 InputButton inputButton = new InputButton();
@@ -33,8 +58,6 @@ namespace DataSmith.DbSource
                 inputButton.Tag = model;
                 c1InputPanel1.Items.Add(inputButton);
             }
-
-            c1InputPanel1.SetSwitchToggle();
         }
 
         private void InputButton_Click(object sender, EventArgs e)
@@ -55,6 +78,8 @@ namespace DataSmith.DbSource
 
             frm.OperateType = OperateType.New;
             frm.ChangeDataSource();
+
+            c1InputPanel1.ClearSwitchToggle();
         }
     }
 }

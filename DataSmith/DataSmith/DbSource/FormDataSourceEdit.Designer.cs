@@ -47,6 +47,7 @@
             this.inputTextBox7 = new C1.Win.C1InputPanel.InputTextBox();
             this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
             this.inputButton2 = new C1.Win.C1InputPanel.InputButton();
+            this.btnPing = new C1.Win.C1InputPanel.InputButton();
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,6 +61,7 @@
             this.c1InputPanel1.Items.Add(this.inputComboBox1);
             this.c1InputPanel1.Items.Add(this.inputLabel6);
             this.c1InputPanel1.Items.Add(this.inputTextBox5);
+            this.c1InputPanel1.Items.Add(this.btnPing);
             this.c1InputPanel1.Items.Add(this.inputLabel5);
             this.c1InputPanel1.Items.Add(this.inputNumericBox1);
             this.c1InputPanel1.Items.Add(this.inputLabel4);
@@ -116,6 +118,7 @@
             // 
             // inputTextBox5
             // 
+            this.inputTextBox5.Break = C1.Win.C1InputPanel.BreakType.None;
             this.inputTextBox5.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputTextBox5.Name = "inputTextBox5";
             this.inputTextBox5.Width = 230;
@@ -214,6 +217,14 @@
             this.inputButton2.Text = "保存";
             this.inputButton2.Click += new System.EventHandler(this.inputButton2_Click);
             // 
+            // btnPing
+            // 
+            this.btnPing.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.btnPing.Name = "btnPing";
+            this.btnPing.TabStop = false;
+            this.btnPing.Text = "Ping";
+            this.btnPing.Click += new System.EventHandler(this.btnPing_Click);
+            // 
             // FormDataSourceEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -250,6 +261,7 @@
         private C1.Win.C1InputPanel.InputTextBox inputTextBox7;
         private C1.Win.C1InputPanel.InputLabel inputLabel8;
         private C1.Win.C1InputPanel.InputNumericBox inputNumericBox1;
+        private C1.Win.C1InputPanel.InputButton btnPing;
     }
 }
 
