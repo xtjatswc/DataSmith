@@ -78,6 +78,7 @@
             this.c1InputPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.c1InputPanel1.MouseWheelEdit = false;
             this.c1InputPanel1.Name = "c1InputPanel1";
+            this.c1InputPanel1.Padding = new System.Windows.Forms.Padding(8, 8, 2, 2);
             this.c1InputPanel1.Size = new System.Drawing.Size(972, 505);
             this.c1InputPanel1.TabIndex = 0;
             this.c1InputPanel1.VisualStyle = C1.Win.C1InputPanel.VisualStyle.Office2007Blue;
@@ -107,7 +108,9 @@
             this.inputComboBox1.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
             this.inputComboBox1.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputComboBox1.Name = "inputComboBox1";
+            this.inputComboBox1.TabStop = false;
             this.inputComboBox1.Width = 230;
+            this.inputComboBox1.ChangeCommitted += new System.EventHandler(this.inputComboBox1_ChangeCommitted);
             // 
             // inputLabel6
             // 

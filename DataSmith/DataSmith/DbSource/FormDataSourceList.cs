@@ -23,6 +23,11 @@ namespace DataSmith.DbSource
 
         private void FormDataSourceList_Load(object sender, EventArgs e)
         {
+            RefreshList();
+        }
+
+        private void RefreshList()
+        {
             var models = _dataSourceDal.GetModels();
             c1InputPanel1.Items.Clear();
 
@@ -68,16 +73,21 @@ namespace DataSmith.DbSource
             frm.OperateType = OperateType.Modify;
             frm.DataSourceId = ((sender as InputButton).Tag as DataSource).ID;
             frm.ChangeDataSource();
+            frm.AfterSaved += Frm_AfterSaved;
+        }
+
+        private void Frm_AfterSaved(object sender, EventArgs e)
+        {
+            RefreshList();
         }
 
         //添加数据源
         private void inputButton2_Click(object sender, EventArgs e)
         {
             var frm = Host.GetService<FormDataSourceEdit>();
-            panel1.ShowForm(frm);
-
             frm.OperateType = OperateType.New;
             frm.ChangeDataSource();
+            panel1.ShowForm(frm);
 
             c1InputPanel1.ClearSwitchToggle();
         }

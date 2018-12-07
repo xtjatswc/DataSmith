@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.c1InputPanel1 = new C1.Win.C1InputPanel.C1InputPanel();
             this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
             this.inputButton2 = new C1.Win.C1InputPanel.InputButton();
@@ -48,8 +49,9 @@
             this.c1InputPanel1.Items.Add(this.inputButton4);
             this.c1InputPanel1.Items.Add(this.inputButton5);
             this.c1InputPanel1.Location = new System.Drawing.Point(0, 0);
+            this.c1InputPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.c1InputPanel1.Name = "c1InputPanel1";
-            this.c1InputPanel1.Size = new System.Drawing.Size(1248, 82);
+            this.c1InputPanel1.Size = new System.Drawing.Size(936, 66);
             this.c1InputPanel1.TabIndex = 0;
             this.c1InputPanel1.VisualStyle = C1.Win.C1InputPanel.VisualStyle.Office2007Blue;
             // 
@@ -115,19 +117,22 @@
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 82);
+            this.panel1.Location = new System.Drawing.Point(0, 66);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1248, 607);
+            this.panel1.Size = new System.Drawing.Size(936, 485);
             this.panel1.TabIndex = 1;
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1248, 689);
+            this.ClientSize = new System.Drawing.Size(936, 551);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.c1InputPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DataSmith";
