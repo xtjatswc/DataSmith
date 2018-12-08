@@ -52,6 +52,8 @@ namespace DataSmith.Interface
             inputTextBox1.Tag = dataBaseType.DefaultQuerySql;
             inputComboBox1.SelectedValue = _interfaces.DataSourceID;
             inputComboBox2.SelectedValue = _interfaces.TargetDataSourceID;
+
+            c1FlexGrid1.DataSource = null;
         }
 
         private void inputButton1_Click(object sender, EventArgs e)
