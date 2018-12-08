@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Forms;
 using DataSmith.Core.Util;
@@ -72,18 +73,25 @@ namespace DataSmith.Core.Util
         {
             if (txtOutPutInfo.InvokeRequired)
             {
-                txtOutPutInfo.Invoke(new Action(() =>
+                try
                 {
-                    txtOutPutInfo.AppendText(e.Data + "\r\n");
-                    //txtOutPutInfo.SelectionStart = txtOutPutInfo.Text.Length;
-                    //txtOutPutInfo.SelectionLength = 0;
-                    //txtOutPutInfo.Focus();
-                    txtOutPutInfo.ScrollToCaret();
-                }));
+                    txtOutPutInfo.Invoke(new Action(() =>
+                    {
+                        txtOutPutInfo.AppendText(e.Data + "\r\n");
+                        //txtOutPutInfo.SelectionStart = txtOutPutInfo.Text.Length;
+                        //txtOutPutInfo.SelectionLength = 0;
+                        //txtOutPutInfo.Focus();
+                        txtOutPutInfo.ScrollToCaret();
+                    }));
+                }
+                catch (InvalidAsynchronousStateException)
+                {
+                }
             }
             else
             {
                 txtOutPutInfo.AppendText(e.Data + "\r\n");
+                txtOutPutInfo.ScrollToCaret();
             }
         }
 

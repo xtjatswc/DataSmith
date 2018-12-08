@@ -35,7 +35,6 @@ namespace DataSmith.Core.Util
                 return;
 
             _process = new Process();
-            _process.OutputDataReceived -= new DataReceivedEventHandler(ProcessOutDataReceived);
             ProcessStartInfo p = new ProcessStartInfo
             {
                 FileName = "cmd.exe",
@@ -66,6 +65,7 @@ namespace DataSmith.Core.Util
         {
             if (_process != null)
             {
+                _process.OutputDataReceived -= new DataReceivedEventHandler(ProcessOutDataReceived);
                 _process.CancelOutputRead();//取消异步操作
                 _process.Kill();
                 _process = null;
