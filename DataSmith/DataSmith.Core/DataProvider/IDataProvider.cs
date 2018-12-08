@@ -10,10 +10,10 @@ using FluentData;
 
 namespace DataSmith.Core.DataProvider
 {
-	/// <summary>
-	/// Description of MyClass.
-	/// </summary>
-	public interface IDataProvider
+    /// <summary>
+    /// Description of MyClass.
+    /// </summary>
+    public interface IDataProvider
     {
         IDbContext Db { get; set; }
         DBType DbType { get; }
@@ -22,13 +22,14 @@ namespace DataSmith.Core.DataProvider
 
         bool TestConn();
         DataTable GetDataTable(string sql);
-	}
+    }
 
     public enum DBType
-	{
-		SqlServer=0,
-		Oracle=1,
-		MySQL=2,
-		Sqlite=3
-	}
+    {
+        SqlServer = 0,
+        Oracle = 1,
+        MySQL = 2,
+        Sqlite = 3,
+        DB2 = 4
+    }
 }

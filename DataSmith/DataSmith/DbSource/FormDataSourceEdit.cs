@@ -244,6 +244,7 @@ namespace DataSmith.DbSource
                         break;
                     case DBType.Oracle:
                     case DBType.MySQL:
+                    case DBType.DB2:                       
                         inputTextBoxConnStr.Text = string.Format(dataBaseType.DefaultConnStr,
                             inputTextBoxIP.Text,
                             inputNumericBoxPort.Text,

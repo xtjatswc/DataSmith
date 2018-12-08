@@ -41,6 +41,9 @@
     <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
       <HintPath>..\DLL\Autofac.3.5.2\Autofac.dll</HintPath>
@@ -96,6 +99,7 @@
     <Compile Include="Context\JoinContext.cs" />
     <Compile Include="DataProvider\BaseDataProvider.cs" />
     <Compile Include="DataProvider\IDataProvider.cs" />
+    <Compile Include="DataProvider\DB2Provider.cs" />
     <Compile Include="DataProvider\MySQLProvider.cs" />
     <Compile Include="DataProvider\SqlServerProvider.cs" />
     <Compile Include="DataProvider\OracleProvider.cs" />

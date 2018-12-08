@@ -117,6 +117,7 @@ namespace DataSmith.Interface
                 return;            
 
             var dataSource = _dataSourceDal.GetModel(inputComboBox1.SelectedValue);
+            _dataProvider = dataSource.GetDataProvider();
             var dataBaseType = dataSource.GetDataBaseType();
             inputTextBox1.Text = string.Format(dataBaseType.DefaultQuerySql, _interfaces.ViewName);
             inputTextBox1.Tag = dataBaseType.DefaultQuerySql;
