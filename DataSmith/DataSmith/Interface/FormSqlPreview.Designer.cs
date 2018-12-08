@@ -114,6 +114,7 @@
             this.inputTextBox2.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputTextBox2.Name = "inputTextBox2";
             this.inputTextBox2.Width = 524;
+            this.inputTextBox2.TextChanged += new System.EventHandler(this.inputTextBox2_TextChanged);
             // 
             // inputLabel2
             // 

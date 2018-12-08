@@ -49,6 +49,7 @@ namespace DataSmith.Interface
             inputLabel3.Text = _interfaces.InterfaceName;
             inputTextBox2.Text = _interfaces.ViewName;
             inputTextBox1.Text = string.Format(dataBaseType.DefaultQuerySql, _interfaces.ViewName);
+            inputTextBox1.Tag = dataBaseType.DefaultQuerySql;
             inputComboBox1.SelectedValue = _interfaces.DataSourceID;
             inputComboBox2.SelectedValue = _interfaces.TargetDataSourceID;
         }
@@ -118,6 +119,15 @@ namespace DataSmith.Interface
             var dataSource = _dataSourceDal.GetModel(inputComboBox1.SelectedValue);
             var dataBaseType = dataSource.GetDataBaseType();
             inputTextBox1.Text = string.Format(dataBaseType.DefaultQuerySql, _interfaces.ViewName);
+            inputTextBox1.Tag = dataBaseType.DefaultQuerySql;
+        }
+
+        private void inputTextBox2_TextChanged(object sender, EventArgs e)
+        {
+            if (inputTextBox1.Tag != null)
+            {
+                inputTextBox1.Text = string.Format(inputTextBox1.Tag.ToString(), inputTextBox2.Text);
+            }
         }
     }
 }

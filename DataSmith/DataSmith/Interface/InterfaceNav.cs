@@ -38,6 +38,7 @@ namespace DataSmith.Interface
             foreach (var ic in ics)
             {
                 var inputGroupHeader = new InputGroupHeader();
+                inputGroupHeader.Font = new System.Drawing.Font("微软雅黑", 10F);
                 inputGroupHeader.Text = ic.ClassifyName;
                 c1InputPanel1.Items.Add(inputGroupHeader);
 
