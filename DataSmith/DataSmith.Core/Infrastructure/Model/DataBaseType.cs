@@ -11,6 +11,7 @@ namespace DataSmith.Core.Infrastructure.Model
         public String DBTypeName { get; set; }
         public Int64 DefaultPort { get; set; }
         public String DefaultConnStr { get; set; }
+        public String DefaultQuerySql { get; set; }
 
     }
 }

@@ -27,10 +27,16 @@ namespace DataSmith.Interface
         private void Form2_Load(object sender, EventArgs e)
         {
             //绑定数据源下拉框
-            var models = _dataSourceDal.GetModels();
+            var models = _dataSourceDal.GetModels(where: "SourceType=1");
             inputComboBox1.DisplayMember = "SourceName";
             inputComboBox1.ValueMember = "ID";
             inputComboBox1.DataSource = models;
+
+            //绑定目标数据源下拉框
+            models = _dataSourceDal.GetModels(where: "SourceType=2");
+            inputComboBox2.DisplayMember = "SourceName";
+            inputComboBox2.ValueMember = "ID";
+            inputComboBox2.DataSource = models;
 
         }
 
@@ -39,10 +45,12 @@ namespace DataSmith.Interface
             _interfaces = _interfacesDal.GetModel(InterfaceId);
             var dataSource = _interfaces.GetDataSource();
             _dataProvider = dataSource.GetDataProvider();
+            var dataBaseType = dataSource.GetDataBaseType();
             inputLabel3.Text = _interfaces.InterfaceName;
             inputTextBox2.Text = _interfaces.ViewName;
-            inputTextBox1.Text = $"select * from {_interfaces.ViewName}";
+            inputTextBox1.Text = string.Format(dataBaseType.DefaultQuerySql, _interfaces.ViewName);
             inputComboBox1.SelectedValue = _interfaces.DataSourceID;
+            inputComboBox2.SelectedValue = _interfaces.TargetDataSourceID;
         }
 
         private void inputButton1_Click(object sender, EventArgs e)
@@ -77,6 +85,13 @@ namespace DataSmith.Interface
 
             using (var context = _viewFieldSetDal.Db.UseTransaction(true))
             {
+                //保存接口信息
+                _interfaces.ViewName = inputTextBox2.Text;
+                _interfaces.DataSourceID = Convert.ToInt64(inputComboBox1.SelectedValue);
+                _interfaces.TargetDataSourceID = Convert.ToInt64(inputComboBox2.SelectedValue);
+                _interfacesDal.Update(_interfaces, x => x.ID);
+
+                //保存字段列表
                 _viewFieldSetDal.Db.Sql("delete from ViewFieldSet where InterFaceID = @0 ",
                     _interfaces.ID).Execute();
                 for (int i = 0; i < dt.Columns.Count; i++)
@@ -91,6 +106,8 @@ namespace DataSmith.Interface
 
                 context.Commit();
             }
+
+            MessageBox.Show("保存成功!");
         }
     }
 }

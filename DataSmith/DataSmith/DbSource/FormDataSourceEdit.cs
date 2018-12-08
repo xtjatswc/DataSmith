@@ -62,7 +62,10 @@ namespace DataSmith.DbSource
                 inputTextBoxUserID.Text = _dataSource.UserID;
                 inputTextBoxPassword.Text = _dataSource.Password;
                 inputTextBoxConnStr.Text = _dataSource.DBConnStr;
-                inputButtonDelete.Visibility = Visibility.Visible;
+                if (_dataSource.SourceType == 2)
+                    inputButtonDelete.Visibility = Visibility.Hidden;
+                else
+                    inputButtonDelete.Visibility = Visibility.Visible;
             }
 
             inputComboBox1_ChangeCommitted(inputComboBox1, null);

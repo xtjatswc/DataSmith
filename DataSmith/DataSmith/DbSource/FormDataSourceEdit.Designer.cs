@@ -50,9 +50,11 @@
             this.inputTextBoxPassword = new C1.Win.C1InputPanel.InputTextBox();
             this.inputLabel2 = new C1.Win.C1InputPanel.InputLabel();
             this.inputTextBoxConnStr = new C1.Win.C1InputPanel.InputTextBox();
+            this.inputButtonDelete = new C1.Win.C1InputPanel.InputButton();
             this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
             this.inputButton2 = new C1.Win.C1InputPanel.InputButton();
-            this.inputButtonDelete = new C1.Win.C1InputPanel.InputButton();
+            this.inputLabel12 = new C1.Win.C1InputPanel.InputLabel();
+            this.inputLabel13 = new C1.Win.C1InputPanel.InputLabel();
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,6 +64,7 @@
             this.c1InputPanel1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.c1InputPanel1.Items.Add(this.inputLabel3);
             this.c1InputPanel1.Items.Add(this.inputTextBox1);
+            this.c1InputPanel1.Items.Add(this.inputLabel12);
             this.c1InputPanel1.Items.Add(this.inputLabel1);
             this.c1InputPanel1.Items.Add(this.inputComboBox1);
             this.c1InputPanel1.Items.Add(this.inputLabel6);
@@ -81,6 +84,7 @@
             this.c1InputPanel1.Items.Add(this.inputTextBoxPassword);
             this.c1InputPanel1.Items.Add(this.inputLabel2);
             this.c1InputPanel1.Items.Add(this.inputTextBoxConnStr);
+            this.c1InputPanel1.Items.Add(this.inputLabel13);
             this.c1InputPanel1.Items.Add(this.inputButtonDelete);
             this.c1InputPanel1.Items.Add(this.inputButton1);
             this.c1InputPanel1.Items.Add(this.inputButton2);
@@ -102,6 +106,7 @@
             // 
             // inputTextBox1
             // 
+            this.inputTextBox1.Break = C1.Win.C1InputPanel.BreakType.None;
             this.inputTextBox1.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputTextBox1.Name = "inputTextBox1";
             this.inputTextBox1.Width = 230;
@@ -250,12 +255,24 @@
             // 
             // inputTextBoxConnStr
             // 
+            this.inputTextBoxConnStr.Break = C1.Win.C1InputPanel.BreakType.None;
             this.inputTextBoxConnStr.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputTextBoxConnStr.Height = 132;
             this.inputTextBoxConnStr.Multiline = true;
             this.inputTextBoxConnStr.Name = "inputTextBoxConnStr";
             this.inputTextBoxConnStr.VerticalAlign = C1.Win.C1InputPanel.InputContentAlignment.Spread;
             this.inputTextBoxConnStr.Width = 570;
+            // 
+            // inputButtonDelete
+            // 
+            this.inputButtonDelete.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.inputButtonDelete.ElementWidth = 90;
+            this.inputButtonDelete.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputButtonDelete.Name = "inputButtonDelete";
+            this.inputButtonDelete.Padding = new System.Windows.Forms.Padding(0, 0, 64, 0);
+            this.inputButtonDelete.TabStop = false;
+            this.inputButtonDelete.Text = "删除";
+            this.inputButtonDelete.Click += new System.EventHandler(this.inputButtonDelete_Click);
             // 
             // inputButton1
             // 
@@ -264,6 +281,7 @@
             this.inputButton1.Name = "inputButton1";
             this.inputButton1.TabStop = false;
             this.inputButton1.Text = "测试连接";
+            this.inputButton1.Width = 90;
             this.inputButton1.Click += new System.EventHandler(this.inputButton1_Click);
             // 
             // inputButton2
@@ -272,17 +290,24 @@
             this.inputButton2.Name = "inputButton2";
             this.inputButton2.TabStop = false;
             this.inputButton2.Text = "保存";
+            this.inputButton2.Width = 90;
             this.inputButton2.Click += new System.EventHandler(this.inputButton2_Click);
             // 
-            // inputButtonDelete
+            // inputLabel12
             // 
-            this.inputButtonDelete.Break = C1.Win.C1InputPanel.BreakType.None;
-            this.inputButtonDelete.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.inputButtonDelete.Name = "inputButtonDelete";
-            this.inputButtonDelete.Padding = new System.Windows.Forms.Padding(0, 0, 64, 0);
-            this.inputButtonDelete.TabStop = false;
-            this.inputButtonDelete.Text = "删除";
-            this.inputButtonDelete.Click += new System.EventHandler(this.inputButtonDelete_Click);
+            this.inputLabel12.Break = C1.Win.C1InputPanel.BreakType.Row;
+            this.inputLabel12.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputLabel12.ForeColor = System.Drawing.Color.Blue;
+            this.inputLabel12.Name = "inputLabel12";
+            this.inputLabel12.Text = "备注：起一个直观的名字，如：HIS数据库、LIS数据库……";
+            // 
+            // inputLabel13
+            // 
+            this.inputLabel13.Break = C1.Win.C1InputPanel.BreakType.Row;
+            this.inputLabel13.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputLabel13.ForeColor = System.Drawing.Color.Blue;
+            this.inputLabel13.Name = "inputLabel13";
+            this.inputLabel13.Text = "备注：自动生成，可以不填写";
             // 
             // FormDataSourceEdit
             // 
@@ -326,6 +351,8 @@
         private C1.Win.C1InputPanel.InputLabel inputLabel10;
         private C1.Win.C1InputPanel.InputLabel inputLabel11;
         private C1.Win.C1InputPanel.InputButton inputButtonDelete;
+        private C1.Win.C1InputPanel.InputLabel inputLabel12;
+        private C1.Win.C1InputPanel.InputLabel inputLabel13;
     }
 }
 

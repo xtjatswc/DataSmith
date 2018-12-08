@@ -45,6 +45,7 @@ namespace DataSmith.Interface
                 foreach (var model in interfaces)
                 {
                     var inputButton = new InputButton();
+                    inputButton.Font = new System.Drawing.Font("微软雅黑", 10F);
                     inputButton.Text = model.InterfaceName;
                     inputButton.Width = c1InputPanel1.Width - 20;
                     inputButton.Click += InputButton_Click;
