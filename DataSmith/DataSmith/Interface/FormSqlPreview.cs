@@ -109,5 +109,15 @@ namespace DataSmith.Interface
 
             MessageBox.Show("保存成功!");
         }
+
+        private void inputComboBox1_ChangeCommitted(object sender, EventArgs e)
+        {
+            if(_interfaces == null || inputComboBox1.SelectedItem == null)
+                return;            
+
+            var dataSource = _dataSourceDal.GetModel(inputComboBox1.SelectedValue);
+            var dataBaseType = dataSource.GetDataBaseType();
+            inputTextBox1.Text = string.Format(dataBaseType.DefaultQuerySql, _interfaces.ViewName);
+        }
     }
 }

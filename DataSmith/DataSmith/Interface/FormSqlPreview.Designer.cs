@@ -99,6 +99,7 @@
             this.inputComboBox1.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputComboBox1.Name = "inputComboBox1";
             this.inputComboBox1.Width = 218;
+            this.inputComboBox1.ChangeCommitted += new System.EventHandler(this.inputComboBox1_ChangeCommitted);
             // 
             // inputLabel5
             // 
