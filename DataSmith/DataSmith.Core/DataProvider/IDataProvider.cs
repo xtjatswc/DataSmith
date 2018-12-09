@@ -31,6 +31,7 @@ namespace DataSmith.Core.DataProvider
         MySQL = 2,
         Sqlite = 3,
         DB2 = 4,
-        PostgreSQL = 5
+        PostgreSQL = 5,
+        SqlServerCompact = 6
     }
 }
