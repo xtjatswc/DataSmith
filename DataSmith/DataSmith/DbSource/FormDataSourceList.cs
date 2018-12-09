@@ -35,7 +35,7 @@ namespace DataSmith.DbSource
             var source = models.Where(o => o.SourceType == 1).ToList();
             InputGroupHeader groupHeader = new InputGroupHeader();
             groupHeader.Font = new System.Drawing.Font("微软雅黑", 10F);
-            groupHeader.Text = "[源]";
+            groupHeader.Text = "[数据源]";
             c1InputPanel1.Items.Add(groupHeader);
             LoadItems(source);
 
@@ -44,7 +44,7 @@ namespace DataSmith.DbSource
             groupHeader = new InputGroupHeader();
             groupHeader.Font = new System.Drawing.Font("微软雅黑", 10F);
             groupHeader.Padding = new Padding(2, 15, 2, 2);
-            groupHeader.Text = "[目标]";
+            groupHeader.Text = "[目标数据源]";
             c1InputPanel1.Items.Add(groupHeader);
             LoadItems(target);
 

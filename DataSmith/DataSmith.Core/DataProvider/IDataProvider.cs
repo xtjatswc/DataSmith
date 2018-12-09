@@ -30,6 +30,7 @@ namespace DataSmith.Core.DataProvider
         Oracle = 1,
         MySQL = 2,
         Sqlite = 3,
-        DB2 = 4
+        DB2 = 4,
+        PostgreSQL = 5
     }
 }

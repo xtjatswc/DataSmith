@@ -27,13 +27,13 @@ namespace DataSmith.Interface
         private void Form2_Load(object sender, EventArgs e)
         {
             //绑定数据源下拉框
-            var models = _dataSourceDal.GetModels(where: "SourceType=1");
+            var models = _dataSourceDal.GetModels(where: "SourceType=1 and IsDeleted = 0");
             inputComboBox1.DisplayMember = "SourceName";
             inputComboBox1.ValueMember = "ID";
             inputComboBox1.DataSource = models;
 
             //绑定目标数据源下拉框
-            models = _dataSourceDal.GetModels(where: "SourceType=2");
+            models = _dataSourceDal.GetModels(where: "SourceType=2 and IsDeleted = 0");
             inputComboBox2.DisplayMember = "SourceName";
             inputComboBox2.ValueMember = "ID";
             inputComboBox2.DataSource = models;
