@@ -37,7 +37,7 @@ namespace DataSmith.CNIS.Plugin.Setting
 		void InputButton1Click(object sender, EventArgs e)
 		{			
 			FormCmd frm = new FormCmd() {
-				Commond = Host.ExePath,
+				Commond = "\"" + Host.ExePath + "\"",
 				Parameter = string.Format("{0} {1} {2}", TaskSchedulerID, inputDatePicker1.Text, inputDatePicker2.Text),
 				AutoExec = true
 			};

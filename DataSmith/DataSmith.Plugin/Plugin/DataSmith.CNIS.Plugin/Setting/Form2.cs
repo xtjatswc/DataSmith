@@ -41,7 +41,7 @@ namespace DataSmith.CNIS.Plugin.Setting
 			}
 			
 			FormCmd frm = new FormCmd() {
-				Commond = Host.ExePath,
+				Commond = "\"" + Host.ExePath + "\"",
 				Parameter = string.Format("{0} {1}", TaskSchedulerID, inputNumericBox1.Text),
 				AutoExec = true
 			};
