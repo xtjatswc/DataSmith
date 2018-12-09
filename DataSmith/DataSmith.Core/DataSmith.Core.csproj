@@ -111,6 +111,7 @@
     <Compile Include="DataProvider\DB2Provider.cs" />
     <Compile Include="DataProvider\PostgreSQLProvider.cs" />
     <Compile Include="DataProvider\MySQLProvider.cs" />
+    <Compile Include="DataProvider\AccessProvider.cs" />
     <Compile Include="DataProvider\SqlServerCompact.cs" />
     <Compile Include="DataProvider\SqlServerProvider.cs" />
     <Compile Include="DataProvider\OracleProvider.cs" />

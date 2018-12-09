@@ -204,6 +204,7 @@ namespace DataSmith.DbSource
                         break;
                     case DBType.Sqlite:
                     case DBType.SqlServerCompact:
+                    case DBType.Access:
                         //IP
                         inputLabel6.Visibility = Visibility.Collapsed;
                         inputTextBoxIP.Visibility = Visibility.Collapsed;
@@ -257,6 +258,7 @@ namespace DataSmith.DbSource
                         break;
                     case DBType.Sqlite:
                     case DBType.SqlServerCompact:
+                    case DBType.Access:
                         inputTextBoxConnStr.Text = string.Format(dataBaseType.DefaultConnStr,
                             inputTextBoxDBName.Text,
                             string.IsNullOrWhiteSpace(inputTextBoxPassword.Text) ? "" : $"Password={inputTextBoxPassword.Text};"
