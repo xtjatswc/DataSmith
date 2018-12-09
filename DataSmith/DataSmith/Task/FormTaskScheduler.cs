@@ -8,6 +8,7 @@ using DataSmith.Util;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 
 namespace DataSmith.Task
@@ -31,6 +32,7 @@ namespace DataSmith.Task
             foreach (var ic in ics)
             {
                 var inputGroupHeader = new InputGroupHeader();
+                inputGroupHeader.Font = new System.Drawing.Font("微软雅黑", 10F);
                 inputGroupHeader.Text = ic.ClassifyName;
                 c1InputPanel1.Items.Add(inputGroupHeader);
 
@@ -38,6 +40,7 @@ namespace DataSmith.Task
                 foreach (var model in interfaces)
                 {
                     var inputButton = new InputButton();
+                    inputButton.Font = new System.Drawing.Font("微软雅黑", 10F);
                     inputButton.Text = model.TaskName;
                     inputButton.Width = c1InputPanel1.Width - 20;
                     inputButton.Click += InputButton_Click; ;
@@ -53,6 +56,17 @@ namespace DataSmith.Task
             TaskScheduler taskScheduler = (sender as InputButton).Tag as TaskScheduler;
             var setting = _iSettings.Where(o => o.TaskSchedulerID == taskScheduler.ID).First();
             panel1.ShowForm(setting.FormInstance);
+        }
+
+        private void inputButton1_Click(object sender, EventArgs e)
+        {
+            Process process = new Process();
+            ProcessStartInfo processInfo = new ProcessStartInfo
+            {
+                FileName = "taskschd.msc"
+            };
+            process.StartInfo = processInfo;
+            process.Start();
         }
     }
 }
