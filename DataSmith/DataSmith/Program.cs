@@ -5,8 +5,10 @@
  */
 
 using System;
+using System.Text;
 using System.Windows.Forms;
 using DataSmith.Core.Context;
+using DataSmith.Core.Util;
 
 namespace DataSmith
 {
@@ -21,6 +23,8 @@ namespace DataSmith
         [STAThread]
         private static void Main(string[] args)
         {
+            ExceptionUtil.SetUnhandledExceptionHandler();
+
             if (args.Length > 0)
             {
                 Host.Args = args;

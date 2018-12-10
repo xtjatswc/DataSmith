@@ -17,7 +17,12 @@ namespace DataSmith
     {
         public static void Execute()
         {
-            int InterfaceID = 1;
+            //根据任务ID获取任务属性
+            int taskSchedulerID = Convert.ToInt32(Host.Args[0]);
+            var taskSchedulerDal = Host.GetService<TaskSchedulerDal>();
+            var taskScheduler = taskSchedulerDal.GetModel(taskSchedulerID);
+
+            string InterfaceID = taskScheduler.InterfaceID;
 
             //获取视图名称
             var ifDal = Host.GetService<InterfacesDal>();
@@ -59,8 +64,9 @@ namespace DataSmith
             joinContext.SourceDataProvider = iDataProvider;
             joinContext.TargetDataProvider = iTargetDataProvider;
 
-            var iDataTransfer = Host.GetServices<IDataTransfer>().ToList();
-            iDataTransfer[0].DataTransfer(joinContext);
+            //根据插件ID获取对应的插件并调用
+            var iDataTransfer = Host.GetServices<ITransferPlugin>().First(o => o.PluginID == taskScheduler.PluginID);
+            iDataTransfer.DataTransfer(joinContext);
 
             System.Diagnostics.Process.GetCurrentProcess().Kill();
 

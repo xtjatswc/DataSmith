@@ -15,7 +15,7 @@ namespace DataSmith.Task
 {
     public partial class FormTaskScheduler : BaseForm
     {
-        readonly IEnumerable<ISetting> _iSettings = Host.GetServices<ISetting>();
+        readonly IEnumerable<IPluginSetting> _iSettings = Host.GetServices<IPluginSetting>();
 
         public FormTaskScheduler()
         {

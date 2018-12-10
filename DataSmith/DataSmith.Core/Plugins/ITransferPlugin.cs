@@ -7,8 +7,9 @@ using DataSmith.Core.Context;
 
 namespace DataSmith.Core.Plugins
 {
-    public interface IDataTransfer
+    public interface ITransferPlugin
     {
+        string PluginID { get; }
         void DataTransfer(JoinContext context);
     }
 }

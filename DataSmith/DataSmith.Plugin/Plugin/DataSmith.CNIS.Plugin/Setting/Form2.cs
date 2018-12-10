@@ -15,7 +15,7 @@ namespace DataSmith.CNIS.Plugin.Setting
 	/// <summary>
 	/// Description of Form2.
 	/// </summary>
-	public partial class Form2 : Form,ISetting
+	public partial class Form2 : Form,IPluginSetting
 	{
 		public Int64 TaskSchedulerID { get { return 2; } }
 		public Form FormInstance{ get { return this; } }

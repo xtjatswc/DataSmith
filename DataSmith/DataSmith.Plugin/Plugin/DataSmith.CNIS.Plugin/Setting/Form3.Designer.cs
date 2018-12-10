@@ -106,6 +106,7 @@ namespace DataSmith.CNIS.Plugin.Setting
 			// inputLabel2
 			// 
 			this.inputLabel2.Font = new System.Drawing.Font("微软雅黑", 10F);
+			this.inputLabel2.ForeColor = System.Drawing.Color.Blue;
 			this.inputLabel2.Name = "inputLabel2";
 			this.inputLabel2.Text = "备注：导入时间范围内入院或出院的患者。";
 			// 

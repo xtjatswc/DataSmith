@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace DataSmith.Core.Util
 {
-    public class WebUtility
+    public class WebUtil
     {
         /// <summary>
         ///  请求数据

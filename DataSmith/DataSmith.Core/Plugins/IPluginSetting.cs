@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace DataSmith.Core.Plugins
 {
-    public interface ISetting
+    public interface IPluginSetting
     {
         Int64 TaskSchedulerID { get; }
         Form FormInstance { get; }

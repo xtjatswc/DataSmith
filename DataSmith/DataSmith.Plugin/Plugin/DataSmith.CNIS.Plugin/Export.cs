@@ -17,16 +17,17 @@ namespace DataSmith.CNIS.Plugin
 	/// <summary>
 	/// Description of MyClass.
 	/// </summary>
-	public class Export : IDataTransfer
+	public class Export : ITransferPlugin
 	{
+		public string PluginID{ get { return "{DA3C382E-2E32-4E5E-8E56-75540B8E7283}"; } }
 		public static JoinContext context;
 		
-        public void DataTransfer(JoinContext context)
-        {
-        	Export.context = context;
-        	var args = context.Args;
+		public void DataTransfer(JoinContext context)
+		{
+			Export.context = context;
+			var args = context.Args;
         	
-        	try {
+			try {
 				string taskSchedulerID = args[0];
 				IImp absImp = null;
 				string zyh = "";
@@ -40,11 +41,11 @@ namespace DataSmith.CNIS.Plugin
 					case "2":      
 						var nearDays = int.Parse(args[1]);
 						Console.WriteLine("2.在院患者 -> 导入最近" + nearDays + "天入院或出院的患者>>>");
-						absImp = new ImpPatient(){nearDays=nearDays};
+						absImp = new ImpPatient(){ nearDays = nearDays };
 						break;
 					case "3":                        
 						Console.WriteLine("3.在院患者 -> 导入时间范围内入院或出院的患者>>>");
-						absImp = new ImpPatient(){
+						absImp = new ImpPatient() {
 							inBeginDate = DateTime.Parse(args[1]),
 							inEndDate = DateTime.Parse(args[2]),
 						};
@@ -73,11 +74,11 @@ namespace DataSmith.CNIS.Plugin
 					case "9":
 						Console.WriteLine("9.导单个患者会诊>>>");
 						zyh = args[1];
-						absImp = new ImpConsultation(){zyh = zyh};
+						absImp = new ImpConsultation(){ zyh = zyh };
 						break;
 					case "10":
 						Console.WriteLine("10.批量导患者会诊>>>");
-                        absImp = new ImpConsultation();
+						absImp = new ImpConsultation();
 						break;
 					case "11":                        
 						Console.WriteLine("11.导在院患者的his肠内医嘱信息>>>");
@@ -91,6 +92,6 @@ namespace DataSmith.CNIS.Plugin
 				Console.WriteLine(ExceptionUtil.getInnerException(ex));
 				Thread.Sleep(10000);
 			}
-        }
+		}
 	}
 }

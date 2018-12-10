@@ -72,7 +72,7 @@ namespace DataSmith.Core.Config
                     o => o.BaseType != null
                          && (
                              typeof(Form).IsAssignableFrom(o.BaseType) ||
-                             typeof(IDataTransfer).IsAssignableFrom(o)
+                             typeof(ITransferPlugin).IsAssignableFrom(o)
                          )
                          ).ToArray();
                 //.AsImplementedInterfaces().PropertiesAutowired()

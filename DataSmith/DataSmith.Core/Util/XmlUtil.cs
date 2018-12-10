@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace DataSmith.Core.Util
 {
-    public class XmlUtility
+    public class XmlUtil
 	{
 		/// <summary>
 		/// 将自定义对象序列化为XML字符串

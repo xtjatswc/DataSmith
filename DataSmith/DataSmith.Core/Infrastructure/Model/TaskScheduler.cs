@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DataSmith.Core.Infrastructure.Base;
 
 namespace DataSmith.Core.Infrastructure.Model
 {
-    public class TaskScheduler
+    public class TaskScheduler : BaseModel
     {
-        public Int64 ID { get; set; }
+        public string PluginID { get; set; }
         public Int64 ClassifyID { get; set; }
         public string TaskName { get; set; }
         public string InterfaceID { get; set; }

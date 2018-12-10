@@ -55,9 +55,9 @@ namespace DataSmith.CNIS.Plugin.Setting
 			this.c1InputPanel1.Items.Add(this.inputButton1);
 			this.c1InputPanel1.Items.Add(this.inputLabel2);
 			this.c1InputPanel1.Location = new System.Drawing.Point(0, 0);
-			this.c1InputPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.c1InputPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.c1InputPanel1.Name = "c1InputPanel1";
-			this.c1InputPanel1.Size = new System.Drawing.Size(487, 494);
+			this.c1InputPanel1.Size = new System.Drawing.Size(649, 618);
 			this.c1InputPanel1.TabIndex = 1;
 			this.c1InputPanel1.VisualStyle = C1.Win.C1InputPanel.VisualStyle.Office2007Blue;
 			// 
@@ -92,16 +92,17 @@ namespace DataSmith.CNIS.Plugin.Setting
 			// inputLabel2
 			// 
 			this.inputLabel2.Font = new System.Drawing.Font("微软雅黑", 10F);
+			this.inputLabel2.ForeColor = System.Drawing.Color.Blue;
 			this.inputLabel2.Name = "inputLabel2";
 			this.inputLabel2.Text = "备注：导入最近几分钟就诊的患者。";
 			// 
 			// Form4
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(487, 494);
+			this.ClientSize = new System.Drawing.Size(649, 618);
 			this.Controls.Add(this.c1InputPanel1);
-			this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.Name = "Form4";
 			this.Text = "Form2";
 			((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).EndInit();

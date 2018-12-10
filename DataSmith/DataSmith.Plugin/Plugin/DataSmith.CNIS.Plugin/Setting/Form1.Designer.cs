@@ -66,6 +66,7 @@ namespace DataSmith.CNIS.Plugin.Setting
 			// inputTextBox1
 			// 
 			this.inputTextBox1.Break = C1.Win.C1InputPanel.BreakType.None;
+			this.inputTextBox1.Font = new System.Drawing.Font("微软雅黑", 10F);
 			this.inputTextBox1.Name = "inputTextBox1";
 			this.inputTextBox1.Width = 185;
 			// 
