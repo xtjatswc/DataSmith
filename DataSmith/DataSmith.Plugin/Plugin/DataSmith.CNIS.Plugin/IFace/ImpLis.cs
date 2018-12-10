@@ -14,21 +14,21 @@ namespace DataSmith.CNIS.Plugin.IFace
 	/// </summary>
 	class ImpLis : AbsImpLisBase
 	{
-		string zyh;
+		string bahm;
 		
 		public ImpLis()
 		{
 			
 		}
 		
-		public ImpLis(string zyh)
+		public ImpLis(string bahm)
 		{
-			this.zyh = zyh;           
+			this.bahm = bahm;           
 		}
 
 		public override void Import()
 		{
-			Import(zyh);
+			Import(bahm);
 			//DeleteLis();
 
 		}
@@ -37,9 +37,8 @@ namespace DataSmith.CNIS.Plugin.IFace
 		{
 			int ret = 0;
 			string sql;
-			object obj;
 
-			Console.WriteLine("正在导入检验数据，住院号：" + zyh);
+			Console.WriteLine("正在导入检验数据，病案号：" + zyh);
 
 			//从Lis取检验数据
 			sql = "select *, ZYH LaboratoryIndexResultNo from V_CNIS_TestResult_i where bahm = '" + zyh + "'";
@@ -74,11 +73,10 @@ namespace DataSmith.CNIS.Plugin.IFace
 						bahm = zyh;
 						sql = string.Format(sqlGetDBKey, bahm);
 						Console.WriteLine("query patient");
-						obj = context.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
-						PatientHospitalize_DBKey = obj == null ? "" : obj.ToString();
+						PatientHospitalize_DBKey = context.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
 					}
 
-					if (PatientHospitalize_DBKey == "")
+					if (PatientHospitalize_DBKey == null)
 						continue;
 
 					//保存检验数据主表信息

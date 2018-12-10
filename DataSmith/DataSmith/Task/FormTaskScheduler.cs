@@ -54,7 +54,13 @@ namespace DataSmith.Task
         private void InputButton_Click(object sender, EventArgs e)
         {
             TaskScheduler taskScheduler = (sender as InputButton).Tag as TaskScheduler;
-            var setting = _iSettings.Where(o => o.TaskSchedulerID == taskScheduler.ID).First();
+            var setting = _iSettings.FirstOrDefault(o => o.TaskSchedulerID == taskScheduler.ID);
+            if (setting == null)
+            {
+                setting = _iSettings.FirstOrDefault(o => o.TaskSchedulerID == 0);
+                setting.FormInstance.Tag = taskScheduler;
+            }
+
             panel1.ShowForm(setting.FormInstance);
         }
 

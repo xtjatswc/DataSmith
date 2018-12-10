@@ -86,6 +86,7 @@ namespace DataSmith.CNIS.Plugin.Setting
 			this.inputButton1.Name = "inputButton1";
 			this.inputButton1.TabStop = false;
 			this.inputButton1.Text = "导入";
+			this.inputButton1.Width = 90;
 			this.inputButton1.Click += new System.EventHandler(this.InputButton1Click);
 			// 
 			// inputLabel2

@@ -5,17 +5,14 @@
  */
 namespace DataSmith.CNIS.Plugin.Setting
 {
-	partial class Form4
+	partial class Form0
 	{
 		/// <summary>
 		/// Designer variable used to keep track of non-visual components.
 		/// </summary>
 		private System.ComponentModel.IContainer components = null;
 		private C1.Win.C1InputPanel.C1InputPanel c1InputPanel1;
-		private C1.Win.C1InputPanel.InputLabel inputLabel1;
 		private C1.Win.C1InputPanel.InputButton inputButton1;
-		private C1.Win.C1InputPanel.InputNumericBox inputNumericBox1;
-		private C1.Win.C1InputPanel.InputLabel inputLabel2;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -39,10 +36,7 @@ namespace DataSmith.CNIS.Plugin.Setting
 		private void InitializeComponent()
 		{
 			this.c1InputPanel1 = new C1.Win.C1InputPanel.C1InputPanel();
-			this.inputLabel1 = new C1.Win.C1InputPanel.InputLabel();
-			this.inputNumericBox1 = new C1.Win.C1InputPanel.InputNumericBox();
 			this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
-			this.inputLabel2 = new C1.Win.C1InputPanel.InputLabel();
 			((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -50,36 +44,12 @@ namespace DataSmith.CNIS.Plugin.Setting
 			// 
 			this.c1InputPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.c1InputPanel1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
-			this.c1InputPanel1.Items.Add(this.inputLabel1);
-			this.c1InputPanel1.Items.Add(this.inputNumericBox1);
 			this.c1InputPanel1.Items.Add(this.inputButton1);
-			this.c1InputPanel1.Items.Add(this.inputLabel2);
 			this.c1InputPanel1.Location = new System.Drawing.Point(0, 0);
-			this.c1InputPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.c1InputPanel1.Name = "c1InputPanel1";
 			this.c1InputPanel1.Size = new System.Drawing.Size(649, 618);
 			this.c1InputPanel1.TabIndex = 1;
 			this.c1InputPanel1.VisualStyle = C1.Win.C1InputPanel.VisualStyle.Office2007Blue;
-			// 
-			// inputLabel1
-			// 
-			this.inputLabel1.Font = new System.Drawing.Font("微软雅黑", 10F);
-			this.inputLabel1.Name = "inputLabel1";
-			this.inputLabel1.Text = "最近几分钟？";
-			// 
-			// inputNumericBox1
-			// 
-			this.inputNumericBox1.Break = C1.Win.C1InputPanel.BreakType.None;
-			this.inputNumericBox1.DecimalPlaces = 0;
-			this.inputNumericBox1.Font = new System.Drawing.Font("微软雅黑", 10F);
-			this.inputNumericBox1.Format = "n";
-			this.inputNumericBox1.Name = "inputNumericBox1";
-			this.inputNumericBox1.OutOfRangeErrorText = "{0}超出允许范围:[{1}，{2}]";
-			this.inputNumericBox1.Value = new decimal(new int[] {
-			5,
-			0,
-			0,
-			0});
 			// 
 			// inputButton1
 			// 
@@ -90,22 +60,14 @@ namespace DataSmith.CNIS.Plugin.Setting
 			this.inputButton1.Width = 90;
 			this.inputButton1.Click += new System.EventHandler(this.InputButton1Click);
 			// 
-			// inputLabel2
-			// 
-			this.inputLabel2.Font = new System.Drawing.Font("微软雅黑", 10F);
-			this.inputLabel2.ForeColor = System.Drawing.Color.Blue;
-			this.inputLabel2.Name = "inputLabel2";
-			this.inputLabel2.Text = "备注：导入最近几分钟就诊的患者。";
-			// 
-			// Form4
+			// Form0
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(649, 618);
 			this.Controls.Add(this.c1InputPanel1);
-			this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.Name = "Form4";
-			this.Text = "Form4";
+			this.Name = "Form0";
+			this.Text = "Form0";
 			((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).EndInit();
 			this.ResumeLayout(false);
 

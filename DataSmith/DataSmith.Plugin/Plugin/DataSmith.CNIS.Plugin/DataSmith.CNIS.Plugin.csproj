@@ -34,7 +34,7 @@
     <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
     <StartAction>Program</StartAction>
     <StartProgram>..\..\..\bin\DataSmith.exe</StartProgram>
-    <StartArguments>1 201700330</StartArguments>
+    <StartArguments>7</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -92,6 +92,10 @@
     <Compile Include="IFace\ImpPatientSign.cs" />
     <Compile Include="Export.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Setting\Form0.cs" />
+    <Compile Include="Setting\Form0.Designer.cs">
+      <DependentUpon>Form0.cs</DependentUpon>
+    </Compile>
     <Compile Include="Setting\Form1.cs" />
     <Compile Include="Setting\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -108,6 +112,10 @@
     <Compile Include="Setting\Form4.Designer.cs">
       <DependentUpon>Form4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Setting\Form5.cs" />
+    <Compile Include="Setting\Form5.Designer.cs">
+      <DependentUpon>Form5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Util\ExceptionUtil.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +126,9 @@
     <Folder Include="Setting" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Setting\Form0.resx">
+      <DependentUpon>Form0.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Setting\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -129,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Setting\Form4.resx">
       <DependentUpon>Form4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setting\Form5.resx">
+      <DependentUpon>Form5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
