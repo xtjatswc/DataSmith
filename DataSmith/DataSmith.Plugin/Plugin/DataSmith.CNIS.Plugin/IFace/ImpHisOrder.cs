@@ -30,7 +30,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 				sql = @"select a.*,b.RYRQ,'' MedicinalType from V_CNIS_HISORDER a 
 inner join V_CNIS_ZYBRXX b on a.ZYH = b.ZYH 
 where b.CYPB = 0";
-				DataTable hisDt = context.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
+				DataTable hisDt = ifObj.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 				foreach (DataRow hisRow in hisDt.Rows) {
 					Import(hisRow);
 				}
@@ -46,7 +46,7 @@ inner join nutrientadvicedetail d on d.NutrientAdvice_DBKey = c.NutrientAdvice_D
 inner join recipeandproduct e on e.RecipeAndProduct_DBKey = d.RecipeAndProduct_DBKey
 inner join patientbasicinfo g on g.PATIENT_DBKEY = a.PATIENT_DBKEY
 where a.TherapyStatus <> 9";
-				DataTable cnisDt = context.TargetDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
+				DataTable cnisDt = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 				foreach (DataRow cnisRow in cnisDt.Rows) {
 					Import(cnisRow);
 				}
@@ -62,7 +62,7 @@ where a.TherapyStatus <> 9";
 			sql = @"update patienthospitalizebasicinfo a, v_cnis_hisorder b set a.HasHisOrder = 1 where a.HospitalizationNumber = b.ZYH;
 update v_cnis_hisorder a, v_cnis_hisorder_dict b set a.MedicinalType = b.MedicinalType where a.MedicinalNo = b.MedicinalNo and a.MedicinalType is not null
 ";
-			int i = context.TargetDataProvider.Db.Sql(sql).Execute();
+			int i = ifObj.TargetDataProvider.Db.Sql(sql).Execute();
 			
 		}
 		
@@ -75,7 +75,7 @@ update v_cnis_hisorder a, v_cnis_hisorder_dict b set a.MedicinalType = b.Medicin
 			string MedicinalType = row["MedicinalType"].ToString();
 						
 			string sql = "insert into v_cnis_hisorder(ZYH,PatientName,MedicinalNo,OrderText,MedicinalType) values(@ZYH,@PatientName,@MedicinalNo,@OrderText,@MedicinalType) on duplicate key update OrderText = values(OrderText);";
-			int ret = context.TargetDataProvider.Db.Sql(sql)
+			int ret = ifObj.TargetDataProvider.Db.Sql(sql)
 				.Parameter("ZYH", ZYH)
 				.Parameter("PatientName", PatientName)
 				.Parameter("MedicinalNo", MedicinalNo)

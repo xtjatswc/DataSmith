@@ -58,8 +58,8 @@ namespace DataSmith.Task
             if (setting == null)
             {
                 setting = _iSettings.FirstOrDefault(o => o.TaskSchedulerID == 0);
-                setting.FormInstance.Tag = taskScheduler;
             }
+            setting.SetTaskScheduler(taskScheduler);
 
             panel1.ShowForm(setting.FormInstance);
         }

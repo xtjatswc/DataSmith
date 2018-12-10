@@ -51,16 +51,16 @@ namespace DataSmith.CNIS.Plugin
 						};
 						break;
 					case "4":
-						Console.WriteLine("4.批量导最近门诊患者>>>");
+						Console.WriteLine("4.门诊患者 -> 导最近几分钟就诊的患者");
 						absImp = new ImpOPatient();
 						break;
 					case "5":
-						Console.WriteLine("5.导单个患者检验数据>>>");
+						Console.WriteLine("5.检验数据 -> 按病案号导单个患者检验数据");
 						zyh = args[1];
 						absImp = new ImpLis(zyh);
 						break;
 					case "6":
-						Console.WriteLine("6.增量导检验数据>>>");
+						Console.WriteLine("6.检验数据 -> 增量导检验数据");
 						absImp = new ImpLisNear();
 						break;
 					case "7":

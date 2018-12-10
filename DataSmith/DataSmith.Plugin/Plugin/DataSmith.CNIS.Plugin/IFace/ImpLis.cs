@@ -42,7 +42,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 
 			//从Lis取检验数据
 			sql = "select *, ZYH LaboratoryIndexResultNo from V_CNIS_TestResult_i where bahm = '" + zyh + "'";
-			DataTable dtLis = context.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
+			DataTable dtLis = ifObj.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 
 			if (dtLis.Rows.Count == 0)
 				return;
@@ -51,7 +51,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 			SortedDictionary<string, string> testItemDict = new SortedDictionary<string, string>();
 			sql = "select TestItemCode, TestItemDetail_DBKey from testitemdetail";
 			Console.WriteLine("query testitemdetail");
-			DataTable dt = context.TargetDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
+			DataTable dt = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 			foreach (DataRow row in dt.Rows) {
 				if (testItemDict.ContainsKey(row["TestItemCode"].ToString()))
 					continue;
@@ -73,7 +73,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 						bahm = zyh;
 						sql = string.Format(sqlGetDBKey, bahm);
 						Console.WriteLine("query patient");
-						PatientHospitalize_DBKey = context.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
+						PatientHospitalize_DBKey = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
 					}
 
 					if (PatientHospitalize_DBKey == null)
@@ -90,7 +90,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 						sql = "select count(*) cc from laboratoryindex where LaboratoryIndexResultNo = '" + LaboratoryIndexResultNo + "'";
 						Console.WriteLine("query laboratoryindex");
 
-						ret = context.TargetDataProvider.Db.Sql(sql).QuerySingle<int>();
+						ret = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<int>();
 
 						if (ret == 0) {
 							IsLabNoImport = false;
@@ -103,7 +103,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 
 							//WriteLogFile("D:\\LIS.txt", "插入检验单号前");
 
-							ret = context.TargetDataProvider.Db.Sql(sql)
+							ret = ifObj.TargetDataProvider.Db.Sql(sql)
 								.Parameter("ReportName", row["LabNo"].ToString())
 								.Parameter("LaboratoryIndex_DBKey", LaboratoryIndex_DBKey)
 								.Parameter("PatientHospitalize_DBKey", PatientHospitalize_DBKey)
@@ -152,7 +152,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 							sql = "INSERT INTO `testitemdetail` (`TestItemDetail_DBKey`, `TestMedium_DBKey`, `TestItemCode`, `TestItemName`, `TestItemUnit`, `TestItemMinValue`, `TestItemMaxValue`, `IsEnabled`) VALUES (@TestItemDetail_DBKey, 1, @TestItemCode, @TestItemName, @TestItemUnit, @TestItemMinValue, @TestItemMaxValue, '1');";
 
 							Console.WriteLine("insert testitemdetail");
-							ret = context.TargetDataProvider.Db.Sql(sql)
+							ret = ifObj.TargetDataProvider.Db.Sql(sql)
 								.Parameter("TestItemDetail_DBKey", TestItemDetail_DBKey)
 								.Parameter("TestItemCode", TestItemCode)
 								.Parameter("TestItemName", row["TestItemName"].ToString())
@@ -167,7 +167,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 						sql = "INSERT INTO `testresult` (`TestResult_DBKey`, `LaboratoryIndex_DBKey`, `TestItemDetail_DBKey`, `TestResultNo`, `TestItemCode`, `TestItemName`, `TestItemValue`, `TestItemUnit`, `TestItemMaxValue`, `TestItemMinValue`, `IsPositive`, `IsOverMax`, `IsOverMin`, `TestMedium_DBKey`, `CreateBy`, `CreateTime`, `CreateProgram`, `CreateIP`, `UpdateBy`, `UpdateTime`, `UpdateProgram`, `UpdateIP`) VALUES (@TestResult_DBKey, @LaboratoryIndex_DBKey, @TestItemDetail_DBKey, @TestResultNo, @TestItemCode, @TestItemName, @TestItemValue, @TestItemUnit, @TestItemMaxValue, @TestItemMinValue, @IsPositive, @IsOverMax, IsOverMin, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);";
 						Console.WriteLine("insert testresult");
 
-						ret = context.TargetDataProvider.Db.Sql(sql)
+						ret = ifObj.TargetDataProvider.Db.Sql(sql)
 							.Parameter("TestResult_DBKey", TestResult_DBKey)
 							.Parameter("LaboratoryIndex_DBKey", LaboratoryIndex_DBKey)
 							.Parameter("TestItemDetail_DBKey", TestItemDetail_DBKey)

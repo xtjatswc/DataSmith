@@ -29,7 +29,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 inner join diseaseicd10 c on a.Disease_DBKEY = c.Disease_DBKEY
  where a.InHospitalData > '" + DateTime.Now.AddDays(-nearDays).ToString("yyyy-MM-dd") + @"'
 order by a.InHospitalData desc";
-			DataTable dt = context.TargetDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
+			DataTable dt = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 			Console.WriteLine(" count >>>  " + dt.Rows.Count);
 			foreach (DataRow patient in dt.Rows) {
 				try {
@@ -64,7 +64,7 @@ order by a.InHospitalData desc";
 			string pastMedicalHistory = "";
 	
 			sql = "select * from  V_CNIS_SCREENING_BASIC where ZYH = '" + HospitalizationNumber + "'";
-			DataTable zsTable = context.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
+			DataTable zsTable = ifObj.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 			
 			if (zsTable.Rows.Count > 0) {
 				information1 = zsTable.Rows[0]["ChiefComplaint"].ToString();// Encoding.UTF8.GetString((byte[])zsTable.Rows[0]["ChiefComplaint"]);
@@ -85,7 +85,7 @@ order by a.InHospitalData desc";
 			string createtime3 = "";
 			try {
 				sql = "select * from  V_CNIS_SCREENING_DIAGNOSE where ZYH = '" + HospitalizationNumber + "'";
-				DataTable zdTable =context.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
+				DataTable zdTable =ifObj.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 				
 				foreach (DataRow zdRow in zdTable.Rows) {
 					//入院诊断
@@ -136,7 +136,7 @@ order by a.InHospitalData desc";
 			string height = "";
 			string weight = "";
 			sql = "select * from  V_CNIS_SCREENING_CHECKING where ZYH = '" + HospitalizationNumber + "'";
-			DataTable tgTable = context.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
+			DataTable tgTable = ifObj.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 
 			for (int i = 0; i < tgTable.Rows.Count; i++) {
 				height = patient["Height"].ToString();// tgTable.Rows[i]["Height"].ToString();
@@ -159,7 +159,7 @@ order by a.InHospitalData desc";
 			//病程记录
 			StringBuilder information4Builder = new StringBuilder();
 			sql = "select  * from V_CNIS_SCREENING_PROGRESSNOTE where ZYH = '" + HospitalizationNumber + "'";
-			DataTable bcTable = context.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
+			DataTable bcTable = ifObj.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 
 			for (int i = 0; i < bcTable.Rows.Count; i++) {
 				information4Builder.AppendLine("患者编号：" + bcTable.Rows[i]["BAHM"].ToString());
@@ -173,7 +173,7 @@ order by a.InHospitalData desc";
 	
 			//存入患者基本信息表
 			sql = "update patienthospitalizebasicinfo set ChiefComplaint=@ChiefComplaint, MedicalHistory=@MedicalHistory,PastMedicalHistory=@pastMedicalHistory,ClinicalDiagnosis=@ClinicalDiagnosis where HospitalizationNumber=@HospitalizationNumber";
-			int ret = context.TargetDataProvider.Db.Sql(sql)
+			int ret = ifObj.TargetDataProvider.Db.Sql(sql)
 				.Parameter("ChiefComplaint", information1)
 				.Parameter("MedicalHistory", information2)
 				.Parameter("PastMedicalHistory", pastMedicalHistory)
@@ -183,13 +183,13 @@ order by a.InHospitalData desc";
 	
 			//存入筛查表
 			sql = "select count(*) rt from ai_caseinformation where HospitalizationNumber = '" + HospitalizationNumber + "'";
-			int count = context.TargetDataProvider.Db.Sql(sql).QuerySingle<int>();
+			int count = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<int>();
 	
 			if (count == 0) {
 				//存入数据库
 				sql = "INSERT INTO `ai_caseinformation` (`PatientNo`, `HospitalizationNumber`, `InHospitalData`, `PatientName`, `Gender`, `DateOfBirth`, `information1`, `information2`, `information3`, `information4`, `information5`, `information6`, `information7`, `isRun`) VALUES (@PatientNo, @HospitalizationNumber, @InHospitalData, @PatientName, @Gender, @DateOfBirth, @information1, @information2, @information3, @information4, @information5, @information6, @information7, @isRun);";
 	
-				ret = context.TargetDataProvider.Db.Sql(sql)
+				ret = ifObj.TargetDataProvider.Db.Sql(sql)
 					.Parameter("PatientNo", PatientNo)
 					.Parameter("HospitalizationNumber", HospitalizationNumber)
 					.Parameter("InHospitalData", patient["InHospitalData"])
@@ -208,7 +208,7 @@ order by a.InHospitalData desc";
 			} else {
 				//执行修改
 				sql = "update ai_caseinformation set PatientNo=@PatientNo, HospitalizationNumber=@HospitalizationNumber, InHospitalData=@InHospitalData, PatientName=@PatientName, Gender=@Gender, DateOfBirth=@DateOfBirth, information1=@information1, information2=@information2, information3=@information3, information4=@information4, information5=@information5, information6=@information6, information7=@information7  where PatientNo=" + PatientNo;
-				ret = context.TargetDataProvider.Db.Sql(sql)
+				ret = ifObj.TargetDataProvider.Db.Sql(sql)
 					.Parameter("PatientNo", PatientNo)
 					.Parameter("HospitalizationNumber", patient["HospitalizationNumber"])
 					.Parameter("InHospitalData", patient["InHospitalData"])

@@ -23,7 +23,7 @@ FROM
 	laboratoryindex a 
 INNER JOIN testresult b on a.LaboratoryIndex_DBKey = b.LaboratoryIndex_DBKey
 WHERE a.TestTime2 < date_add(CURRENT_DATE(), interval -90 day);";
-			int ret = context.TargetDataProvider.Db.Sql(sql).Execute();
+			int ret = ifObj.TargetDataProvider.Db.Sql(sql).Execute();
 		}
 	}
 }

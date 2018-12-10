@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using DataSmith.Core.Plugins;
 using DataSmith.Core.Util;
 using DataSmith.Core.Context;
+using DataSmith.Core.Infrastructure.Model;
 
 namespace DataSmith.CNIS.Plugin.Setting
 {
@@ -30,6 +31,11 @@ namespace DataSmith.CNIS.Plugin.Setting
 			//
 			// TODO: Add constructor code after the InitializeComponent() call.
 			//
+		}
+		
+		public void SetTaskScheduler(TaskScheduler taskScheduler)
+		{
+			
 		}
 		
 		void InputButton1Click(object sender, EventArgs e)

@@ -14,37 +14,6 @@ namespace DataSmith.Core.Context
         //命令行参数
         public string[] Args { get; set; }
 
-        //接口模型
-        public Interfaces Interfaces { get; set; }
-
-        //查询字段拼接，select ... from 中间的部分
-        public string QueryFields { get; set; }
-
-        //字段模型
-        public Dictionary<string, FieldSet> FieldSets { get; set; }
-
-        //查询字段模型
-        public Dictionary<string, QueryParameter> QueryParameters { get; set; }
-
-        //数据源提供程序
-        public IDataProvider SourceDataProvider { get; set; }
-
-        //目标数据源提供程序
-        public IDataProvider TargetDataProvider { get; set; }
-
-        //根据接口字段名得到视图别名
-        public string GetFieldAlias(string fieldName)
-        {
-            if(FieldSets.ContainsKey(fieldName))
-                return FieldSets[fieldName].FieldAlias;
-
-            return "";
-        }
-
-        //得到代表true的字符串标识，如参数传入性别字段，返回“男”或“M”
-        public string GetTrue(string fieldName)
-        {
-            return FieldSets[fieldName].GetFieldProperties().Property2;
-        }
+        public Dictionary<Int64, InterfaceObj> IfDict { get; set; } = new Dictionary<Int64, InterfaceObj>(); 
     }
 }

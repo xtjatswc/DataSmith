@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using DataSmith.Core.Plugins;
 using DataSmith.Core.Util;
 using DataSmith.Core.Context;
+using DataSmith.Core.Infrastructure.Model;
 
 namespace DataSmith.CNIS.Plugin.Setting
 {
@@ -34,6 +35,11 @@ namespace DataSmith.CNIS.Plugin.Setting
 			inputDatePicker1.Value = DateTime.Now.AddDays(-3);
 		}
 		
+		public void SetTaskScheduler(TaskScheduler taskScheduler)
+		{
+			
+		}
+
 		void InputButton1Click(object sender, EventArgs e)
 		{			
 			FormCmd frm = new FormCmd() {

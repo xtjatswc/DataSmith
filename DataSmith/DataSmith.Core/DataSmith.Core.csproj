@@ -105,6 +105,7 @@
     <Compile Include="Config\AutofacConfig.cs" />
     <Compile Include="Config\LessConfig.cs" />
     <Compile Include="Context\Host.cs" />
+    <Compile Include="Context\InterfaceObj.cs" />
     <Compile Include="Context\JoinContext.cs" />
     <Compile Include="DataProvider\BaseDataProvider.cs" />
     <Compile Include="DataProvider\IDataProvider.cs" />

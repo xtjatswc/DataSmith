@@ -26,7 +26,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 				sql += " ZYH = '" + zyh + "'";
 			}
         	
-			DataTable dt = context.TargetDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
+			DataTable dt = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 			Console.WriteLine("共计：" + dt.Rows.Count + "条记录");
 
 			foreach (DataRow row in dt.Rows) {
@@ -56,7 +56,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 
 				string PatientHospitalize_DBKey = "";
 				string sql = "	select PatientHospitalize_DBKey from patienthospitalizebasicinfo where  HospitalizationNumber='" + ZYH + "';";
-				object obj = context.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
+				object obj = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
 				if (obj == null) {
 					return;
 				} else {
@@ -66,7 +66,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 				//申请科室
 				string ApplyDepartment_DBKey = "";
 				sql = "	select Department_DBKey from department where DepartmentCode='" + ApplyDepartmentCode + "';";
-				obj = context.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
+				obj = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
 				if (obj != null) {
 					ApplyDepartment_DBKey = obj.ToString();
 				}
@@ -74,7 +74,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 				//会诊科室
 				string ConsultationDepartment_DBKey = "";
 				sql = "	select Department_DBKey from department where DepartmentCode='" + ConsultationDepartmentCode + "';";
-				obj = context.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
+				obj = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
 				if (obj != null) {
 					ConsultationDepartment_DBKey = obj.ToString();
 				}
@@ -82,7 +82,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 				//申请会诊医师
 				string ApplyConsultationDoctor_DBKey = "";
 				sql = "	select User_DBKey from `user` where UserName='" + ApplyConsultationDoctorName + "';";
-				obj = context.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
+				obj = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
 				if (obj != null) {
 					ApplyConsultationDoctor_DBKey = obj.ToString();
 				}
@@ -90,14 +90,14 @@ namespace DataSmith.CNIS.Plugin.IFace
 				//会诊医师姓名
 				string ConsultationDoctor_DBKey = "";
 				sql = "	select User_DBKey from `user` where UserName='" + ConsultationDoctorName + "';";
-				obj = context.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
+				obj = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
 				if (obj != null) {
 					ConsultationDoctor_DBKey = obj.ToString();
 				}
 
 
 				sql = "select ConsultationNo_DBKey from patientconsultation where ConsultationNo = '" + ConsultationNo + "'";
-				obj = context.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
+				obj = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
 				string ConsultationNo_DBKey = "";
 				if (obj == null) {
 					//新增
@@ -153,7 +153,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 									null
 								);";
 					
-					int ret = context.TargetDataProvider.Db.Sql(sql)
+					int ret = ifObj.TargetDataProvider.Db.Sql(sql)
 						.Parameter("ConsultationNo_DBKey", ConsultationNo_DBKey)
 						.Parameter("PatientHospitalize_DBKey", PatientHospitalize_DBKey)
 						.Parameter("ConsultationNo", ConsultationNo)
@@ -182,7 +182,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 									where ConsultationNo_DBKey=@ConsultationNo_DBKey
 								;";
 					
-					int ret = context.TargetDataProvider.Db.Sql(sql)
+					int ret = ifObj.TargetDataProvider.Db.Sql(sql)
 						.Parameter("ConsultationNo_DBKey", ConsultationNo_DBKey)
 						.Parameter("ConsultationDate", ConsultationDate)
 						.Parameter("ConsultationDepartment", ApplyDepartment_DBKey)

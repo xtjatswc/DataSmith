@@ -20,14 +20,14 @@ namespace DataSmith.CNIS.Plugin.AbsIF
 		public void ImportUserLimit(string YGBH, string YGXM, string lcysxmsx, out string doctorydbkey)
 		{
 			string sql = "	select User_DBKey from `user` where userloginid='" + YGBH + "';";
-			doctorydbkey = context.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
+			doctorydbkey = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
 			if (doctorydbkey == null) {
 				//新建用户
 				doctorydbkey = GetSeed("User_DBKey");
 
 				sql = "INSERT INTO `user` (`User_DBKey`, `Organization_DBKey`, `UserLoginID`, `UserName`, `UserNameFirstLetter`, `LoginPassword`, `IsLocked`, `UserJob`, `UserGender`, `UserJobNumber`, `UserTitle`, `UserDateOfBirth`, `UserEducation`, `TelPhone`, `MobilePhone`, `Email`, `Description`, `UserPhoto`, `IsSupperUser`, `IsActive`, `CreateBy`, `CreateTime`, `CreateProgram`, `CreateIP`, `UpdateBy`, `UpdateTime`, `UpdateProgram`, `UpdateIP`, `LoginFlg`) VALUES (@doctorydbkey,2,@doctorno,@doctorname,  @lcysxmsx , 'c6f057b86584942e415435ffb1fa93d4', '0', '临床医师', null, null, '临床医师', null, '','', '', '', '', '', '0', '1', '', '', '', '', '', '', '', '','1');";
 
-				int ret = context.TargetDataProvider.Db.Sql(sql)
+				int ret = ifObj.TargetDataProvider.Db.Sql(sql)
 					.Parameter("doctorydbkey", doctorydbkey)
 					.Parameter("doctorno", YGBH)
 					.Parameter("doctorname", YGXM)
@@ -61,7 +61,7 @@ namespace DataSmith.CNIS.Plugin.AbsIF
 				UserConfig_DBKey = GetSeed("UserConfig_DBKey");
 				sbSql.AppendLine("insert into userconfig(userconfig_dbkey,user_dbkey,configcode,configvalue,configstatus,configtype) values(" + UserConfig_DBKey + "," + doctorydbkey + ",'012','AddPatientUser',1,0);");
 
-				ret = context.TargetDataProvider.Db.Sql(sbSql.ToString()).Execute();
+				ret = ifObj.TargetDataProvider.Db.Sql(sbSql.ToString()).Execute();
 
 				#endregion
 
@@ -71,7 +71,7 @@ namespace DataSmith.CNIS.Plugin.AbsIF
 				string usrroleid = GetSeed("UserRoleRelation_DBKey");
 
 				sql = "	INSERT INTO `userrolerelation` VALUES (@usrroleid,@doctorydbkey, '2', null, null, null, null, null, null, null, null);";
-				ret = context.TargetDataProvider.Db.Sql(sql)
+				ret = ifObj.TargetDataProvider.Db.Sql(sql)
 					.Parameter("usrroleid", usrroleid)
 					.Parameter("doctorydbkey", doctorydbkey)
 					.Execute();
@@ -80,7 +80,7 @@ namespace DataSmith.CNIS.Plugin.AbsIF
 				string usraccessid = GetSeed("UserDataAccess_DBKEY");
 
 				sql = "	INSERT INTO `userdataaccess` VALUES (@usraccessid,@doctorydbkey, '2', '1', null, null, null, null, null, null, null, null);";
-				ret = context.TargetDataProvider.Db.Sql(sql)
+				ret = ifObj.TargetDataProvider.Db.Sql(sql)
 					.Parameter("usraccessid", usraccessid)
 					.Parameter("doctorydbkey", doctorydbkey)
 					.Execute();
@@ -98,13 +98,13 @@ namespace DataSmith.CNIS.Plugin.AbsIF
 			string Department_DBKey = "";
 			if (BRKS.Length > 0) {
 				string sql = "	select Department_DBKey from department where DepartmentCode='" + BRKS + "';";
-				Department_DBKey = context.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
+				Department_DBKey = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
 				int ret = 0;
 				if (Department_DBKey == null) {
 					Department_DBKey = GetSeed("Department_DBKey");
 
 					sql = "	insert into department(department_dbkey,DepartmentCode,DepartmentName,isactive,DepartmentNameFirstLetter)values(@departdbkey,@departno,@departname,1,@DepartmentNameFirstLetter);";
-					ret = context.TargetDataProvider.Db.Sql(sql)
+					ret = ifObj.TargetDataProvider.Db.Sql(sql)
 						.Parameter("departdbkey", Department_DBKey)
 						.Parameter("departno", BRKS)
 						.Parameter("departname", KSMC)
@@ -112,7 +112,7 @@ namespace DataSmith.CNIS.Plugin.AbsIF
 						.Execute();
 				} else {
 					sql = "	update department set DepartmentName=@DepartmentName where department_dbkey = @department_dbkey;";
-					ret = context.TargetDataProvider.Db.Sql(sql)
+					ret = ifObj.TargetDataProvider.Db.Sql(sql)
 						.Parameter("department_dbkey", Department_DBKey)
 						.Parameter("DepartmentName", KSMC)
 						.Execute();
@@ -134,12 +134,12 @@ namespace DataSmith.CNIS.Plugin.AbsIF
 			string beddbkey = "";
 			if (BRCH.Length > 0 && Department_DBKey.Length > 0) {
 				string sql = "	select max(BedNumber_DBKey) from bednumber  where BedCode='" + BRCH + "' and Department_DBKey='" + Department_DBKey + "';";
-				beddbkey = context.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
+				beddbkey = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
 				if (beddbkey == null) {
 					beddbkey = GetSeed("BedNumber_DBKey");
 
 					sql = "	insert into bednumber(BedNumber_DBKey,Department_dbkey,bedcode,bed,isactive) values(@beddbkey,@departdbkey,@bedno,@bedno,1);";
-					int ret = context.TargetDataProvider.Db.Sql(sql)
+					int ret = ifObj.TargetDataProvider.Db.Sql(sql)
 						.Parameter("beddbkey", beddbkey)
 						.Parameter("departdbkey", Department_DBKey)
 						.Parameter("bedno", BRCH)
@@ -161,12 +161,12 @@ namespace DataSmith.CNIS.Plugin.AbsIF
 			string Disease_DBKEY = "";
 			if (diseasecode.Length > 0) {
 				string sql = "	select Disease_DBKEY from diseaseicd10 where DiseaseClassificationCode='" + diseasecode + "';";
-				Disease_DBKEY = context.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
+				Disease_DBKEY = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
 				if (Disease_DBKEY == null) {
 					Disease_DBKEY = GetSeed("Disease_DBKEY");
 
 					sql = "insert into diseaseicd10(Disease_DBKEY,DiseaseClassificationCode,DiseaseName,IsPrimary)values(@diseasecode_DBKey,@diseasecode,@diseasename,0);";
-					int ret = context.TargetDataProvider.Db.Sql(sql)
+					int ret = ifObj.TargetDataProvider.Db.Sql(sql)
 						.Parameter("diseasecode_DBKey", Disease_DBKEY)
 						.Parameter("diseasecode", diseasecode)
 						.Parameter("diseasename", DiseaseName)
@@ -218,7 +218,7 @@ where b.PatientHospitalize_DBKey is null and  TherapyStatus <> 9 and BedNumber_D
 
 ";
 
-			int ret = context.TargetDataProvider.Db.Sql(sql).Execute();
+			int ret = ifObj.TargetDataProvider.Db.Sql(sql).Execute();
 		}
 
 		/// <summary>
@@ -251,7 +251,7 @@ delete from patientbasicinfo where patient_dbkey not in
 );
 ";
 
-			int ret = context.TargetDataProvider.Db.Sql(sql).Execute();
+			int ret = ifObj.TargetDataProvider.Db.Sql(sql).Execute();
 		}
 
 		/// <summary>
@@ -263,10 +263,10 @@ delete from patientbasicinfo where patient_dbkey not in
            
 			//清除历史记录
 			string sql = @"delete from ai_caseinformation where InHospitalData <= date_add(CURRENT_DATE(), interval -" + day + @" day)";
-			int ret = context.TargetDataProvider.Db.Sql(sql).Execute();
+			int ret = ifObj.TargetDataProvider.Db.Sql(sql).Execute();
 				
 			sql = @"delete from ai_intelligentscreening where InHospitalData <= date_add(CURRENT_DATE(), interval -" + day + @" day)";
-			ret = context.TargetDataProvider.Db.Sql(sql).Execute();
+			ret = ifObj.TargetDataProvider.Db.Sql(sql).Execute();
 		}
         
 

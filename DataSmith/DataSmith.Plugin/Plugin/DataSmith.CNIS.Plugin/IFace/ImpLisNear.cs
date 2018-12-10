@@ -30,11 +30,11 @@ namespace DataSmith.CNIS.Plugin.IFace
 
 			//取最近一次检验报告的时间
 			sql = "select senttime from laboratoryindex order by senttime desc limit 0, 1";
-			string nearTime = context.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
+			string nearTime = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
 			
 			//增量取最新的未导入检验的患者住院号
 			sql = "select  DISTINCT BAHM ZYH from  V_CNIS_TestResult_i where SamTime >= '" + nearTime + "'";
-			dt = context.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
+			dt = ifObj.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 			Console.WriteLine(" count >>>  " + dt.Rows.Count);
 			ImpLis impLis = new ImpLis();
 			foreach (DataRow row in dt.Rows) {
@@ -50,7 +50,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 
 			//DeleteLis();
 			sql = @"delete from laboratoryindex where PatientHospitalize_DBKey not in (select PatientHospitalize_DBKey from patienthospitalizebasicinfo);";
-			int ret = context.TargetDataProvider.Db.Sql(sql).Execute();
+			int ret = ifObj.TargetDataProvider.Db.Sql(sql).Execute();
 		}
 		        
 	}

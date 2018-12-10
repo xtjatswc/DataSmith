@@ -40,19 +40,19 @@ namespace DataSmith.CNIS.Plugin.IFace
 				 * "yyyyMMdd00:00:01" "yyyyMMddHH:mm:ss"
 				 * 				 
 				 */
-				startDate = DateTime.Now.AddDays(-nearDays).ToString(context.QueryParameters["BeginTime"].Formart);
-				endDate = DateTime.Now.Date.AddDays(1).AddSeconds(-1).ToString(context.QueryParameters["EndTime"].Formart);
+				startDate = DateTime.Now.AddDays(-nearDays).ToString(ifObj.QueryParameters["BeginTime"].Formart);
+				endDate = DateTime.Now.Date.AddDays(1).AddSeconds(-1).ToString(ifObj.QueryParameters["EndTime"].Formart);
 			}
 			Console.WriteLine("入院或者出院时间：从" + startDate + "到" + endDate);
 
-			string sql = "select " + context.QueryFields + " from " + context.Interfaces.ViewName + " where (" + context.GetFieldAlias("RYRQ") + " between '{0}' and '{1}' or " + context.GetFieldAlias("OutHospitalDate") + " between '{0}' and '{1}') {2} order by " + context.GetFieldAlias("RYRQ") + " asc";
+			string sql = "select " + ifObj.QueryFields + " from " + ifObj.Interfaces.ViewName + " where (" + ifObj.GetFieldAlias("RYRQ") + " between '{0}' and '{1}' or " + ifObj.GetFieldAlias("OutHospitalDate") + " between '{0}' and '{1}') {2} order by " + ifObj.GetFieldAlias("RYRQ") + " asc";
 
 			sql = string.Format(sql, startDate, endDate, condition);
 
-			DataTable dt = context.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
+			DataTable dt = ifObj.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 
 			Console.WriteLine("共计" + dt.Rows.Count + "位患者");
-			ImpPatientSign sign = new ImpPatientSign{ context = context };
+			ImpPatientSign sign = new ImpPatientSign{ ifObj = ifObj };
 			foreach (DataRow patient in dt.Rows) {
 				try {
 					sign.Import(patient);

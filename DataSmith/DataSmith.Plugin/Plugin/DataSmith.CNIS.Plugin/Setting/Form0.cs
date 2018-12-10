@@ -21,7 +21,8 @@ namespace DataSmith.CNIS.Plugin.Setting
 		//缺省设置
 		public Int64 TaskSchedulerID { get { return 0; } }
 		public Form FormInstance{ get { return this; } }
-		
+		TaskScheduler _taskScheduler;
+			
 		public Form0()
 		{
 			//
@@ -34,12 +35,17 @@ namespace DataSmith.CNIS.Plugin.Setting
 			//
 		}
 		
+		public void SetTaskScheduler(TaskScheduler taskScheduler)
+		{
+			_taskScheduler = taskScheduler;
+			inputGroupHeader1.Text = _taskScheduler.TaskName;
+		}
+		
 		void InputButton1Click(object sender, EventArgs e)
 		{			
-			TaskScheduler taskScheduler = this.Tag as TaskScheduler;
 			FormCmd frm = new FormCmd() {
 				Commond = "\"" + Host.ExePath + "\"",
-				Parameter = string.Format("{0}", taskScheduler.ID),
+				Parameter = string.Format("{0}", _taskScheduler.ID),
 				AutoExec = true
 			};
 			frm.ShowDialog();

@@ -17,20 +17,39 @@ namespace DataSmith
     {
         public static void Execute()
         {
+            JoinContext joinContext = new JoinContext();
+            joinContext.Args = Host.Args;
+
             //根据任务ID获取任务属性
             int taskSchedulerID = Convert.ToInt32(Host.Args[0]);
             var taskSchedulerDal = Host.GetService<TaskSchedulerDal>();
             var taskScheduler = taskSchedulerDal.GetModel(taskSchedulerID);
 
             string InterfaceID = taskScheduler.InterfaceID;
+            foreach (var ifID in InterfaceID.Split(','))
+            {
+                var ifObj = GetIfObj(ifID);
+                joinContext.IfDict.Add(ifObj.Interfaces.ID,ifObj);
+            }
 
+
+            //根据插件ID获取对应的插件并调用
+            var iDataTransfer = Host.GetServices<ITransferPlugin>().First(o => o.PluginID == taskScheduler.PluginID);
+            iDataTransfer.DataTransfer(joinContext);
+
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
+
+        }
+
+        public static InterfaceObj GetIfObj(string interfaceID)
+        {
             //获取视图名称
             var ifDal = Host.GetService<InterfacesDal>();
-            var interfaces = ifDal.GetModel(InterfaceID);
+            var interfaces = ifDal.GetModel(interfaceID);
 
             //获取字段信息
             var fieldSetDal = Host.GetService<FieldSetDal>();
-            var fields = fieldSetDal.GetModels(where: $"InterfaceID={InterfaceID}");
+            var fields = fieldSetDal.GetModels(where: $"interfaceID={interfaceID}");
 
             //拼接sql
             StringBuilder sbField = new StringBuilder();
@@ -53,23 +72,16 @@ namespace DataSmith
             var iTargetDataProvider = targetDataSource.GetDataProvider();
 
             var queryParameterDal = Host.GetService<QueryParameterDal>();
-            var queryParameters = queryParameterDal.GetModels(where: $"InterfaceID={InterfaceID}");
+            var queryParameters = queryParameterDal.GetModels(where: $"interfaceID={interfaceID}");
 
-            JoinContext joinContext = new JoinContext();
-            joinContext.Args = Host.Args;
-            joinContext.Interfaces = interfaces;
-            joinContext.QueryFields = fieldStr;
-            joinContext.FieldSets = fields.ToDictionary(k => k.FieldName, v => v);
-            joinContext.QueryParameters = queryParameters.ToDictionary(k => k.ParaName, v => v);
-            joinContext.SourceDataProvider = iDataProvider;
-            joinContext.TargetDataProvider = iTargetDataProvider;
-
-            //根据插件ID获取对应的插件并调用
-            var iDataTransfer = Host.GetServices<ITransferPlugin>().First(o => o.PluginID == taskScheduler.PluginID);
-            iDataTransfer.DataTransfer(joinContext);
-
-            System.Diagnostics.Process.GetCurrentProcess().Kill();
-
+            InterfaceObj ifObj = new InterfaceObj();
+            ifObj.Interfaces = interfaces;
+            ifObj.QueryFields = fieldStr;
+            ifObj.FieldSets = fields.ToDictionary(k => k.FieldName, v => v);
+            ifObj.QueryParameters = queryParameters.ToDictionary(k => k.ParaName, v => v);
+            ifObj.SourceDataProvider = iDataProvider;
+            ifObj.TargetDataProvider = iTargetDataProvider;
+            return ifObj;
         }
     }
 }

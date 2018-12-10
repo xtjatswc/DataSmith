@@ -30,7 +30,7 @@ namespace DataSmith.CNIS.Plugin.IFace
             Console.WriteLine("门诊起止时间：从" + startDate + "到" + endDate);
 
             string sql = "select * from V_CNIS_MZBRXX where RYRQ between '"+ startDate +"' and '"+ endDate +"'";
-            DataTable dt = context.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
+            DataTable dt = ifObj.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
             Console.WriteLine("共计" + dt.Rows.Count + "位患者");
             foreach (DataRow oPatient in dt.Rows)
             {
@@ -109,13 +109,13 @@ namespace DataSmith.CNIS.Plugin.IFace
                 if (BAHM.Length > 0)
                 {
                     sql = "	select PATIENT_DBKEY from PatientBasicInfo where patientno='" + BAHM + "';";
-                    obj = context.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
+                    obj = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
                     if (obj == null)
                     {
                         PATIENT_DBKEY = GetSeed("PATIENT_DBKEY");
 
                         sql = "insert into PatientBasicInfo(PATIENT_DBKEY,patientno,patientname,patientnamefirstletter,gender,age,dateofbirth,maritalstatus,updatetime,telphone,homeaddress,UrgentContactName,UrgentContactTelPhone) 			values(@patientdbkey,@pno,@pname,@pin,@psex,@page,@pbirth,@pmarriage,@CURDATE,@telphone,@homeaddress,@UrgentContactName,@UrgentContactTelPhone);";
-                        int ret = context.TargetDataProvider.Db.Sql(sql)
+                        int ret = ifObj.TargetDataProvider.Db.Sql(sql)
                         	.Parameter("patientdbkey", PATIENT_DBKEY)
                         	.Parameter("pno",  BAHM)
                         	.Parameter("pname",  BRXM)
@@ -144,13 +144,13 @@ namespace DataSmith.CNIS.Plugin.IFace
                 if (PATIENT_DBKEY.Length > 0 && ZYH.Length > 0)
                 {
                     sql = "	select PatientHospitalize_DBKey from patienthospitalizebasicinfo where PATIENT_DBKEY='" + PATIENT_DBKEY + "' and HospitalizationNumber='" + ZYH + "';";
-                    obj = context.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
+                    obj = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
                     if (obj == null)
                     {
                         pdhosdbkey = GetSeed("PatientHospitalize_DBKey");
 
                         sql = "insert into PatientHospitalizeBasicInfo(patienthospitalize_dbkey,patient_dbkey,Disease_DBKEY,department_dbkey,bednumber_dbkey,HospitalizationNumber,inhospitalData,Clinicist_DBKey,TherapyStatus,PhysicalActivityLevel,PregnantCondition,ClinicalDiagnosis,ClinicalTreatment,OutHospitalData,VisitingTime) values(@pdhosdbkey,@patientdbkey,@diseasecode_DBKey,@departdbkey,@beddbkey,@hopno,@intime,@doctorydbkey,@TherapyStatus,0,0,@ClinicalDiagnosis,@ClinicalTreatment,@OutHospitalData,@VisitingTime);";
-                        int ret = context.TargetDataProvider.Db.Sql(sql)
+                        int ret = ifObj.TargetDataProvider.Db.Sql(sql)
                         	.Parameter("pdhosdbkey", pdhosdbkey)
                         	.Parameter("patientdbkey",  PATIENT_DBKEY)
                         	.Parameter("diseasecode_DBKey",  Disease_DBKEY)
@@ -170,7 +170,7 @@ namespace DataSmith.CNIS.Plugin.IFace
                     {
                         pdhosdbkey = obj.ToString();
                         sql = "update PatientHospitalizeBasicInfo set department_dbkey=@departdbkey,bednumber_dbkey=@beddbkey,Clinicist_DBKey=@doctorydbkey where patienthospitalize_dbkey=@pdhosdbkey;";
-                        int ret = context.TargetDataProvider.Db.Sql(sql)
+                        int ret = ifObj.TargetDataProvider.Db.Sql(sql)
                         	.Parameter("departdbkey", Department_DBKey)
                         	.Parameter("beddbkey",  beddbkey)
                         	.Parameter("doctorydbkey",  doctorydbkey)
@@ -188,12 +188,12 @@ namespace DataSmith.CNIS.Plugin.IFace
                 if (ZYH.Length > 0)
                 {
                     sql = "	select PatientHospitalize_DBKey from patienthospitalizebasicinfo where HospitalizationNumber='" + ZYH + "';";
-                    obj = context.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
+                    obj = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
                     if (obj != null)
                     {
                         pdhosdbkey = obj.ToString();
                         sql = "update PatientHospitalizeBasicInfo set TherapyStatus=9,department_dbkey=@departdbkey,bednumber_dbkey=@beddbkey,Clinicist_DBKey=@doctorydbkey,OutHospitalData=@OutHospitalData, Height=@Height,Weight=@Weight  where patienthospitalize_dbkey=@pdhosdbkey;";
-                        int ret = context.TargetDataProvider.Db.Sql(sql)
+                        int ret = ifObj.TargetDataProvider.Db.Sql(sql)
                         	.Parameter("departdbkey", Department_DBKey)
                         	.Parameter("beddbkey",  beddbkey)
                         	.Parameter("doctorydbkey",  doctorydbkey)

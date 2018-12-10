@@ -13,6 +13,7 @@ namespace DataSmith.CNIS.Plugin.Setting
 		private System.ComponentModel.IContainer components = null;
 		private C1.Win.C1InputPanel.C1InputPanel c1InputPanel1;
 		private C1.Win.C1InputPanel.InputButton inputButton1;
+		private C1.Win.C1InputPanel.InputGroupHeader inputGroupHeader1;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -37,6 +38,7 @@ namespace DataSmith.CNIS.Plugin.Setting
 		{
 			this.c1InputPanel1 = new C1.Win.C1InputPanel.C1InputPanel();
 			this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
+			this.inputGroupHeader1 = new C1.Win.C1InputPanel.InputGroupHeader();
 			((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -44,6 +46,7 @@ namespace DataSmith.CNIS.Plugin.Setting
 			// 
 			this.c1InputPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.c1InputPanel1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
+			this.c1InputPanel1.Items.Add(this.inputGroupHeader1);
 			this.c1InputPanel1.Items.Add(this.inputButton1);
 			this.c1InputPanel1.Location = new System.Drawing.Point(0, 0);
 			this.c1InputPanel1.Name = "c1InputPanel1";
@@ -59,6 +62,11 @@ namespace DataSmith.CNIS.Plugin.Setting
 			this.inputButton1.Text = "导入";
 			this.inputButton1.Width = 90;
 			this.inputButton1.Click += new System.EventHandler(this.InputButton1Click);
+			// 
+			// inputGroupHeader1
+			// 
+			this.inputGroupHeader1.Name = "inputGroupHeader1";
+			this.inputGroupHeader1.Text = "Group";
 			// 
 			// Form0
 			// 
