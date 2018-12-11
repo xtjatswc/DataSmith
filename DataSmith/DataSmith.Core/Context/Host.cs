@@ -14,6 +14,7 @@ namespace DataSmith.Core.Context
     public class Host
     {
         public static string[] Args;
+        public static string Version;
         public static string ExePath;
         public static IContainer iContainer;
         public static Dictionary<DBType, IDataProvider> DataProviderPool;
@@ -22,6 +23,7 @@ namespace DataSmith.Core.Context
 
         static Host()
         {
+            Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
             ExePath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
             iContainer = AutofacConfig.Register();
 
