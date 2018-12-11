@@ -21,5 +21,9 @@ namespace DataSmith.Core.Infrastructure.DAL
             Db = Host.db1;
         }
 
+        public void UpdatePassed(Int64 isPassed, Int64 id)
+        {
+            Db.Sql("update DataSource set Passed = @0 where ID = @1", isPassed, id).Execute();
+        }
     }
 }

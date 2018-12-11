@@ -22,7 +22,7 @@ namespace DataSmith
         public FormMain()
         {
             InitializeComponent();
-            Text += string.Format("{0, 5}v{1}", "", Host.Version);
+            Text += string.Format("{0,2}v{1}", "", Host.Version);
             inputButton1.Image = DataSmith.Res.Resource48.cylinder_database_48px_13406_easyicon_net;
             inputButton2.Image = DataSmith.Res.Resource48.SQL_File_Extension_48px_1140212_easyicon_net;
             inputButton3.Image = DataSmith.Res.Resource48.table_relationship_48px_527120_easyicon_net;

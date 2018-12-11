@@ -27,6 +27,8 @@ namespace DataSmith.Core.Infrastructure.Model
         public Int64 IsDeleted { get; set; }
         //1、源数据库、2、目标数据库
         public Int64 SourceType { get; set; }
+        //是否连接通过
+        public Int64 Passed { get; set; }
 
     }
 }

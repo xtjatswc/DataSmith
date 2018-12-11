@@ -57,6 +57,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource48.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resource72.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource72.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -70,6 +75,10 @@
     <EmbeddedResource Include="Resource48.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource48.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resource72.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource72.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +95,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\close_48px_1175541_easyicon.net.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bulb_green_72px_12741_easyicon.net.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bulb_72px_28127_easyicon.net.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

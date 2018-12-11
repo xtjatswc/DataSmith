@@ -45,10 +45,10 @@
             this.c1InputPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.c1InputPanel1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.c1InputPanel1.Items.Add(this.inputButton1);
-            this.c1InputPanel1.Location = new System.Drawing.Point(0, 62);
-            this.c1InputPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.c1InputPanel1.Location = new System.Drawing.Point(0, 78);
+            this.c1InputPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.c1InputPanel1.Name = "c1InputPanel1";
-            this.c1InputPanel1.Size = new System.Drawing.Size(192, 498);
+            this.c1InputPanel1.Size = new System.Drawing.Size(395, 622);
             this.c1InputPanel1.TabIndex = 0;
             this.c1InputPanel1.VisualStyle = C1.Win.C1InputPanel.VisualStyle.Office2007Blue;
             // 
@@ -61,10 +61,10 @@
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(192, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Location = new System.Drawing.Point(395, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(494, 560);
+            this.panel1.Size = new System.Drawing.Size(520, 700);
             this.panel1.TabIndex = 1;
             // 
             // panel2
@@ -73,9 +73,9 @@
             this.panel2.Controls.Add(this.c1InputPanel2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(192, 560);
+            this.panel2.Size = new System.Drawing.Size(395, 700);
             this.panel2.TabIndex = 2;
             // 
             // c1InputPanel2
@@ -84,9 +84,9 @@
             this.c1InputPanel2.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.c1InputPanel2.Items.Add(this.inputButton2);
             this.c1InputPanel2.Location = new System.Drawing.Point(0, 0);
-            this.c1InputPanel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.c1InputPanel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.c1InputPanel2.Name = "c1InputPanel2";
-            this.c1InputPanel2.Size = new System.Drawing.Size(192, 62);
+            this.c1InputPanel2.Size = new System.Drawing.Size(395, 78);
             this.c1InputPanel2.TabIndex = 0;
             this.c1InputPanel2.VisualStyle = C1.Win.C1InputPanel.VisualStyle.Office2007Blue;
             // 
@@ -97,17 +97,17 @@
             this.inputButton2.Padding = new System.Windows.Forms.Padding(0, 15, 0, 0);
             this.inputButton2.TabStop = false;
             this.inputButton2.Text = "添加数据源";
-            this.inputButton2.Width = 172;
+            this.inputButton2.Width = 160;
             this.inputButton2.Click += new System.EventHandler(this.inputButton2_Click);
             // 
             // FormDataSourceList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(686, 560);
+            this.ClientSize = new System.Drawing.Size(915, 700);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormDataSourceList";
             this.Text = "FormDataSourceList";
             this.Load += new System.EventHandler(this.FormDataSourceList_Load);

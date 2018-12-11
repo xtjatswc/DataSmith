@@ -23,6 +23,7 @@ namespace DataSmith.DbSource
 
         //保存成功事件
         public event EventHandler AfterSaved;
+        public event EventHandler AfterTestConn;
 
         public FormDataSourceEdit()
         {
@@ -80,6 +81,7 @@ namespace DataSmith.DbSource
 
         private bool TestConn()
         {
+            bool ret = false;
             try
             {
                 if (OperateType == OperateType.New)
@@ -88,14 +90,22 @@ namespace DataSmith.DbSource
                 }
 
                 DataProvider.Db.Data.ConnectionString = inputTextBoxConnStr.Text;
-                return DataProvider.TestConn();
+                ret = DataProvider.TestConn();
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
             }
 
-            return false;
+            //更新状态
+            if (OperateType == OperateType.Modify)
+            {
+                _dataSource.Passed = ret ? 1 : 0;
+                dsDal.UpdatePassed(_dataSource.Passed, _dataSource.ID);
+                AfterTestConn?.Invoke(_dataSource, new EventArgs());
+            }
+
+            return ret;
         }
 
         private void inputButton2_Click(object sender, EventArgs e)
@@ -114,8 +124,11 @@ namespace DataSmith.DbSource
             GetModel();
 
             if (!TestConn())
+            {
                 return;
+            }
 
+            _dataSource.Passed = 1;
             if (OperateType == OperateType.New)
             {
                 _dataSource.SourceType = 1;
