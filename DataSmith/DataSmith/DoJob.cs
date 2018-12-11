@@ -77,7 +77,13 @@ namespace DataSmith
             InterfaceObj ifObj = new InterfaceObj();
             ifObj.Interfaces = interfaces;
             ifObj.QueryFields = fieldStr;
-            ifObj.FieldSets = fields.ToDictionary(k => k.FieldName, v => v);
+            //让fieldSet key不区分大小写
+            ifObj.FieldSets.Clear();
+            foreach (var fieldSet in fields)
+            {
+                ifObj.FieldSets.Add(fieldSet.FieldName, fieldSet);
+            }
+            //ifObj.FieldSets = fields.ToDictionary(k => k.FieldName, v => v);
             ifObj.QueryParameters = queryParameters.ToDictionary(k => k.ParaName, v => v);
             ifObj.SourceDataProvider = iDataProvider;
             ifObj.TargetDataProvider = iTargetDataProvider;

@@ -17,7 +17,7 @@ namespace DataSmith.Core.Context
         public string QueryFields { get; set; }
 
         //字段模型
-        public Dictionary<string, FieldSet> FieldSets { get; set; }
+        public Dictionary<string, FieldSet> FieldSets { get; set; } = new Dictionary<string, FieldSet>(StringComparer.OrdinalIgnoreCase);
 
         //查询字段模型
         public Dictionary<string, QueryParameter> QueryParameters { get; set; }
