@@ -25,11 +25,11 @@ namespace DataSmith.CNIS.Plugin.IFace
 		
 		public override void Import()
 		{
-			string startDate = DateTime.Now.AddDays(-nearDays).ToString("yyyyMMdd00:00:01");
-			string endDate = DateTime.Now.Date.AddDays(1).AddSeconds(-1).ToString("yyyyMMddHH:mm:ss");
-			Console.WriteLine("入院起止时间：从" + startDate + "到" + endDate);
+			string startDate = DateTime.Now.AddDays(-nearDays).ToString("yyyy-MM-dd 00:00:01");
+			string endDate = DateTime.Now.Date.AddDays(1).AddSeconds(-1).ToString("yyyy-MM-dd HH:mm:ss");
+			Console.WriteLine("起止时间：从" + startDate + "到" + endDate);
 
-			string sql = @"select a.*, b.BRXM from V_CNIS_ClinicalDietaryAdvice  a inner join V_CNIS_ZYBRXX b on a.ZYH  = b.ZYH  where a.StopDateTime between '{0}' and '{1}' or a.EnterDateTime between '{0}' and '{1}'  or a.StopOrderDateTime between '{0}' and '{1}'";
+			string sql = @"select a.* from V_CNIS_ClinicalDietaryAdvice  a where a.StopDateTime between '{0}' and '{1}' or a.EnterDateTime between '{0}' and '{1}'  or a.StopOrderDateTime between '{0}' and '{1}'";
 			sql = string.Format(sql, startDate, endDate);
 			DataTable dt = ifObj.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 			Console.WriteLine(" count >>>  " + dt.Rows.Count);
@@ -47,30 +47,21 @@ namespace DataSmith.CNIS.Plugin.IFace
 		
 		public void Import(DataRow row)
 		{
-			string BRXM = row["BRXM"].ToString();
 			string bahm = row["BAHM"].ToString();
 			string ZYH = row["ZYH"].ToString();
 			Console.WriteLine(ZYH);			
 			string OrderText = row["OrderText"].ToString();
 			string StartDateTime = row["StartDateTime"].ToString().Trim();
-			if (StartDateTime != "")
-				StartDateTime = DateTime.ParseExact(StartDateTime, "yyyyMMddHH:mm:ss", System.Globalization.CultureInfo.CurrentCulture).ToString("yyyy-MM-dd HH:mm:ss");
 			
 			string StopDateTime = row["StopDateTime"].ToString().Trim();
-			if (StopDateTime != "")
-				StopDateTime = DateTime.ParseExact(StopDateTime, "yyyyMMddHH:mm:ss", System.Globalization.CultureInfo.CurrentCulture).ToString("yyyy-MM-dd HH:mm:ss");
 			
 			string Doctor = row["Doctor"].ToString();
 			string StopDoctor = row["StopDoctor"].ToString();
 			string Nurse = row["Nurse"].ToString();
 			string StopNurse = row["StopNurse"].ToString();
 			string EnterDateTime = row["EnterDateTime"].ToString().Trim();
-			if (EnterDateTime != "")
-				EnterDateTime = DateTime.ParseExact(EnterDateTime, "yyyyMMddHH:mm:ss", System.Globalization.CultureInfo.CurrentCulture).ToString("yyyy-MM-dd HH:mm:ss");
 		
 			string StopOrderDateTime = row["StopOrderDateTime"].ToString().Trim();
-			if (StopOrderDateTime != "")
-				StopOrderDateTime = DateTime.ParseExact(StopOrderDateTime, "yyyyMMddHH:mm:ss", System.Globalization.CultureInfo.CurrentCulture).ToString("yyyy-MM-dd HH:mm:ss");
 			
 			string OrderStatus = row["OrderStatus"].ToString();
 			string RepeatIndicator = row["RepeatIndicator"].ToString();
@@ -78,7 +69,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 			
 			string sql = "insert into clinicaldietaryadvice(patient_name,bahm,order_text,start_date_time,stop_date_time,doctor,stop_doctor,nurse,stop_nurse,enter_date_time,stop_order_date_time,order_status,repeat_indicator) values(@patient_name,@bahm,@order_text,@start_date_time,@stop_date_time,@doctor,@stop_doctor,@nurse,@stop_nurse,@enter_date_time,@stop_order_date_time,@order_status,@repeat_indicator) on duplicate key update doctor = values(doctor),stop_doctor = values(stop_doctor),nurse = values(nurse),stop_nurse = values(stop_nurse),enter_date_time = values(enter_date_time),stop_order_date_time = values(stop_order_date_time),order_status = values(order_status),repeat_indicator = values(repeat_indicator); ";
 			int ret = ifObj.TargetDataProvider.Db.Sql(sql)
-				.Parameter("patient_name", BRXM)
+				.Parameter("patient_name", "")
 				.Parameter("bahm", ZYH)
 				.Parameter("order_text", OrderText)
 				.Parameter("start_date_time", StartDateTime)

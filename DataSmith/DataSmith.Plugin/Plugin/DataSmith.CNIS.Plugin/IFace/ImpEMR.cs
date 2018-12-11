@@ -25,8 +25,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 		
 		public override void Import()
 		{
-			string sql = @"select c.DiseaseName,a.PATIENT_DBKEY,b.PatientNo,b.PatientName,a.InHospitalData,a.HospitalizationNumber,b.gender,b.DateOfBirth,a.Height,a.Weight  from patienthospitalizebasicinfo a inner join patientbasicinfo b on a.PATIENT_DBKEY = b.PATIENT_DBKEY
-inner join diseaseicd10 c on a.Disease_DBKEY = c.Disease_DBKEY
+			string sql = @"select a.PATIENT_DBKEY,b.PatientNo,b.PatientName,a.InHospitalData,a.HospitalizationNumber,b.gender,b.DateOfBirth,a.Height,a.Weight  from patienthospitalizebasicinfo a inner join patientbasicinfo b on a.PATIENT_DBKEY = b.PATIENT_DBKEY
  where a.InHospitalData > '" + DateTime.Now.AddDays(-nearDays).ToString("yyyy-MM-dd") + @"'
 order by a.InHospitalData desc";
 			DataTable dt = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
@@ -54,7 +53,6 @@ order by a.InHospitalData desc";
 			string PatientName = patient["PatientName"].ToString();
 			string InHospitalData = patient["InHospitalData"].ToString();
 			string HospitalizationNumber = patient["HospitalizationNumber"].ToString();
-			string DiseaseName = patient["DiseaseName"].ToString();
 			Console.WriteLine(PatientName + "   " + InHospitalData);
 	                    
 	                    
@@ -63,7 +61,7 @@ order by a.InHospitalData desc";
 			string information2 = "";
 			string pastMedicalHistory = "";
 	
-			sql = "select * from  V_CNIS_SCREENING_BASIC where ZYH = '" + HospitalizationNumber + "'";
+			sql = "select SB ChiefComplaint, DSB medicalhistory from  V_CNIS_SCREENING_BASIC where 住院号 = '" + HospitalizationNumber + "'";
 			DataTable zsTable = ifObj.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 			
 			if (zsTable.Rows.Count > 0) {
@@ -81,10 +79,8 @@ order by a.InHospitalData desc";
 			string diagnose2 = "";
 			string diagnose3 = "";
 			string createtime1 = "";
-			string createtime2 = "";
-			string createtime3 = "";
 			try {
-				sql = "select * from  V_CNIS_SCREENING_DIAGNOSE where ZYH = '" + HospitalizationNumber + "'";
+				sql = "select * from  V_CNIS_SCREENING_DIAGNOSE where zyh = '" + HospitalizationNumber + "'";
 				DataTable zdTable =ifObj.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 				
 				foreach (DataRow zdRow in zdTable.Rows) {
@@ -95,32 +91,11 @@ order by a.InHospitalData desc";
 					//最后诊断
 					diagnose3 = zdRow["diagnose3"].ToString();
 		
-					string format1 = "yyyyMMdd";
-					string format2 = "yyyyMMddHH:mm:ss";
 					string createtime = zdRow["createtime1"].ToString().Trim();
-					if (createtime != "" && createtime.Length == 8)
-						createtime1 = DateTime.ParseExact(createtime, format1, System.Globalization.CultureInfo.CurrentCulture).ToString(format1);
-					else if (createtime.Length > 8) {
-						createtime1 = DateTime.ParseExact(createtime, format2, System.Globalization.CultureInfo.CurrentCulture).ToString(format2);
-					}
-					
-					createtime = zdRow["createtime2"].ToString().Trim();
-					if (createtime != "" && createtime.Length == 8)
-						createtime2 = DateTime.ParseExact(createtime, format1, System.Globalization.CultureInfo.CurrentCulture).ToString(format1);
-					else if (createtime.Length > 8) {
-						createtime2 = DateTime.ParseExact(createtime, format2, System.Globalization.CultureInfo.CurrentCulture).ToString(format2);
-					}
-					
-					createtime = zdRow["createtime3"].ToString().Trim();
-					if (createtime != "" && createtime.Length == 8)
-						createtime3 = DateTime.ParseExact(createtime, format1, System.Globalization.CultureInfo.CurrentCulture).ToString(format1);
-					else if (createtime.Length > 8) {
-						createtime3 = DateTime.ParseExact(createtime, format2, System.Globalization.CultureInfo.CurrentCulture).ToString(format2);
-					}
 		                        
 					diagnoseBuilder.AppendLine("【入院诊断】(" + createtime1 + ")" + diagnose1 + "\r\n"
-					+ "【初步诊断】(" + createtime2 + ")" + diagnose2 + "\r\n"
-					+ "【最后诊断】(" + createtime3 + ")" + diagnose3 + "\r\n" + DiseaseName);	                        
+					+ "【初步诊断】(" + createtime1 + ")" + diagnose2 + "\r\n"
+					+ "【最后诊断】(" + createtime1 + ")" + diagnose3 + "\r\n");	                        
 				}
 				diagnose = diagnoseBuilder.ToString();
 			} catch (Exception ex) {
@@ -143,13 +118,13 @@ order by a.InHospitalData desc";
 				weight = patient["Weight"].ToString();// tgTable.Rows[i]["Weight"].ToString();
 
 				physiqueBuilder.AppendLine("住院号：" + tgTable.Rows[i]["ZYH"].ToString());
-				physiqueBuilder.AppendLine("体温：" + tgTable.Rows[i]["Temperature"].ToString());
-				physiqueBuilder.AppendLine("心率：" + tgTable.Rows[i]["HeartRate"].ToString());
-				physiqueBuilder.AppendLine("呼吸频率：" + tgTable.Rows[i]["BreathingRate"].ToString());
+//				physiqueBuilder.AppendLine("体温：" + tgTable.Rows[i]["Temperature"].ToString());
+//				physiqueBuilder.AppendLine("心率：" + tgTable.Rows[i]["HeartRate"].ToString());
+//				physiqueBuilder.AppendLine("呼吸频率：" + tgTable.Rows[i]["BreathingRate"].ToString());
 				physiqueBuilder.AppendLine("身高：" + height);
 				physiqueBuilder.AppendLine("体重：" + weight);
-				physiqueBuilder.AppendLine("体表面积：" + tgTable.Rows[i]["BodySurfaceArea"].ToString());
-				physiqueBuilder.AppendLine("卡氏评分：" + tgTable.Rows[i]["KSScore"].ToString());
+//				physiqueBuilder.AppendLine("体表面积：" + tgTable.Rows[i]["BodySurfaceArea"].ToString());
+//				physiqueBuilder.AppendLine("卡氏评分：" + tgTable.Rows[i]["KSScore"].ToString());
 				physiqueBuilder.AppendLine("查房记录：" + tgTable.Rows[i]["CheckingRecord"].ToString());
 				physiqueBuilder.AppendLine("创建时间：" + tgTable.Rows[i]["CreateTime"].ToString());
 	
@@ -164,7 +139,7 @@ order by a.InHospitalData desc";
 			for (int i = 0; i < bcTable.Rows.Count; i++) {
 				information4Builder.AppendLine("患者编号：" + bcTable.Rows[i]["BAHM"].ToString());
 				information4Builder.AppendLine("住院号：" + bcTable.Rows[i]["ZYH"].ToString());
-				information4Builder.AppendLine("病程记录：" + bcTable.Rows[i]["ChiefComplaint"].ToString());// Encoding.UTF8.GetString((byte[])bcTable.Rows[i]["ProgressNote"]));
+				information4Builder.AppendLine("病程记录：" + bcTable.Rows[i]["ProgressNote"].ToString()); //Encoding.UTF8.GetString((byte[])bcTable.Rows[i]["ProgressNote"])
 				information4Builder.AppendLine("创建时间：" + bcTable.Rows[i]["CreateTime"].ToString());
 	
 			}

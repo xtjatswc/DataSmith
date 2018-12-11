@@ -55,10 +55,10 @@ namespace DataSmith.CNIS.Plugin.IFace
 				Console.WriteLine("未能查询到住院号为 “" + _zyh + "” 的患者！");
 				return;
 			}
-			Import(dt.Rows[0]);
+			Import(dt.Rows[0], DateTime.Now);
 		}
 
-		public void Import(DataRow row)
+		public void Import(DataRow row, DateTime dtNow)
 		{
 			string BRXM = row.GetString(ifObj.GetFieldAlias("BRXM"));//患者姓名
 			string ZYH = row.GetString(ifObj.GetFieldAlias("ZYH"));//住院号
@@ -98,8 +98,8 @@ namespace DataSmith.CNIS.Plugin.IFace
 				RYRQ = DateTime.ParseExact(row.GetString(ifObj.GetFieldAlias("RYRQ")).Trim(), _RYRQ_Properties.Property2, System.Globalization.CultureInfo.CurrentCulture);   
 			}
 
-			string TELPHONE = row.GetString(ifObj.GetFieldAlias("TELPHONE"));//联系电话
-			string HOMEADDRESS = row.GetString(ifObj.GetFieldAlias("HOMEADDRESS"));//家庭住址
+			string TELPHONE = row.GetString(ifObj.GetFieldAlias("TelPhone"));//联系电话
+			string HOMEADDRESS = row.GetString(ifObj.GetFieldAlias("HomeAddress"));//家庭住址
 			string UrgentContactName = row.GetString(ifObj.GetFieldAlias("UrgentContactName"));//紧急联系人					
 			string UrgentContactTelPhone = row.GetString(ifObj.GetFieldAlias("UrgentContactTelPhone"));//紧急联系电话
 			//出院日期
@@ -173,7 +173,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 					if (pdhosdbkey == null) {
 						pdhosdbkey = GetSeed("PatientHospitalize_DBKey");
 
-						sql = "insert into PatientHospitalizeBasicInfo(patienthospitalize_dbkey,patient_dbkey,Disease_DBKEY,department_dbkey,bednumber_dbkey,HospitalizationNumber,inhospitalData,Clinicist_DBKey,TherapyStatus,PhysicalActivityLevel,PregnantCondition,OutHospitalData,Height,Weight) values(@pdhosdbkey,@patientdbkey,@diseasecode_DBKey,@departdbkey,@beddbkey,@hopno,@intime,@doctorydbkey,0,0,0,@OutHospitalData,@Height,@Weight);";
+						sql = "insert into PatientHospitalizeBasicInfo(patienthospitalize_dbkey,patient_dbkey,Disease_DBKEY,department_dbkey,bednumber_dbkey,HospitalizationNumber,inhospitalData,Clinicist_DBKey,TherapyStatus,PhysicalActivityLevel,PregnantCondition,OutHospitalData,Height,Weight,UpdateTime) values(@pdhosdbkey,@patientdbkey,@diseasecode_DBKey,@departdbkey,@beddbkey,@hopno,@intime,@doctorydbkey,0,0,0,@OutHospitalData,@Height,@Weight,@UpdateTime);";
 						int ret = ifObj.TargetDataProvider.Db.Sql(sql)
 							.Parameter("pdhosdbkey", pdhosdbkey)
 							.Parameter("patientdbkey", PATIENT_DBKEY)
@@ -186,12 +186,13 @@ namespace DataSmith.CNIS.Plugin.IFace
 							.Parameter("OutHospitalData", OutHospitalData)
 							.Parameter("Height", Height)
 							.Parameter("Weight", Weight)
+							.Parameter("UpdateTime", dtNow)
 							.Execute();
 						
 						
 						
 					} else {
-						sql = "update PatientHospitalizeBasicInfo set department_dbkey=@departdbkey,bednumber_dbkey=@beddbkey,Clinicist_DBKey=@doctorydbkey, Height=@height,Weight=@Weight where patienthospitalize_dbkey=@pdhosdbkey;update patientbasicinfo set PatientName = @PatientName where PATIENT_DBKEY = @PATIENT_DBKEY;";
+						sql = "update PatientHospitalizeBasicInfo set department_dbkey=@departdbkey,bednumber_dbkey=@beddbkey,Clinicist_DBKey=@doctorydbkey, Height=@height,Weight=@Weight,UpdateTime=@UpdateTime where patienthospitalize_dbkey=@pdhosdbkey;update patientbasicinfo set PatientName = @PatientName where PATIENT_DBKEY = @PATIENT_DBKEY;";
 						int ret = ifObj.TargetDataProvider.Db.Sql(sql)
 							.Parameter("departdbkey", Department_DBKey)
 							.Parameter("beddbkey", beddbkey)
@@ -201,6 +202,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 							.Parameter("Weight", Weight)
 							.Parameter("PatientName", BRXM)
 							.Parameter("PATIENT_DBKEY", PATIENT_DBKEY)
+							.Parameter("UpdateTime", dtNow)
 							.Execute();
 					}
 				}

@@ -41,7 +41,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 			Console.WriteLine("正在导入检验数据，病案号：" + zyh);
 
 			//从Lis取检验数据
-			sql = "select *, ZYH LaboratoryIndexResultNo from V_CNIS_TestResult_i where bahm = '" + zyh + "'";
+			sql = "select * from V_CNIS_TestResult_i where zyh = '" + zyh + "'";
 			DataTable dtLis = ifObj.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 
 			if (dtLis.Rows.Count == 0)
@@ -59,7 +59,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 				testItemDict.Add(row["TestItemCode"].ToString(), row["TestItemDetail_DBKey"].ToString());
 			}
 
-			string sqlGetDBKey = "select b.PatientHospitalize_DBKey from patientbasicinfo a inner join patienthospitalizebasicinfo b on a.patient_dbkey = b.patient_dbkey where b.HospitalizationNumber = '{0}' order by InHospitalData desc limit 0,1";
+			string sqlGetDBKey = "select b.PatientHospitalize_DBKey from patientbasicinfo a inner join patienthospitalizebasicinfo b on a.patient_dbkey = b.patient_dbkey where b.HospitalizationNumber = @0 order by InHospitalData desc limit 0,1";
 
 			string bahm = "";
 			string LaboratoryIndexResultNo = "";
@@ -73,18 +73,19 @@ namespace DataSmith.CNIS.Plugin.IFace
 						bahm = zyh;
 						sql = string.Format(sqlGetDBKey, bahm);
 						Console.WriteLine("query patient");
-						PatientHospitalize_DBKey = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
+						PatientHospitalize_DBKey = ifObj.TargetDataProvider.Db.Sql(sql, bahm).QuerySingle<string>();
 					}
 
 					if (PatientHospitalize_DBKey == null)
 						continue;
 
 					//保存检验数据主表信息
-					if (LaboratoryIndexResultNo != row["LaboratoryIndexResultNo"].ToString()) {
-						LaboratoryIndexResultNo = row["LaboratoryIndexResultNo"].ToString();
+					var labNo = Convert.ToDateTime(row["createTime"]).ToString("yyyyMMddHHmmss");
+					if (LaboratoryIndexResultNo != labNo) {
+						LaboratoryIndexResultNo = labNo;
 
-						Console.WriteLine(LaboratoryIndexResultNo + "   -   " + row["SamTime"].ToString());
-						string SentTime = row["SamTime"].ToString();
+						Console.WriteLine(LaboratoryIndexResultNo + "   -   " + row["createTime"].ToString());
+						string SentTime = row["createTime"].ToString();
 
 						//判断检验单号是否已经导入过了
 						sql = "select count(*) cc from laboratoryindex where LaboratoryIndexResultNo = '" + LaboratoryIndexResultNo + "'";
@@ -104,7 +105,7 @@ namespace DataSmith.CNIS.Plugin.IFace
 							//WriteLogFile("D:\\LIS.txt", "插入检验单号前");
 
 							ret = ifObj.TargetDataProvider.Db.Sql(sql)
-								.Parameter("ReportName", row["LabNo"].ToString())
+								.Parameter("ReportName", "")
 								.Parameter("LaboratoryIndex_DBKey", LaboratoryIndex_DBKey)
 								.Parameter("PatientHospitalize_DBKey", PatientHospitalize_DBKey)
 								.Parameter("LaboratoryIndexResultNo", LaboratoryIndexResultNo)

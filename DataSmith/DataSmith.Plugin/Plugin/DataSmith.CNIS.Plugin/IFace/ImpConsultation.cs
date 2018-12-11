@@ -21,12 +21,12 @@ namespace DataSmith.CNIS.Plugin.IFace
 			string beginDate = DateTime.Now.AddDays(-15).ToString("yyyy-MM-dd");
 			string sql = "select * from V_CNIS_PatientConsultation_i where ";
 			if (string.IsNullOrEmpty(zyh)) {
-				sql += " (ConsultationDate > '" + beginDate + "' or ApplyTime > '" + beginDate + "')";
+				sql += " (ConsultationDate between sysdate - 15 and sysdate or ApplyTime between sysdate - 15 and sysdate)";
 			} else {
 				sql += " ZYH = '" + zyh + "'";
 			}
         	
-			DataTable dt = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
+			DataTable dt = ifObj.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 			Console.WriteLine("共计：" + dt.Rows.Count + "条记录");
 
 			foreach (DataRow row in dt.Rows) {
@@ -35,17 +35,17 @@ namespace DataSmith.CNIS.Plugin.IFace
 		}
 		public void Import(DataRow row)
 		{
-			var ZYH = row["ZYH"].ToString();
+			var ZYH = row["HOSPITALIZATIONNUMBER"].ToString();
 			try {
 				string ConsultationNo = row["ConsultationNo"].ToString();//会诊单号
-				string ApplyDepartmentCode = row["ApplyDepartmentCode"].ToString();//申请科室Code
-				string ApplyDepartmentName = row["ApplyDepartmentName"].ToString();//申请科室
+				string ApplyDepartmentCode = "";//row["ApplyDepartmentCode"].ToString();//申请科室Code
+				string ApplyDepartmentName = row["APPLYDEPARTMENT"].ToString();//申请科室
 				string ApplyTime = row["ApplyTime"].ToString();//申请时间
 				string PatientCondition = row["PatientCondition"].ToString();//患者病情
 				string ConsultationReason = row["ConsultationReason"].ToString();//会诊理由
-				string ApplyConsultationDoctorName = row["ApplyConsultationDoctorName"].ToString();//申请会诊医师姓名
-				string ConsultationDepartmentCode = row["ConsultationDepartmentCode"].ToString();//会诊科室Code
-				string ConsultationDepartmentName = row["ConsultationDepartmentName"].ToString();//会诊科室
+				string ApplyConsultationDoctorName = "";//row["ApplyConsultationDoctorName"].ToString();//申请会诊医师姓名
+				string ConsultationDepartmentCode = "";//row["ConsultationDepartmentCode"].ToString();//会诊科室Code
+				string ConsultationDepartmentName = row["CONSULTATIONDEPARTMENT"].ToString();//会诊科室
 				string ConsultationDate = row["ConsultationDate"].ToString();//会诊时间
 				string ConsultationComments = row["ConsultationComments"].ToString();//会诊意见
 				string ConsultationDoctorName = row["ConsultationDoctorName"].ToString();//会诊医师姓名
@@ -56,50 +56,35 @@ namespace DataSmith.CNIS.Plugin.IFace
 
 				string PatientHospitalize_DBKey = "";
 				string sql = "	select PatientHospitalize_DBKey from patienthospitalizebasicinfo where  HospitalizationNumber='" + ZYH + "';";
-				object obj = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
-				if (obj == null) {
+				PatientHospitalize_DBKey = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
+				if (PatientHospitalize_DBKey == null) {
 					return;
-				} else {
-					PatientHospitalize_DBKey = obj.ToString();
-				}
+				} 
 
 				//申请科室
 				string ApplyDepartment_DBKey = "";
-				sql = "	select Department_DBKey from department where DepartmentCode='" + ApplyDepartmentCode + "';";
-				obj = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
-				if (obj != null) {
-					ApplyDepartment_DBKey = obj.ToString();
-				}
+				sql = "	select Department_DBKey from department where DepartmentName='" + ApplyDepartmentName + "';";
+				ApplyDepartment_DBKey = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
 
 				//会诊科室
 				string ConsultationDepartment_DBKey = "";
-				sql = "	select Department_DBKey from department where DepartmentCode='" + ConsultationDepartmentCode + "';";
-				obj = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
-				if (obj != null) {
-					ConsultationDepartment_DBKey = obj.ToString();
-				}
+				sql = "	select Department_DBKey from department where DepartmentName='" + ConsultationDepartmentName + "';";
+				ConsultationDepartment_DBKey = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
 
 				//申请会诊医师
 				string ApplyConsultationDoctor_DBKey = "";
 				sql = "	select User_DBKey from `user` where UserName='" + ApplyConsultationDoctorName + "';";
-				obj = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
-				if (obj != null) {
-					ApplyConsultationDoctor_DBKey = obj.ToString();
-				}
+				ApplyConsultationDoctor_DBKey = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
 
 				//会诊医师姓名
 				string ConsultationDoctor_DBKey = "";
 				sql = "	select User_DBKey from `user` where UserName='" + ConsultationDoctorName + "';";
-				obj = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
-				if (obj != null) {
-					ConsultationDoctor_DBKey = obj.ToString();
-				}
-
+				ConsultationDoctor_DBKey = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
 
 				sql = "select ConsultationNo_DBKey from patientconsultation where ConsultationNo = '" + ConsultationNo + "'";
-				obj = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<object>();
-				string ConsultationNo_DBKey = "";
-				if (obj == null) {
+				string ConsultationNo_DBKey = ifObj.TargetDataProvider.Db.Sql(sql).QuerySingle<string>();
+
+				if (ConsultationNo_DBKey == null) {
 					//新增
 					ConsultationNo_DBKey = GetSeed("ConsultationNo_DBKey");
 
@@ -172,8 +157,6 @@ namespace DataSmith.CNIS.Plugin.IFace
 				} else {
 
 					//更新
-					ConsultationNo_DBKey = obj.ToString();
-
 					sql = @"update patientconsultation set 
 									ConsultationDepartment=@ConsultationDepartment,-- 会诊科室
 									ConsultationDate=@ConsultationDate,-- 会诊时间
