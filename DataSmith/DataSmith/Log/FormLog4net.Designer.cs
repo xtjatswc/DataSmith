@@ -52,6 +52,8 @@
             this.inputButton2 = new C1.Win.C1InputPanel.InputButton();
             this.logBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.inputLabel1 = new C1.Win.C1InputPanel.InputLabel();
+            this.inputButton3 = new C1.Win.C1InputPanel.InputButton();
+            this.inputComboBox1 = new C1.Win.C1InputPanel.InputComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.c1FlexGrid1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel2)).BeginInit();
@@ -101,9 +103,11 @@
             // 
             this.c1InputPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.c1InputPanel2.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
+            this.c1InputPanel2.Items.Add(this.inputComboBox1);
             this.c1InputPanel2.Items.Add(this.inputButton1);
             this.c1InputPanel2.Items.Add(this.inputLabel1);
             this.c1InputPanel2.Items.Add(this.inputButton2);
+            this.c1InputPanel2.Items.Add(this.inputButton3);
             this.c1InputPanel2.Location = new System.Drawing.Point(932, 0);
             this.c1InputPanel2.Name = "c1InputPanel2";
             this.c1InputPanel2.Padding = new System.Windows.Forms.Padding(2, 30, 2, 2);
@@ -242,6 +246,7 @@
             // 
             // inputButton2
             // 
+            this.inputButton2.Break = C1.Win.C1InputPanel.BreakType.None;
             this.inputButton2.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputButton2.Name = "inputButton2";
             this.inputButton2.TabStop = false;
@@ -258,6 +263,25 @@
             this.inputLabel1.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputLabel1.Name = "inputLabel1";
             this.inputLabel1.Text = "第{0}页";
+            // 
+            // inputButton3
+            // 
+            this.inputButton3.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputButton3.Name = "inputButton3";
+            this.inputButton3.TabStop = false;
+            this.inputButton3.Text = "清空";
+            this.inputButton3.Width = 90;
+            this.inputButton3.Click += new System.EventHandler(this.inputButton3_Click);
+            // 
+            // inputComboBox1
+            // 
+            this.inputComboBox1.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.inputComboBox1.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
+            this.inputComboBox1.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputComboBox1.Name = "inputComboBox1";
+            this.inputComboBox1.TabStop = false;
+            this.inputComboBox1.Width = 163;
+            this.inputComboBox1.ChangeCommitted += new System.EventHandler(this.inputComboBox1_ChangeCommitted);
             // 
             // FormLog4net
             // 
@@ -302,5 +326,7 @@
         private C1.Win.C1InputPanel.InputButton inputButton1;
         private C1.Win.C1InputPanel.InputButton inputButton2;
         private C1.Win.C1InputPanel.InputLabel inputLabel1;
+        private C1.Win.C1InputPanel.InputComboBox inputComboBox1;
+        private C1.Win.C1InputPanel.InputButton inputButton3;
     }
 }

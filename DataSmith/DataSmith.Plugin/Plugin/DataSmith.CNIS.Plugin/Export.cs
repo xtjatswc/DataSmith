@@ -89,7 +89,9 @@ namespace DataSmith.CNIS.Plugin
 				absImp.Import();
 
 			} catch (Exception ex) {
-				Console.WriteLine(ExceptionUtil.getInnerException(ex));
+				var msg = ExceptionUtil.getInnerException(ex);
+				context.Log.Error(msg, ex);
+				Console.WriteLine();
 				Thread.Sleep(10000);
 			}
 		}

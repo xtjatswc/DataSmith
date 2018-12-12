@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using C1.Win.C1InputPanel;
 using DataSmith.Core.Context;
 using DataSmith.Core.Infrastructure.DAL;
 
@@ -21,6 +22,9 @@ namespace DataSmith.Log
         public FormLog4net()
         {
             InitializeComponent();
+
+            string[] arr = new[] { "ALL", "ERROR", "INFO" };
+            inputComboBox1.DataSource = arr;
         }
 
         private void FormLog4net_Load(object sender, EventArgs e)
@@ -39,10 +43,9 @@ namespace DataSmith.Log
 
         private void inputButton1_Click(object sender, EventArgs e)
         {
-            if(_pageIndex == 1)
-                return;
+            if (_pageIndex > 1)
+                _pageIndex--;
 
-            _pageIndex--;
             GetData(_pageIndex, _pageSize);
         }
 
@@ -60,9 +63,28 @@ namespace DataSmith.Log
         private int GetData(int currentPage, int itemsPerPage)
         {
             inputLabel1.Text = string.Format("第{0}页", _pageIndex);
-            _models = _logDal.GetModels(currentPage: currentPage, itemsPerPage: itemsPerPage, orderBy: "Date desc");
+            string sWhere = "";
+            if (inputComboBox1.Text != "ALL")
+            {
+                sWhere = $"Level='{inputComboBox1.Text}'";
+            }
+
+            _models = _logDal.GetModels(where: sWhere, currentPage: currentPage, itemsPerPage: itemsPerPage, orderBy: "Date desc");
             c1FlexGrid1.DataSource = _models;
             return _models.Count;
+        }
+
+        private void inputButton3_Click(object sender, EventArgs e)
+        {
+            _logDal.Db.Sql("delete from Log").Execute();
+            c1InputPanel1.DataSource = new Core.Infrastructure.Model.Log();
+            _pageIndex = 1;
+            GetData(_pageIndex, _pageSize);
+        }
+
+        private void inputComboBox1_ChangeCommitted(object sender, EventArgs e)
+        {
+            GetData(_pageIndex, _pageSize);
         }
     }
 }

@@ -14,6 +14,8 @@ namespace DataSmith.Core.Context
         //命令行参数
         public string[] Args { get; set; }
 
-        public Dictionary<Int64, InterfaceObj> IfDict { get; set; } = new Dictionary<Int64, InterfaceObj>(); 
+        public Dictionary<Int64, InterfaceObj> IfDict { get; set; } = new Dictionary<Int64, InterfaceObj>();
+
+        public log4net.ILog Log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
     }
 }

@@ -51,6 +51,7 @@
     </Reference>
     <Reference Include="DataSmith.Core">
       <HintPath>..\..\..\bin\DataSmith.Core.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="FluentData">
       <HintPath>..\..\..\DLL\FluentData.dll</HintPath>
