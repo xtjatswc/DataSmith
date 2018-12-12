@@ -36,6 +36,7 @@ namespace DataSmith.Core.Context
 
         public static IDbContext db = new DbContext().ConnectionString(LessConfig.db1, new MySqlProvider());
         public static IDbContext db1 = new DbContext().ConnectionString(LessConfig.db2, new SqliteProvider());
+        public static IDbContext db2 = new DbContext().ConnectionString(LessConfig.db3, new SqliteProvider());
 
         public static TService GetService<TService>()
         {

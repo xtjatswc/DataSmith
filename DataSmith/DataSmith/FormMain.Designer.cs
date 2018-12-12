@@ -36,6 +36,7 @@
             this.inputButton4 = new C1.Win.C1InputPanel.InputButton();
             this.inputButton5 = new C1.Win.C1InputPanel.InputButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.inputButton6 = new C1.Win.C1InputPanel.InputButton();
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,11 +48,12 @@
             this.c1InputPanel1.Items.Add(this.inputButton2);
             this.c1InputPanel1.Items.Add(this.inputButton3);
             this.c1InputPanel1.Items.Add(this.inputButton4);
+            this.c1InputPanel1.Items.Add(this.inputButton6);
             this.c1InputPanel1.Items.Add(this.inputButton5);
             this.c1InputPanel1.Location = new System.Drawing.Point(0, 0);
-            this.c1InputPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.c1InputPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.c1InputPanel1.Name = "c1InputPanel1";
-            this.c1InputPanel1.Size = new System.Drawing.Size(936, 66);
+            this.c1InputPanel1.Size = new System.Drawing.Size(1248, 82);
             this.c1InputPanel1.TabIndex = 0;
             this.c1InputPanel1.VisualStyle = C1.Win.C1InputPanel.VisualStyle.Office2007Blue;
             // 
@@ -117,22 +119,34 @@
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 66);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Location = new System.Drawing.Point(0, 82);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(936, 485);
+            this.panel1.Size = new System.Drawing.Size(1248, 607);
             this.panel1.TabIndex = 1;
+            // 
+            // inputButton6
+            // 
+            this.inputButton6.Break = C1.Win.C1InputPanel.BreakType.None;
+            this.inputButton6.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputButton6.Height = 60;
+            this.inputButton6.ImageSize = new System.Drawing.Size(32, 32);
+            this.inputButton6.Name = "inputButton6";
+            this.inputButton6.TabStop = false;
+            this.inputButton6.Text = "系统日志";
+            this.inputButton6.Width = 180;
+            this.inputButton6.Click += new System.EventHandler(this.inputButton6_Click);
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(936, 551);
+            this.ClientSize = new System.Drawing.Size(1248, 689);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.c1InputPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DataSmith";
@@ -152,5 +166,6 @@
         private C1.Win.C1InputPanel.InputButton inputButton3;
         private C1.Win.C1InputPanel.InputButton inputButton4;
         private C1.Win.C1InputPanel.InputButton inputButton5;
+        private C1.Win.C1InputPanel.InputButton inputButton6;
     }
 }

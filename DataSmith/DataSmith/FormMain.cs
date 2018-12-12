@@ -4,9 +4,11 @@ using System.Windows.Forms;
 using C1.Win.C1InputPanel;
 using DataSmith.Core.Context;
 using DataSmith.Core.Extension;
+using DataSmith.Core.Infrastructure.DAL;
 using DataSmith.Core.Util;
 using DataSmith.DbSource;
 using DataSmith.Interface;
+using DataSmith.Log;
 using DataSmith.Task;
 using DataSmith.Util;
 
@@ -28,6 +30,7 @@ namespace DataSmith
             inputButton3.Image = DataSmith.Res.Resource48.table_relationship_48px_527120_easyicon_net;
             inputButton4.Image = DataSmith.Res.Resource128.transfer;
             inputButton5.Image = DataSmith.Res.Resource48.close_48px_1175541_easyicon_net;
+            inputButton6.Image = DataSmith.Res.Resource48.LOG_File_Extension_48px_1140175_easyicon_net;
         }
 
         protected override void WndProc(ref Message m)
@@ -73,6 +76,12 @@ namespace DataSmith
         {
             //Environment.Exit(Environment.ExitCode);
             System.Diagnostics.Process.GetCurrentProcess().Kill();
+        }
+
+        private void inputButton6_Click(object sender, EventArgs e)
+        {
+            FormLog4net frm = Host.GetService<FormLog4net>();
+            panel1.ShowForm(frm);
         }
     }
 }

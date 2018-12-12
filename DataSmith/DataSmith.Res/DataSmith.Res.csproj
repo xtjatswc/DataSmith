@@ -102,5 +102,8 @@
   <ItemGroup>
     <None Include="Resources\bulb_72px_28127_easyicon.net.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LOG_File_Extension_48px_1140175_easyicon.net.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

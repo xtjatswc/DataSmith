@@ -40,6 +40,21 @@ namespace DataSmith.Core.Config
             }
         }
 
+        private static string _db3;
+        public static string db3
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_db3))
+                {
+                    //Password=asdf1234;
+                    _db3 = string.Format(JsonConfig.Config.Global.DataBases.db3.ToString(), DbPath, "");
+                }
+                return _db3;
+            }
+        }
+
+
         public static string Copyright { get { return JsonConfig.Config.Global.LessBase.SystemInfo.Copyright; } }
         public static string Version { get { return JsonConfig.Config.Global.LessBase.SystemInfo.Version; } }
 

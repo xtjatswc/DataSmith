@@ -83,6 +83,16 @@ namespace DataSmith.Res {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        public static System.Drawing.Bitmap LOG_File_Extension_48px_1140175_easyicon_net {
+            get {
+                object obj = ResourceManager.GetObject("LOG_File_Extension_48px_1140175_easyicon_net", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         public static System.Drawing.Bitmap SQL_File_Extension_48px_1140212_easyicon_net {
             get {
                 object obj = ResourceManager.GetObject("SQL_File_Extension_48px_1140212_easyicon_net", resourceCulture);
