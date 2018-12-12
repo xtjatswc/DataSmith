@@ -91,7 +91,7 @@ namespace DataSmith.CNIS.Plugin
 			} catch (Exception ex) {
 				var msg = ExceptionUtil.getInnerException(ex);
 				context.Log.Error(msg, ex);
-				Console.WriteLine();
+				Console.WriteLine(msg);
 				Thread.Sleep(10000);
 			}
 		}
