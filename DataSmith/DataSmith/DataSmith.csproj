@@ -120,10 +120,10 @@
     <Compile Include="Interface\FormSqlPreview.Designer.cs">
       <DependentUpon>FormSqlPreview.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormFieldMapping.cs">
+    <Compile Include="Interface\FormFieldMapping.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormFieldMapping.Designer.cs">
+    <Compile Include="Interface\FormFieldMapping.Designer.cs">
       <DependentUpon>FormFieldMapping.cs</DependentUpon>
     </Compile>
     <Compile Include="Interface\FormInterfaceList.cs">
@@ -171,7 +171,7 @@
     <EmbeddedResource Include="Interface\FormSqlPreview.resx">
       <DependentUpon>FormSqlPreview.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormFieldMapping.resx">
+    <EmbeddedResource Include="Interface\FormFieldMapping.resx">
       <DependentUpon>FormFieldMapping.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Interface\FormInterfaceList.resx">

@@ -42,13 +42,29 @@ namespace DataSmith.Interface
                 inputGroupHeader.Text = ic.ClassifyName;
                 c1InputPanel1.Items.Add(inputGroupHeader);
 
-                var interfaces = _interfacesDal.GetModels($"ClassifyID={ic.ID}");
+                var interfaces = _interfacesDal.GetModels(where:$"ClassifyID={ic.ID} and IsDeleted = 0");
                 foreach (var model in interfaces)
                 {
+                    //状态图标
+                    InputImage inputImage = new InputImage();
+                    if (this.Parent.GetType() == typeof(FormInterfaceList))
+                    {
+                        inputImage.Image = model.ViewPassed == 1 ? DataSmith.Res.Resource72.bulb_green_72px_12741_easyicon_net : DataSmith.Res.Resource72.bulb_72px_28127_easyicon_net;
+                    }
+                    else if (this.Parent.GetType() == typeof(FormFieldMapping))
+                    {
+                        inputImage.Image = model.FieldPassed == 1 ? DataSmith.Res.Resource72.bulb_green_72px_12741_easyicon_net : DataSmith.Res.Resource72.bulb_72px_28127_easyicon_net;
+                    }
+                    inputImage.Width = 32;
+                    inputImage.Height = 32;
+                    inputImage.Break = BreakType.None;
+                    inputImage.Tag = model;
+                    c1InputPanel1.Items.Add(inputImage);
+
                     var inputButton = new InputButton();
                     inputButton.Font = new System.Drawing.Font("微软雅黑", 10F);
                     inputButton.Text = model.InterfaceName;
-                    inputButton.Width = c1InputPanel1.Width - 20;
+                    inputButton.Width = c1InputPanel1.Width - 60;
                     inputButton.Click += InputButton_Click;
                     inputButton.Tag = model;
                     c1InputPanel1.Items.Add(inputButton);
@@ -56,6 +72,30 @@ namespace DataSmith.Interface
             }
             c1InputPanel1.SetSwitchToggle();
 
+        }
+
+        public void RefreshPassed(Interfaces ds1)
+        {
+            foreach (InputComponent inputComponent in c1InputPanel1.Items)
+            {
+                InputImage inputImage = inputComponent as InputImage;
+                if (inputImage != null)
+                {
+                    var ds2 = inputImage.Tag as Interfaces;
+                    if (ds1.ID == ds2.ID)
+                    {
+                        if (this.Parent.GetType() == typeof(FormInterfaceList))
+                        {
+                            inputImage.Image = ds1.ViewPassed == 1 ? DataSmith.Res.Resource72.bulb_green_72px_12741_easyicon_net : DataSmith.Res.Resource72.bulb_72px_28127_easyicon_net;
+                        }
+                        else if (this.Parent.GetType() == typeof(FormFieldMapping))
+                        {
+                            inputImage.Image = ds1.FieldPassed == 1 ? DataSmith.Res.Resource72.bulb_green_72px_12741_easyicon_net : DataSmith.Res.Resource72.bulb_72px_28127_easyicon_net;
+                        }
+                    }
+                }
+
+            }
         }
 
         private void InputButton_Click(object sender, EventArgs e)

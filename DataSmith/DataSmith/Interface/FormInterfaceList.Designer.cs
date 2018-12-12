@@ -35,28 +35,29 @@
             // panel1
             // 
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(197, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
+            this.panel1.Location = new System.Drawing.Point(285, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(557, 577);
+            this.panel1.Size = new System.Drawing.Size(720, 721);
             this.panel1.TabIndex = 1;
             // 
             // interfaceNav1
             // 
             this.interfaceNav1.Dock = System.Windows.Forms.DockStyle.Left;
             this.interfaceNav1.Location = new System.Drawing.Point(0, 0);
+            this.interfaceNav1.Margin = new System.Windows.Forms.Padding(5);
             this.interfaceNav1.Name = "interfaceNav1";
-            this.interfaceNav1.Size = new System.Drawing.Size(197, 577);
+            this.interfaceNav1.Size = new System.Drawing.Size(285, 721);
             this.interfaceNav1.TabIndex = 2;
             // 
             // FormInterfaceList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(754, 577);
+            this.ClientSize = new System.Drawing.Size(1005, 721);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.interfaceNav1);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormInterfaceList";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

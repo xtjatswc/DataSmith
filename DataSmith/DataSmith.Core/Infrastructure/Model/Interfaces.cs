@@ -17,5 +17,9 @@ namespace DataSmith.Core.Infrastructure.Model
         public Int64 TargetDataSourceID { get; set; }
         public String ViewName { get; set; }
         public decimal SortNo { get; set; }
+        public Int64 IsDeleted { get; set; }
+        public Int64 ViewPassed { get; set; }
+        public Int64 FieldPassed { get; set; }
+
     }
 }

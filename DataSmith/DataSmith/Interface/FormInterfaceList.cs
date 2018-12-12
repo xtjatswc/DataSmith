@@ -28,6 +28,14 @@ namespace DataSmith.Interface
 
             frm.InterfaceId = e.ID;
             frm.ChangeInterface();
+
+            frm.AfterSaved -= Frm_AfterSaved;
+            frm.AfterSaved += Frm_AfterSaved;
+        }
+
+        private void Frm_AfterSaved(object sender, EventArgs e)
+        {
+            interfaceNav1.RefreshPassed(sender as Interfaces);
         }
     }
 }

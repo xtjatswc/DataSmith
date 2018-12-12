@@ -9,18 +9,28 @@ using DataSmith.Core.Extension;
 using DataSmith.Core.Infrastructure.DAL;
 using DataSmith.Core.Infrastructure.Model;
 
-namespace DataSmith
+namespace DataSmith.Interface
 {
     public partial class FormFieldMapping : Form
     {
         private readonly FieldSetDal _fieldSetDal = Host.GetService<FieldSetDal>();
         private readonly ViewFieldSetDal _viewFieldSetDal = Host.GetService<ViewFieldSetDal>();
+        private readonly InterfacesDal _interfacesDal = Host.GetService<InterfacesDal>();
 
         private Dictionary<FieldSet, dynamic> _dictForm = new Dictionary<FieldSet, dynamic>();
+        private Int64 _interfaceID;
+
+        public event EventHandler AfterSaved;
 
         public FormFieldMapping()
         {
             InitializeComponent();
+            AfterSaved += FormFieldMapping_AfterSaved;
+        }
+
+        private void FormFieldMapping_AfterSaved(object sender, EventArgs e)
+        {
+            interfaceNav1.RefreshPassed(sender as Interfaces);
         }
 
         private void Form3_Load(object sender, EventArgs e)
@@ -31,7 +41,8 @@ namespace DataSmith
 
         private void InterfaceNav1_NavClick(Interfaces e)
         {
-            var fieldSets = _fieldSetDal.GetModels($"InterfaceID={e.ID}", "SortNo");
+            _interfaceID = e.ID;
+            var fieldSets = _fieldSetDal.GetModels($"InterfaceID={_interfaceID}", "SortNo");
             inputGroupHeader1.Text = e.InterfaceName;
 
             c1InputPanel2.Items.Clear();
@@ -147,6 +158,11 @@ namespace DataSmith
                 fieldSet.FieldAlias = inputComboBoxFieldAlias.SelectedValue.ToString();
                 _fieldSetDal.Update(fieldSet, x => x.ID);
             }
+
+            var interfaces = _interfacesDal.GetModel(_interfaceID);
+            interfaces.FieldPassed = 1;
+            _interfacesDal.Update(interfaces, x => x.ID);
+            AfterSaved?.Invoke(interfaces, new EventArgs());
 
             MessageBox.Show("保存成功!");
         }

@@ -19,6 +19,8 @@ namespace DataSmith.Interface
         public Int64 InterfaceId { get; set; }
         private Core.Infrastructure.Model.Interfaces _interfaces;
 
+        public event EventHandler AfterSaved;
+
         public FormSqlPreview()
         {
             InitializeComponent();
@@ -92,6 +94,7 @@ namespace DataSmith.Interface
                 _interfaces.ViewName = inputTextBox2.Text;
                 _interfaces.DataSourceID = Convert.ToInt64(inputComboBox1.SelectedValue);
                 _interfaces.TargetDataSourceID = Convert.ToInt64(inputComboBox2.SelectedValue);
+                _interfaces.ViewPassed = 1;
                 _interfacesDal.Update(_interfaces, x => x.ID);
 
                 //保存字段列表
@@ -109,6 +112,8 @@ namespace DataSmith.Interface
 
                 context.Commit();
             }
+
+            AfterSaved?.Invoke(_interfaces, new EventArgs());
 
             MessageBox.Show("保存成功!");
         }

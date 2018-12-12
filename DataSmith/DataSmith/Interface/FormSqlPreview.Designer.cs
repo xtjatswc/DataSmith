@@ -33,16 +33,16 @@
             this.inputLabel3 = new C1.Win.C1InputPanel.InputLabel();
             this.inputLabel4 = new C1.Win.C1InputPanel.InputLabel();
             this.inputComboBox1 = new C1.Win.C1InputPanel.InputComboBox();
+            this.inputLabel6 = new C1.Win.C1InputPanel.InputLabel();
+            this.inputComboBox2 = new C1.Win.C1InputPanel.InputComboBox();
             this.inputLabel5 = new C1.Win.C1InputPanel.InputLabel();
             this.inputTextBox2 = new C1.Win.C1InputPanel.InputTextBox();
+            this.inputLabel7 = new C1.Win.C1InputPanel.InputLabel();
             this.inputLabel2 = new C1.Win.C1InputPanel.InputLabel();
             this.inputTextBox1 = new C1.Win.C1InputPanel.InputTextBox();
             this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
             this.inputButton2 = new C1.Win.C1InputPanel.InputButton();
             this.c1FlexGrid1 = new C1.Win.C1FlexGrid.C1FlexGrid();
-            this.inputLabel6 = new C1.Win.C1InputPanel.InputLabel();
-            this.inputComboBox2 = new C1.Win.C1InputPanel.InputComboBox();
-            this.inputLabel7 = new C1.Win.C1InputPanel.InputLabel();
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.c1FlexGrid1)).BeginInit();
             this.SuspendLayout();
@@ -65,9 +65,10 @@
             this.c1InputPanel1.Items.Add(this.inputButton1);
             this.c1InputPanel1.Items.Add(this.inputButton2);
             this.c1InputPanel1.Location = new System.Drawing.Point(0, 0);
-            this.c1InputPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.c1InputPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.c1InputPanel1.MouseWheelEdit = false;
             this.c1InputPanel1.Name = "c1InputPanel1";
-            this.c1InputPanel1.Size = new System.Drawing.Size(1292, 187);
+            this.c1InputPanel1.Size = new System.Drawing.Size(1723, 234);
             this.c1InputPanel1.TabIndex = 0;
             this.c1InputPanel1.VisualStyle = C1.Win.C1InputPanel.VisualStyle.Office2007Blue;
             // 
@@ -101,6 +102,20 @@
             this.inputComboBox1.Width = 218;
             this.inputComboBox1.ChangeCommitted += new System.EventHandler(this.inputComboBox1_ChangeCommitted);
             // 
+            // inputLabel6
+            // 
+            this.inputLabel6.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputLabel6.Name = "inputLabel6";
+            this.inputLabel6.Text = "目标数据源";
+            this.inputLabel6.Width = 80;
+            // 
+            // inputComboBox2
+            // 
+            this.inputComboBox2.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
+            this.inputComboBox2.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputComboBox2.Name = "inputComboBox2";
+            this.inputComboBox2.Width = 218;
+            // 
             // inputLabel5
             // 
             this.inputLabel5.Font = new System.Drawing.Font("微软雅黑", 10F);
@@ -115,6 +130,14 @@
             this.inputTextBox2.Name = "inputTextBox2";
             this.inputTextBox2.Width = 524;
             this.inputTextBox2.TextChanged += new System.EventHandler(this.inputTextBox2_TextChanged);
+            // 
+            // inputLabel7
+            // 
+            this.inputLabel7.Break = C1.Win.C1InputPanel.BreakType.Group;
+            this.inputLabel7.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputLabel7.ForeColor = System.Drawing.Color.Blue;
+            this.inputLabel7.Name = "inputLabel7";
+            this.inputLabel7.Text = "备注：部分数据库视图需要在名称前带上用户名前缀，如HISDB.V_CNIS_ZYBRXX";
             // 
             // inputLabel2
             // 
@@ -156,44 +179,22 @@
             // 
             this.c1FlexGrid1.ColumnInfo = "10,1,0,0,0,120,Columns:";
             this.c1FlexGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.c1FlexGrid1.Location = new System.Drawing.Point(0, 187);
-            this.c1FlexGrid1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.c1FlexGrid1.Location = new System.Drawing.Point(0, 234);
+            this.c1FlexGrid1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.c1FlexGrid1.Name = "c1FlexGrid1";
             this.c1FlexGrid1.Rows.DefaultSize = 24;
-            this.c1FlexGrid1.Size = new System.Drawing.Size(1292, 383);
+            this.c1FlexGrid1.Size = new System.Drawing.Size(1723, 478);
             this.c1FlexGrid1.TabIndex = 1;
             this.c1FlexGrid1.VisualStyle = C1.Win.C1FlexGrid.VisualStyle.Office2007Blue;
             // 
-            // inputLabel6
-            // 
-            this.inputLabel6.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.inputLabel6.Name = "inputLabel6";
-            this.inputLabel6.Text = "目标数据源";
-            this.inputLabel6.Width = 80;
-            // 
-            // inputComboBox2
-            // 
-            this.inputComboBox2.DropDownStyle = C1.Win.C1InputPanel.InputComboBoxStyle.DropDownList;
-            this.inputComboBox2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.inputComboBox2.Name = "inputComboBox2";
-            this.inputComboBox2.Width = 218;
-            // 
-            // inputLabel7
-            // 
-            this.inputLabel7.Break = C1.Win.C1InputPanel.BreakType.Group;
-            this.inputLabel7.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.inputLabel7.ForeColor = System.Drawing.Color.Blue;
-            this.inputLabel7.Name = "inputLabel7";
-            this.inputLabel7.Text = "备注：部分数据库视图需要在名称前带上用户名前缀，如HISDB.V_CNIS_ZYBRXX";
-            // 
             // FormSqlPreview
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1292, 570);
+            this.ClientSize = new System.Drawing.Size(1723, 712);
             this.Controls.Add(this.c1FlexGrid1);
             this.Controls.Add(this.c1InputPanel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormSqlPreview";
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.Form2_Load);
