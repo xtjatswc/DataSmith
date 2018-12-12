@@ -18,3 +18,5 @@
 /DataSmith/bin/DataSmith.Res.dll
 /DataSmith/DataSmith/DataSmith.csproj.user
 /release/DataSmith.exe
+/release/DataSmith_FW.exe
+/release/Setup Script/dotNetFx40_Full_x86_x64.exe
