@@ -33,9 +33,9 @@ InfoBeforeFile=before installation.txt
 InfoAfterFile=after installation.txt
 OutputDir=..\
 #if IncludeFramework  
-  OutputBaseFilename=DataSmith_FW  
+  OutputBaseFilename=Setup_FW  
 #else  
-  OutputBaseFilename=DataSmith  
+  OutputBaseFilename=Setup  
 #endif
 SetupIconFile=setup.ico
 Password=ainst
@@ -53,7 +53,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Source: "..\..\DataSmith\bin\*"; DestDir: "{app}\bin"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\..\DataSmith\msg\*"; DestDir: "{app}\msg"; Flags: ignoreversion recursesubdirs createallsubdirs
 #if IncludeFramework  
-Source: "dotNetFx40_Full_x86_x64.exe"; DestDir: "{app}\环境配置"; Flags: ignoreversion ; Check:NeedsFramework
+;Source: "dotNetFx40_Full_x86_x64.exe"; DestDir: "{app}\环境配置"; Flags: ignoreversion
 #endif
 ; 注意: 不要在任何共享系统文件上使用“Flags: ignoreversion”  
 
@@ -61,7 +61,7 @@ Source: "dotNetFx40_Full_x86_x64.exe"; DestDir: "{app}\环境配置"; Flags: ign
 [Icons]
 ;开始菜单快捷方式
 Name: "{commonprograms}\接口工具\{#MyAppName}"; Filename: "{app}\bin\{#MyAppExeName}"
-Name: "{commonprograms}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
+Name: "{commonprograms}\接口工具\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 ;桌面快捷方式
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\bin\{#MyAppExeName}"; Tasks: desktopicon
 
@@ -130,7 +130,7 @@ UnInstallFile : String;
 begin
     ResultCode:=-1;
     UnInstallFile:=''
-    RegQueryStringValue(HKLM, 'SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{A6A7578-84EC-4006-8226-C87D71FB94}_is1', 'UninstallString', UnInstallFile);
+    RegQueryStringValue(HKLM, 'SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{D2A45316-77EC-47BC-BED5-E6DEB8C02238}_is1', 'UninstallString', UnInstallFile);
     StringChangeEx(UnInstallFile, '"', '', True);
     if(FileExists(UnInstallFile)) then begin
         Exec(UnInstallFile, '/norestart', ExtractFilePath(UnInstallFile), SW_SHOWNORMAL, ewWaitUntilTerminated, ResultCode);
@@ -170,9 +170,9 @@ begin
         end
     end 
     else begin
-        #if IncludeFramework
+        //#if IncludeFramework
         Result :=CheckDotNetFrameWork(); //安装程序继续 
-        #endif
+        //#endif
         IsRunning:=GetLogedOrLoggingWindow();
     end; 
 end;
