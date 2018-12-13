@@ -38,7 +38,7 @@ OutputDir=..\
   OutputBaseFilename=Setup  
 #endif
 SetupIconFile=setup.ico
-Password=ainst
+;Password=ainst
 Compression=lzma
 SolidCompression=yes
 
@@ -52,6 +52,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 ;Source: "..\..\DataSmith\bin\DataSmith.exe"; DestDir: "{app}\bin"; Flags: ignoreversion
 Source: "..\..\DataSmith\bin\*"; DestDir: "{app}\bin"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\..\DataSmith\msg\*"; DestDir: "{app}\msg"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: ISTask.dll; DestDir: {app}; Flags: ignoreversion
 #if IncludeFramework  
 ;Source: "dotNetFx40_Full_x86_x64.exe"; DestDir: "{app}\环境配置"; Flags: ignoreversion
 #endif
@@ -72,18 +73,23 @@ Filename: "{app}\bin\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringC
 [code]
 //全局变量
 var
-ErrorCode,IsRunning: Integer;
+ErrorCode: Integer;
+IsRunning: Boolean;
 const WM_CLOSE=$0010;
 
-// 程序是否运行或在登录中
-function GetLogedOrLoggingWindow() : Integer; 
-begin
-  result:=FindWindowByWindowName('{#MyAppLoggedName}');
-  if(result = 0) then
-  begin
-    result:=FindWindowByWindowName('{#MyAppLoggingName}');  
-  end;
-end;
+// 安装前判断进程是否在运行；如果用的是Unicode版本的innosetup ,上面的代码不能起到检测进程、杀进程的功能，将string换成ansistring 这样就可以了
+//RunTaskU('{#MyAppExeName}', false);
+//KillTaskU('{#MyAppExeName}');
+function RunTaskU(FileName: ansistring ; bFullpath: Boolean): Boolean;
+external 'RunTask@files:ISTask.dll stdcall delayload';
+function KillTaskU(ExeFileName: ansistring ): Integer;
+external 'KillTask@files:ISTask.dll stdcall delayload';
+
+// 在卸载时判断进程的dll已经没有了，所以不能调用它的函数。其实安装和卸载时调用的dll是不同的。
+function RunTask(FileName: ansistring; bFullpath: Boolean): Boolean;
+external 'RunTask@{app}\ISTask.dll stdcall uninstallonly';
+function KillTask(ExeFileName: ansistring): Integer;
+external 'KillTask@{app}\ISTask.dll stdcall uninstallonly';
 
 // 检测.net framework 4.0安装环境，并安装.net框架
 function CheckDotNetFrameWork() : Boolean;
@@ -144,18 +150,18 @@ end;
 function InitializeSetup() : Boolean;
 begin
     Result :=true; //安装程序继续  
-    IsRunning:=GetLogedOrLoggingWindow()
-    while IsRunning<>0 do 
+    IsRunning:=RunTaskU('{#MyAppExeName}', false);
+    while IsRunning do 
     begin
         if Msgbox('系统检测到客户端正在运行，请确认是否关闭？' #13#13 '单击【是】自动关闭客户端并继续安装，【否】退出安装！', mbConfirmation, MB_YESNO) = idNO then begin
             Result :=false; //安装程序退出  
-            IsRunning :=0; 
+            IsRunning :=false; 
             exit; 
         end 
         else begin
-            SendMessage(IsRunning,WM_CLOSE,0,0); // 关闭进程
+            KillTaskU('{#MyAppExeName}'); // 关闭进程
             Result :=true; // 安装程序继续
-            IsRunning:=GetLogedOrLoggingWindow()
+            IsRunning:=RunTaskU('{#MyAppExeName}', false);
         end; 
     end;
     // 检查是否已经安装过应用程序 
@@ -166,14 +172,14 @@ begin
         end
         else begin
             Result :=false; //安装程序退出  
-            IsRunning :=0;
+            IsRunning :=false;
         end
     end 
     else begin
         //#if IncludeFramework
         Result :=CheckDotNetFrameWork(); //安装程序继续 
         //#endif
-        IsRunning:=GetLogedOrLoggingWindow();
+        IsRunning:=RunTaskU('{#MyAppExeName}', false);
     end; 
 end;
 
@@ -181,17 +187,17 @@ end;
 function InitializeUninstall() : Boolean;
 begin
     Result :=true; //安装程序继续
-    IsRunning:=GetLogedOrLoggingWindow();
-    while IsRunning<>0 do
+    IsRunning:=RunTask('{#MyAppExeName}', false);
+    while IsRunning do
     begin
         if Msgbox('系统检测到客户端正在运行，请确认是否关闭？' #13#13 '单击【是】自动关闭客户端并继续卸载，【否】退出！', mbConfirmation, MB_YESNO) = idNO then begin
             Result :=false; //安装程序退出  
-            IsRunning :=0;
+            IsRunning :=false;
         end 
         else begin
-            SendMessage(IsRunning,WM_CLOSE,0,0);
+            KillTask('{#MyAppExeName}');
             Result :=true; //安装程序继续  
-            IsRunning:=GetLogedOrLoggingWindow();
+            IsRunning:=RunTask('{#MyAppExeName}', false);
         end;
     end;
 end;
