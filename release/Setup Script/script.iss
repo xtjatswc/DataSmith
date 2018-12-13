@@ -18,7 +18,7 @@
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{D2A45316-77EC-47BC-BED5-E6DEB8C02238}
+AppId={{EA629364-66D5-436A-A9CB-493F1C6B5893}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
@@ -136,7 +136,7 @@ UnInstallFile : String;
 begin
     ResultCode:=-1;
     UnInstallFile:=''
-    RegQueryStringValue(HKLM, 'SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{D2A45316-77EC-47BC-BED5-E6DEB8C02238}_is1', 'UninstallString', UnInstallFile);
+    RegQueryStringValue(HKLM, 'SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{EA629364-66D5-436A-A9CB-493F1C6B5893}_is1', 'UninstallString', UnInstallFile);
     StringChangeEx(UnInstallFile, '"', '', True);
     if(FileExists(UnInstallFile)) then begin
         Exec(UnInstallFile, '/norestart', ExtractFilePath(UnInstallFile), SW_SHOWNORMAL, ewWaitUntilTerminated, ResultCode);
@@ -148,6 +148,7 @@ end;
 //判断程序是否存在  
 //初始华程序事件   
 function InitializeSetup() : Boolean;
+var UnInstallFile : String;
 begin
     Result :=true; //安装程序继续  
     IsRunning:=RunTaskU('{#MyAppExeName}', false);
@@ -165,7 +166,7 @@ begin
         end; 
     end;
     // 检查是否已经安装过应用程序 
-    if RegValueExists(HKEY_LOCAL_MACHINE, 'SOFTWARE\{#MyAppName}', 'config') then begin
+    if RegQueryStringValue(HKEY_LOCAL_MACHINE, 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{EA629364-66D5-436A-A9CB-493F1C6B5893}_is1', 'UninstallString', UnInstallFile) then begin
         if Msgbox('客户端已安装过，是否卸载重装？' #13#13 '单击【是】卸载并重装，【否】退出安装！', mbConfirmation, MB_YESNO) = idYES then begin
             UnInstallBefore();
             Result :=true; //安装程序继续  
