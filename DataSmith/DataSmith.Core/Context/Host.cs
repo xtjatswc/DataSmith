@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using FluentData;
@@ -21,22 +22,33 @@ namespace DataSmith.Core.Context
 
         public static log4net.ILog log;
 
+        public static IDbContext db;
+        public static IDbContext db1;
+        public static IDbContext db2;
+
         static Host()
         {
-            Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            ExePath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
-            iContainer = AutofacConfig.Register();
+            try
+            {
+                log4net.Config.XmlConfigurator.ConfigureAndWatch(new System.IO.FileInfo($"{LessConfig.ExecutionPath}Log4net.config"));
+                log =
+                    log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-            log4net.Config.XmlConfigurator.ConfigureAndWatch(new System.IO.FileInfo($"{LessConfig.ExecutionPath}Log4net.config"));
-            log =
-                log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+                Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                ExePath = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
+                iContainer = AutofacConfig.Register();
 
-            DataProviderPool = GetServices<IDataProvider>().ToDictionary(k => k.DbType, v => v);
+                db = new DbContext().ConnectionString(LessConfig.db1, new MySqlProvider());
+                db1 = new DbContext().ConnectionString(LessConfig.db2, new SqliteProvider());
+                db2 = new DbContext().ConnectionString(LessConfig.db3, new SqliteProvider());
+
+                DataProviderPool = GetServices<IDataProvider>().ToDictionary(k => k.DbType, v => v);
+            }
+            catch (Exception e)
+            {
+                log.Error("Host初始化异常", e);
+            }
         }
-
-        public static IDbContext db = new DbContext().ConnectionString(LessConfig.db1, new MySqlProvider());
-        public static IDbContext db1 = new DbContext().ConnectionString(LessConfig.db2, new SqliteProvider());
-        public static IDbContext db2 = new DbContext().ConnectionString(LessConfig.db3, new SqliteProvider());
 
         public static TService GetService<TService>()
         {
