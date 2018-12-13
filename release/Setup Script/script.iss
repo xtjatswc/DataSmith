@@ -7,8 +7,12 @@
 #define MyAppURL "http://www.chcare.cn/"
 #define MyAppExeName "DataSmith.exe" 
 ; 是否将.net framework打包进去
-#define IncludeFramework true
+#define IncludeFramework false
 #define IsExternal ""
+; 程序登录窗口名
+#define MyAppLoggedName "DataSmith"
+; 程序登录后的窗口名
+#define MyAppLoggingName "DataSmith"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -49,36 +53,145 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Source: "..\..\DataSmith\bin\*"; DestDir: "{app}\bin"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "..\..\DataSmith\msg\*"; DestDir: "{app}\msg"; Flags: ignoreversion recursesubdirs createallsubdirs
 #if IncludeFramework  
-Source: "dotNetFx40_Full_x86_x64.exe"; DestDir: "{tmp}"; Flags: ignoreversion ; Check:NeedsFramework
+Source: "dotNetFx40_Full_x86_x64.exe"; DestDir: "{app}\环境配置"; Flags: ignoreversion ; Check:NeedsFramework
 #endif
 ; 注意: 不要在任何共享系统文件上使用“Flags: ignoreversion”  
 
 
 [Icons]
-Name: "{commonprograms}\{#MyAppName}"; Filename: "{app}\bin\{#MyAppExeName}"
+;开始菜单快捷方式
+Name: "{commonprograms}\接口工具\{#MyAppName}"; Filename: "{app}\bin\{#MyAppExeName}"
+Name: "{commonprograms}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
+;桌面快捷方式
 Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\bin\{#MyAppExeName}"; Tasks: desktopicon
 
 [Run]
-#if IncludeFramework
-Filename: {tmp}\dotNetFx40_Full_x86_x64.exe; Parameters: "/q:a /c:""install /l /q"""; WorkingDir: {tmp}; Flags:skipifdoesntexist; StatusMsg: "Installing .NET Framework if needed"
-#endif
 Filename: "{app}\bin\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
 
 
 [code]
-// Indicates whether .NET Framework is installed.  
-function IsDotNETDetected(): boolean;
+//全局变量
 var
-    success: boolean;
-    install: cardinal;
+ErrorCode,IsRunning: Integer;
+const WM_CLOSE=$0010;
+
+// 程序是否运行或在登录中
+function GetLogedOrLoggingWindow() : Integer; 
 begin
-    success := RegQueryDWordValue(HKLM, 'SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full', 'Install', install);
-    //success := RegQueryDWordValue(HKLM, 'SOFTWARE\Microsoft\NET Framework Setup\NDP\v2.0.50727', 'Install', install);  
-    Result := success and (install = 1);
+  result:=FindWindowByWindowName('{#MyAppLoggedName}');
+  if(result = 0) then
+  begin
+    result:=FindWindowByWindowName('{#MyAppLoggingName}');  
+  end;
 end;
 
-//Remember this method from the Files section above  
-function NeedsFramework(): Boolean;
-begin 
-  Result := (IsDotNETDetected = false);
+// 检测.net framework 4.0安装环境，并安装.net框架
+function CheckDotNetFrameWork() : Boolean;
+var 
+ResultCode: Integer;
+Path, dotNetV4RegPath, dotNetV4PackFile, wic : string;
+begin
+    dotNetV4RegPath:='SOFTWARE\Microsoft\.NETFramework\policy\v4.0';
+    dotNetV4PackFile:='{src}\环境配置\dotNetFx40_Full_x86_x64.exe';
+    //wic:='{src}\环境配置\wic_x86_chs.exe';
+    if RegKeyExists(HKLM, dotNetV4RegPath) then begin 
+        Result := true; 
+    end 
+    else begin 
+        // Exec(ExpandConstant(wic), '/q /norestart', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ResultCode);  // 安装wic,windows xp系统会需要安装wic
+        if MsgBox('正在安装客户端必备组件.Net Framework 4.0，可能会花费几分钟，请稍后……', mbConfirmation, MB_YESNO) = idYes then begin
+            Path := ExpandConstant(dotNetV4PackFile);
+            if(FileOrDirExists(Path)) then begin
+                Exec(Path, '/norestart', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ResultCode);
+                Result := true;
+            end
+            else begin
+                if MsgBox('软件安装目录中没有.Net Framework的安装程序，' #13#13 '单击【是】跳过.Net Framework 4.0安装，【否】将退出安装！', mbConfirmation, MB_YESNO) = idYes then begin
+                    Result := true;
+                end
+                else begin
+                // path := expandconstant('{pf}\internet explorer\iexplore.exe'); //从官网下载
+                // exec(path, 'http://www.microsoft.com/en-us/download/confirmation.aspx?id=17851', '', sw_shownormal, ewwaituntilterminated, resultcode);
+                // msgbox('请安装好.net framework4.0环境后，再运行本安装包程序！',mbinformation,mb_ok);
+                Result := false;
+                end;
+            end;
+        end
+        else begin
+            Result := false;
+        end;
+    end; 
+end;
+
+// 卸载之前的安装版本
+function UnInstallBefore() : Integer;
+var ResultCode : Integer;
+UnInstallFile : String;
+begin
+    ResultCode:=-1;
+    UnInstallFile:=''
+    RegQueryStringValue(HKLM, 'SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{A6A7578-84EC-4006-8226-C87D71FB94}_is1', 'UninstallString', UnInstallFile);
+    StringChangeEx(UnInstallFile, '"', '', True);
+    if(FileExists(UnInstallFile)) then begin
+        Exec(UnInstallFile, '/norestart', ExtractFilePath(UnInstallFile), SW_SHOWNORMAL, ewWaitUntilTerminated, ResultCode);
+    end;
+
+    Result :=ResultCode;
+end;
+
+//判断程序是否存在  
+//初始华程序事件   
+function InitializeSetup() : Boolean;
+begin
+    Result :=true; //安装程序继续  
+    IsRunning:=GetLogedOrLoggingWindow()
+    while IsRunning<>0 do 
+    begin
+        if Msgbox('系统检测到客户端正在运行，请确认是否关闭？' #13#13 '单击【是】自动关闭客户端并继续安装，【否】退出安装！', mbConfirmation, MB_YESNO) = idNO then begin
+            Result :=false; //安装程序退出  
+            IsRunning :=0; 
+            exit; 
+        end 
+        else begin
+            SendMessage(IsRunning,WM_CLOSE,0,0); // 关闭进程
+            Result :=true; // 安装程序继续
+            IsRunning:=GetLogedOrLoggingWindow()
+        end; 
+    end;
+    // 检查是否已经安装过应用程序 
+    if RegValueExists(HKEY_LOCAL_MACHINE, 'SOFTWARE\{#MyAppName}', 'config') then begin
+        if Msgbox('客户端已安装过，是否卸载重装？' #13#13 '单击【是】卸载并重装，【否】退出安装！', mbConfirmation, MB_YESNO) = idYES then begin
+            UnInstallBefore();
+            Result :=true; //安装程序继续  
+        end
+        else begin
+            Result :=false; //安装程序退出  
+            IsRunning :=0;
+        end
+    end 
+    else begin
+        #if IncludeFramework
+        Result :=CheckDotNetFrameWork(); //安装程序继续 
+        #endif
+        IsRunning:=GetLogedOrLoggingWindow();
+    end; 
+end;
+
+// 卸载时判断客户端是否正在运行  
+function InitializeUninstall() : Boolean;
+begin
+    Result :=true; //安装程序继续
+    IsRunning:=GetLogedOrLoggingWindow();
+    while IsRunning<>0 do
+    begin
+        if Msgbox('系统检测到客户端正在运行，请确认是否关闭？' #13#13 '单击【是】自动关闭客户端并继续卸载，【否】退出！', mbConfirmation, MB_YESNO) = idNO then begin
+            Result :=false; //安装程序退出  
+            IsRunning :=0;
+        end 
+        else begin
+            SendMessage(IsRunning,WM_CLOSE,0,0);
+            Result :=true; //安装程序继续  
+            IsRunning:=GetLogedOrLoggingWindow();
+        end;
+    end;
 end;
