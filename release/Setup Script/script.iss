@@ -92,7 +92,7 @@ function KillTask(ExeFileName: ansistring): Integer;
 external 'KillTask@{app}\ISTask.dll stdcall uninstallonly';
 
 // 检测.net framework 4.0安装环境，并安装.net框架
-function CheckDotNetFrameWork() : Boolean;
+function CheckDotNetFrameWork_() : Boolean;
 var 
 ResultCode: Integer;
 Path, Path_x86,Path_x64, dotNetV4RegPath, dotNetV4PackFile, dotNetV4PackFile_sp1_x86, dotNetV4PackFile_sp1_x64, wic : string;
@@ -124,6 +124,45 @@ begin
             end
             else begin
                 if MsgBox('软件安装目录中没有.Net Framework的安装程序，' #13#13 '单击【是】跳过.Net Framework 4.0安装，【否】将退出安装！', mbConfirmation, MB_YESNO) = idYes then begin
+                    Result := true;
+                end
+                else begin
+                // path := expandconstant('{pf}\internet explorer\iexplore.exe'); //从官网下载
+                // exec(path, 'http://www.microsoft.com/en-us/download/confirmation.aspx?id=17851', '', sw_shownormal, ewwaituntilterminated, resultcode);
+                // msgbox('请安装好.net framework4.0环境后，再运行本安装包程序！',mbinformation,mb_ok);
+                Result := false;
+                end;
+            end;
+        end
+        else begin
+            Result := false;
+        end;
+    end; 
+end;
+
+// 检测.net framework 4.6.2安装环境，并安装.net框架
+function CheckDotNetFrameWork() : Boolean;
+var 
+ResultCode: Integer;
+Path, dotNetV4RegPath, dotNetV4PackFile, Version, wic : string;
+begin
+    dotNetV4RegPath:='SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full';
+    dotNetV4PackFile:='{src}\环境配置\NDP462-KB3151800-x86-x64-AllOS-ENU.exe';
+    //wic:='{src}\环境配置\wic_x86_chs.exe';
+    RegQueryStringValue(HKEY_LOCAL_MACHINE, dotNetV4RegPath, 'Version', Version);
+    if Version = '4.6.01590' then begin 
+        Result := true; 
+    end 
+    else begin 
+        // Exec(ExpandConstant(wic), '/q /norestart', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ResultCode);  // 安装wic,windows xp系统会需要安装wic
+        if MsgBox('正在安装客户端必备组件.Net Framework 4.6.2，可能会花费几分钟，请稍后……', mbConfirmation, MB_YESNO) = idYes then begin
+            Path := ExpandConstant(dotNetV4PackFile);
+            if(FileOrDirExists(Path)) then begin
+                Exec(Path, '/norestart', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ResultCode);
+                Result := true;
+            end
+            else begin
+                if MsgBox('软件安装目录中没有.Net Framework 4.6.2的安装程序，' #13#13 '单击【是】跳过.Net Framework 4.6.2安装，【否】将退出安装！', mbConfirmation, MB_YESNO) = idYes then begin
                     Result := true;
                 end
                 else begin
