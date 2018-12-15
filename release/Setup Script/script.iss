@@ -95,10 +95,12 @@ external 'KillTask@{app}\ISTask.dll stdcall uninstallonly';
 function CheckDotNetFrameWork() : Boolean;
 var 
 ResultCode: Integer;
-Path, dotNetV4RegPath, dotNetV4PackFile, wic : string;
+Path, Path_x86,Path_x64, dotNetV4RegPath, dotNetV4PackFile, dotNetV4PackFile_sp1_x86, dotNetV4PackFile_sp1_x64, wic : string;
 begin
     dotNetV4RegPath:='SOFTWARE\Microsoft\.NETFramework\policy\v4.0';
     dotNetV4PackFile:='{src}\环境配置\dotNetFx40_Full_x86_x64.exe';
+    dotNetV4PackFile_sp1_x86:='{src}\环境配置\dotNetFx40_sp1\NDP40-KB2468871-v2-x86.exe';
+    dotNetV4PackFile_sp1_x64:='{src}\环境配置\dotNetFx40_sp1\NDP40-KB2468871-v2-x64.exe';
     //wic:='{src}\环境配置\wic_x86_chs.exe';
     if RegKeyExists(HKLM, dotNetV4RegPath) then begin 
         Result := true; 
@@ -107,8 +109,17 @@ begin
         // Exec(ExpandConstant(wic), '/q /norestart', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ResultCode);  // 安装wic,windows xp系统会需要安装wic
         if MsgBox('正在安装客户端必备组件.Net Framework 4.0，可能会花费几分钟，请稍后……', mbConfirmation, MB_YESNO) = idYes then begin
             Path := ExpandConstant(dotNetV4PackFile);
+            Path_x86 := ExpandConstant(dotNetV4PackFile_sp1_x86);
+            Path_x64 := ExpandConstant(dotNetV4PackFile_sp1_x64);
             if(FileOrDirExists(Path)) then begin
                 Exec(Path, '/norestart', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ResultCode);
+                //安装.net framework 4.0 sp1补丁
+                if(IsWin64) then begin
+                    Exec(Path_x64, '/norestart', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ResultCode);
+                end
+                else begin
+                    Exec(Path_x86, '/norestart', '', SW_SHOWNORMAL, ewWaitUntilTerminated, ResultCode);
+                end;
                 Result := true;
             end
             else begin
