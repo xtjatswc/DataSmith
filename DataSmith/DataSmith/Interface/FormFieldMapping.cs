@@ -146,6 +146,8 @@ namespace DataSmith.Interface
                 inputSeparator.Width = 1200;
                 c1InputPanel2.Items.Add(inputSeparator);
             }
+
+            c1InputPanel2.Focus();
         }
 
         private void InputButton_Click(object sender, EventArgs e)
