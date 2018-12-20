@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -57,6 +58,6 @@ namespace DataSmith.Core.Config
 
         public static string Copyright { get { return JsonConfig.Config.Global.LessBase.SystemInfo.Copyright; } }
         public static string Version { get { return JsonConfig.Config.Global.LessBase.SystemInfo.Version; } }
-
+        public static Font SysFont = new System.Drawing.Font("微软雅黑", 10F);
     }
 }

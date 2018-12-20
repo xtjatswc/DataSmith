@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Dynamic;
 using System.Windows.Forms;
 using C1.Win.C1InputPanel;
+using DataSmith.Core.Config;
 using DataSmith.Core.Context;
 using DataSmith.Core.Extension;
 using DataSmith.Core.Infrastructure.DAL;
@@ -53,28 +54,36 @@ namespace DataSmith.Interface
                 inputButton1.Visibility = Visibility.Visible;
             }
 
-            foreach (var fieldSet in fieldSets)
+            for (var i = 0; i < fieldSets.Count; i++)
             {
+                var fieldSet = fieldSets[i];
                 dynamic controls = new ExpandoObject();
                 _dictForm.Add(fieldSet, controls);
 
+                //序号
+                var inputLabelSn = new InputLabel();
+                inputLabelSn.Font = LessConfig.SysFont;
+                inputLabelSn.Text = (i + 1).ToString();
+                inputLabelSn.Width = 50;
+                c1InputPanel2.Items.Add(inputLabelSn);
+
                 //接口字段
                 var inputLabelFieldName2 = new InputLabel();
-                inputLabelFieldName2.Font = new System.Drawing.Font("微软雅黑", 10F);
+                inputLabelFieldName2.Font = LessConfig.SysFont;
                 inputLabelFieldName2.Text = fieldSet.FieldName;
                 inputLabelFieldName2.Width = 200;
                 c1InputPanel2.Items.Add(inputLabelFieldName2);
 
                 //接口字段描述
                 var inputLabelFieldDescribe = new InputLabel();
-                inputLabelFieldDescribe.Font = new System.Drawing.Font("微软雅黑", 10F);
+                inputLabelFieldDescribe.Font = LessConfig.SysFont;
                 inputLabelFieldDescribe.Text = fieldSet.FieldDescribe;
                 inputLabelFieldDescribe.Width = 200;
                 c1InputPanel2.Items.Add(inputLabelFieldDescribe);
 
                 //接口字段备注
                 var inputLabelRemark = new InputLabel();
-                inputLabelRemark.Font = new System.Drawing.Font("微软雅黑", 10F);
+                inputLabelRemark.Font = LessConfig.SysFont;
                 inputLabelRemark.Text = fieldSet.Remark;
                 inputLabelRemark.Width = 300;
                 c1InputPanel2.Items.Add(inputLabelRemark);
@@ -83,7 +92,7 @@ namespace DataSmith.Interface
                 var viewFieldSets = _viewFieldSetDal.GetModels("InterfaceID=" + e.ID);
                 viewFieldSets.Insert(0, new ViewFieldSet { FieldName = "" });
                 var inputComboBoxFieldAlias = new InputComboBox();
-                inputComboBoxFieldAlias.Font = new System.Drawing.Font("微软雅黑", 10F);
+                inputComboBoxFieldAlias.Font = LessConfig.SysFont;
                 inputComboBoxFieldAlias.MismatchValueErrorText = "值“{0}”不匹配任何可用选项";
                 c1InputPanel2.Items.Add(inputComboBoxFieldAlias);
                 inputComboBoxFieldAlias.DataSource = viewFieldSets;
@@ -105,7 +114,7 @@ namespace DataSmith.Interface
                 controls.inputComboBoxFieldAlias = inputComboBoxFieldAlias;
 
                 InputLabel inputLabel = new InputLabel();
-                inputLabel.Font = new System.Drawing.Font("微软雅黑", 10F);
+                inputLabel.Font = LessConfig.SysFont;
                 inputLabel.ForeColor = Color.Red;
                 inputLabel.Width = 50;
                 if (fieldSet.Required == 1)
@@ -118,7 +127,7 @@ namespace DataSmith.Interface
 
                 //分隔线
                 var inputSeparator = new InputSeparator();
-                inputSeparator.Width = 1200;
+                inputSeparator.Width = 1250;
                 c1InputPanel2.Items.Add(inputSeparator);
             }
         }
