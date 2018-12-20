@@ -121,13 +121,26 @@ namespace DataSmith.Interface
                 {
                     inputLabel.Text = "(必填)";
                 }
-                inputLabel.Break = BreakType.Row;
                 c1InputPanel2.Items.Add(inputLabel);
 
+                var fieldProperties = fieldSet.GetFieldProperties();
+                if (fieldProperties == null)
+                {
+                    inputLabel.Break = BreakType.Row;
+                }
+                else
+                {
+                    InputButton inputButton = new InputButton();
+                    inputButton.Text = "设置";
+                    inputButton.Width = 90;
+                    inputButton.TabStop = false;
+                    inputButton.Font = LessConfig.SysFont;
+                    c1InputPanel2.Items.Add(inputButton);
+                }
 
                 //分隔线
                 var inputSeparator = new InputSeparator();
-                inputSeparator.Width = 1250;
+                inputSeparator.Width = 1200;
                 c1InputPanel2.Items.Add(inputSeparator);
             }
         }

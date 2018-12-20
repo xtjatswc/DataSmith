@@ -29,16 +29,17 @@
         private void InitializeComponent()
         {
             this.c1InputPanel2 = new C1.Win.C1InputPanel.C1InputPanel();
-            this.interfaceNav1 = new DataSmith.Interface.InterfaceNav();
             this.c1InputPanel1 = new C1.Win.C1InputPanel.C1InputPanel();
             this.inputButton1 = new C1.Win.C1InputPanel.InputButton();
             this.inputGroupHeader1 = new C1.Win.C1InputPanel.InputGroupHeader();
+            this.inputLabel5 = new C1.Win.C1InputPanel.InputLabel();
             this.inputLabel1 = new C1.Win.C1InputPanel.InputLabel();
             this.inputLabel2 = new C1.Win.C1InputPanel.InputLabel();
             this.inputLabel3 = new C1.Win.C1InputPanel.InputLabel();
             this.inputLabel4 = new C1.Win.C1InputPanel.InputLabel();
+            this.inputLabel6 = new C1.Win.C1InputPanel.InputLabel();
             this.inputSeparator1 = new C1.Win.C1InputPanel.InputSeparator();
-            this.inputLabel5 = new C1.Win.C1InputPanel.InputLabel();
+            this.interfaceNav1 = new DataSmith.Interface.InterfaceNav();
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.c1InputPanel1)).BeginInit();
             this.SuspendLayout();
@@ -55,15 +56,6 @@
             this.c1InputPanel2.TabIndex = 1;
             this.c1InputPanel2.VisualStyle = C1.Win.C1InputPanel.VisualStyle.Office2007Blue;
             // 
-            // interfaceNav1
-            // 
-            this.interfaceNav1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.interfaceNav1.Location = new System.Drawing.Point(0, 0);
-            this.interfaceNav1.Margin = new System.Windows.Forms.Padding(5);
-            this.interfaceNav1.Name = "interfaceNav1";
-            this.interfaceNav1.Size = new System.Drawing.Size(285, 604);
-            this.interfaceNav1.TabIndex = 2;
-            // 
             // c1InputPanel1
             // 
             this.c1InputPanel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -75,6 +67,7 @@
             this.c1InputPanel1.Items.Add(this.inputLabel2);
             this.c1InputPanel1.Items.Add(this.inputLabel3);
             this.c1InputPanel1.Items.Add(this.inputLabel4);
+            this.c1InputPanel1.Items.Add(this.inputLabel6);
             this.c1InputPanel1.Items.Add(this.inputSeparator1);
             this.c1InputPanel1.Location = new System.Drawing.Point(285, 0);
             this.c1InputPanel1.Margin = new System.Windows.Forms.Padding(4);
@@ -96,6 +89,13 @@
             // 
             this.inputGroupHeader1.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputGroupHeader1.Name = "inputGroupHeader1";
+            // 
+            // inputLabel5
+            // 
+            this.inputLabel5.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
+            this.inputLabel5.Name = "inputLabel5";
+            this.inputLabel5.Text = "序号";
+            this.inputLabel5.Width = 50;
             // 
             // inputLabel1
             // 
@@ -120,23 +120,31 @@
             // 
             // inputLabel4
             // 
-            this.inputLabel4.Break = C1.Win.C1InputPanel.BreakType.Row;
             this.inputLabel4.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
             this.inputLabel4.Name = "inputLabel4";
             this.inputLabel4.Text = "视图字段名";
-            this.inputLabel4.Width = 200;
+            this.inputLabel4.Width = 255;
+            // 
+            // inputLabel6
+            // 
+            this.inputLabel6.Break = C1.Win.C1InputPanel.BreakType.Row;
+            this.inputLabel6.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
+            this.inputLabel6.Name = "inputLabel6";
+            this.inputLabel6.Text = "格式设置";
             // 
             // inputSeparator1
             // 
             this.inputSeparator1.Name = "inputSeparator1";
             this.inputSeparator1.Width = 1200;
             // 
-            // inputLabel5
+            // interfaceNav1
             // 
-            this.inputLabel5.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold);
-            this.inputLabel5.Name = "inputLabel5";
-            this.inputLabel5.Text = "序号";
-            this.inputLabel5.Width = 50;
+            this.interfaceNav1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.interfaceNav1.Location = new System.Drawing.Point(0, 0);
+            this.interfaceNav1.Margin = new System.Windows.Forms.Padding(5);
+            this.interfaceNav1.Name = "interfaceNav1";
+            this.interfaceNav1.Size = new System.Drawing.Size(285, 604);
+            this.interfaceNav1.TabIndex = 2;
             // 
             // FormFieldMapping
             // 
@@ -168,5 +176,6 @@
         private C1.Win.C1InputPanel.InputLabel inputLabel4;
         private C1.Win.C1InputPanel.InputSeparator inputSeparator1;
         private C1.Win.C1InputPanel.InputLabel inputLabel5;
+        private C1.Win.C1InputPanel.InputLabel inputLabel6;
     }
 }
