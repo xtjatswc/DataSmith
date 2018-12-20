@@ -40,8 +40,8 @@
             // 
             // c1InputPanel1
             // 
-            this.c1InputPanel1.Location = new System.Drawing.Point(0, 172);
-            this.c1InputPanel1.Size = new System.Drawing.Size(499, 55);
+            this.c1InputPanel1.Location = new System.Drawing.Point(0, 187);
+            this.c1InputPanel1.Size = new System.Drawing.Size(496, 55);
             // 
             // c1InputPanel2
             // 
@@ -55,7 +55,7 @@
             this.c1InputPanel2.Location = new System.Drawing.Point(0, 0);
             this.c1InputPanel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.c1InputPanel2.Name = "c1InputPanel2";
-            this.c1InputPanel2.Size = new System.Drawing.Size(499, 172);
+            this.c1InputPanel2.Size = new System.Drawing.Size(496, 187);
             this.c1InputPanel2.TabIndex = 1;
             this.c1InputPanel2.VisualStyle = C1.Win.C1InputPanel.VisualStyle.Office2007Blue;
             this.c1InputPanel2.Click += new System.EventHandler(this.c1InputPanel2_Click);
@@ -86,24 +86,25 @@
             // 
             // inputTextBox1
             // 
-            this.inputTextBox1.Break = C1.Win.C1InputPanel.BreakType.None;
             this.inputTextBox1.Font = new System.Drawing.Font("微软雅黑", 10F);
             this.inputTextBox1.Name = "inputTextBox1";
+            this.inputTextBox1.Width = 159;
             // 
             // inputLabel1
             // 
             this.inputLabel1.Font = new System.Drawing.Font("微软雅黑", 10F);
+            this.inputLabel1.ForeColor = System.Drawing.Color.Blue;
             this.inputLabel1.Name = "inputLabel1";
             this.inputLabel1.Text = "Label";
             // 
-            // FormSetting
+            // FormSetting1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(499, 227);
+            this.ClientSize = new System.Drawing.Size(496, 242);
             this.Controls.Add(this.c1InputPanel2);
             this.Margin = new System.Windows.Forms.Padding(5, 8, 5, 8);
-            this.Name = "FormSetting";
+            this.Name = "FormSetting1";
             this.Text = "字段设置";
             this.Load += new System.EventHandler(this.FormSetting_Load);
             this.Controls.SetChildIndex(this.c1InputPanel1, 0);
