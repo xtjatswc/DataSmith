@@ -9,6 +9,7 @@ using DataSmith.Core.Context;
 using DataSmith.Core.Extension;
 using DataSmith.Core.Infrastructure.DAL;
 using DataSmith.Core.Infrastructure.Model;
+using DataSmith.Setting;
 
 namespace DataSmith.Interface
 {
@@ -135,6 +136,8 @@ namespace DataSmith.Interface
                     inputButton.Width = 90;
                     inputButton.TabStop = false;
                     inputButton.Font = LessConfig.SysFont;
+                    inputButton.Click += InputButton_Click;
+                    inputButton.Tag = fieldSet;
                     c1InputPanel2.Items.Add(inputButton);
                 }
 
@@ -143,6 +146,15 @@ namespace DataSmith.Interface
                 inputSeparator.Width = 1200;
                 c1InputPanel2.Items.Add(inputSeparator);
             }
+        }
+
+        private void InputButton_Click(object sender, EventArgs e)
+        {
+            var button = sender as InputButton;
+            button.Focus();
+            var form = Host.GetService<FormSetting1>();
+            form.FieldSet = button.Tag as FieldSet;            
+            form.ShowDialog();
         }
 
         private void InputComboBoxFieldAlias_SelectedValueChanged(object sender, EventArgs e)

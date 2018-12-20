@@ -102,6 +102,12 @@
     <Compile Include="DbSource\FormDataSourceList.Designer.cs">
       <DependentUpon>FormDataSourceList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Setting\FormSetting1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setting\FormSetting1.Designer.cs">
+      <DependentUpon>FormSetting1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Log\FormLog4net.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,11 +120,11 @@
     <Compile Include="Task\FormTaskScheduler.Designer.cs">
       <DependentUpon>FormTaskScheduler.cs</DependentUpon>
     </Compile>
-    <Compile Include="Util\BaseForm.cs">
+    <Compile Include="Util\AlertForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Util\BaseForm.Designer.cs">
-      <DependentUpon>BaseForm.cs</DependentUpon>
+    <Compile Include="Util\AlertForm.Designer.cs">
+      <DependentUpon>AlertForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Interface\FormSqlPreview.cs">
       <SubType>Form</SubType>
@@ -175,6 +181,9 @@
     <EmbeddedResource Include="DbSource\FormDataSourceList.resx">
       <DependentUpon>FormDataSourceList.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Setting\FormSetting1.resx">
+      <DependentUpon>FormSetting1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Interface\FormSqlPreview.resx">
       <DependentUpon>FormSqlPreview.cs</DependentUpon>
     </EmbeddedResource>
@@ -204,8 +213,8 @@
     <EmbeddedResource Include="Task\FormTaskScheduler.resx">
       <DependentUpon>FormTaskScheduler.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Util\BaseForm.resx">
-      <DependentUpon>BaseForm.cs</DependentUpon>
+    <EmbeddedResource Include="Util\AlertForm.resx">
+      <DependentUpon>AlertForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

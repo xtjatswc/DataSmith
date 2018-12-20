@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace DataSmith.Task
 {
-    public partial class FormTaskScheduler : BaseForm
+    public partial class FormTaskScheduler : Form
     {
         readonly IEnumerable<IPluginSetting> _iSettings = Host.GetServices<IPluginSetting>();
 
