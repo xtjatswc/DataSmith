@@ -69,7 +69,19 @@ namespace DataSmith.InBody.Plugin.IFace
 				.Parameter("Times", times)
 				.Parameter("ApplyNo", apply_no)
 				.Execute();
-	
+			}else{
+				sql = "update ApplyInbody set Name = @Name, Sex = @Sex, Birthday = @Birthday, Height = @Height, SocialNo = @SocialNo, PatientId = @PatientId, Times = @Times, ApplyNo = @ApplyNo where CheckId = @CheckId;";
+				int ret = ifObj.TargetDataProvider.Db.Sql(sql)
+				.Parameter("CheckId", check_id)
+				.Parameter("Name", name)
+				.Parameter("Sex", sex)
+				.Parameter("Birthday", pbirth)
+				.Parameter("Height", height)
+				.Parameter("SocialNo", social_no)
+				.Parameter("PatientId", patient_id)
+				.Parameter("Times", times)
+				.Parameter("ApplyNo", apply_no)
+				.Execute();
 			}
 
 		}
