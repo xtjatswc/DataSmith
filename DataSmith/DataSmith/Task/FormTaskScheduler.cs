@@ -28,7 +28,7 @@ namespace DataSmith.Task
             InterfaceClassifyDal _icDal = Host.GetService<InterfaceClassifyDal>();
             TaskSchedulerDal taskSchedulerDal = Host.GetService<TaskSchedulerDal>();
 
-            var ics = _icDal.GetModels(orderBy: "SortNo asc");
+            var ics = _icDal.GetModels(where:"IsDeleted=0", orderBy: "SortNo asc");
             c1InputPanel1.Items.Clear();
             foreach (var ic in ics)
             {
@@ -37,7 +37,7 @@ namespace DataSmith.Task
                 inputGroupHeader.Text = ic.ClassifyName;
                 c1InputPanel1.Items.Add(inputGroupHeader);
 
-                var interfaces = taskSchedulerDal.GetModels(where:$"ClassifyID={ic.ID}",orderBy:"SortNo asc");
+                var interfaces = taskSchedulerDal.GetModels(where:$"IsDeleted=0 and ClassifyID={ic.ID}",orderBy:"SortNo asc");
                 foreach (var model in interfaces)
                 {
                     var inputButton = new InputButton();

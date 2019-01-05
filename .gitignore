@@ -22,3 +22,9 @@
 /release/Setup Script/dotNetFx40_Full_x86_x64.exe
 /release/Setup.exe
 /release/环境配置/dotNetFx40_Full_x86_x64.exe
+/DataSmith/DataSmith.Plugin/Plugin/DataSmith.InBody.Plugin/obj
+/DataSmith/bin/plugins/DataSmith.InBody.Plugin.dll
+/DataSmith/bin/plugins/DataSmith.InBody.Plugin.pdb
+/release/环境配置/NDP462-KB3151800-x86-x64-AllOS-ENU.exe
+/release/环境配置/dotNetFx40_sp1/NDP40-KB2468871-v2-x64.exe
+/release/环境配置/dotNetFx40_sp1/NDP40-KB2468871-v2-x86.exe

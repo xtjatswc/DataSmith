@@ -33,7 +33,7 @@ namespace DataSmith.Interface
             InterfaceClassifyDal _icDal = Host.GetService<InterfaceClassifyDal>();
             InterfacesDal _interfacesDal = Host.GetService<InterfacesDal>();
 
-            var ics = _icDal.GetModels(orderBy: "SortNo asc");
+            var ics = _icDal.GetModels(where:"IsDeleted=0", orderBy: "SortNo asc");
             c1InputPanel1.Items.Clear();
             foreach (var ic in ics)
             {

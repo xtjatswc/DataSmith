@@ -10,5 +10,6 @@ namespace DataSmith.Core.Infrastructure.Model
     {
         public String ClassifyName { get; set; }
         public decimal SortNo { get; set; }
+        public int IsDeleted { get; set; }
     }
 }

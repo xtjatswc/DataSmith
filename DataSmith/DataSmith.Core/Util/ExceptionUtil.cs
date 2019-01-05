@@ -31,9 +31,24 @@ namespace DataSmith.Core.Util
             WriteExceptionLog(e.ExceptionObject as Exception);
         }
 
-        private static void WriteExceptionLog(Exception ex)
+        public static void WriteExceptionLog(Exception ex)
         {
             Log.Error("全局异常处理", ex);
+            StringBuilder sb = new StringBuilder();
+            JoinErrStackTrace(ex, sb);
+        }
+
+        public static void JoinErrStackTrace(Exception ex, StringBuilder sb)
+        {
+            if (ex.InnerException != null)
+            {
+                JoinErrStackTrace(ex.InnerException, sb);
+                sb.AppendFormat("-".PadRight(60, '-'));
+                sb.AppendLine();
+            }
+
+            sb.AppendLine(ex.Message);
+            sb.AppendLine(ex.StackTrace);
         }
     }
 }
