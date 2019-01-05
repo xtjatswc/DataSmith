@@ -43,7 +43,7 @@ namespace DataSmith.InBody.Plugin.IFace
 			string sex = (row.GetString(ifObj.GetFieldAlias("sex")).Trim() == _male ? "M" : "F"); //M男、F女
 			//出生日期
 			DateTime? pbirth = null;
-			if (_birthday_Properties == null) {
+			if (_birthday_Properties == null || string.IsNullOrWhiteSpace(_birthday_Properties.Property2)) {
 				pbirth = row.GetDateTime(ifObj.GetFieldAlias("birthday"));
 			} else {
 				pbirth = DateTime.ParseExact(row.GetString(ifObj.GetFieldAlias("birthday")).Trim(), _birthday_Properties.Property2, System.Globalization.CultureInfo.CurrentCulture);
@@ -53,6 +53,24 @@ namespace DataSmith.InBody.Plugin.IFace
 			string patient_id = row.GetString(ifObj.GetFieldAlias("patient_id"));
 			string times = row.GetString(ifObj.GetFieldAlias("times"));
 			string apply_no = row.GetString(ifObj.GetFieldAlias("apply_no"));
+
+			int count = ifObj.TargetDataProvider.Db.Sql("select count(*) from ApplyInbody where CheckId = @0", check_id).QuerySingle<int>();
+			
+			if (count == 0) {
+				sql = "INSERT INTO ApplyInbody (CheckId, Name, Sex, Birthday, Height, SocialNo, PatientId, Times, ApplyNo) VALUES (@CheckId, @Name, @Sex, @Birthday, @Height, @SocialNo, @PatientId, @Times, @ApplyNo);";
+				int ret = ifObj.TargetDataProvider.Db.Sql(sql)
+				.Parameter("CheckId", check_id)
+				.Parameter("Name", name)
+				.Parameter("Sex", sex)
+				.Parameter("Birthday", pbirth)
+				.Parameter("Height", height)
+				.Parameter("SocialNo", social_no)
+				.Parameter("PatientId", patient_id)
+				.Parameter("Times", times)
+				.Parameter("ApplyNo", apply_no)
+				.Execute();
+	
+			}
 
 		}
 	}
