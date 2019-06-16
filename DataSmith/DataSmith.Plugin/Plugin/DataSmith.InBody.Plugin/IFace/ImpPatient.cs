@@ -30,7 +30,7 @@ namespace DataSmith.InBody.Plugin.IFace
 		
 		public override void Import()
 		{
-			string sql = "select " + ifObj.QueryFields + " from " + ifObj.Interfaces.ViewName + " where " + ifObj.GetFieldAlias("check_id") + " = '" + CheckId + "'";
+			string sql = "select " + ifObj.QueryFields + " from " + ifObj.Interfaces.ViewName + " where " + ifObj.GetFieldAlias("check_id") + " = '" + CheckId + "' or " + ifObj.GetFieldAlias("patient_id") + " = '" + CheckId + "'";
 			DataTable dt = ifObj.SourceDataProvider.Db.Sql(sql).QuerySingle<DataTable>();
 			if (dt.Rows.Count == 0) {
 				Console.WriteLine("未能查询到住会员号为 “" + CheckId + "” 的会员信息！");
