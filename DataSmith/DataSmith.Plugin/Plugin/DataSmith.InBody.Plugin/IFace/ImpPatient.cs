@@ -49,6 +49,7 @@ namespace DataSmith.InBody.Plugin.IFace
 				pbirth = DateTime.ParseExact(row.GetString(ifObj.GetFieldAlias("birthday")).Trim(), _birthday_Properties.Property2, System.Globalization.CultureInfo.CurrentCulture);
 			}
 			string height = row.GetString(ifObj.GetFieldAlias("height"));
+			height = height.Trim() == "" ? "0" : height;
 			string social_no = row.GetString(ifObj.GetFieldAlias("social_no"));
 			string patient_id = row.GetString(ifObj.GetFieldAlias("patient_id"));
 			string times = row.GetString(ifObj.GetFieldAlias("times"));
